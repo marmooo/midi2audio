@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head prefix="og: http://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Convert MIDI to audio (WAV, MP3, AAC, FLAC, Opus) powered by Midy.">
+    <title>midi2audio</title>
+    <meta property="og:title" content="midi2audio">
+    <meta property="og:site_name" content="midi2audio">
+    <meta property="og:description" content="Convert MIDI to audio (WAV, MP3, AAC, FLAC, Opus) powered by Midy.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marmooo.github.io/midi2audio/">
+    <meta property="og:image" content="https://marmooo.github.io/midi2audio/favicon/apple-touch-icon.png">
+    <meta name="twitter:card" content="summary">
+    <script>
+      (function() {
+        const saved = localStorage.getItem("darkMode");
+        const prefersDark = globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-bs-theme", theme);
+      })();
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2179JXDYY"></script> -->
+    <!-- <script> -->
+    <!--   window.dataLayer = window.dataLayer || []; -->
+    <!--   function gtag(){dataLayer.push(arguments);} -->
+    <!--   gtag('js', new Date()); -->
+    <!--   gtag('config', 'G-F2179JXDYY'); -->
+    <!-- </script> -->
+    <link rel="icon" type="image/png" href="/midi2audio/favicon/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="/midi2audio/favicon/favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/midi2audio/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/midi2audio/favicon/site.webmanifest">
+    <link class="drop-inline-css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+      html[data-bs-theme="dark"] .favicon { filter: invert(1) hue-rotate(180deg); }
+    </style>
+    <!-- <script data-ad-client="ca-pub-6459713332128733" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand">
+        <div class="container flex-wrap">
+          <a class="navbar-brand" href="/midi2audio/">
+            <img class="favicon" alt="" src="/midi2audio/favicon/favicon.svg" width="32" height="32">
+            midi2audio
+          </a>
+          <div class="navbar-nav">
+            <button title="toggle dark-mode" id="toggleDarkMode" class="fs-4 btn p-0 ms-1" type="button">🌓</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <noscript>
+        <div class="alert alert-warning">Please turn on JavaScript.</div>
+      </noscript>
+      <p>Convert MIDI to audio (WAV, MP3, AAC, FLAC, Opus) powered by <a href="https://github.com/marmooo/midy">Midy</a>.</p>
+      <div id="selectPanel" class="card text-center mb-3">
+        <div class="card-body bg-light-subtle">
+          <div>
+            <button id="selectFile" class="btn btn-lg btn-primary rounded-pill">Select MIDI / SoundFont</button>
+            <input id="inputFile" type="file" accept=".mid,.midi,.sf2,.sf3" hidden="">
+          </div>
+          or drop a file, or select from samples.
+          <details>
+            <summary>samples</summary>
+            <form id="samples" class="text-start d-flex flex-wrap pt-1">
+              <fieldset class="card flex-fill">
+                <legend class="card-header h6">Sample MIDI</legend>
+                <div class="card-body">
+                  You can find more from <a href="https://marmooo.github.io/free-midi/">Free MIDI</a>.
+                  <div id="sampleMIDI"></div>
+                </div>
+              </fieldset>
+              <fieldset class="card flex-fill">
+                <legend class="card-header h6">Sample SoundFont</legend>
+                <div class="card-body">
+                  These soundfont's are in <a href="https://github.com/marmooo/free-soundfonts">@marmooo/free-soundfonts</a>.
+                  <div id="sampleSoundFont"></div>
+                </div>
+              </fieldset>
+            </form>
+          </details>
+        </div>
+      </div>
+      <details open>
+        <summary>Configuration</summary>
+        <form id="configuration" class="d-flex flex-wrap pt-1">
+          <fieldset id="ReverbAlgorithm" class="card flex-fill">
+            <legend class="card-header h6">Reverb Algorithm</legend>
+            <div class="card-body">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbAlgorithm" value="Convolution">
+                  Convolution Reverb
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbAlgorithm" value="Schroeder" checked>
+                  Schroeder (1962)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbAlgorithm" value="Moorer">
+                  Moorer (1979)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbAlgorithm" value="FDN">
+                  FDN (1992)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbAlgorithm" value="Dattorro">
+                  Dattorro (1997)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbAlgorithm" value="Freeverb">
+                  Freeverb (1999)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbAlgorithm" value="VelvetNoise">
+                  Velvet Noise Reverb (2012)
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset id="ReverbType" class="card flex-fill">
+            <legend class="card-header h6">Reverb Type</legend>
+            <div class="card-body">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbType" value="0">
+                  #0 Small Room
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbType" value="1">
+                  #1 Medium Room
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbType" value="2">
+                  #2 Large Room
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbType" value="3">
+                  #3 Medium Hall
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbType" value="4" checked>
+                  #4 Large Hall
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="reverbType" value="8">
+                  #8 Plate
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset id="ChorusType" class="card flex-fill">
+            <legend class="card-header h6">Chorus Type</legend>
+            <div class="card-body">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="chorusType" value="0">
+                  #0 Chorus 1
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="chorusType" value="1" checked>
+                  #1 Chorus 2
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="chorusType" value="2">
+                  #2 Chorus 3
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="chorusType" value="3">
+                  #3 Chorus 4
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="chorusType" value="4">
+                  #4 FB Chorus
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="chorusType" value="5">
+                  #5 Flanger
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset id="OutputFormat" class="card flex-fill">
+            <legend class="card-header h6">Output Format</legend>
+            <div class="card-body">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="outputFormat" value="wav">
+                  WAV (.wav)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="outputFormat" value="mp3">
+                  MP3 (.mp3)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="outputFormat" value="aac">
+                  AAC (.m4a)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="outputFormat" value="flac">
+                  FLAC (.flac)
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input class="form-check-input" type="radio" name="outputFormat" value="opus" checked>
+                  Opus (.ogg)
+                </label>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </details>
+      <div class="text-center p-3">
+        <button id="convert" class="btn btn-lg btn-primary rounded-pill" disabled>
+          <span id="convertText">Convert to Audio</span>
+          <span id="convertSpinner" class="d-none">
+            <span id="spinner" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            <span role="status">Converting...</span>
+          </span>
+        </button>
+        <div id="convertAlert" class="alert alert-secondary d-none" role="alert">
+          Select MIDI File!
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+          <audio id="resultAudio" controls></audio>
+        </div>
+        <div id="convertStatus" class="d-none">Completed!</div>
+      </div>
+    </main>
+    <footer class="pt-5 alert text-center">
+      <div class="pt-3">
+        <a class="px-1" href="/">Home</a>
+        <a class="px-1" href="/terms/">Terms</a>
+        <a class="px-1" href="https://github.com/marmooo/midi2audio">Contact</a>
+      </div>
+      <div class="text-muted">&copy; <a href="https://github.com/marmooo">marmooo</a></div>
+    </footer>
+    <div class="drop-inline-css d-none border border-secondary"></div>
+    <script type="module" src="/midi2audio/index.js"></script>
+  </body>
+</html>
