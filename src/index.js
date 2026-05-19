@@ -257,7 +257,7 @@ function setAudioTag(audioData) {
 }
 
 async function convert(event) {
-  event.target.disabled = true;
+  event.currentTarget.disabled = true;
   const convertText = document.getElementById("convertText");
   const convertSpinner = document.getElementById("convertSpinner");
   const convertAlert = document.getElementById("convertAlert");
@@ -281,7 +281,7 @@ async function convert(event) {
   } finally {
     convertText.classList.remove("d-none");
     convertSpinner.classList.add("d-none");
-    event.target.disabled = false;
+    event.currentTarget.disabled = false;
   }
 }
 
