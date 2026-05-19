@@ -1,7 +1,2030 @@
-var rn,Ee,_,an,ur,cs,hr,xt,X,ls,dr,fr,w,pi,mi,pr,yi,vi,Si,xi,wi,Mi,Pi,Ci,Ti,eo,Ei,to,so,ro,Jn,no,Zn,ki,Di,gr,Hi,Lt,Ut,Yn,br,yr,vr,co,Sr,xr,hs,Ni,un,ho,Vi,Gt,wr,G,fo,F,Ae,st,rt,ds,q,fs,po,mo,Mr,Pr,bo,nt,jt,qt,Kt,Qt,Wt,Cr,Tr,zt,go,ke,D,te,se,ps,ms,bs,_e,gs,R,re,ys,$t,vs,Ss,O,T,Oe,Xt,xs,fe,ot,ws,it,Ms,pe,Ke,Qe,Ps,ue,g,k,We,Fr,ze,Cs,Ts,wt,Fs,Er,$e,hn,xe,I,at,Mt,Es,Jt,kr,ks,Dr,Xe,ct,lt,Ds,Ir,Je,Is,ne,Hs,C,yo,Ns,Vs,Ze,Ye,he,Hr,et,Re,E,vo,Bs,dn,Pt,Zt,ut,N,W,fn,As,H,Le,Nr,_s,Os,Ue,pn,mn,Ct,Tt,Ft,V,we,Rs,ht,De,Vr,bn,dt,B,Me,Pe,Ge,ft,Br,Ie,He,Ce,Ar,oe,pt,A,ie,Yt,Ls,_r,gn,Ai,K,Q,xo,wo,Mo,Gs,me,So,Us,Or,Po,js,$,J,ae,Et,be,yn,vn,Sn,xn,qs,ge,ko,Rr,_i,Oi,Ri,Li,Co,Lr,Ur,To,kt,Ks,Qr,Gr,jr,qr,Kr,Ui,wn,Mn,Fo,Gi,ji,qi,Eo,Dt,Qs,Ws,Ki,Qi,Wi,zi,$i,Do,It,zs,$s,mt,Io,Xi,Ho,Ji,Zi,Yi,bt,ea,ta,Ht,Nt,Xs,es,No,Te,Z,Wr,gt,zr,yt,ts,ss,sa,rs,Js,ns,Pn,Zs,Ys,Cn,er,Tn,tr,Vo,$r,Xr,Bo,Ao,_o,Oo,Jr,Bt,Fn,At,ia,aa,Ro,ca,ua,Zo,ha,da,kn,$o,In,Hn,or,pa,Y,Zr,Yr,Bn,_t,Nn,ma,ba,ga,ya,va,Sa,Dn,rr,nr,Vn,Ne,os,vt,Xo,FORMAT_MAP,htmlLang,soundFontURL,configuration,audioContext,midy,ti=Object.create,qn=Object.defineProperty,si=Object.getOwnPropertyDescriptor,ri=Object.getOwnPropertyNames,ni=Object.getPrototypeOf,oi=Object.prototype.hasOwnProperty,lr=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports),ii=(e,t,n,s)=>{if(t&&typeof t=="object"||typeof t=="function")for(let o of ri(t))!oi.call(e,o)&&o!==n&&qn(e,o,{get:()=>t[o],enumerable:!(s=si(t,o))||s.enumerable});return e},Kn=(e,t,n)=>(n=e!=null?ti(ni(e)):{},ii(t||!e||!e.__esModule?qn(n,"default",{value:e,enumerable:!0}):n,e)),Wn=lr((e,t)=>{function s(e){if(t=new n(e),s=t.readChunk(),s.id!="MThd")throw"Bad MIDI file.  Expected 'MHdr', got: '"+s.id+"'";for(var t,s,a,d,r=o(s.data),c=[],l=0;!t.eof()&&l<r.numTracks;l++){if(a=t.readChunk(),a.id!="MTrk")throw"Bad MIDI file.  Expected 'MTrk', got: '"+a.id+"'";d=i(a.data),c.push(d)}return{header:r,tracks:c}}function o(e){var o=new n(e),i=o.readUInt16(),a=o.readUInt16(),t={format:i,numTracks:a},s=o.readUInt16();return s&32768?(t.framesPerSecond=256-(s>>8),t.ticksPerFrame=s&255):t.ticksPerBeat=s,t}function i(e){for(var s,i,t=new n(e),o=[];!t.eof();)i=a(),o.push(i);return o;function a(){if(e={},e.deltaTime=t.readVarInt(),o=t.readUInt8(),(o&240)===240)if(o===255){e.meta=!0;var e,o,i,a,r,c,d,l=t.readUInt8(),n=t.readVarInt();switch(l){case 0:if(e.type="sequenceNumber",n!==2)throw"Expected length for sequenceNumber event is 2, got "+n;return e.number=t.readUInt16(),e;case 1:return e.type="text",e.text=t.readString(n),e;case 2:return e.type="copyrightNotice",e.text=t.readString(n),e;case 3:return e.type="trackName",e.text=t.readString(n),e;case 4:return e.type="instrumentName",e.text=t.readString(n),e;case 5:return e.type="lyrics",e.text=t.readString(n),e;case 6:return e.type="marker",e.text=t.readString(n),e;case 7:return e.type="cuePoint",e.text=t.readString(n),e;case 32:if(e.type="channelPrefix",n!=1)throw"Expected length for channelPrefix event is 1, got "+n;return e.channel=t.readUInt8(),e;case 33:if(e.type="portPrefix",n!=1)throw"Expected length for portPrefix event is 1, got "+n;return e.port=t.readUInt8(),e;case 47:if(e.type="endOfTrack",n!=0)throw"Expected length for endOfTrack event is 0, got "+n;return e;case 81:if(e.type="setTempo",n!=3)throw"Expected length for setTempo event is 3, got "+n;return e.microsecondsPerBeat=t.readUInt24(),e;case 84:if(e.type="smpteOffset",n!=5)throw"Expected length for smpteOffset event is 5, got "+n;return r=t.readUInt8(),d={0:24,32:25,64:29,96:30},e.frameRate=d[r&96],e.hour=r&31,e.min=t.readUInt8(),e.sec=t.readUInt8(),e.frame=t.readUInt8(),e.subFrame=t.readUInt8(),e;case 88:if(e.type="timeSignature",n!=2&&n!=4)throw"Expected length for timeSignature event is 4 or 2, got "+n;return e.numerator=t.readUInt8(),e.denominator=1<<t.readUInt8(),n===4?(e.metronome=t.readUInt8(),e.thirtyseconds=t.readUInt8()):(e.metronome=36,e.thirtyseconds=8),e;case 89:if(e.type="keySignature",n!=2)throw"Expected length for keySignature event is 2, got "+n;return e.key=t.readInt8(),e.scale=t.readUInt8(),e;case 127:return e.type="sequencerSpecific",e.data=t.readBytes(n),e;default:return e.type="unknownMeta",e.data=t.readBytes(n),e.metatypeByte=l,e}}else if(o==240)return e.type="sysEx",n=t.readVarInt(),e.data=t.readBytes(n),e;else if(o==247)return e.type="endSysEx",n=t.readVarInt(),e.data=t.readBytes(n),e;else throw"Unrecognised MIDI event type byte: "+o;else{if((o&128)===0){if(s===null)throw"Running status byte encountered before status byte";i=o,o=s,e.running=!0}else i=t.readUInt8(),s=o;switch(c=o>>4,e.channel=o&15,c){case 8:return e.type="noteOff",e.noteNumber=i,e.velocity=t.readUInt8(),e;case 9:return a=t.readUInt8(),e.type=a===0?"noteOff":"noteOn",e.noteNumber=i,e.velocity=a,a===0&&(e.byte9=!0),e;case 10:return e.type="noteAftertouch",e.noteNumber=i,e.amount=t.readUInt8(),e;case 11:return e.type="controller",e.controllerType=i,e.value=t.readUInt8(),e;case 12:return e.type="programChange",e.programNumber=i,e;case 13:return e.type="channelAftertouch",e.amount=i,e;case 14:return e.type="pitchBend",e.value=i+(t.readUInt8()<<7)-8192,e;default:throw"Unrecognised MIDI event type: "+c}}}}function n(e){this.buffer=e,this.bufferLen=this.buffer.length,this.pos=0}n.prototype.eof=function(){return this.pos>=this.bufferLen},n.prototype.readUInt8=function(){var e=this.buffer[this.pos];return this.pos+=1,e},n.prototype.readInt8=function(){var e=this.readUInt8();return e&128?e-256:e},n.prototype.readUInt16=function(){var e=this.readUInt8(),t=this.readUInt8();return(e<<8)+t},n.prototype.readInt16=function(){var e=this.readUInt16();return e&32768?e-65536:e},n.prototype.readUInt24=function(){var e=this.readUInt8(),t=this.readUInt8(),n=this.readUInt8();return(e<<16)+(t<<8)+n},n.prototype.readInt24=function(){var e=this.readUInt24();return e&8388608?e-16777216:e},n.prototype.readUInt32=function(){var e=this.readUInt8(),t=this.readUInt8(),n=this.readUInt8(),s=this.readUInt8();return(e<<24)+(t<<16)+(n<<8)+s},n.prototype.readBytes=function(e){var t=this.buffer.slice(this.pos,this.pos+e);return this.pos+=e,t},n.prototype.readString=function(e){var t=this.readBytes(e);return String.fromCharCode.apply(null,t)},n.prototype.readVarInt=function(){for(var t,e=0;!this.eof();)if(t=this.readUInt8(),t&128)e+=t&127,e<<=7;else return e+t;return e},n.prototype.readChunk=function(){var t=this.readString(4),e=this.readUInt32(),n=this.readBytes(e);return{id:t,length:e,data:n}},t.exports=s}),$n=lr((e,t)=>{function s(e,t){if(typeof e!="object")throw"Invalid MIDI data";t=t||{};var s,l=e.header||{},r=e.tracks||[],c=r.length,a=new n;for(o(a,l,c),s=0;s<c;s++)i(a,r[s],t);return a.buffer}function o(e,t,s){var o,a=t.format==null?1:t.format,i=128;t.timeDivision?i=t.timeDivision:t.ticksPerFrame&&t.framesPerSecond?i=-(t.framesPerSecond&255)<<8|t.ticksPerFrame&255:t.ticksPerBeat&&(i=t.ticksPerBeat&32767),o=new n,o.writeUInt16(a),o.writeUInt16(s),o.writeUInt16(i),e.writeChunk("MThd",o.buffer)}function i(e,t,s){var o,r=new n,c=t.length,i=null;for(o=0;o<c;o++)(s.running===!1||!s.running&&!t[o].running)&&(i=null),i=a(r,t[o],i,s.useByte9ForNoteOff);e.writeChunk("MTrk",r.buffer)}function a(e,t,n,s){var c,l,d,u,r=t.type,m=t.deltaTime,i=t.text||"",a=t.data||[],o=null;switch(e.writeVarInt(m),r){case"sequenceNumber":e.writeUInt8(255),e.writeUInt8(0),e.writeVarInt(2),e.writeUInt16(t.number);break;case"text":e.writeUInt8(255),e.writeUInt8(1),e.writeVarInt(i.length),e.writeString(i);break;case"copyrightNotice":e.writeUInt8(255),e.writeUInt8(2),e.writeVarInt(i.length),e.writeString(i);break;case"trackName":e.writeUInt8(255),e.writeUInt8(3),e.writeVarInt(i.length),e.writeString(i);break;case"instrumentName":e.writeUInt8(255),e.writeUInt8(4),e.writeVarInt(i.length),e.writeString(i);break;case"lyrics":e.writeUInt8(255),e.writeUInt8(5),e.writeVarInt(i.length),e.writeString(i);break;case"marker":e.writeUInt8(255),e.writeUInt8(6),e.writeVarInt(i.length),e.writeString(i);break;case"cuePoint":e.writeUInt8(255),e.writeUInt8(7),e.writeVarInt(i.length),e.writeString(i);break;case"channelPrefix":e.writeUInt8(255),e.writeUInt8(32),e.writeVarInt(1),e.writeUInt8(t.channel);break;case"portPrefix":e.writeUInt8(255),e.writeUInt8(33),e.writeVarInt(1),e.writeUInt8(t.port);break;case"endOfTrack":e.writeUInt8(255),e.writeUInt8(47),e.writeVarInt(0);break;case"setTempo":e.writeUInt8(255),e.writeUInt8(81),e.writeVarInt(3),e.writeUInt24(t.microsecondsPerBeat);break;case"smpteOffset":e.writeUInt8(255),e.writeUInt8(84),e.writeVarInt(5),c={24:0,25:32,29:64,30:96},l=t.hour&31|c[t.frameRate],e.writeUInt8(l),e.writeUInt8(t.min),e.writeUInt8(t.sec),e.writeUInt8(t.frame),e.writeUInt8(t.subFrame);break;case"timeSignature":e.writeUInt8(255),e.writeUInt8(88),e.writeVarInt(4),e.writeUInt8(t.numerator),d=Math.floor(Math.log(t.denominator)/Math.LN2)&255,e.writeUInt8(d),e.writeUInt8(t.metronome),e.writeUInt8(t.thirtyseconds||8);break;case"keySignature":e.writeUInt8(255),e.writeUInt8(89),e.writeVarInt(2),e.writeInt8(t.key),e.writeUInt8(t.scale);break;case"sequencerSpecific":e.writeUInt8(255),e.writeUInt8(127),e.writeVarInt(a.length),e.writeBytes(a);break;case"unknownMeta":t.metatypeByte!=null&&(e.writeUInt8(255),e.writeUInt8(t.metatypeByte),e.writeVarInt(a.length),e.writeBytes(a));break;case"sysEx":e.writeUInt8(240),e.writeVarInt(a.length),e.writeBytes(a);break;case"endSysEx":e.writeUInt8(247),e.writeVarInt(a.length),e.writeBytes(a);break;case"noteOff":u=s!==!1&&t.byte9||s&&t.velocity==0?144:128,o=u|t.channel,o!==n&&e.writeUInt8(o),e.writeUInt8(t.noteNumber),e.writeUInt8(t.velocity);break;case"noteOn":o=144|t.channel,o!==n&&e.writeUInt8(o),e.writeUInt8(t.noteNumber),e.writeUInt8(t.velocity);break;case"noteAftertouch":o=160|t.channel,o!==n&&e.writeUInt8(o),e.writeUInt8(t.noteNumber),e.writeUInt8(t.amount);break;case"controller":o=176|t.channel,o!==n&&e.writeUInt8(o),e.writeUInt8(t.controllerType),e.writeUInt8(t.value);break;case"programChange":o=192|t.channel,o!==n&&e.writeUInt8(o),e.writeUInt8(t.programNumber);break;case"channelAftertouch":o=208|t.channel,o!==n&&e.writeUInt8(o),e.writeUInt8(t.amount);break;case"pitchBend":o=224|t.channel,o!==n&&e.writeUInt8(o);var h=8192+t.value,f=h&127,p=h>>7&127;e.writeUInt8(f),e.writeUInt8(p);break;default:throw"Unrecognized event type: "+r}return o}function n(){this.buffer=[]}n.prototype.writeUInt8=function(e){this.buffer.push(e&255)},n.prototype.writeInt8=n.prototype.writeUInt8,n.prototype.writeUInt16=function(e){var t=e>>8&255,n=e&255;this.writeUInt8(t),this.writeUInt8(n)},n.prototype.writeInt16=n.prototype.writeUInt16,n.prototype.writeUInt24=function(e){var t=e>>16&255,n=e>>8&255,s=e&255;this.writeUInt8(t),this.writeUInt8(n),this.writeUInt8(s)},n.prototype.writeInt24=n.prototype.writeUInt24,n.prototype.writeUInt32=function(e){var t=e>>24&255,n=e>>16&255,s=e>>8&255,o=e&255;this.writeUInt8(t),this.writeUInt8(n),this.writeUInt8(s),this.writeUInt8(o)},n.prototype.writeInt32=n.prototype.writeUInt32,n.prototype.writeBytes=function(e){this.buffer=this.buffer.concat(Array.prototype.slice.call(e,0))},n.prototype.writeString=function(e){var t,s=e.length,n=[];for(t=0;t<s;t++)n.push(e.codePointAt(t));this.writeBytes(n)},n.prototype.writeVarInt=function(e){if(e<0)throw"Cannot write negative variable-length integer";if(e<=127)this.writeUInt8(e);else{var s,t=e,n=[];for(n.push(t&127),t>>=7;t;)s=t&127|128,n.push(s),t>>=7;this.writeBytes(n.reverse())}},n.prototype.writeChunk=function(e,t){this.writeString(e),this.writeUInt32(t.length),this.writeBytes(t)},t.exports=s}),Xn=lr(e=>{e.parseMidi=Wn(),e.writeMidi=$n()}),uo=lr((e,t)=>{t.exports=Worker}),Jo=Kn(Xn()),Be=class{constructor(e,t){Object.defineProperty(this,"data",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"offset",{enumerable:!0,configurable:!0,writable:!0,value:t})}readString(e){let n=this.offset,s=n+e,o=this.data,t=o.subarray(n,s).indexOf(0);t<0&&(t=e);let i=new Array(t);for(let e=0;e<t;e++)i[e]=o[n+e];return this.offset=s,String.fromCharCode(...i)}readWORD(){return this.data[this.offset++]|this.data[this.offset++]<<8}readDWORD(e=!1){return e?(this.data[this.offset++]<<24|this.data[this.offset++]<<16|this.data[this.offset++]<<8|this.data[this.offset++])>>>0:(this.data[this.offset++]|this.data[this.offset++]<<8|this.data[this.offset++]<<16|this.data[this.offset++]<<24)>>>0}readByte(){return this.data[this.offset++]}readAt(e){return this.data[this.offset+e]}readUInt8(){return this.readByte()}readInt8(){return this.readByte()<<24>>24}readUInt16(){return this.readWORD()}readInt16(){return this.readWORD()<<16>>16}readUInt32(){return this.readDWORD()}};function nn(e,t,n){let s=new Be(e,t),o=s.readString(4),i=s.readDWORD(n);return new rn(o,i,s.offset)}function on(e,t=0,n,{padding:s=!0,bigEndian:o=!1}={}){let a=[],r=n+t,i=t;for(;i<r;){let n=nn(e,i,o);i=n.offset+n.size,s&&(i-t&1)===1&&i++,a.push(n)}return a}rn=class{constructor(e,t,n){Object.defineProperty(this,"type",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"size",{enumerable:!0,configurable:!0,writable:!0,value:t}),Object.defineProperty(this,"offset",{enumerable:!0,configurable:!0,writable:!0,value:n})}},Ee=["startAddrsOffset","endAddrsOffset","startloopAddrsOffset","endloopAddrsOffset","startAddrsCoarseOffset","modLfoToPitch","vibLfoToPitch","modEnvToPitch","initialFilterFc","initialFilterQ","modLfoToFilterFc","modEnvToFilterFc","endAddrsCoarseOffset","modLfoToVolume",void 0,"chorusEffectsSend","reverbEffectsSend","pan",void 0,void 0,void 0,"delayModLFO","freqModLFO","delayVibLFO","freqVibLFO","delayModEnv","attackModEnv","holdModEnv","decayModEnv","sustainModEnv","releaseModEnv","keynumToModEnvHold","keynumToModEnvDecay","delayVolEnv","attackVolEnv","holdVolEnv","decayVolEnv","sustainVolEnv","releaseVolEnv","keynumToVolEnvHold","keynumToVolEnvDecay","instrument",void 0,"keyRange","velRange","startloopAddrsCoarseOffset","keynum","velocity","initialAttenuation",void 0,"endloopAddrsCoarseOffset","coarseTune","fineTune","sampleID","sampleModes",void 0,"scaleTuning","exclusiveClass","overridingRootKey"],_=class i{constructor(e,t,n,s,o){Object.defineProperty(this,"type",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"polarity",{enumerable:!0,configurable:!0,writable:!0,value:t}),Object.defineProperty(this,"direction",{enumerable:!0,configurable:!0,writable:!0,value:n}),Object.defineProperty(this,"cc",{enumerable:!0,configurable:!0,writable:!0,value:s}),Object.defineProperty(this,"index",{enumerable:!0,configurable:!0,writable:!0,value:o})}get controllerType(){return this.cc<<7|this.index}static parse(e){let t=e>>10&63,n=e&127,s=e>>7&1,o=e>>8&1,a=e>>9&1;return new i(t,a,o,s,n)}map(e){let t=e;switch(this.polarity===1?(t=(t-.5)*2,this.direction===1&&(t*=-1)):this.direction===1&&(t=1-t),this.type){case 0:break;case 1:t=Math.sign(t)*Math.log(Math.abs(t));break;case 2:t=Math.sign(t)*Math.exp(-Math.abs(t));break;case 3:t=t>=.5?1:0;break;default:console.warn(`unexpected type: ${this.type}`);break}return t}},an=class i2{constructor(e,t){Object.defineProperty(this,"major",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"minor",{enumerable:!0,configurable:!0,writable:!0,value:t})}static parse(e){let t=e.readInt8(),n=e.readInt8();return new i2(t,n)}},ur=class i3{constructor(e,t,n,s,o,i,a,r,c,l,d){Object.defineProperty(this,"comment",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"copyright",{enumerable:!0,configurable:!0,writable:!0,value:t}),Object.defineProperty(this,"creationDate",{enumerable:!0,configurable:!0,writable:!0,value:n}),Object.defineProperty(this,"engineer",{enumerable:!0,configurable:!0,writable:!0,value:s}),Object.defineProperty(this,"name",{enumerable:!0,configurable:!0,writable:!0,value:o}),Object.defineProperty(this,"product",{enumerable:!0,configurable:!0,writable:!0,value:i}),Object.defineProperty(this,"software",{enumerable:!0,configurable:!0,writable:!0,value:a}),Object.defineProperty(this,"version",{enumerable:!0,configurable:!0,writable:!0,value:r}),Object.defineProperty(this,"soundEngine",{enumerable:!0,configurable:!0,writable:!0,value:c}),Object.defineProperty(this,"romName",{enumerable:!0,configurable:!0,writable:!0,value:l}),Object.defineProperty(this,"romVersion",{enumerable:!0,configurable:!0,writable:!0,value:d})}static parse(e,t){function s(e){for(let n=0;n<t.length;n++)if(t[n].type===e)return t[n]}function o(t){return new Be(e,t.offset)}function n(e){let t=s(e);return t?o(t).readString(t.size):null}function i(e){let t=s(e);return t?an.parse(o(t)):null}let c=n("ICMT"),r=n("ICOP"),a=n("ICRD"),l=n("IENG"),d=n("INAM"),u=n("IPRD"),h=n("ISFT"),m=i("ifil"),f=n("isng"),p=n("irom"),g=i("iver");return new i3(c,r,a,l,d,u,h,m,f,p,g)}},cs=class i4{constructor(e,t){Object.defineProperty(this,"generatorIndex",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"modulatorIndex",{enumerable:!0,configurable:!0,writable:!0,value:t})}static parse(e){let t=e.readWORD(),n=e.readWORD();return new i4(t,n)}},hr=class i5{constructor(e,t,n,s,o,i,a){Object.defineProperty(this,"presetName",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"preset",{enumerable:!0,configurable:!0,writable:!0,value:t}),Object.defineProperty(this,"bank",{enumerable:!0,configurable:!0,writable:!0,value:n}),Object.defineProperty(this,"presetBagIndex",{enumerable:!0,configurable:!0,writable:!0,value:s}),Object.defineProperty(this,"library",{enumerable:!0,configurable:!0,writable:!0,value:o}),Object.defineProperty(this,"genre",{enumerable:!0,configurable:!0,writable:!0,value:i}),Object.defineProperty(this,"morphology",{enumerable:!0,configurable:!0,writable:!0,value:a})}get isEnd(){let{presetName:e,preset:t,bank:n,library:s,genre:o,morphology:i}=this;return e==="EOP"||e===""&&t+n+s+o+i===0}static parse(e){let t=e.readString(20),n=e.readWORD(),s=e.readWORD(),o=e.readWORD(),i=e.readDWORD(),a=e.readDWORD(),r=e.readDWORD();return new i5(t,n,s,o,i,a,r)}},xt=class i6{constructor(e,t){Object.defineProperty(this,"lo",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),Object.defineProperty(this,"hi",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),this.lo=e,this.hi=t}in(e){return this.lo<=e&&e<=this.hi}static parse(e){let t=e.readByte(),n=e.readByte();return new i6(t,n)}},X=class i7{constructor(e,t,n,s,o){Object.defineProperty(this,"sourceOper",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"destinationOper",{enumerable:!0,configurable:!0,writable:!0,value:t}),Object.defineProperty(this,"amount",{enumerable:!0,configurable:!0,writable:!0,value:n}),Object.defineProperty(this,"amountSourceOper",{enumerable:!0,configurable:!0,writable:!0,value:s}),Object.defineProperty(this,"transOper",{enumerable:!0,configurable:!0,writable:!0,value:o})}transform(e){let t=this.amount*e;switch(this.transOper){case 0:return t;case 2:return Math.abs(t);default:return t}}static parse(e){let t=e.readWORD(),n=e.readWORD(),s=e.readInt16(),o=e.readWORD(),i=e.readWORD(),a=_.parse(t),r=_.parse(o);return new i7(a,n,s,r,i)}},ls=class i8{constructor(e,t){Object.defineProperty(this,"code",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"value",{enumerable:!0,configurable:!0,writable:!0,value:t})}get type(){return Ee[this.code]}get isEnd(){return this.code===0&&this.value===0}static parse(e){let n=e.readWORD(),s=Ee[n],t;switch(s){case"keyRange":case"velRange":t=xt.parse(e);break;case"instrument":case"sampleID":t=e.readUInt16();break;default:t=e.readInt16();break}return new i8(n,t)}},dr=class i9{constructor(){Object.defineProperty(this,"instrumentName",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),Object.defineProperty(this,"instrumentBagIndex",{enumerable:!0,configurable:!0,writable:!0,value:void 0})}get isEnd(){return this.instrumentName==="EOI"}static parse(e){let t=new i9;return t.instrumentName=e.readString(20),t.instrumentBagIndex=e.readWORD(),t}},fr=class i10{constructor(e,t,n,s,o,i,a,r,c,l){Object.defineProperty(this,"sampleName",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"start",{enumerable:!0,configurable:!0,writable:!0,value:t}),Object.defineProperty(this,"end",{enumerable:!0,configurable:!0,writable:!0,value:n}),Object.defineProperty(this,"loopStart",{enumerable:!0,configurable:!0,writable:!0,value:s}),Object.defineProperty(this,"loopEnd",{enumerable:!0,configurable:!0,writable:!0,value:o}),Object.defineProperty(this,"sampleRate",{enumerable:!0,configurable:!0,writable:!0,value:i}),Object.defineProperty(this,"originalPitch",{enumerable:!0,configurable:!0,writable:!0,value:a}),Object.defineProperty(this,"pitchCorrection",{enumerable:!0,configurable:!0,writable:!0,value:r}),Object.defineProperty(this,"sampleLink",{enumerable:!0,configurable:!0,writable:!0,value:c}),Object.defineProperty(this,"sampleType",{enumerable:!0,configurable:!0,writable:!0,value:l})}get isEnd(){return this.sampleName==="EOS"}static parse(e,t){let i=e.readString(20),n=e.readDWORD(),a=e.readDWORD(),s=e.readDWORD(),o=e.readDWORD(),r=e.readDWORD(),c=e.readByte(),l=e.readInt8(),d=e.readWORD(),u=e.readWORD();return t||(s-=n,o-=n),new i10(i,n,a,s,o,r,c,l,d,u)}},w=class{constructor(e,t,n){Object.defineProperty(this,"min",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),Object.defineProperty(this,"max",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),Object.defineProperty(this,"defaultValue",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),this.min=e,this.defaultValue=t,this.max=n}clamp(e){return Math.max(this.min,Math.min(e,this.max))}},pi=["pcm16","pcm24","compressed"],mi=new Set(pi),pr=class{constructor(e,t,n){if(Object.defineProperty(this,"type",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),Object.defineProperty(this,"sampleHeader",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),Object.defineProperty(this,"data",{enumerable:!0,configurable:!0,writable:!0,value:void 0}),!mi.has(e))throw new Error(`Invalid AudioDataType: ${e}`);this.type=e,this.sampleHeader=t,this.data=n}decodePCM(e){let{type:s}=this;if(s==="pcm16"){let t=e.byteLength/2,n=new Float32Array(t),s=new Int16Array(e.buffer,e.byteOffset,e.byteLength/2);for(let e=0;e<t;e++)n[e]=s[e]/32768;return n}let t=e.byteLength/3,n=new Float32Array(t);for(let s=0;s<t;s++){let o=s*3,i=e[o]|e[o+1]<<8|e[o+2]<<16;i&8388608&&(i|=4278190080),n[s]=i/8388608}return n}};function cn(e,t={}){let s=on(e,0,e.length,t);if(s.length!==1)throw new Error("wrong chunk length");let o=s[0];if(o===null)throw new Error("chunk not found");function i(e,t,n={}){let s=mr(e,t,"RIFF","sfbk",n);if(s.length!==3)throw new Error("invalid sfbk structure");let o=bi(s[0],t),i=o.version.major===3;return i&&s[2].type!=="LIST"&&(s[2]=nn(t,s[2].offset-9,!1)),{info:o,samplingData:gi(s[1],t),...a(s[2],t,i)}}function a(e,t,n){let s=mr(e,t,"LIST","pdta");if(s.length!==9)throw new Error("invalid pdta chunk");return{presetHeaders:yi(s[0],t),presetZone:vi(s[1],t),presetModulators:wi(s[2],t),presetGenerators:Pi(s[3],t),instruments:Si(s[4],t),instrumentZone:xi(s[5],t),instrumentModulators:Mi(s[6],t),instrumentGenerators:Ci(s[7],t),sampleHeaders:Ti(s[8],t,n)}}let n=i(o,e,t),r=n.info.version.major===3;return{...n,samples:Fi(n.sampleHeaders,n.samplingData.offsetMSB,n.samplingData.offsetLSB,e,r)}}function mr(e,t,n,s,o={}){if(e.type!==n)throw new Error("invalid chunk type:"+e.type);let i=new Be(t,e.offset),a=i.readString(4);if(a!==s)throw new Error("invalid signature:"+a);return on(t,i.offset,e.size-4,o)}function bi(e,t){let n=mr(e,t,"LIST","INFO");return ur.parse(t,n)}function gi(e,t){let n=mr(e,t,"LIST","sdta");return{offsetMSB:n[0].offset,offsetLSB:n[1]?.offset}}function qe(e,t,n,s,o,i){let a=[];if(e.type!==n)throw new Error("invalid chunk type:"+e.type);let r=new Be(t,e.offset),c=e.offset+e.size;for(;r.offset<c;){let e=s.parse(r,i);if(o&&o(e))break;a.push(e)}return a}yi=(e,t)=>qe(e,t,"phdr",hr,e=>e.isEnd),vi=(e,t)=>qe(e,t,"pbag",cs),Si=(e,t)=>qe(e,t,"inst",dr,e=>e.isEnd),xi=(e,t)=>qe(e,t,"ibag",cs),wi=(e,t)=>qe(e,t,"pmod",X),Mi=(e,t)=>qe(e,t,"imod",X),Pi=(e,t)=>qe(e,t,"pgen",ls,e=>e.isEnd),Ci=(e,t)=>qe(e,t,"igen",ls),Ti=(e,t,n)=>qe(e,t,"shdr",fr,e=>e.isEnd,n);function Fi(e,t,n,s,o){let i=new Array(e.length),a=o?1:2,r=o?"compressed":n?"pcm24":"pcm16";for(let n=0;n<e.length;n++){let{start:o,end:c}=e[n],l=t+o*a,d=t+c*a,u=s.subarray(l,d);i[n]=new pr(r,e[n],u)}return i}eo=new Map;for(let e=0;e<Ee.length;e++)eo.set(Ee[e],e);Ei=["instrument","sampleID"],to=["keyRange","velRange"],so=["keynum","velocity"],ro=["startAddrsOffset","endAddrsOffset","startloopAddrsOffset","endloopAddrsOffset","startAddrsCoarseOffset","endAddrsCoarseOffset","startloopAddrsCoarseOffset","endloopAddrsCoarseOffset","sampleModes","exclusiveClass","overridingRootKey"],Jn=[...ro,...so],no=new Set;for(let e=0;e<Jn.length;e++){let n=Jn[e],t=eo.get(n);t!==void 0&&no.add(t)}function oo(e){let t={},n=Object.keys(e);for(let s of n){let o=e[s];if(us(s))t[s]=o;else{let e=o;t[s]=e.clamp(e.defaultValue)}}return t}Zn=[["keynum","keyRange"],["velocity","velRange"]],ki=new Set(to);function us(e){return ki.has(e)}Di=new Set([...Ei,...to,...so,...ro]);function Ii(){let e=[],t=Ee.length;for(let n=0;n<t;n++){let s=Ee[n];s!==void 0&&!Di.has(s)&&e.push(s)}return e}gr=Ii(),Hi=new Set(gr);function ln(e){return Hi.has(e)}function io(e){let t={};for(let o=0;o<e.length;o++){let n=e[o],s=n.type;if(s!==void 0&&!no.has(n.code))if(us(s))t[s]=n.value;else{let e=s;t[e]=n.value}}return t}function ao(e){let t={};for(let s=0;s<e.length;s++){let o=e[s],n=o.type;if(n!==void 0)if(us(n))t[n]=o.value;else{let e=n;t[e]=o.value}}for(let e=0;e<Zn.length;e++){let[s,o]=Zn[e],n=t[s];n!==void 0&&(t[o]=new xt(n,n))}return t}Lt=-32768,Ut=32767,Yn=0,br=65535,yr={startAddrsOffset:new w(0,0,Ut),endAddrsOffset:new w(Lt,0,0),startloopAddrsOffset:new w(Lt,0,Ut),endloopAddrsOffset:new w(Lt,0,Ut),startAddrsCoarseOffset:new w(0,0,Ut),modLfoToPitch:new w(-12e3,0,12e3),vibLfoToPitch:new w(-12e3,0,12e3),modEnvToPitch:new w(-12e3,0,12e3),initialFilterFc:new w(1500,13500,13500),initialFilterQ:new w(0,0,960),modLfoToFilterFc:new w(-12e3,0,12e3),modEnvToFilterFc:new w(-12e3,0,12e3),endAddrsCoarseOffset:new w(Lt,0,0),modLfoToVolume:new w(-960,0,960),chorusEffectsSend:new w(0,0,1e3),reverbEffectsSend:new w(0,0,1e3),pan:new w(-500,0,500),delayModLFO:new w(-12e3,-12e3,5e3),freqModLFO:new w(-16e3,0,4500),delayVibLFO:new w(-12e3,-12e3,5e3),freqVibLFO:new w(-16e3,0,4500),delayModEnv:new w(-12e3,-12e3,5e3),attackModEnv:new w(-12e3,-12e3,8e3),holdModEnv:new w(-12e3,-12e3,5e3),decayModEnv:new w(-12e3,-12e3,8e3),sustainModEnv:new w(0,0,1e3),releaseModEnv:new w(-12e3,-12e3,8e3),keynumToModEnvHold:new w(-1200,0,1200),keynumToModEnvDecay:new w(-1200,0,1200),delayVolEnv:new w(-12e3,-12e3,5e3),attackVolEnv:new w(-12e3,-12e3,8e3),holdVolEnv:new w(-12e3,-12e3,5e3),decayVolEnv:new w(-12e3,-12e3,8e3),sustainVolEnv:new w(0,0,1440),releaseVolEnv:new w(-12e3,-12e3,8e3),keynumToVolEnvHold:new w(-1200,0,1200),keynumToVolEnvDecay:new w(-1200,0,1200),instrument:new w(Yn,br,br),keyRange:new xt(0,127),velRange:new xt(0,127),startloopAddrsCoarseOffset:new w(Lt,0,Ut),keynum:new w(-1,-1,127),velocity:new w(-1,-1,127),initialAttenuation:new w(0,0,1440),endloopAddrsCoarseOffset:new w(Lt,0,Ut),coarseTune:new w(-120,0,120),fineTune:new w(-99,0,99),sampleID:new w(Yn,br,br),sampleModes:new w(0,0,3),scaleTuning:new w(0,100,100),exclusiveClass:new w(0,0,127),overridingRootKey:new w(-1,-1,127)};function Se(e){return Math.pow(2,e/1200)}vr=class{constructor(e,t,n,s,o){Object.defineProperty(this,"key",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"generators",{enumerable:!0,configurable:!0,writable:!0,value:t}),Object.defineProperty(this,"modulators",{enumerable:!0,configurable:!0,writable:!0,value:n}),Object.defineProperty(this,"sample",{enumerable:!0,configurable:!0,writable:!0,value:s}),Object.defineProperty(this,"sampleHeader",{enumerable:!0,configurable:!0,writable:!0,value:o}),Object.defineProperty(this,"controllerToDestinations",{enumerable:!0,configurable:!0,writable:!0,value:new Map}),Object.defineProperty(this,"destinationToModulators",{enumerable:!0,configurable:!0,writable:!0,value:new Map}),Object.defineProperty(this,"voiceHandlers",{enumerable:!0,configurable:!0,writable:!0,value:{modLfoToPitch:(e,t)=>{e.modLfoToPitch=this.clamp("modLfoToPitch",t)},vibLfoToPitch:(e,t)=>{e.vibLfoToPitch=this.clamp("vibLfoToPitch",t)},modEnvToPitch:(e,t)=>{e.modEnvToPitch=this.clamp("modEnvToPitch",t)},initialFilterFc:(e,t)=>{e.initialFilterFc=this.clamp("initialFilterFc",t)},initialFilterQ:(e,t)=>{e.initialFilterQ=this.clamp("initialFilterQ",t)},modLfoToFilterFc:(e,t)=>{e.modLfoToFilterFc=this.clamp("modLfoToFilterFc",t)},modEnvToFilterFc:(e,t)=>{e.modEnvToFilterFc=this.clamp("modEnvToFilterFc",t)},modLfoToVolume:(e,t)=>{e.modLfoToVolume=this.clamp("modLfoToVolume",t)},chorusEffectsSend:(e,t)=>{e.chorusEffectsSend=this.clamp("chorusEffectsSend",t)/1e3},reverbEffectsSend:(e,t)=>{e.reverbEffectsSend=this.clamp("reverbEffectsSend",t)/1e3},pan:(e,t)=>{e.pan=this.clamp("pan",t)/1e3},delayModLFO:(e,t)=>{e.delayModLFO=Se(this.clamp("delayModLFO",t))},freqModLFO:(e,t)=>{e.freqModLFO=this.clamp("freqModLFO",t)},delayVibLFO:(e,t)=>{e.delayVibLFO=Se(this.clamp("delayVibLFO",t))},freqVibLFO:(e,t)=>{e.freqVibLFO=this.clamp("freqVibLFO",t)},delayModEnv:(e,t)=>{e.modDelay=Se(this.clamp("delayModEnv",t))},attackModEnv:(e,t)=>{e.modAttack=Se(this.clamp("attackModEnv",t))},holdModEnv:(e,t)=>{let n=this.clamp("holdModEnv",t),s=this.clamp("keynumToModEnvHold",t);e.modHold=this.getModHold(n,s)},decayModEnv:(e,t)=>{let n=this.clamp("decayModEnv",t),s=this.clamp("keynumToModEnvDecay",t);e.modDecay=this.getModDecay(n,s)},sustainModEnv:(e,t)=>{e.modSustain=this.clamp("sustainModEnv",t)/1e3},releaseModEnv:(e,t)=>{e.modRelease=Se(this.clamp("releaseModEnv",t))},keynumToModEnvHold:(e,t)=>{let n=this.clamp("holdModEnv",t),s=this.clamp("keynumToModEnvHold",t);e.modHold=this.getModHold(n,s)},keynumToModEnvDecay:(e,t)=>{let n=this.clamp("decayModEnv",t),s=this.clamp("keynumToModEnvDecay",t);e.modDecay=this.getModDecay(n,s)},delayVolEnv:(e,t)=>{e.volDelay=Se(this.clamp("delayVolEnv",t))},attackVolEnv:(e,t)=>{e.volAttack=Se(this.clamp("attackVolEnv",t))},holdVolEnv:(e,t)=>{let n=this.clamp("holdVolEnv",t),s=this.clamp("keynumToVolEnvHold",t);e.volHold=this.getVolHold(n,s)},decayVolEnv:(e,t)=>{let n=this.clamp("decayVolEnv",t),s=this.clamp("keynumToVolEnvDecay",t);e.volDecay=this.getVolDecay(n,s)},sustainVolEnv:(e,t)=>{e.volSustain=this.clamp("sustainVolEnv",t)/1e3},releaseVolEnv:(e,t)=>{e.volRelease=Se(this.clamp("releaseVolEnv",t))},keynumToVolEnvHold:(e,t)=>{let n=this.clamp("holdVolEnv",t),s=this.clamp("keynumToVolEnvHold",t);e.modHold=this.getVolHold(n,s)},keynumToVolEnvDecay:(e,t)=>{let n=this.clamp("decayVolEnv",t),s=this.clamp("keynumToVolEnvDecay",t);e.modDecay=this.getVolDecay(n,s)},initialAttenuation:(e,t)=>{e.initialAttenuation=this.clamp("initialAttenuation",t)},coarseTune:(e,t)=>{e.detune=this.getDetune(t)},fineTune:(e,t)=>{e.detune=this.getDetune(t)},scaleTuning:(e,t)=>{e.playbackRate=this.getPlaybackRate(t)}}}),this.setControllerToDestinations(),this.setDestinationToModulators()}setControllerToDestinations(){for(let e=0;e<this.modulators.length;e++){let t=this.modulators[e],n=t.sourceOper.controllerType,o=t.destinationOper,s=this.controllerToDestinations.get(n);s?s.add(t.destinationOper):this.controllerToDestinations.set(n,new Set([o]))}}setDestinationToModulators(){for(let e=0;e<this.modulators.length;e++){let t=this.modulators[e],n=t.destinationOper,s=this.destinationToModulators.get(n);s?s.push(t):this.destinationToModulators.set(n,[t])}}getModHold(e,t){return Se(e+(this.key-60)*t)}getModDecay(e,t){return Se(e+(this.key-60)*t)}getVolHold(e,t){return Se(e+(this.key-60)*t)}getVolDecay(e,t){return Se(e+(this.key-60)*t)}getPlaybackRate(e){let t=this.clamp("overridingRootKey",e),n=this.clamp("scaleTuning",e),s=t===-1?this.sampleHeader.originalPitch:t;return Math.pow(2,(this.key-s)*n/1200)}getDetune(e){let t=this.clamp("coarseTune",e)*100,n=this.clamp("fineTune",e),s=this.sampleHeader.pitchCorrection;return t+n+s}transformParams(e,t){let n={},s=this.controllerToDestinations.get(e);if(!s)return n;for(let o of s){let e=Ee[o];if(!e||!ln(e))continue;let i=this.destinationToModulators.get(o);if(i){n[e]=this.generators[e];for(let o of i){let a=o.sourceOper,l=a.map(t[a.controllerType]),r=1,s=o.amountSourceOper;if(s.cc!==0||s.index!==0){let e=t[s.controllerType];r=s.map(e)}let c=o.transform(l*r);Number.isNaN(c)||(n[e]+=c)}}}return n}transformAllParams(e){let t=structuredClone(this.generators);for(let n of this.modulators){let c=n.sourceOper.controllerType,i=e[c];if(!i)continue;let o=Ee[n.destinationOper];if(!o||!ln(o))continue;let l=n.sourceOper.map(i),a=1,s=n.amountSourceOper;if(s.cc!==0||s.index!==0){let t=e[s.controllerType];a=s.map(t)}let r=n.transform(l*a);Number.isNaN(r)||(t[o]+=r)}return t}clamp(e,t){return yr[e].clamp(t[e])}getParams(e,t){let n={},s=structuredClone(this.generators),o=this.transformParams(e,t),i=Object.keys(o);for(let e of i)s[e]=o[e];for(let e of i)this.voiceHandlers[e](n,s);return n}getAllParams(e){let t={start:this.generators.startAddrsCoarseOffset*32768+this.generators.startAddrsOffset,end:this.generators.endAddrsCoarseOffset*32768+this.generators.endAddrsOffset,loopStart:this.sampleHeader.loopStart+this.generators.startloopAddrsCoarseOffset*32768+this.generators.startloopAddrsOffset,loopEnd:this.sampleHeader.loopEnd+this.generators.endloopAddrsCoarseOffset*32768+this.generators.endloopAddrsOffset,instrument:this.generators.instrument,sampleID:this.generators.sampleID,sample:this.sample,sampleRate:this.sampleHeader.sampleRate,sampleName:this.sampleHeader.sampleName,sampleModes:this.generators.sampleModes,exclusiveClass:this.clamp("exclusiveClass",this.generators)},n=this.transformAllParams(e);for(let e=0;e<gr.length;e++){let s=gr[e];this.voiceHandlers[s](t,n)}return t}},co=[new X(_.parse(1282),48,960,_.parse(0),0),new X(_.parse(258),8,-2400,_.parse(0),0),new X(_.parse(13),6,50,_.parse(0),0),new X(_.parse(129),6,50,_.parse(0),0),new X(_.parse(1415),48,960,_.parse(0),0),new X(_.parse(650),48,1,_.parse(0),0),new X(_.parse(1419),48,960,_.parse(0),0),new X(_.parse(219),16,.2,_.parse(0),0),new X(_.parse(221),15,.2,_.parse(0),0),new X(_.parse(526),51,127,_.parse(16),0)],Sr=class{constructor(e,t){Object.defineProperty(this,"generators",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"modulators",{enumerable:!0,configurable:!0,writable:!0,value:t})}},xr=class{constructor(e,t){Object.defineProperty(this,"generators",{enumerable:!0,configurable:!0,writable:!0,value:e}),Object.defineProperty(this,"modulators",{enumerable:!0,configurable:!0,writable:!0,value:t})}},hs=class{constructor(e){Object.defineProperty(this,"parsed",{enumerable:!0,configurable:!0,writable:!0,value:e})}getGeneratorParams(e,t,n,s){let o=new Array(s-n);for(let i=n;i<s;i++){let a=t[i].generatorIndex,r=t[i+1].generatorIndex;o[i-n]=e.slice(a,r)}return o}getPresetGenerators(e){let n=this.parsed.presetHeaders[e],t=this.parsed.presetHeaders[e+1],s=t?t.presetBagIndex:this.parsed.presetZone.length-1;return this.getGeneratorParams(this.parsed.presetGenerators,this.parsed.presetZone,n.presetBagIndex,s)}getInstrumentGenerators(e){let n=this.parsed.instruments[e],t=this.parsed.instruments[e+1],s=t?t.instrumentBagIndex:this.parsed.instrumentZone.length-1;return this.getGeneratorParams(this.parsed.instrumentGenerators,this.parsed.instrumentZone,n.instrumentBagIndex,s)}getModulators(e,t,n,s){let o=new Array(s-n);for(let i=n;i<s;i++){let a=t[i].modulatorIndex,r=t[i+1].modulatorIndex;o[i-n]=e.slice(a,r)}return o}getPresetModulators(e){let n=this.parsed.presetHeaders[e],t=this.parsed.presetHeaders[e+1],s=t?t.presetBagIndex:this.parsed.presetZone.length-1;return this.getModulators(this.parsed.presetModulators,this.parsed.presetZone,n.presetBagIndex,s)}getInstrumentModulators(e){let n=this.parsed.instruments[e],t=this.parsed.instruments[e+1],s=t?t.instrumentBagIndex:this.parsed.instrumentZone.length-1;return this.getModulators(this.parsed.instrumentModulators,this.parsed.instrumentZone,n.instrumentBagIndex,s)}findInstrumentZone(e,t,n){let i=this.getInstrumentGenerators(e),s=this.getInstrumentModulators(e),o,a=[];for(let r=0;r<i.length;r++){let e=ao(i[r]);if(e.sampleID===void 0){o=e,a=s[r];continue}if(!(e.keyRange&&!e.keyRange.in(t))&&!(e.velRange&&!e.velRange.in(n)))if(o){let t={...o,...e},n=[...a,...s[r]];return new Sr(t,n)}else return new Sr(e,s[r])}}findInstrument(e,t,n){let i=this.getPresetGenerators(e),s=this.getPresetModulators(e),o,a=[];for(let r=0;r<i.length;r++){let e=io(i[r]);if(e.instrument===void 0){o=e,a=s[r];continue}if(e.keyRange&&!e.keyRange.in(t)||e.velRange&&!e.velRange.in(n))continue;let c=this.findInstrumentZone(e.instrument,t,n);if(c)if(o){let n={...o,...e},i=[...a,...s[r]],l=new xr(n,i);return this.createVoice(t,l,c)}else{let n=new xr(e,s[r]);return this.createVoice(t,n,c)}}return null}createVoice(e,t,n){let s=oo(yr);Object.assign(s,n.generators);let o=Object.keys(t.generators);for(let e=0;e<o.length;e++){let n=o[e];us(n)||(s[n]+=t.generators[n])}let a=[...co,...t.modulators,...n.modulators],i=s.sampleID,r=this.parsed.samples[i],c=this.parsed.sampleHeaders[i];return new vr(e,s,a,r,c)}getVoice(e,t,n,s){let o=this.parsed.presetHeaders.findIndex(n=>n.preset===t&&n.bank===e);if(o<0)return console.warn("preset not found: bank=%s instrument=%s",e,t),null;let i=this.findInstrument(o,n,s);return i||(console.warn("instrument not found: bank=%s instrument=%s",e,t),null)}getPresetNames(){let e={},t=this.parsed.presetHeaders;for(let s=0;s<t.length;s++){let n=t[s];e[n.bank]||(e[n.bank]={}),e[n.bank][n.preset]=n.presetName}return e}},Ni=(e,t=4294967295,n=79764919)=>{let r=new Int32Array(256),s,a,o,i=t;for(s=0;s<256;s++){for(o=s<<24,a=8;a>0;--a)o=2147483648&o?o<<1^n:o<<1;r[s]=o}for(s=0;s<e.length;s++)i=i<<8^r[255&(i>>24^e[s])];return i},un=(e,t=Ni)=>{let l=e=>new Uint8Array(e.length/2).map((t,n)=>parseInt(e.substring(2*n,2*(n+1)),16)),m=e=>l(e)[0],h=new Map;[,8364,,8218,402,8222,8230,8224,8225,710,8240,352,8249,338,,381,,,8216,8217,8220,8221,8226,8211,8212,732,8482,353,8250,339,,382,376].forEach((e,t)=>h.set(e,t));let d=new Uint8Array(e.length),n,o,r,a=!1,u=0,i=42,c=e.length>13&&e.substring(0,9)==="dynEncode",s=0;c&&(s=11,o=m(e.substring(9,s)),o<=1&&(s+=2,i=m(e.substring(11,s))),o===1&&(s+=8,r=(e=>new DataView(l(e).buffer).getInt32(0,!0))(e.substring(13,s))));let p=256-i;for(let t=s;t<e.length;t++)if(n=e.charCodeAt(t),n!==61||a){if(n===92&&t<e.length-5&&c){let s=e.charCodeAt(t+1);s!==117&&s!==85||(n=parseInt(e.substring(t+2,t+6),16),t+=5)}if(n>255){let e=h.get(n);e&&(n=e+127)}a&&(a=!1,n-=64),d[u++]=n<i&&n>0?n+p:n-i}else a=!0;let f=d.subarray(0,u);if(c&&o===1){let e=t(f);if(e!==r){let t="Decode failed crc32 validation";throw console.error("`simple-yenc`\n",t+`
-`,"Expected: "+r+"; Got: "+e+`
-`,"Visit https://github.com/eshaz/simple-yenc for more information"),Error(t)}}return f};function U(){let e=Uint8Array,t=Float32Array;U.modules||Object.defineProperties(U,{modules:{value:new WeakMap},setModule:{value(e,t){U.modules.set(e,Promise.resolve(t))}},getModule:{value(e,t){let n=U.modules.get(e);return n||(t?n=WebAssembly.compile(un(t)):(t=e.wasm,n=U.inflateDynEncodeString(t).then(e=>WebAssembly.compile(e))),U.modules.set(e,n)),n}},concatFloat32:{value(e,n){let o=new t(n),s=0,i=0;for(;s<e.length;)o.set(e[s],i),i+=e[s++].length;return o}},getDecodedAudio:{value:(e,t,n,s,o)=>({errors:e,channelData:t,samplesDecoded:n,sampleRate:s,bitDepth:o})},getDecodedAudioMultiChannel:{value(e,t,n,s,o,i){let c=[],a,r;for(a=0;a<n;a++){let e=[];for(r=0;r<t.length;)e.push(t[r++][a]||[]);c.push(U.concatFloat32(e,s))}return U.getDecodedAudio(e,c,s,o,i)}},inflateDynEncodeString:{value(t){return t=un(t),new Promise(n=>{let s=String.raw`dynEncode012804c7886d()((()>+*§§)§,§§§§)§+§§§)§+.-()(*)-+)(.7*§)i¸¸,3§(i¸¸,3/G+.¡*(,(,3+)2å:-),§H(P*DI*H(P*@I++hH)H*r,hH(H(P*<J,i)^*<H,H(P*4U((I-H(H*i0J,^*DH+H-H*I+H,I*4)33H(H*H)^*DH(H+H)^*@H+i§H)i§3æ*).§K(iHI/+§H,iHn,§H+i(H+i(rCJ0I,H*I-+hH,,hH(H-V)(i)J.H.W)(i)c)(H,i)I,H-i*I-4)33i(I.*hH(V)(H+n5(H(i*I-i(I,i)I.+hH,i*J+iHn,hi(I-i*I,+hH,H/H-c)(H,iFn,hi(I,+hH,H0n5-H*V)(J(,hH/H(i)J(H(V)(J(i)c)(H)H(i)H,c)(3H*i*I*H,i)I,4(3(-H(H,W)(H-I-H,i*I,4)3(3(3H,H-I1H+I,H.i)H1V)(J.i(v5(33H.-H(H,i(c)(H,i*I,4)333)-§i*I*+§H*iHn,hi73H,H(i)8(H+J+H)P*(H*V)(J-r,§H)P*,H.i)H+H,i)V)(-H*i*I*H+i)I+H-H.I.H,H-i)I,4)333Ã+)-§iø7i(^*(iü7I,*h+hH+iDn,h*hilI+i)I,+hH+,hH+iô7H,c)(i)H+i´8W)(H,I,H+i*I+4)-+hH(H)8*J-i(p5.*h*h*hH-i')u,hH(P*(J+,hH(P*0J,H(P*,n50H+H,H-b((3H(P*0i)I.4)3H-i¨*n5*H-iÅ*s,hi73H-i)J+V)&+I,H(H+V)æ,8(I.H(H*8*J-i(p51H-i)J+i¸7V)(H(H+iø7V)(8(J/H(P*0J+s,hi73H+H,H.J,I.H(P*(m5(H.H(P*,s5.+hH,m5*H(P*(J.H+H.H+H/U((b((H(H(P*0i)J+^*0H,i)I,4(3(3H(H.^*03H-i¨*o5)33i(73(3(3-H,H+i)c)(H,i*I,H+i)I+4)33i)I-3H-3!2)0§K(i2J,L(H,H(^*(H,H*^*4H,i(^*0H,i(^*DH,j(_*<H,H)P*(^*,H,H+P*(^*8*h*h+hH,i)8(I3i§I**h*h*h*h*h*h*hH,i*8(6+(),03H,j(_*@i*I-H,P*<J.i,J(H,P*8J/s50H,H.i+J0^*<i¦I*H.H,P*4J1J.U(*H.U((J2i')o5/H.U()I.H,H(^*<H0H1U((H.i0J.i§i0i')o5/H/H.H2J*H(J.q50H,P*0J/H*I-H,P*(J0,hH,P*,H-q,hi)I-423+hH*m5+H/H0H(H1U((b((H/i)I/H(i)I(H*i)I*4(3(3H,H.^*<H,H-^*04*3iØ1U((5+i(I(i¨7i1^*(i$6iè1^*(i°7iè6^*(i¬7iÈ6^*(+hH(iÈ*n,hiÈ*I(+hH(i¨,n,hi¨,I(+hH(iØ,n,hiØ,I(+hH(iè,o,hH,i-H(i0c)(H(i*I(4)33iè1i1H,i-iÈ*8)Bi(I(+hH(ido,hH,i-H(i-c)(H(i*I(4)33iÈ6iè6H,i-iF8)BiØ1i)b((41-H,i-H(i/c)(H(i*I(4)3(3(-H,i-H(i1c)(H(i*I(4)3(3(-H,i-H(i0c)(H(i*I(4)3(3(3H,H/^*0H,H(^*<3i(I*4*3H,H,i¸)^*TH,H,iø-^*PH,H,iX^*LH,H,i(^*HH,i-8(I(H,i-8(I-i¥I*H,i,8(I.H(iErH-iEr5)H(i©*I1H-i)I0i(i;H.i,J(i(H(i(rCJ(J*H*i;sCI*i¨1I-H(I/+hH/,hH,i-H-V)(i)H,i+8(c)(H/i)I/H-i*I-H*i)I*4)-H(i)i¨1I/+hH(H*o,hH,i-H/V)(i)i(c)(H/i*I/H(i)I(4)33i¤I*H,iø-H,i¸)H,i-i;8)5+H0H1I2i(I-+hH-H2p,hH,H,iP8*J*i(p5-H*i7u,hH,i-H-i)H*c)(H-i)I-4*3i(I/i+I.i+I(*h*h*hH*i86*(*)3H-m,hi£I*403H-i)H,W)-I/i*I(4)3i3I.i/I(3H2H,H(8(H.J(H-J.p,hi¢I*4.3H,i-H-i)I*+hH(,hH*H/c)(H*i*I*H(i)I(4)-H.I-4+3(3(33H,W)1m,hiI*4,3H,iø-H,i¸)H,i-H18)J(,hi¡I*H(i(p5,H1H,V)ú-H,V)ø-o5,3H,i(H,iXH,i-H1i)H08)J(,hi I*H(i(p5,H0H,V)H,V)o5,3H,H,iPH,iH8+I*4+3(3(3H,i$6i¬78+I*3H*H3m5(3i)I-H*i(r5)3H)H,P*0^*(H+H,P*<^*(H*I-3H,i2L(H-33Á)+(i¨03b+(,(-(.(/(0(1(2(3(5(7(9(;(?(C(G(K(S([(c(k({(((«(Ë(ë((*)(iø03O)()()()(*(*(*(*(+(+(+(+(,(,(,(,(-(-(-(-(i¨13M8(9(:(((0(/(1(.(2(-(3(,(4(+(5(*(6()(7(T7*S7US0U `;U.getModule(U,s).then(e=>WebAssembly.instantiate(e,{})).then(({exports:s})=>{let i=new Map(Object.entries(s)),m=i.get("puff"),l=i.get("memory").buffer,a=new e(l),r=new DataView(l),o=i.get("__heap_base"),d=t.length,u=o;o+=4,r.setInt32(u,d,!0);let h=o;o+=d,a.set(t,h);let c=o;o+=4,r.setInt32(c,a.byteLength-o,!0),m(o,c,h,u),n(a.slice(o,o+r.getInt32(c,!0)))})})}}}),Object.defineProperty(this,"wasm",{enumerable:!0,get:()=>this._wasm}),this.getOutputChannels=(e,t,n)=>{let o=[],s=0;for(;s<t;)o.push(e.slice(s*n,s++*n+n));return o},this.allocateTypedArray=(e,t,n=!0)=>{let s=this._wasm.malloc(t.BYTES_PER_ELEMENT*e);return n&&this._pointers.add(s),{ptr:s,len:e,buf:new t(this._wasm.HEAP,s,e)}},this.free=()=>{this._pointers.forEach(e=>{this._wasm.free(e)}),this._pointers.clear()},this.codeToString=e=>{let t=[],n=new Uint8Array(this._wasm.HEAP);for(let s=n[e];s!==0;s=n[++e])t.push(s);return String.fromCharCode.apply(null,t)},this.addError=(e,t,n,s,o,i)=>{e.push({message:t,frameLength:n,frameNumber:s,inputBytes:o,outputSamples:i})},this.instantiate=(e,t)=>(t&&U.setModule(e,t),this._wasm=new e(U).instantiate(),this._pointers=new Set,this._wasm.ready.then(()=>this))}ho=Kn(uo(),1),Vi=()=>globalThis.Worker||ho.default,Gt=class extends Vi(){constructor(e,t,n,s){U.modules||new U;let o=U.modules.get(n);if(!o){let e="text/javascript",t,i=`'use strict';(${((e,t,n)=>{let s,o,i=new Promise(e=>{o=e});self.onmessage=({data:{id:a,command:r,data:c}})=>{let l=i,d={id:a},u;r==="init"?(Object.defineProperties(e,{WASMAudioDecoderCommon:{value:t},EmscriptenWASM:{value:n},module:{value:c.module},isWebWorker:{value:!0}}),s=new e(c.options),o()):r==="free"?s.free():r==="ready"?l=l.then(()=>s.ready):r==="reset"?l=l.then(()=>s.reset()):(Object.assign(d,s[r](Array.isArray(c)?c.map(e=>new Uint8Array(e)):new Uint8Array(c))),u=d.channelData?d.channelData.map(e=>e.buffer):[]),l.then(()=>self.postMessage(d,u))}}).toString()})(${n}, ${U}, ${s})`;try{t=typeof process.versions.node<"u"}catch{}o=t?`data:${e};base64,${Buffer.from(i).toString("base64")}`:URL.createObjectURL(new Blob([i],{type:e})),U.modules.set(n,o)}super(o,{name:t}),this._id=Number.MIN_SAFE_INTEGER,this._enqueuedOperations=new Map,this.onmessage=({data:e})=>{let{id:t,...n}=e;this._enqueuedOperations.get(t)(n),this._enqueuedOperations.delete(t)},new s(U).getModule().then(t=>{this.postToDecoder("init",{module:t,options:e})})}async postToDecoder(e,t){return new Promise(n=>{this.postMessage({command:e,id:this._id,data:t}),this._enqueuedOperations.set(this._id++,n)})}get ready(){return this.postToDecoder("ready")}async free(){await this.postToDecoder("free").finally(()=>{this.terminate()})}async reset(){await this.postToDecoder("reset")}},wr=(e,t)=>{Object.defineProperty(e,"name",{value:t})},G=Symbol,fo=", ",F=(()=>{let s="front",o="side",i="rear",e="left",t="center",n="right";return["",s+" ",o+" ",i+" "].map(s=>[[e,n],[e,n,t],[e,t,n],[t,e,n],[t]].flatMap(e=>e.map(e=>s+e).join(fo)))})(),Ae="LFE",st="monophonic (mono)",rt="stereo",ds="surround",q=(e,...t)=>`${[st,rt,`linear ${ds}`,"quadraphonic",`5.0 ${ds}`,`5.1 ${ds}`,`6.1 ${ds}`,`7.1 ${ds}`][e-1]} (${t.join(fo)})`,fs=[st,q(2,F[0][0]),q(3,F[0][2]),q(4,F[1][0],F[3][0]),q(5,F[1][2],F[3][0]),q(6,F[1][2],F[3][0],Ae),q(7,F[1][2],F[2][0],F[3][4],Ae),q(8,F[1][2],F[2][0],F[3][0],Ae)],po=192e3,mo=176400,Mr=96e3,Pr=88200,bo=64e3,nt=48e3,jt=44100,qt=32e3,Kt=24e3,Qt=22050,Wt=16e3,Cr=12e3,Tr=11025,zt=8e3,go=7350,ke="absoluteGranulePosition",D="bandwidth",te="bitDepth",se="bitrate",ps=se+"Maximum",ms=se+"Minimum",bs=se+"Nominal",_e="buffer",gs=_e+"Fullness",R="codec",re=R+"Frames",ys="coupledStreamCount",$t="crc",vs=$t+"16",Ss=$t+"32",O="data",T="description",Oe="duration",Xt="emphasis",xs="hasOpusPadding",fe="header",ot="isContinuedPacket",ws="isCopyrighted",it="isFirstPage",Ms="isHome",pe="isLastPage",Ke="isOriginal",Qe="isPrivate",Ps="isVbr",ue="layer",g="length",k="mode",We=k+"Extension",Fr="mpeg",ze=Fr+"Version",Cs="numberAACFrames",Ts="outputGain",wt="preSkip",Fs="profile",Er=G(),$e="protection",hn="rawData",xe="segments",I="subarray",at="version",Mt="vorbis",Es=Mt+"Comments",Jt=Mt+"Setup",kr="block",ks=kr+"ingStrategy",Dr=G(),Xe=kr+"Size",ct=kr+"size0",lt=kr+"size1",Ds=G(),Ir="channel",Je=Ir+"MappingFamily",Is=Ir+"MappingTable",ne=Ir+"Mode",Hs=G(),C=Ir+"s",yo="copyright",Ns=yo+"Id",Vs=yo+"IdStart",Ze="frame",Ye=Ze+"Count",he=Ze+"Length",Hr="Number",et=Ze+Hr,Re=Ze+"Padding",E=Ze+"Size",vo="Rate",Bs="inputSample"+vo,dn="page",Pt=dn+"Checksum",Zt=G(),ut=dn+"SegmentTable",W=dn+"Sequence"+Hr,fn="sample",As=fn+Hr,H=fn+vo,Le=G(),N=fn+"s",Nr="stream",_s=Nr+"Count",Os=Nr+"Info",Ue=Nr+"Serial"+Hr,pn=Nr+"StructureVersion",mn="total",Ct=mn+"BytesOut",Tt=mn+"Duration",Ft=mn+"Samples",V=G(),we=G(),Rs=G(),ht=G(),De=G(),Vr=G(),bn=G(),dt=G(),B=G(),Me=G(),Pe=G(),Ge=G(),ft=G(),Br=G(),Ie=G(),He=G(),Ce=G(),Ar=G(),oe=Uint8Array,pt=DataView,A="reserved",ie="bad",Yt="free",Ls="none",_r="16bit CRC",gn=(e,t,n)=>{for(let s=0;s<e[g];s++){let o=t(s);for(let e=8;e>0;e--)o=n(o);e[s]=o}return e},Ai=gn(new oe(256),e=>e,e=>e&128?7^e<<1:e<<1),K=[gn(new Uint16Array(256),e=>e<<8,e=>e<<1^(e&32768?32773:0))],Q=[gn(new Uint32Array(256),e=>e,e=>e>>>1^(e&1)*3988292384)];for(let e=0;e<15;e++){K.push(new Uint16Array(256)),Q.push(new Uint32Array(256));for(let t=0;t<=255;t++)K[e+1][t]=K[0][K[e][t]>>>8]^K[e][t]<<8,Q[e+1][t]=Q[e][t]>>>8^Q[0][Q[e][t]&255]}xo=e=>{let t=0,n=e[g];for(let s=0;s!==n;s++)t=Ai[t^e[s]];return t},wo=e=>{let s=e[g],o=s-16,n=0,t=0;for(;t<=o;)n^=e[t++]<<8|e[t++],n=K[15][n>>8]^K[14][n&255]^K[13][e[t++]]^K[12][e[t++]]^K[11][e[t++]]^K[10][e[t++]]^K[9][e[t++]]^K[8][e[t++]]^K[7][e[t++]]^K[6][e[t++]]^K[5][e[t++]]^K[4][e[t++]]^K[3][e[t++]]^K[2][e[t++]]^K[1][e[t++]]^K[0][e[t++]];for(;t!==s;)n=(n&255)<<8^K[0][n>>8^e[t++]];return n},Mo=e=>{let s=e[g],o=s-16,n=0,t=0;for(;t<=o;)n=Q[15][(e[t++]^n)&255]^Q[14][(e[t++]^n>>>8)&255]^Q[13][(e[t++]^n>>>16)&255]^Q[12][e[t++]^n>>>24]^Q[11][e[t++]]^Q[10][e[t++]]^Q[9][e[t++]]^Q[8][e[t++]]^Q[7][e[t++]]^Q[6][e[t++]]^Q[5][e[t++]]^Q[4][e[t++]]^Q[3][e[t++]]^Q[2][e[t++]]^Q[1][e[t++]]^Q[0][e[t++]];for(;t!==s;)n=Q[0][(n^e[t++])&255]^n>>>8;return n^-1},Gs=(...e)=>{let t=new oe(e.reduce((e,t)=>e+t[g],0));return e.reduce((e,n)=>(t.set(n,e),e+n[g]),0),t},me=e=>String.fromCharCode(...e),So=[0,8,4,12,2,10,6,14,1,9,5,13,3,11,7,15],Us=e=>So[e&15]<<4|So[e>>4],Or=class{constructor(e){this._data=e,this._pos=e[g]*8}set position(e){this._pos=e}get position(){return this._pos}read(e){let t=Math.floor(this._pos/8),n=this._pos%8;return this._pos-=e,(Us(this._data[t-1])<<8)+Us(this._data[t])>>7-n&255}},Po=(e,t)=>{try{return e.getBigInt64(t,!0)}catch{let o=e.getUint8(t+7)&128?-1:1,s=e.getUint32(t,!0),n=e.getUint32(t+4,!0);return o===-1&&(s=~s+1,n=~n+1),n>1048575&&console.warn("This platform does not support BigInt"),o*(s+n*2**32)}},js=class{constructor(e,t){this._onCodecHeader=e,this._onCodecUpdate=t,this[Ie]()}[He](){this._isEnabled=!0}[Ie](){this._headerCache=new Map,this._codecUpdateData=new WeakMap,this._codecHeaderSent=!1,this._codecShouldUpdate=!1,this._bitrate=null,this._isEnabled=!1}[Br](e,t){if(this._onCodecUpdate){this._bitrate!==e&&(this._bitrate=e,this._codecShouldUpdate=!0);let n=this._codecUpdateData.get(this._headerCache.get(this._currentHeader));this._codecShouldUpdate&&n&&this._onCodecUpdate({bitrate:e,...n},t),this._codecShouldUpdate=!1}}[B](e){let t=this._headerCache.get(e);return t&&this._updateCurrentHeader(e),t}[Me](e,t,n){this._isEnabled&&(this._codecHeaderSent||(this._onCodecHeader({...t}),this._codecHeaderSent=!0),this._updateCurrentHeader(e),this._headerCache.set(e,t),this._codecUpdateData.set(t,n))}_updateCurrentHeader(e){this._onCodecUpdate&&e!==this._currentHeader&&(this._codecShouldUpdate=!0,this._currentHeader=e)}},$=new WeakMap,J=new WeakMap,ae=class{constructor(e,t){this._codecParser=e,this._headerCache=t}*[bn](){let e;do{if(e=yield*this.Frame[Pe](this._codecParser,this._headerCache,0),e)return e;this._codecParser[we](1)}while(!0)}*[dt](e){let t=yield*this[bn](),n=J.get(t)[g];if(e||this._codecParser._flushing||(yield*this.Header[B](this._codecParser,this._headerCache,n)))return this._headerCache[He](),this._codecParser[we](n),this._codecParser[ht](t),t;this._codecParser[De](`Missing ${Ze} at ${n} bytes from current position.`,`Dropping current ${Ze} and trying again.`),this._headerCache[Ie](),this._codecParser[we](1)}},Et=class{constructor(e,t){J.set(this,{[fe]:e}),this[O]=t}},be=class extends Et{static*[Pe](e,t,n,s,o){let i=yield*e[B](n,s,o);if(i){let e=$.get(i)[he],s=$.get(i)[N],a=(yield*n[V](e,o))[I](0,e);return new t(i,a,s)}return null}constructor(e,t,n){super(e,t),this[fe]=e,this[N]=n,this[Oe]=n/e[H]*1e3,this[et]=null,this[Ct]=null,this[Ft]=null,this[Tt]=null,J.get(this)[g]=t[g]}},yn="unsynchronizationFlag",vn="extendedHeaderFlag",Sn="experimentalFlag",xn="footerPresent",qs=class i11{static*getID3v2Header(e,t,n){let o={},s=yield*e[V](3,n);if(s[0]!==73||s[1]!==68||s[2]!==51||(s=yield*e[V](10,n),o[at]=`id3v2.${s[3]}.${s[4]}`,s[5]&15)||(o[yn]=!!(s[5]&128),o[vn]=!!(s[5]&64),o[Sn]=!!(s[5]&32),o[xn]=!!(s[5]&16),s[6]&128||s[7]&128||s[8]&128||s[9]&128))return null;let i=s[6]<<21|s[7]<<14|s[8]<<7|s[9];return o[g]=10+i,new i11(o)}constructor(e){this[at]=e[at],this[yn]=e[yn],this[vn]=e[vn],this[Sn]=e[Sn],this[xn]=e[xn],this[g]=e[g]}},ge=class{constructor(e){$.set(this,e),this[te]=e[te],this[se]=null,this[C]=e[C],this[ne]=e[ne],this[H]=e[H]}},ko={0:[Yt,Yt,Yt,Yt,Yt],16:[32,32,32,32,8],240:[ie,ie,ie,ie,ie]},Rr=(e,t,n)=>8*((e+n)%t+t)*(1<<(e+n)/t)-8*t*(t/8|0);for(let e=2;e<15;e++)ko[e<<4]=[e*32,Rr(e,4,0),Rr(e,4,-1),Rr(e,8,4),Rr(e,8,0)];_i=0,Oi=1,Ri=2,Li=3,Co=4,Lr="bands ",Ur=" to 31",To={0:Lr+4+Ur,16:Lr+8+Ur,32:Lr+12+Ur,48:Lr+16+Ur},kt="bitrateIndex",Ks="v2",Qr="v1",Gr="Intensity stereo ",jr=", MS stereo ",qr="on",Kr="off",Ui={0:Gr+Kr+jr+Kr,16:Gr+qr+jr+Kr,32:Gr+Kr+jr+qr,48:Gr+qr+jr+qr},wn={0:{[T]:A},2:{[T]:"Layer III",[Re]:1,[We]:Ui,[Qr]:{[kt]:Ri,[N]:1152},[Ks]:{[kt]:Co,[N]:576}},4:{[T]:"Layer II",[Re]:1,[We]:To,[N]:1152,[Qr]:{[kt]:Oi},[Ks]:{[kt]:Co}},6:{[T]:"Layer I",[Re]:4,[We]:To,[N]:384,[Qr]:{[kt]:_i},[Ks]:{[kt]:Li}}},Mn="MPEG Version ",Fo="ISO/IEC ",Gi={0:{[T]:`${Mn}2.5 (later extension of MPEG 2)`,[ue]:Ks,[H]:{0:Tr,4:Cr,8:zt,12:A}},8:{[T]:A},16:{[T]:`${Mn}2 (${Fo}13818-3)`,[ue]:Ks,[H]:{0:Qt,4:Kt,8:Wt,12:A}},24:{[T]:`${Mn}1 (${Fo}11172-3)`,[ue]:Qr,[H]:{0:jt,4:nt,8:qt,12:A}},length:g},ji={0:_r,1:Ls},qi={0:Ls,1:"50/15 ms",2:A,3:"CCIT J.17"},Eo={0:{[C]:2,[T]:rt},64:{[C]:2,[T]:"joint "+rt},128:{[C]:2,[T]:"dual channel"},192:{[C]:1,[T]:st}},Dt=class i12 extends ge{static*[B](e,t,n){let s={},r=yield*qs.getID3v2Header(e,t,n);r&&(yield*e[V](r[g],n),e[we](r[g]));let o=yield*e[V](4,n),l=me(o[I](0,4)),d=t[B](l);if(d)return new i12(d);if(o[0]!==255||o[1]<224)return null;let a=Gi[o[1]&24];if(a[T]===A)return null;let c=o[1]&6;if(wn[c][T]===A)return null;let i={...wn[c],...wn[c][a[ue]]};if(s[ze]=a[T],s[ue]=i[T],s[N]=i[N],s[$e]=ji[o[1]&1],s[g]=4,s[se]=ko[o[2]&240][i[kt]],s[se]===ie||(s[H]=a[H][o[2]&12],s[H]===A)||(s[Re]=o[2]&2&&i[Re],s[Qe]=!!(o[2]&1),s[he]=Math.floor(125*s[se]*s[N]/s[H]+s[Re]),!s[he]))return null;let u=o[3]&192;if(s[ne]=Eo[u][T],s[C]=Eo[u][C],s[We]=i[We][o[3]&48],s[ws]=!!(o[3]&8),s[Ke]=!!(o[3]&4),s[Xt]=qi[o[3]&3],s[Xt]===A)return null;s[te]=16;{let{length:n,frameLength:o,samples:i,...e}=s;t[Me](l,s,e)}return new i12(s)}constructor(e){super(e),this[se]=e[se],this[Xt]=e[Xt],this[Re]=e[Re],this[ws]=e[ws],this[Ke]=e[Ke],this[Qe]=e[Qe],this[ue]=e[ue],this[We]=e[We],this[ze]=e[ze],this[$e]=e[$e]}},Qs=class i13 extends be{static*[Pe](e,t,n){return yield*super[Pe](Dt,i13,e,t,n)}constructor(e,t,n){super(e,t,n)}},Ws=class extends ae{constructor(e,t,n){super(e,t),this.Frame=Qs,this.Header=Dt,n(this[R])}get[R](){return Fr}*[Ge](){return yield*this[dt]()}},Ki={0:"MPEG-4",8:"MPEG-2"},Qi={0:"valid",2:ie,4:ie,6:ie},Wi={0:_r,1:Ls},zi={0:"AAC Main",64:"AAC LC (Low Complexity)",128:"AAC SSR (Scalable Sample Rate)",192:"AAC LTP (Long Term Prediction)"},$i={0:Mr,4:Pr,8:bo,12:nt,16:jt,20:qt,24:Kt,28:Qt,32:Wt,36:Cr,40:Tr,44:zt,48:go,52:A,56:A,60:"frequency is written explicitly"},Do={0:{[C]:0,[T]:"Defined in AOT Specific Config"},64:{[C]:1,[T]:st},128:{[C]:2,[T]:q(2,F[0][0])},192:{[C]:3,[T]:q(3,F[1][3])},256:{[C]:4,[T]:q(4,F[1][3],F[3][4])},320:{[C]:5,[T]:q(5,F[1][3],F[3][0])},384:{[C]:6,[T]:q(6,F[1][3],F[3][0],Ae)},448:{[C]:8,[T]:q(8,F[1][3],F[2][0],F[3][0],Ae)}},It=class i14 extends ge{static*[B](e,t,n){let s={},o=yield*e[V](7,n),i=me([o[0],o[1],o[2],o[3]&252|o[6]&3]),a=t[B](i);if(a)Object.assign(s,a);else{if(o[0]!==255||o[1]<240||(s[ze]=Ki[o[1]&8],s[ue]=Qi[o[1]&6],s[ue]===ie))return null;let e=o[1]&1;s[$e]=Wi[e],s[g]=e?7:9,s[Er]=o[2]&192,s[Le]=o[2]&60;let n=o[2]&2;if(s[Fs]=zi[s[Er]],s[H]=$i[s[Le]],s[H]===A)return null;s[Qe]=!!n,s[Hs]=(o[2]<<8|o[3])&448,s[ne]=Do[s[Hs]][T],s[C]=Do[s[Hs]][C],s[Ke]=!!(o[3]&32),s[Ms]=!!(o[3]&8),s[Ns]=!!(o[3]&8),s[Vs]=!!(o[3]&4),s[te]=16,s[N]=1024,s[Cs]=o[6]&3;{let{length:n,channelModeBits:o,profileBits:a,sampleRateBits:r,frameLength:c,samples:l,numberAACFrames:d,...e}=s;t[Me](i,s,e)}}if(s[he]=(o[3]<<11|o[4]<<3|o[5]>>5)&8191,!s[he])return null;let r=(o[5]<<6|o[6]>>2)&2047;return s[gs]=r===2047?"VBR":r,new i14(s)}constructor(e){super(e),this[Ns]=e[Ns],this[Vs]=e[Vs],this[gs]=e[gs],this[Ms]=e[Ms],this[Ke]=e[Ke],this[Qe]=e[Qe],this[ue]=e[ue],this[g]=e[g],this[ze]=e[ze],this[Cs]=e[Cs],this[Fs]=e[Fs],this[$e]=e[$e]}get audioSpecificConfig(){let e=$.get(this),n=e[Er]+64<<5|e[Le]<<5|e[Hs]>>3,t=new oe(2);return new pt(t[_e]).setUint16(0,n,!1),t}},zs=class i15 extends be{static*[Pe](e,t,n){return yield*super[Pe](It,i15,e,t,n)}constructor(e,t,n){super(e,t,n)}},$s=class extends ae{constructor(e,t,n){super(e,t),this.Frame=zs,this.Header=It,n(this[R])}get[R](){return"aac"}*[Ge](){return yield*this[dt]()}},mt=class i16 extends be{static _getFrameFooterCrc16(e){return(e[e[g]-2]<<8)+e[e[g]-1]}static[Ar](e){let t=i16._getFrameFooterCrc16(e),n=wo(e[I](0,-2));return t===n}constructor(e,t,n){t[Os]=n,t[vs]=i16._getFrameFooterCrc16(e),super(t,e,$.get(t)[N])}},Io="get from STREAMINFO metadata block",Xi={0:"Fixed",1:"Variable"},Ho={0:A,16:192};for(let e=2;e<16;e++)Ho[e<<4]=e<6?576*2**(e-2):2**e;Ji={0:Io,1:Pr,2:mo,3:po,4:zt,5:Wt,6:Qt,7:Kt,8:qt,9:jt,10:nt,11:Mr,15:ie},Zi={0:{[C]:1,[T]:st},16:{[C]:2,[T]:q(2,F[0][0])},32:{[C]:3,[T]:q(3,F[0][1])},48:{[C]:4,[T]:q(4,F[1][0],F[3][0])},64:{[C]:5,[T]:q(5,F[1][1],F[3][0])},80:{[C]:6,[T]:q(6,F[1][1],Ae,F[3][0])},96:{[C]:7,[T]:q(7,F[1][1],Ae,F[3][4],F[2][0])},112:{[C]:8,[T]:q(8,F[1][1],Ae,F[3][0],F[2][0])},128:{[C]:2,[T]:`${rt} (left, diff)`},144:{[C]:2,[T]:`${rt} (diff, right)`},160:{[C]:2,[T]:`${rt} (avg, diff)`},176:A,192:A,208:A,224:A,240:A},Yi={0:Io,2:8,4:12,6:A,8:16,10:20,12:24,14:A},bt=class i17 extends ge{static _decodeUTF8Int(e){if(e[0]>254)return null;if(e[0]<128)return{value:e[0],length:1};let n=1;for(let t=64;t&e[0];t>>=1)n++;let t=n-1,s=0,o=0;for(;t>0;o+=6,t--){if((e[t]&192)!==128)return null;s|=(e[t]&63)<<o}return s|=(e[t]&127>>n)<<o,{value:s,length:n}}static[Ce](e,t){let n={[V]:function*(){return e}};return i17[B](n,t,0).next().value}static*[B](e,t,n){let o=yield*e[V](6,n);if(o[0]!==255||o[1]!==248&&o[1]!==249)return null;let s={},r=me(o[I](0,4)),a=t[B](r);if(a)Object.assign(s,a);else{if(s[Dr]=o[1]&1,s[ks]=Xi[s[Dr]],s[Ds]=o[2]&240,s[Le]=o[2]&15,s[Xe]=Ho[s[Ds]],s[Xe]===A||(s[H]=Ji[s[Le]],s[H]===ie)||o[3]&1)return null;let e=Zi[o[3]&240];if(e===A||(s[C]=e[C],s[ne]=e[T],s[te]=Yi[o[3]&14],s[te]===A))return null}s[g]=5,o=yield*e[V](s[g]+8,n);let i=i17._decodeUTF8Int(o[I](4));if(!i||(s[Dr]?s[As]=i.value:s[et]=i.value,s[g]+=i[g],s[Ds]===96?(o[g]<s[g]&&(o=yield*e[V](s[g],n)),s[Xe]=o[s[g]-1]+1,s[g]+=1):s[Ds]===112&&(o[g]<s[g]&&(o=yield*e[V](s[g],n)),s[Xe]=(o[s[g]-1]<<8)+o[s[g]]+1,s[g]+=2),s[N]=s[Xe],s[Le]===12?(o[g]<s[g]&&(o=yield*e[V](s[g],n)),s[H]=o[s[g]-1]*1e3,s[g]+=1):s[Le]===13?(o[g]<s[g]&&(o=yield*e[V](s[g],n)),s[H]=(o[s[g]-1]<<8)+o[s[g]],s[g]+=2):s[Le]===14&&(o[g]<s[g]&&(o=yield*e[V](s[g],n)),s[H]=((o[s[g]-1]<<8)+o[s[g]])*10,s[g]+=2),o[g]<s[g]&&(o=yield*e[V](s[g],n)),s[$t]=o[s[g]-1],s[$t]!==xo(o[I](0,s[g]-1))))return null;if(!a){let{blockingStrategyBits:n,frameNumber:o,sampleNumber:i,samples:a,sampleRateBits:c,blockSizeBits:l,crc:d,length:u,...e}=s;t[Me](r,s,e)}return new i17(s)}constructor(e){super(e),this[vs]=null,this[ks]=e[ks],this[Xe]=e[Xe],this[et]=e[et],this[As]=e[As],this[Os]=null}},ea=2,ta=512*1024,Ht=class extends ae{constructor(e,t,n){super(e,t),this.Frame=mt,this.Header=bt,n(this[R])}get[R](){return"flac"}*_getNextFrameSyncOffset(e){let t=yield*this._codecParser[V](2,0),n=t[g]-2;for(;e<n;){if(t[e]===255){let n=t[e+1];if(n===248||n===249)break;n!==255&&e++}e++}return e}*[Ge](){do{let e=yield*bt[B](this._codecParser,this._headerCache,0);if(e){let t=$.get(e)[g]+ea;for(;t<=ta;){if(this._codecParser._flushing||(yield*bt[B](this._codecParser,this._headerCache,t))){let n=yield*this._codecParser[V](t);if(this._codecParser._flushing||(n=n[I](0,t)),mt[Ar](n)){let s=new mt(n,e);return this._headerCache[He](),this._codecParser[we](t),this._codecParser[ht](s),s}}t=yield*this._getNextFrameSyncOffset(t+1)}this._codecParser[De](`Unable to sync FLAC frame after searching ${t} bytes.`),this._codecParser[we](t)}else this._codecParser[we](yield*this._getNextFrameSyncOffset(1))}while(!0)}[ft](e){return e[W]===0?(this._headerCache[He](),this._streamInfo=e[O][I](13)):e[W]===1||(e[re]=J.get(e)[xe].map(e=>{let t=bt[Ce](e,this._headerCache);if(t)return new mt(e,t,this._streamInfo);this._codecParser[De]("Failed to parse Ogg FLAC frame","Skipping invalid FLAC frame")}).filter(e=>!!e)),e}},Nt=class i18{static*[B](e,t,n){let s={},o=yield*e[V](28,n);if(o[0]!==79||o[1]!==103||o[2]!==103||o[3]!==83||(s[pn]=o[4],o[5]&248))return null;s[pe]=!!(o[5]&4),s[it]=!!(o[5]&2),s[ot]=!!(o[5]&1);let i=new pt(oe.from(o[I](0,28))[_e]);s[ke]=Po(i,6),s[Ue]=i.getInt32(14,!0),s[W]=i.getInt32(18,!0),s[Pt]=i.getInt32(22,!0);let a=o[26];s[g]=a+27,o=yield*e[V](s[g],n),s[he]=0,s[ut]=[],s[Zt]=oe.from(o[I](27,s[g]));for(let e=0,t=0;e<a;e++){let n=s[Zt][e];s[he]+=n,t+=n,(n!==255||e===a-1)&&(s[ut].push(t),t=0)}return new i18(s)}constructor(e){$.set(this,e),this[ke]=e[ke],this[ot]=e[ot],this[it]=e[it],this[pe]=e[pe],this[ut]=e[ut],this[W]=e[W],this[Pt]=e[Pt],this[Ue]=e[Ue]}},Xs=class i19 extends Et{static*[Pe](e,t,n){let s=yield*Nt[B](e,t,n);if(s){let i=$.get(s)[he],n=$.get(s)[g],t=n+i,o=(yield*e[V](t,0))[I](0,t),a=o[I](n,t);return new i19(s,a,o)}return null}constructor(e,t,n){super(e,t),J.get(this)[g]=n[g],this[re]=[],this[hn]=n,this[ke]=e[ke],this[Ss]=e[Pt],this[Oe]=0,this[ot]=e[ot],this[it]=e[it],this[pe]=e[pe],this[W]=e[W],this[N]=0,this[Ue]=e[Ue]}},es=class extends be{constructor(e,t,n){super(t,e,n)}},No={0:fs.slice(0,2),1:fs},Te="SILK-only",Z="CELT-only",Wr="Hybrid",gt="narrowband",zr="medium-band",yt="wideband",ts="super-wideband",ss="fullband",sa={0:{[k]:Te,[D]:gt,[E]:10},8:{[k]:Te,[D]:gt,[E]:20},16:{[k]:Te,[D]:gt,[E]:40},24:{[k]:Te,[D]:gt,[E]:60},32:{[k]:Te,[D]:zr,[E]:10},40:{[k]:Te,[D]:zr,[E]:20},48:{[k]:Te,[D]:zr,[E]:40},56:{[k]:Te,[D]:zr,[E]:60},64:{[k]:Te,[D]:yt,[E]:10},72:{[k]:Te,[D]:yt,[E]:20},80:{[k]:Te,[D]:yt,[E]:40},88:{[k]:Te,[D]:yt,[E]:60},96:{[k]:Wr,[D]:ts,[E]:10},104:{[k]:Wr,[D]:ts,[E]:20},112:{[k]:Wr,[D]:ss,[E]:10},120:{[k]:Wr,[D]:ss,[E]:20},128:{[k]:Z,[D]:gt,[E]:2.5},136:{[k]:Z,[D]:gt,[E]:5},144:{[k]:Z,[D]:gt,[E]:10},152:{[k]:Z,[D]:gt,[E]:20},160:{[k]:Z,[D]:yt,[E]:2.5},168:{[k]:Z,[D]:yt,[E]:5},176:{[k]:Z,[D]:yt,[E]:10},184:{[k]:Z,[D]:yt,[E]:20},192:{[k]:Z,[D]:ts,[E]:2.5},200:{[k]:Z,[D]:ts,[E]:5},208:{[k]:Z,[D]:ts,[E]:10},216:{[k]:Z,[D]:ts,[E]:20},224:{[k]:Z,[D]:ss,[E]:2.5},232:{[k]:Z,[D]:ss,[E]:5},240:{[k]:Z,[D]:ss,[E]:10},248:{[k]:Z,[D]:ss,[E]:20}},rs=class i20 extends ge{static[Ce](e,t,n){let s={};if(s[C]=e[9],s[Je]=e[18],s[g]=s[Je]!==0?21+s[C]:19,e[g]<s[g])throw new Error("Out of data while inside an Ogg Page");let r=t[0]&3,l=r===3?2:1,o=me(e[I](0,s[g]))+me(t[I](0,l)),c=n[B](o);if(c)return new i20(c);if(o.substr(0,8)!=="OpusHead"||e[8]!==1)return null;s[O]=oe.from(e[I](0,s[g]));let i=new pt(s[O][_e]);if(s[te]=16,s[wt]=i.getUint16(10,!0),s[Bs]=i.getUint32(12,!0),s[H]=nt,s[Ts]=i.getInt16(16,!0),s[Je]in No&&(s[ne]=No[s[Je]][s[C]-1],!s[ne]))return null;s[Je]!==0&&(s[_s]=e[19],s[ys]=e[20],s[Is]=[...e[I](21,s[C]+21)]);let a=sa[248&t[0]];switch(s[k]=a[k],s[D]=a[D],s[E]=a[E],r){case 0:s[Ye]=1;break;case 1:case 2:s[Ye]=2;break;case 3:s[Ps]=!!(128&t[1]),s[xs]=!!(64&t[1]),s[Ye]=63&t[1];break;default:return null}{let{length:t,data:i,channelMappingFamily:a,...e}=s;n[Me](o,s,e)}return new i20(s)}constructor(e){super(e),this[O]=e[O],this[D]=e[D],this[Je]=e[Je],this[Is]=e[Is],this[ys]=e[ys],this[Ye]=e[Ye],this[E]=e[E],this[xs]=e[xs],this[Bs]=e[Bs],this[Ps]=e[Ps],this[k]=e[k],this[Ts]=e[Ts],this[wt]=e[wt],this[_s]=e[_s]}},Js=class extends ae{constructor(e,t,n){super(e,t),this.Frame=es,this.Header=rs,n(this[R]),this._identificationHeader=null,this._preSkipRemaining=null}get[R](){return"opus"}[ft](e){return e[W]===0?(this._headerCache[He](),this._identificationHeader=e[O]):e[W]===1||(e[re]=J.get(e)[xe].map(e=>{let t=rs[Ce](this._identificationHeader,e,this._headerCache);if(t){this._preSkipRemaining===null&&(this._preSkipRemaining=t[wt]);let n=t[E]*t[Ye]/1e3*t[H];return this._preSkipRemaining>0&&(this._preSkipRemaining-=n,n=this._preSkipRemaining<0?-this._preSkipRemaining:0),new es(e,t,n)}this._codecParser[Vr]("Failed to parse Ogg Opus Header","Not a valid Ogg Opus file")})),e}},ns=class extends be{constructor(e,t,n){super(t,e,n)}},Pn={};for(let e=0;e<8;e++)Pn[e+6]=2**(6+e);Zs=class i21 extends ge{static[Ce](e,t,n,s){if(e[g]<30)throw new Error("Out of data while inside an Ogg Page");let a=me(e[I](0,30)),r=t[B](a);if(r)return new i21(r);let o={[g]:30};if(a.substr(0,7)!=="vorbis")return null;o[O]=oe.from(e[I](0,30));let i=new pt(o[O][_e]);if(o[at]=i.getUint32(7,!0),o[at]!==0||(o[C]=e[11],o[ne]=fs[o[C]-1]||"application defined",o[H]=i.getUint32(12,!0),o[ps]=i.getInt32(16,!0),o[bs]=i.getInt32(20,!0),o[ms]=i.getInt32(24,!0),o[lt]=Pn[(e[28]&240)>>4],o[ct]=Pn[e[28]&15],o[ct]>o[lt])||e[29]!==1)return null;o[te]=32,o[Jt]=s,o[Es]=n;{let{length:n,data:s,version:i,vorbisSetup:r,vorbisComments:c,...e}=o;t[Me](a,o,e)}return new i21(o)}constructor(e){super(e),this[ps]=e[ps],this[ms]=e[ms],this[bs]=e[bs],this[ct]=e[ct],this[lt]=e[lt],this[O]=e[O],this[Es]=e[Es],this[Jt]=e[Jt]}},Ys=class extends ae{constructor(e,t,n){super(e,t),this.Frame=ns,n(this[R]),this._identificationHeader=null,this._setupComplete=!1,this._prevBlockSize=null}get[R](){return Mt}[ft](e){e[re]=[];for(let t of J.get(e)[xe])if(t[0]===1)this._headerCache[He](),this._identificationHeader=e[O],this._setupComplete=!1;else if(t[0]===3)this._vorbisComments=t;else if(t[0]===5)this._vorbisSetup=t,this._mode=this._parseSetupHeader(t),this._setupComplete=!0;else if(this._setupComplete){let n=Zs[Ce](this._identificationHeader,this._headerCache,this._vorbisComments,this._vorbisSetup);n?e[re].push(new ns(t,n,this._getSamples(t,n))):this._codecParser[logError]("Failed to parse Ogg Vorbis Header","Not a valid Ogg Vorbis file")}return e}_getSamples(e,t){let n=this._mode.blockFlags[e[0]>>1&this._mode.mask]?t[lt]:t[ct],s=this._prevBlockSize===null?0:(this._prevBlockSize+n)/4;return this._prevBlockSize=n,s}_parseSetupHeader(e){let n=new Or(e),t={count:0,blockFlags:[]};for(;(n.read(1)&1)!==1;);let s;for(;t.count<64&&n.position>0;){Us(n.read(8));let e=0;for(;n.read(8)===0&&e++<3;);if(e===4)s=n.read(7),t.blockFlags.unshift(s&1),n.position+=6,t.count++;else{((Us(s)&126)>>1)+1!==t.count&&this._codecParser[De]("vorbis derived mode count did not match actual mode count");break}}return t.mask=(1<<Math.log2(t.count))-1,t}},Cn=class{constructor(e,t,n){this._codecParser=e,this._headerCache=t,this._onCodec=n,this._continuedPacket=new oe,this._codec=null,this._isSupported=null,this._previousAbsoluteGranulePosition=null}get[R](){return this._codec||""}_updateCodec(e,t){this._codec!==e&&(this._headerCache[Ie](),this._parser=new t(this._codecParser,this._headerCache,this._onCodec),this._codec=e)}_checkCodecSupport({data:e}){let t=me(e[I](0,8));switch(t){case"fishead\0":return!1;case"OpusHead":return this._updateCodec("opus",Js),!0;case/^\x7fFLAC/.test(t)&&t:return this._updateCodec("flac",Ht),!0;case/^\x01vorbis/.test(t)&&t:return this._updateCodec(Mt,Ys),!0;default:return!1}}_checkPageSequenceNumber(e){e[W]!==this._pageSequenceNumber+1&&this._pageSequenceNumber>1&&e[W]>1&&this._codecParser[De]("Unexpected gap in Ogg Page Sequence Number.",`Expected: ${this._pageSequenceNumber+1}, Got: ${e[W]}`),this._pageSequenceNumber=e[W]}_parsePage(e){this._isSupported===null&&(this._pageSequenceNumber=e[W],this._isSupported=this._checkCodecSupport(e)),this._checkPageSequenceNumber(e);let t=J.get(e),n=$.get(t[fe]),s=0;if(t[xe]=n[ut].map(t=>e[O][I](s,s+=t)),this._continuedPacket[g]&&(t[xe][0]=Gs(this._continuedPacket,t[xe][0]),this._continuedPacket=new oe),n[Zt][n[Zt][g]-1]===255&&(this._continuedPacket=Gs(this._continuedPacket,t[xe].pop())),this._previousAbsoluteGranulePosition!==null&&(e[N]=Number(e[ke]-this._previousAbsoluteGranulePosition)),this._previousAbsoluteGranulePosition=e[ke],this._isSupported){let t=this._parser[ft](e);return this._codecParser[ht](t),t}return e}},er=class extends ae{constructor(e,t,n){super(e,t),this._onCodec=n,this.Frame=Xs,this.Header=Nt,this._streams=new Map,this._currentSerialNumber=null}get[R](){let e=this._streams.get(this._currentSerialNumber);return e?e.codec:""}*[Ge](){let t=yield*this[dt](!0);this._currentSerialNumber=t[Ue];let e=this._streams.get(this._currentSerialNumber);return e||(e=new Cn(this._codecParser,this._headerCache,this._onCodec),this._streams.set(this._currentSerialNumber,e)),t[pe]&&this._streams.delete(this._currentSerialNumber),e._parsePage(t)}},Tn=()=>{},tr=class{constructor(e,{onCodec:t,onCodecHeader:n,onCodecUpdate:s,enableLogging:o=!1,enableFrameCRC32:i=!0}={}){this._inputMimeType=e,this._onCodec=t||Tn,this._onCodecHeader=n||Tn,this._onCodecUpdate=s,this._enableLogging=o,this._crc32=i?Mo:Tn,this[Ie]()}get[R](){return this._parser?this._parser[R]:""}[Ie](){this._headerCache=new js(this._onCodecHeader,this._onCodecUpdate),this._generator=this._getGenerator(),this._generator.next()}*flush(){this._flushing=!0;for(let e=this._generator.next();e.value;e=this._generator.next())yield e.value;this._flushing=!1,this[Ie]()}*parseChunk(e){for(let t=this._generator.next(e);t.value;t=this._generator.next())yield t.value}parseAll(e){return[...this.parseChunk(e),...this.flush()]}*_getGenerator(){if(this._inputMimeType.match(/aac/))this._parser=new $s(this,this._headerCache,this._onCodec);else if(this._inputMimeType.match(/mpeg/))this._parser=new Ws(this,this._headerCache,this._onCodec);else if(this._inputMimeType.match(/flac/))this._parser=new Ht(this,this._headerCache,this._onCodec);else if(this._inputMimeType.match(/ogg/))this._parser=new er(this,this._headerCache,this._onCodec);else throw new Error(`Unsupported Codec ${mimeType}`);for(this._frameNumber=0,this._currentReadPosition=0,this._totalBytesIn=0,this._totalBytesOut=0,this._totalSamples=0,this._sampleRate=void 0,this._rawData=new Uint8Array(0);;){let e=yield*this._parser[Ge]();e&&(yield e)}}*[V](e=0,t=0){let n;for(;this._rawData[g]<=e+t;){if(n=yield,this._flushing)return this._rawData[I](t);n&&(this._totalBytesIn+=n[g],this._rawData=Gs(this._rawData,n))}return this._rawData[I](t)}[we](e){this._currentReadPosition+=e,this._rawData=this._rawData[I](e)}[Rs](e){this._sampleRate=e[fe][H],e[fe][se]=e[Oe]>0?Math.round(e[O][g]/e[Oe])*8:0,e[et]=this._frameNumber++,e[Ct]=this._totalBytesOut,e[Ft]=this._totalSamples,e[Tt]=this._totalSamples/this._sampleRate*1e3,e[Ss]=this._crc32(e[O]),this._headerCache[Br](e[fe][se],e[Tt]),this._totalBytesOut+=e[O][g],this._totalSamples+=e[N]}[ht](e){if(e[re]){if(e[pe]){let t=e[N];e[re].forEach(e=>{let n=e[N];t<n&&(e[N]=t>0?t:0,e[Oe]=e[N]/e[fe][H]*1e3),t-=n,this[Rs](e)})}else e[N]=0,e[re].forEach(t=>{e[N]+=t[N],this[Rs](t)});e[Oe]=e[N]/this._sampleRate*1e3||0,e[Ft]=this._totalSamples,e[Tt]=this._totalSamples/this._sampleRate*1e3||0,e[Ct]=this._totalBytesOut}else this[Rs](e)}_log(e,t){if(this._enableLogging){let n=[`${R}:         ${this[R]}`,`inputMimeType: ${this._inputMimeType}`,`readPosition:  ${this._currentReadPosition}`,`totalBytesIn:  ${this._totalBytesIn}`,`${Ct}: ${this._totalBytesOut}`],s=Math.max(...n.map(e=>e[g]));t.push(`--stats--${"-".repeat(s-9)}`,...n,"-".repeat(s)),e("codec-parser",t.reduce((e,t)=>e+`
-  `+t,""))}}[De](...e){this._log(console.warn,e)}[Vr](...e){this._log(console.error,e)}},Vo=tr,$r=re,Xr=O,Bo=fe,Ao=pe,_o=Jt,Oo=Ft;function tt(e){o=o;function v(){}o={};function F(e){throw e}function T(){var e=i.buffer;V=new Int8Array(e),B=new Int16Array(e),r=new Uint8Array(e),H=new Uint16Array(e),I=new Int32Array(e),P=new Uint32Array(e),j=new Float32Array(e),L=new Float64Array(e),N=new BigInt64Array(e),z=new BigUint64Array(e)}for(var o,i,a,r,c,l,d,u,h,m,f,p,g,j,z,N,L,P,H,I,B,V,W=e=>{for(var a,r,n=0,s=0,o=e.length,i=new Uint8Array((o*3>>2)-(e[o-2]=="=")-(e[o-1]=="="));n<o;n+=4,s+=3)a=t[e.charCodeAt(n+1)],r=t[e.charCodeAt(n+2)],i[s]=t[e.charCodeAt(n)]<<2|a>>4,i[s+1]=a<<4|r>>2,i[s+2]=r<<6|t[e.charCodeAt(n+3)];return i},O=()=>F(""),R=()=>{},s={},y=e=>e(),_=()=>performance.now(),w=(e,t)=>{if(s[e]&&(clearTimeout(s[e].id),delete s[e]),!t)return 0;var n=setTimeout(()=>{delete s[e],y(()=>p(e,_()))},t);return s[e]={id:n,timeout_ms:t},0},b=Math.atan,x=Math.cos,C=Math.exp,E=Math.log,k=Math.pow,A=Math.sin,S=e=>{var t=r.length;return e>>>=0,!1},M=e=>{throw`exit(${e})`},t=new Uint8Array(123),n=25;n>=0;--n)t[48+n]=52+n,t[65+n]=n,t[97+n]=26+n;t[43]=62,t[47]=63,m={e:O,d:R,f:w,b,a:x,i:C,h:E,g:k,c:A,k:S,j:M};function D(e){h=e.n,u=e.o,d=e.p,a=e.q,c=e.r,l=e.s,f=e.t,p=e.v}function $(e){e.m()}tt.wasm||Object.defineProperty(tt,"wasm",{get:()=>String.raw`dynEncode012091253f87dì%nä= 4& ¿nÝØäÂLÚªã9ÚØ[äº\ ¼¡³R=}L]Èÿ2 ÿù¶J1jj¡é,zäV|i¸Qk¹= 
+// https://cdn.jsdelivr.net/gh/marmooo/midy@0.5.2/dist/midy.min.js
+var ti = Object.create;
+var qn = Object.defineProperty;
+var si = Object.getOwnPropertyDescriptor;
+var ri = Object.getOwnPropertyNames;
+var ni = Object.getPrototypeOf;
+var oi = Object.prototype.hasOwnProperty;
+var lr = (i22, e) => () => (e || i22((e = { exports: {} }).exports, e), e.exports);
+var ii = (i22, e, t, s) => {
+  if (e && typeof e == "object" || typeof e == "function") for (let r of ri(e)) !oi.call(i22, r) && r !== t && qn(i22, r, { get: () => e[r], enumerable: !(s = si(e, r)) || s.enumerable });
+  return i22;
+};
+var Kn = (i22, e, t) => (t = i22 != null ? ti(ni(i22)) : {}, ii(e || !i22 || !i22.__esModule ? qn(t, "default", { value: i22, enumerable: true }) : t, i22));
+var Wn = lr((wa, Qn) => {
+  function ai(i22) {
+    var e = new ee(i22), t = e.readChunk();
+    if (t.id != "MThd") throw "Bad MIDI file.  Expected 'MHdr', got: '" + t.id + "'";
+    for (var s = ci(t.data), r = [], n = 0; !e.eof() && n < s.numTracks; n++) {
+      var o = e.readChunk();
+      if (o.id != "MTrk") throw "Bad MIDI file.  Expected 'MTrk', got: '" + o.id + "'";
+      var a = li(o.data);
+      r.push(a);
+    }
+    return { header: s, tracks: r };
+  }
+  function ci(i22) {
+    var e = new ee(i22), t = e.readUInt16(), s = e.readUInt16(), r = { format: t, numTracks: s }, n = e.readUInt16();
+    return n & 32768 ? (r.framesPerSecond = 256 - (n >> 8), r.ticksPerFrame = n & 255) : r.ticksPerBeat = n, r;
+  }
+  function li(i22) {
+    for (var e = new ee(i22), t = []; !e.eof(); ) {
+      var s = n();
+      t.push(s);
+    }
+    return t;
+    var r;
+    function n() {
+      var o = {};
+      o.deltaTime = e.readVarInt();
+      var a = e.readUInt8();
+      if ((a & 240) === 240) if (a === 255) {
+        o.meta = true;
+        var c = e.readUInt8(), l = e.readVarInt();
+        switch (c) {
+          case 0:
+            if (o.type = "sequenceNumber", l !== 2) throw "Expected length for sequenceNumber event is 2, got " + l;
+            return o.number = e.readUInt16(), o;
+          case 1:
+            return o.type = "text", o.text = e.readString(l), o;
+          case 2:
+            return o.type = "copyrightNotice", o.text = e.readString(l), o;
+          case 3:
+            return o.type = "trackName", o.text = e.readString(l), o;
+          case 4:
+            return o.type = "instrumentName", o.text = e.readString(l), o;
+          case 5:
+            return o.type = "lyrics", o.text = e.readString(l), o;
+          case 6:
+            return o.type = "marker", o.text = e.readString(l), o;
+          case 7:
+            return o.type = "cuePoint", o.text = e.readString(l), o;
+          case 32:
+            if (o.type = "channelPrefix", l != 1) throw "Expected length for channelPrefix event is 1, got " + l;
+            return o.channel = e.readUInt8(), o;
+          case 33:
+            if (o.type = "portPrefix", l != 1) throw "Expected length for portPrefix event is 1, got " + l;
+            return o.port = e.readUInt8(), o;
+          case 47:
+            if (o.type = "endOfTrack", l != 0) throw "Expected length for endOfTrack event is 0, got " + l;
+            return o;
+          case 81:
+            if (o.type = "setTempo", l != 3) throw "Expected length for setTempo event is 3, got " + l;
+            return o.microsecondsPerBeat = e.readUInt24(), o;
+          case 84:
+            if (o.type = "smpteOffset", l != 5) throw "Expected length for smpteOffset event is 5, got " + l;
+            var u = e.readUInt8(), h = { 0: 24, 32: 25, 64: 29, 96: 30 };
+            return o.frameRate = h[u & 96], o.hour = u & 31, o.min = e.readUInt8(), o.sec = e.readUInt8(), o.frame = e.readUInt8(), o.subFrame = e.readUInt8(), o;
+          case 88:
+            if (o.type = "timeSignature", l != 2 && l != 4) throw "Expected length for timeSignature event is 4 or 2, got " + l;
+            return o.numerator = e.readUInt8(), o.denominator = 1 << e.readUInt8(), l === 4 ? (o.metronome = e.readUInt8(), o.thirtyseconds = e.readUInt8()) : (o.metronome = 36, o.thirtyseconds = 8), o;
+          case 89:
+            if (o.type = "keySignature", l != 2) throw "Expected length for keySignature event is 2, got " + l;
+            return o.key = e.readInt8(), o.scale = e.readUInt8(), o;
+          case 127:
+            return o.type = "sequencerSpecific", o.data = e.readBytes(l), o;
+          default:
+            return o.type = "unknownMeta", o.data = e.readBytes(l), o.metatypeByte = c, o;
+        }
+      } else if (a == 240) {
+        o.type = "sysEx";
+        var l = e.readVarInt();
+        return o.data = e.readBytes(l), o;
+      } else if (a == 247) {
+        o.type = "endSysEx";
+        var l = e.readVarInt();
+        return o.data = e.readBytes(l), o;
+      } else throw "Unrecognised MIDI event type byte: " + a;
+      else {
+        var f;
+        if ((a & 128) === 0) {
+          if (r === null) throw "Running status byte encountered before status byte";
+          f = a, a = r, o.running = true;
+        } else f = e.readUInt8(), r = a;
+        var d = a >> 4;
+        switch (o.channel = a & 15, d) {
+          case 8:
+            return o.type = "noteOff", o.noteNumber = f, o.velocity = e.readUInt8(), o;
+          case 9:
+            var p = e.readUInt8();
+            return o.type = p === 0 ? "noteOff" : "noteOn", o.noteNumber = f, o.velocity = p, p === 0 && (o.byte9 = true), o;
+          case 10:
+            return o.type = "noteAftertouch", o.noteNumber = f, o.amount = e.readUInt8(), o;
+          case 11:
+            return o.type = "controller", o.controllerType = f, o.value = e.readUInt8(), o;
+          case 12:
+            return o.type = "programChange", o.programNumber = f, o;
+          case 13:
+            return o.type = "channelAftertouch", o.amount = f, o;
+          case 14:
+            return o.type = "pitchBend", o.value = f + (e.readUInt8() << 7) - 8192, o;
+          default:
+            throw "Unrecognised MIDI event type: " + d;
+        }
+      }
+    }
+  }
+  function ee(i22) {
+    this.buffer = i22, this.bufferLen = this.buffer.length, this.pos = 0;
+  }
+  ee.prototype.eof = function() {
+    return this.pos >= this.bufferLen;
+  };
+  ee.prototype.readUInt8 = function() {
+    var i22 = this.buffer[this.pos];
+    return this.pos += 1, i22;
+  };
+  ee.prototype.readInt8 = function() {
+    var i22 = this.readUInt8();
+    return i22 & 128 ? i22 - 256 : i22;
+  };
+  ee.prototype.readUInt16 = function() {
+    var i22 = this.readUInt8(), e = this.readUInt8();
+    return (i22 << 8) + e;
+  };
+  ee.prototype.readInt16 = function() {
+    var i22 = this.readUInt16();
+    return i22 & 32768 ? i22 - 65536 : i22;
+  };
+  ee.prototype.readUInt24 = function() {
+    var i22 = this.readUInt8(), e = this.readUInt8(), t = this.readUInt8();
+    return (i22 << 16) + (e << 8) + t;
+  };
+  ee.prototype.readInt24 = function() {
+    var i22 = this.readUInt24();
+    return i22 & 8388608 ? i22 - 16777216 : i22;
+  };
+  ee.prototype.readUInt32 = function() {
+    var i22 = this.readUInt8(), e = this.readUInt8(), t = this.readUInt8(), s = this.readUInt8();
+    return (i22 << 24) + (e << 16) + (t << 8) + s;
+  };
+  ee.prototype.readBytes = function(i22) {
+    var e = this.buffer.slice(this.pos, this.pos + i22);
+    return this.pos += i22, e;
+  };
+  ee.prototype.readString = function(i22) {
+    var e = this.readBytes(i22);
+    return String.fromCharCode.apply(null, e);
+  };
+  ee.prototype.readVarInt = function() {
+    for (var i22 = 0; !this.eof(); ) {
+      var e = this.readUInt8();
+      if (e & 128) i22 += e & 127, i22 <<= 7;
+      else return i22 + e;
+    }
+    return i22;
+  };
+  ee.prototype.readChunk = function() {
+    var i22 = this.readString(4), e = this.readUInt32(), t = this.readBytes(e);
+    return { id: i22, length: e, data: t };
+  };
+  Qn.exports = ai;
+});
+var $n = lr((Ma, zn) => {
+  function ui(i22, e) {
+    if (typeof i22 != "object") throw "Invalid MIDI data";
+    e = e || {};
+    var t = i22.header || {}, s = i22.tracks || [], r, n = s.length, o = new z();
+    for (hi(o, t, n), r = 0; r < n; r++) di(o, s[r], e);
+    return o.buffer;
+  }
+  function hi(i22, e, t) {
+    var s = e.format == null ? 1 : e.format, r = 128;
+    e.timeDivision ? r = e.timeDivision : e.ticksPerFrame && e.framesPerSecond ? r = -(e.framesPerSecond & 255) << 8 | e.ticksPerFrame & 255 : e.ticksPerBeat && (r = e.ticksPerBeat & 32767);
+    var n = new z();
+    n.writeUInt16(s), n.writeUInt16(t), n.writeUInt16(r), i22.writeChunk("MThd", n.buffer);
+  }
+  function di(i22, e, t) {
+    var s = new z(), r, n = e.length, o = null;
+    for (r = 0; r < n; r++) (t.running === false || !t.running && !e[r].running) && (o = null), o = fi(s, e[r], o, t.useByte9ForNoteOff);
+    i22.writeChunk("MTrk", s.buffer);
+  }
+  function fi(i22, e, t, s) {
+    var r = e.type, n = e.deltaTime, o = e.text || "", a = e.data || [], c = null;
+    switch (i22.writeVarInt(n), r) {
+      case "sequenceNumber":
+        i22.writeUInt8(255), i22.writeUInt8(0), i22.writeVarInt(2), i22.writeUInt16(e.number);
+        break;
+      case "text":
+        i22.writeUInt8(255), i22.writeUInt8(1), i22.writeVarInt(o.length), i22.writeString(o);
+        break;
+      case "copyrightNotice":
+        i22.writeUInt8(255), i22.writeUInt8(2), i22.writeVarInt(o.length), i22.writeString(o);
+        break;
+      case "trackName":
+        i22.writeUInt8(255), i22.writeUInt8(3), i22.writeVarInt(o.length), i22.writeString(o);
+        break;
+      case "instrumentName":
+        i22.writeUInt8(255), i22.writeUInt8(4), i22.writeVarInt(o.length), i22.writeString(o);
+        break;
+      case "lyrics":
+        i22.writeUInt8(255), i22.writeUInt8(5), i22.writeVarInt(o.length), i22.writeString(o);
+        break;
+      case "marker":
+        i22.writeUInt8(255), i22.writeUInt8(6), i22.writeVarInt(o.length), i22.writeString(o);
+        break;
+      case "cuePoint":
+        i22.writeUInt8(255), i22.writeUInt8(7), i22.writeVarInt(o.length), i22.writeString(o);
+        break;
+      case "channelPrefix":
+        i22.writeUInt8(255), i22.writeUInt8(32), i22.writeVarInt(1), i22.writeUInt8(e.channel);
+        break;
+      case "portPrefix":
+        i22.writeUInt8(255), i22.writeUInt8(33), i22.writeVarInt(1), i22.writeUInt8(e.port);
+        break;
+      case "endOfTrack":
+        i22.writeUInt8(255), i22.writeUInt8(47), i22.writeVarInt(0);
+        break;
+      case "setTempo":
+        i22.writeUInt8(255), i22.writeUInt8(81), i22.writeVarInt(3), i22.writeUInt24(e.microsecondsPerBeat);
+        break;
+      case "smpteOffset":
+        i22.writeUInt8(255), i22.writeUInt8(84), i22.writeVarInt(5);
+        var l = { 24: 0, 25: 32, 29: 64, 30: 96 }, u = e.hour & 31 | l[e.frameRate];
+        i22.writeUInt8(u), i22.writeUInt8(e.min), i22.writeUInt8(e.sec), i22.writeUInt8(e.frame), i22.writeUInt8(e.subFrame);
+        break;
+      case "timeSignature":
+        i22.writeUInt8(255), i22.writeUInt8(88), i22.writeVarInt(4), i22.writeUInt8(e.numerator);
+        var h = Math.floor(Math.log(e.denominator) / Math.LN2) & 255;
+        i22.writeUInt8(h), i22.writeUInt8(e.metronome), i22.writeUInt8(e.thirtyseconds || 8);
+        break;
+      case "keySignature":
+        i22.writeUInt8(255), i22.writeUInt8(89), i22.writeVarInt(2), i22.writeInt8(e.key), i22.writeUInt8(e.scale);
+        break;
+      case "sequencerSpecific":
+        i22.writeUInt8(255), i22.writeUInt8(127), i22.writeVarInt(a.length), i22.writeBytes(a);
+        break;
+      case "unknownMeta":
+        e.metatypeByte != null && (i22.writeUInt8(255), i22.writeUInt8(e.metatypeByte), i22.writeVarInt(a.length), i22.writeBytes(a));
+        break;
+      case "sysEx":
+        i22.writeUInt8(240), i22.writeVarInt(a.length), i22.writeBytes(a);
+        break;
+      case "endSysEx":
+        i22.writeUInt8(247), i22.writeVarInt(a.length), i22.writeBytes(a);
+        break;
+      case "noteOff":
+        var f = s !== false && e.byte9 || s && e.velocity == 0 ? 144 : 128;
+        c = f | e.channel, c !== t && i22.writeUInt8(c), i22.writeUInt8(e.noteNumber), i22.writeUInt8(e.velocity);
+        break;
+      case "noteOn":
+        c = 144 | e.channel, c !== t && i22.writeUInt8(c), i22.writeUInt8(e.noteNumber), i22.writeUInt8(e.velocity);
+        break;
+      case "noteAftertouch":
+        c = 160 | e.channel, c !== t && i22.writeUInt8(c), i22.writeUInt8(e.noteNumber), i22.writeUInt8(e.amount);
+        break;
+      case "controller":
+        c = 176 | e.channel, c !== t && i22.writeUInt8(c), i22.writeUInt8(e.controllerType), i22.writeUInt8(e.value);
+        break;
+      case "programChange":
+        c = 192 | e.channel, c !== t && i22.writeUInt8(c), i22.writeUInt8(e.programNumber);
+        break;
+      case "channelAftertouch":
+        c = 208 | e.channel, c !== t && i22.writeUInt8(c), i22.writeUInt8(e.amount);
+        break;
+      case "pitchBend":
+        c = 224 | e.channel, c !== t && i22.writeUInt8(c);
+        var d = 8192 + e.value, p = d & 127, y = d >> 7 & 127;
+        i22.writeUInt8(p), i22.writeUInt8(y);
+        break;
+      default:
+        throw "Unrecognized event type: " + r;
+    }
+    return c;
+  }
+  function z() {
+    this.buffer = [];
+  }
+  z.prototype.writeUInt8 = function(i22) {
+    this.buffer.push(i22 & 255);
+  };
+  z.prototype.writeInt8 = z.prototype.writeUInt8;
+  z.prototype.writeUInt16 = function(i22) {
+    var e = i22 >> 8 & 255, t = i22 & 255;
+    this.writeUInt8(e), this.writeUInt8(t);
+  };
+  z.prototype.writeInt16 = z.prototype.writeUInt16;
+  z.prototype.writeUInt24 = function(i22) {
+    var e = i22 >> 16 & 255, t = i22 >> 8 & 255, s = i22 & 255;
+    this.writeUInt8(e), this.writeUInt8(t), this.writeUInt8(s);
+  };
+  z.prototype.writeInt24 = z.prototype.writeUInt24;
+  z.prototype.writeUInt32 = function(i22) {
+    var e = i22 >> 24 & 255, t = i22 >> 16 & 255, s = i22 >> 8 & 255, r = i22 & 255;
+    this.writeUInt8(e), this.writeUInt8(t), this.writeUInt8(s), this.writeUInt8(r);
+  };
+  z.prototype.writeInt32 = z.prototype.writeUInt32;
+  z.prototype.writeBytes = function(i22) {
+    this.buffer = this.buffer.concat(Array.prototype.slice.call(i22, 0));
+  };
+  z.prototype.writeString = function(i22) {
+    var e, t = i22.length, s = [];
+    for (e = 0; e < t; e++) s.push(i22.codePointAt(e));
+    this.writeBytes(s);
+  };
+  z.prototype.writeVarInt = function(i22) {
+    if (i22 < 0) throw "Cannot write negative variable-length integer";
+    if (i22 <= 127) this.writeUInt8(i22);
+    else {
+      var e = i22, t = [];
+      for (t.push(e & 127), e >>= 7; e; ) {
+        var s = e & 127 | 128;
+        t.push(s), e >>= 7;
+      }
+      this.writeBytes(t.reverse());
+    }
+  };
+  z.prototype.writeChunk = function(i22, e) {
+    this.writeString(i22), this.writeUInt32(e.length), this.writeBytes(e);
+  };
+  zn.exports = ui;
+});
+var Xn = lr((sn) => {
+  sn.parseMidi = Wn();
+  sn.writeMidi = $n();
+});
+var uo = lr((ic, lo) => {
+  lo.exports = Worker;
+});
+var Jo = Kn(Xn());
+var Be = class {
+  constructor(e, t) {
+    Object.defineProperty(this, "data", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "offset", { enumerable: true, configurable: true, writable: true, value: t });
+  }
+  readString(e) {
+    let t = this.offset, s = t + e, r = this.data, n = r.subarray(t, s).indexOf(0);
+    n < 0 && (n = e);
+    let o = new Array(n);
+    for (let a = 0; a < n; a++) o[a] = r[t + a];
+    return this.offset = s, String.fromCharCode(...o);
+  }
+  readWORD() {
+    return this.data[this.offset++] | this.data[this.offset++] << 8;
+  }
+  readDWORD(e = false) {
+    return e ? (this.data[this.offset++] << 24 | this.data[this.offset++] << 16 | this.data[this.offset++] << 8 | this.data[this.offset++]) >>> 0 : (this.data[this.offset++] | this.data[this.offset++] << 8 | this.data[this.offset++] << 16 | this.data[this.offset++] << 24) >>> 0;
+  }
+  readByte() {
+    return this.data[this.offset++];
+  }
+  readAt(e) {
+    return this.data[this.offset + e];
+  }
+  readUInt8() {
+    return this.readByte();
+  }
+  readInt8() {
+    return this.readByte() << 24 >> 24;
+  }
+  readUInt16() {
+    return this.readWORD();
+  }
+  readInt16() {
+    return this.readWORD() << 16 >> 16;
+  }
+  readUInt32() {
+    return this.readDWORD();
+  }
+};
+function nn(i22, e, t) {
+  let s = new Be(i22, e), r = s.readString(4), n = s.readDWORD(t);
+  return new rn(r, n, s.offset);
+}
+function on(i22, e = 0, t, { padding: s = true, bigEndian: r = false } = {}) {
+  let n = [], o = t + e, a = e;
+  for (; a < o; ) {
+    let c = nn(i22, a, r);
+    a = c.offset + c.size, s && (a - e & 1) === 1 && a++, n.push(c);
+  }
+  return n;
+}
+var rn = class {
+  constructor(e, t, s) {
+    Object.defineProperty(this, "type", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "size", { enumerable: true, configurable: true, writable: true, value: t }), Object.defineProperty(this, "offset", { enumerable: true, configurable: true, writable: true, value: s });
+  }
+};
+var Ee = ["startAddrsOffset", "endAddrsOffset", "startloopAddrsOffset", "endloopAddrsOffset", "startAddrsCoarseOffset", "modLfoToPitch", "vibLfoToPitch", "modEnvToPitch", "initialFilterFc", "initialFilterQ", "modLfoToFilterFc", "modEnvToFilterFc", "endAddrsCoarseOffset", "modLfoToVolume", void 0, "chorusEffectsSend", "reverbEffectsSend", "pan", void 0, void 0, void 0, "delayModLFO", "freqModLFO", "delayVibLFO", "freqVibLFO", "delayModEnv", "attackModEnv", "holdModEnv", "decayModEnv", "sustainModEnv", "releaseModEnv", "keynumToModEnvHold", "keynumToModEnvDecay", "delayVolEnv", "attackVolEnv", "holdVolEnv", "decayVolEnv", "sustainVolEnv", "releaseVolEnv", "keynumToVolEnvHold", "keynumToVolEnvDecay", "instrument", void 0, "keyRange", "velRange", "startloopAddrsCoarseOffset", "keynum", "velocity", "initialAttenuation", void 0, "endloopAddrsCoarseOffset", "coarseTune", "fineTune", "sampleID", "sampleModes", void 0, "scaleTuning", "exclusiveClass", "overridingRootKey"];
+var _ = class i {
+  constructor(e, t, s, r, n) {
+    Object.defineProperty(this, "type", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "polarity", { enumerable: true, configurable: true, writable: true, value: t }), Object.defineProperty(this, "direction", { enumerable: true, configurable: true, writable: true, value: s }), Object.defineProperty(this, "cc", { enumerable: true, configurable: true, writable: true, value: r }), Object.defineProperty(this, "index", { enumerable: true, configurable: true, writable: true, value: n });
+  }
+  get controllerType() {
+    return this.cc << 7 | this.index;
+  }
+  static parse(e) {
+    let t = e >> 10 & 63, s = e & 127, r = e >> 7 & 1, n = e >> 8 & 1, o = e >> 9 & 1;
+    return new i(t, o, n, r, s);
+  }
+  map(e) {
+    let t = e;
+    switch (this.polarity === 1 ? (t = (t - 0.5) * 2, this.direction === 1 && (t *= -1)) : this.direction === 1 && (t = 1 - t), this.type) {
+      case 0:
+        break;
+      case 1:
+        t = Math.sign(t) * Math.log(Math.abs(t));
+        break;
+      case 2:
+        t = Math.sign(t) * Math.exp(-Math.abs(t));
+        break;
+      case 3:
+        t = t >= 0.5 ? 1 : 0;
+        break;
+      default:
+        console.warn(`unexpected type: ${this.type}`);
+        break;
+    }
+    return t;
+  }
+};
+var an = class i2 {
+  constructor(e, t) {
+    Object.defineProperty(this, "major", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "minor", { enumerable: true, configurable: true, writable: true, value: t });
+  }
+  static parse(e) {
+    let t = e.readInt8(), s = e.readInt8();
+    return new i2(t, s);
+  }
+};
+var ur = class i3 {
+  constructor(e, t, s, r, n, o, a, c, l, u, h) {
+    Object.defineProperty(this, "comment", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "copyright", { enumerable: true, configurable: true, writable: true, value: t }), Object.defineProperty(this, "creationDate", { enumerable: true, configurable: true, writable: true, value: s }), Object.defineProperty(this, "engineer", { enumerable: true, configurable: true, writable: true, value: r }), Object.defineProperty(this, "name", { enumerable: true, configurable: true, writable: true, value: n }), Object.defineProperty(this, "product", { enumerable: true, configurable: true, writable: true, value: o }), Object.defineProperty(this, "software", { enumerable: true, configurable: true, writable: true, value: a }), Object.defineProperty(this, "version", { enumerable: true, configurable: true, writable: true, value: c }), Object.defineProperty(this, "soundEngine", { enumerable: true, configurable: true, writable: true, value: l }), Object.defineProperty(this, "romName", { enumerable: true, configurable: true, writable: true, value: u }), Object.defineProperty(this, "romVersion", { enumerable: true, configurable: true, writable: true, value: h });
+  }
+  static parse(e, t) {
+    function s(v) {
+      for (let S = 0; S < t.length; S++) if (t[S].type === v) return t[S];
+    }
+    function r(v) {
+      return new Be(e, v.offset);
+    }
+    function n(v) {
+      let S = s(v);
+      return S ? r(S).readString(S.size) : null;
+    }
+    function o(v) {
+      let S = s(v);
+      return S ? an.parse(r(S)) : null;
+    }
+    let a = n("ICMT"), c = n("ICOP"), l = n("ICRD"), u = n("IENG"), h = n("INAM"), f = n("IPRD"), d = n("ISFT"), p = o("ifil"), y = n("isng"), m = n("irom"), b = o("iver");
+    return new i3(a, c, l, u, h, f, d, p, y, m, b);
+  }
+};
+var cs = class i4 {
+  constructor(e, t) {
+    Object.defineProperty(this, "generatorIndex", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "modulatorIndex", { enumerable: true, configurable: true, writable: true, value: t });
+  }
+  static parse(e) {
+    let t = e.readWORD(), s = e.readWORD();
+    return new i4(t, s);
+  }
+};
+var hr = class i5 {
+  constructor(e, t, s, r, n, o, a) {
+    Object.defineProperty(this, "presetName", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "preset", { enumerable: true, configurable: true, writable: true, value: t }), Object.defineProperty(this, "bank", { enumerable: true, configurable: true, writable: true, value: s }), Object.defineProperty(this, "presetBagIndex", { enumerable: true, configurable: true, writable: true, value: r }), Object.defineProperty(this, "library", { enumerable: true, configurable: true, writable: true, value: n }), Object.defineProperty(this, "genre", { enumerable: true, configurable: true, writable: true, value: o }), Object.defineProperty(this, "morphology", { enumerable: true, configurable: true, writable: true, value: a });
+  }
+  get isEnd() {
+    let { presetName: e, preset: t, bank: s, library: r, genre: n, morphology: o } = this;
+    return e === "EOP" || e === "" && t + s + r + n + o === 0;
+  }
+  static parse(e) {
+    let t = e.readString(20), s = e.readWORD(), r = e.readWORD(), n = e.readWORD(), o = e.readDWORD(), a = e.readDWORD(), c = e.readDWORD();
+    return new i5(t, s, r, n, o, a, c);
+  }
+};
+var xt = class i6 {
+  constructor(e, t) {
+    Object.defineProperty(this, "lo", { enumerable: true, configurable: true, writable: true, value: void 0 }), Object.defineProperty(this, "hi", { enumerable: true, configurable: true, writable: true, value: void 0 }), this.lo = e, this.hi = t;
+  }
+  in(e) {
+    return this.lo <= e && e <= this.hi;
+  }
+  static parse(e) {
+    let t = e.readByte(), s = e.readByte();
+    return new i6(t, s);
+  }
+};
+var X = class i7 {
+  constructor(e, t, s, r, n) {
+    Object.defineProperty(this, "sourceOper", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "destinationOper", { enumerable: true, configurable: true, writable: true, value: t }), Object.defineProperty(this, "amount", { enumerable: true, configurable: true, writable: true, value: s }), Object.defineProperty(this, "amountSourceOper", { enumerable: true, configurable: true, writable: true, value: r }), Object.defineProperty(this, "transOper", { enumerable: true, configurable: true, writable: true, value: n });
+  }
+  transform(e) {
+    let t = this.amount * e;
+    switch (this.transOper) {
+      case 0:
+        return t;
+      case 2:
+        return Math.abs(t);
+      default:
+        return t;
+    }
+  }
+  static parse(e) {
+    let t = e.readWORD(), s = e.readWORD(), r = e.readInt16(), n = e.readWORD(), o = e.readWORD(), a = _.parse(t), c = _.parse(n);
+    return new i7(a, s, r, c, o);
+  }
+};
+var ls = class i8 {
+  constructor(e, t) {
+    Object.defineProperty(this, "code", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "value", { enumerable: true, configurable: true, writable: true, value: t });
+  }
+  get type() {
+    return Ee[this.code];
+  }
+  get isEnd() {
+    return this.code === 0 && this.value === 0;
+  }
+  static parse(e) {
+    let t = e.readWORD(), s = Ee[t], r;
+    switch (s) {
+      case "keyRange":
+      case "velRange":
+        r = xt.parse(e);
+        break;
+      case "instrument":
+      case "sampleID":
+        r = e.readUInt16();
+        break;
+      default:
+        r = e.readInt16();
+        break;
+    }
+    return new i8(t, r);
+  }
+};
+var dr = class i9 {
+  constructor() {
+    Object.defineProperty(this, "instrumentName", { enumerable: true, configurable: true, writable: true, value: void 0 }), Object.defineProperty(this, "instrumentBagIndex", { enumerable: true, configurable: true, writable: true, value: void 0 });
+  }
+  get isEnd() {
+    return this.instrumentName === "EOI";
+  }
+  static parse(e) {
+    let t = new i9();
+    return t.instrumentName = e.readString(20), t.instrumentBagIndex = e.readWORD(), t;
+  }
+};
+var fr = class i10 {
+  constructor(e, t, s, r, n, o, a, c, l, u) {
+    Object.defineProperty(this, "sampleName", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "start", { enumerable: true, configurable: true, writable: true, value: t }), Object.defineProperty(this, "end", { enumerable: true, configurable: true, writable: true, value: s }), Object.defineProperty(this, "loopStart", { enumerable: true, configurable: true, writable: true, value: r }), Object.defineProperty(this, "loopEnd", { enumerable: true, configurable: true, writable: true, value: n }), Object.defineProperty(this, "sampleRate", { enumerable: true, configurable: true, writable: true, value: o }), Object.defineProperty(this, "originalPitch", { enumerable: true, configurable: true, writable: true, value: a }), Object.defineProperty(this, "pitchCorrection", { enumerable: true, configurable: true, writable: true, value: c }), Object.defineProperty(this, "sampleLink", { enumerable: true, configurable: true, writable: true, value: l }), Object.defineProperty(this, "sampleType", { enumerable: true, configurable: true, writable: true, value: u });
+  }
+  get isEnd() {
+    return this.sampleName === "EOS";
+  }
+  static parse(e, t) {
+    let s = e.readString(20), r = e.readDWORD(), n = e.readDWORD(), o = e.readDWORD(), a = e.readDWORD(), c = e.readDWORD(), l = e.readByte(), u = e.readInt8(), h = e.readWORD(), f = e.readWORD();
+    return t || (o -= r, a -= r), new i10(s, r, n, o, a, c, l, u, h, f);
+  }
+};
+var w = class {
+  constructor(e, t, s) {
+    Object.defineProperty(this, "min", { enumerable: true, configurable: true, writable: true, value: void 0 }), Object.defineProperty(this, "max", { enumerable: true, configurable: true, writable: true, value: void 0 }), Object.defineProperty(this, "defaultValue", { enumerable: true, configurable: true, writable: true, value: void 0 }), this.min = e, this.defaultValue = t, this.max = s;
+  }
+  clamp(e) {
+    return Math.max(this.min, Math.min(e, this.max));
+  }
+};
+var pi = ["pcm16", "pcm24", "compressed"];
+var mi = new Set(pi);
+var pr = class {
+  constructor(e, t, s) {
+    if (Object.defineProperty(this, "type", { enumerable: true, configurable: true, writable: true, value: void 0 }), Object.defineProperty(this, "sampleHeader", { enumerable: true, configurable: true, writable: true, value: void 0 }), Object.defineProperty(this, "data", { enumerable: true, configurable: true, writable: true, value: void 0 }), !mi.has(e)) throw new Error(`Invalid AudioDataType: ${e}`);
+    this.type = e, this.sampleHeader = t, this.data = s;
+  }
+  decodePCM(e) {
+    let { type: t } = this;
+    if (t === "pcm16") {
+      let r = e.byteLength / 2, n = new Float32Array(r), o = new Int16Array(e.buffer, e.byteOffset, e.byteLength / 2);
+      for (let a = 0; a < r; a++) n[a] = o[a] / 32768;
+      return n;
+    } else {
+      let r = e.byteLength / 3, n = new Float32Array(r);
+      for (let o = 0; o < r; o++) {
+        let a = o * 3, c = e[a] | e[a + 1] << 8 | e[a + 2] << 16;
+        c & 8388608 && (c |= 4278190080), n[o] = c / 8388608;
+      }
+      return n;
+    }
+  }
+};
+function cn(i22, e = {}) {
+  let t = on(i22, 0, i22.length, e);
+  if (t.length !== 1) throw new Error("wrong chunk length");
+  let s = t[0];
+  if (s === null) throw new Error("chunk not found");
+  function r(c, l, u = {}) {
+    let h = mr(c, l, "RIFF", "sfbk", u);
+    if (h.length !== 3) throw new Error("invalid sfbk structure");
+    let f = bi(h[0], l), d = f.version.major === 3;
+    return d && h[2].type !== "LIST" && (h[2] = nn(l, h[2].offset - 9, false)), { info: f, samplingData: gi(h[1], l), ...n(h[2], l, d) };
+  }
+  function n(c, l, u) {
+    let h = mr(c, l, "LIST", "pdta");
+    if (h.length !== 9) throw new Error("invalid pdta chunk");
+    return { presetHeaders: yi(h[0], l), presetZone: vi(h[1], l), presetModulators: wi(h[2], l), presetGenerators: Pi(h[3], l), instruments: Si(h[4], l), instrumentZone: xi(h[5], l), instrumentModulators: Mi(h[6], l), instrumentGenerators: Ci(h[7], l), sampleHeaders: Ti(h[8], l, u) };
+  }
+  let o = r(s, i22, e), a = o.info.version.major === 3;
+  return { ...o, samples: Fi(o.sampleHeaders, o.samplingData.offsetMSB, o.samplingData.offsetLSB, i22, a) };
+}
+function mr(i22, e, t, s, r = {}) {
+  if (i22.type !== t) throw new Error("invalid chunk type:" + i22.type);
+  let n = new Be(e, i22.offset), o = n.readString(4);
+  if (o !== s) throw new Error("invalid signature:" + o);
+  return on(e, n.offset, i22.size - 4, r);
+}
+function bi(i22, e) {
+  let t = mr(i22, e, "LIST", "INFO");
+  return ur.parse(e, t);
+}
+function gi(i22, e) {
+  let t = mr(i22, e, "LIST", "sdta");
+  return { offsetMSB: t[0].offset, offsetLSB: t[1]?.offset };
+}
+function qe(i22, e, t, s, r, n) {
+  let o = [];
+  if (i22.type !== t) throw new Error("invalid chunk type:" + i22.type);
+  let a = new Be(e, i22.offset), c = i22.offset + i22.size;
+  for (; a.offset < c; ) {
+    let l = s.parse(a, n);
+    if (r && r(l)) break;
+    o.push(l);
+  }
+  return o;
+}
+var yi = (i22, e) => qe(i22, e, "phdr", hr, (t) => t.isEnd);
+var vi = (i22, e) => qe(i22, e, "pbag", cs);
+var Si = (i22, e) => qe(i22, e, "inst", dr, (t) => t.isEnd);
+var xi = (i22, e) => qe(i22, e, "ibag", cs);
+var wi = (i22, e) => qe(i22, e, "pmod", X);
+var Mi = (i22, e) => qe(i22, e, "imod", X);
+var Pi = (i22, e) => qe(i22, e, "pgen", ls, (t) => t.isEnd);
+var Ci = (i22, e) => qe(i22, e, "igen", ls);
+var Ti = (i22, e, t) => qe(i22, e, "shdr", fr, (s) => s.isEnd, t);
+function Fi(i22, e, t, s, r) {
+  let n = new Array(i22.length), o = r ? 1 : 2, a = r ? "compressed" : t ? "pcm24" : "pcm16";
+  for (let c = 0; c < i22.length; c++) {
+    let { start: l, end: u } = i22[c], h = e + l * o, f = e + u * o, d = s.subarray(h, f);
+    n[c] = new pr(a, i22[c], d);
+  }
+  return n;
+}
+var eo = /* @__PURE__ */ new Map();
+for (let i22 = 0; i22 < Ee.length; i22++) eo.set(Ee[i22], i22);
+var Ei = ["instrument", "sampleID"];
+var to = ["keyRange", "velRange"];
+var so = ["keynum", "velocity"];
+var ro = ["startAddrsOffset", "endAddrsOffset", "startloopAddrsOffset", "endloopAddrsOffset", "startAddrsCoarseOffset", "endAddrsCoarseOffset", "startloopAddrsCoarseOffset", "endloopAddrsCoarseOffset", "sampleModes", "exclusiveClass", "overridingRootKey"];
+var Jn = [...ro, ...so];
+var no = /* @__PURE__ */ new Set();
+for (let i22 = 0; i22 < Jn.length; i22++) {
+  let e = Jn[i22], t = eo.get(e);
+  t !== void 0 && no.add(t);
+}
+function oo(i22) {
+  let e = {}, t = Object.keys(i22);
+  for (let s of t) {
+    let r = i22[s];
+    if (us(s)) e[s] = r;
+    else {
+      let n = r;
+      e[s] = n.clamp(n.defaultValue);
+    }
+  }
+  return e;
+}
+var Zn = [["keynum", "keyRange"], ["velocity", "velRange"]];
+var ki = new Set(to);
+function us(i22) {
+  return ki.has(i22);
+}
+var Di = /* @__PURE__ */ new Set([...Ei, ...to, ...so, ...ro]);
+function Ii() {
+  let i22 = [], e = Ee.length;
+  for (let t = 0; t < e; t++) {
+    let s = Ee[t];
+    s !== void 0 && !Di.has(s) && i22.push(s);
+  }
+  return i22;
+}
+var gr = Ii();
+var Hi = new Set(gr);
+function ln(i22) {
+  return Hi.has(i22);
+}
+function io(i22) {
+  let e = {};
+  for (let t = 0; t < i22.length; t++) {
+    let s = i22[t], r = s.type;
+    if (r !== void 0 && !no.has(s.code)) if (us(r)) e[r] = s.value;
+    else {
+      let n = r;
+      e[n] = s.value;
+    }
+  }
+  return e;
+}
+function ao(i22) {
+  let e = {};
+  for (let t = 0; t < i22.length; t++) {
+    let s = i22[t], r = s.type;
+    if (r !== void 0) if (us(r)) e[r] = s.value;
+    else {
+      let n = r;
+      e[n] = s.value;
+    }
+  }
+  for (let t = 0; t < Zn.length; t++) {
+    let [s, r] = Zn[t], n = e[s];
+    n !== void 0 && (e[r] = new xt(n, n));
+  }
+  return e;
+}
+var Lt = -32768;
+var Ut = 32767;
+var Yn = 0;
+var br = 65535;
+var yr = { startAddrsOffset: new w(0, 0, Ut), endAddrsOffset: new w(Lt, 0, 0), startloopAddrsOffset: new w(Lt, 0, Ut), endloopAddrsOffset: new w(Lt, 0, Ut), startAddrsCoarseOffset: new w(0, 0, Ut), modLfoToPitch: new w(-12e3, 0, 12e3), vibLfoToPitch: new w(-12e3, 0, 12e3), modEnvToPitch: new w(-12e3, 0, 12e3), initialFilterFc: new w(1500, 13500, 13500), initialFilterQ: new w(0, 0, 960), modLfoToFilterFc: new w(-12e3, 0, 12e3), modEnvToFilterFc: new w(-12e3, 0, 12e3), endAddrsCoarseOffset: new w(Lt, 0, 0), modLfoToVolume: new w(-960, 0, 960), chorusEffectsSend: new w(0, 0, 1e3), reverbEffectsSend: new w(0, 0, 1e3), pan: new w(-500, 0, 500), delayModLFO: new w(-12e3, -12e3, 5e3), freqModLFO: new w(-16e3, 0, 4500), delayVibLFO: new w(-12e3, -12e3, 5e3), freqVibLFO: new w(-16e3, 0, 4500), delayModEnv: new w(-12e3, -12e3, 5e3), attackModEnv: new w(-12e3, -12e3, 8e3), holdModEnv: new w(-12e3, -12e3, 5e3), decayModEnv: new w(-12e3, -12e3, 8e3), sustainModEnv: new w(0, 0, 1e3), releaseModEnv: new w(-12e3, -12e3, 8e3), keynumToModEnvHold: new w(-1200, 0, 1200), keynumToModEnvDecay: new w(-1200, 0, 1200), delayVolEnv: new w(-12e3, -12e3, 5e3), attackVolEnv: new w(-12e3, -12e3, 8e3), holdVolEnv: new w(-12e3, -12e3, 5e3), decayVolEnv: new w(-12e3, -12e3, 8e3), sustainVolEnv: new w(0, 0, 1440), releaseVolEnv: new w(-12e3, -12e3, 8e3), keynumToVolEnvHold: new w(-1200, 0, 1200), keynumToVolEnvDecay: new w(-1200, 0, 1200), instrument: new w(Yn, br, br), keyRange: new xt(0, 127), velRange: new xt(0, 127), startloopAddrsCoarseOffset: new w(Lt, 0, Ut), keynum: new w(-1, -1, 127), velocity: new w(-1, -1, 127), initialAttenuation: new w(0, 0, 1440), endloopAddrsCoarseOffset: new w(Lt, 0, Ut), coarseTune: new w(-120, 0, 120), fineTune: new w(-99, 0, 99), sampleID: new w(Yn, br, br), sampleModes: new w(0, 0, 3), scaleTuning: new w(0, 100, 100), exclusiveClass: new w(0, 0, 127), overridingRootKey: new w(-1, -1, 127) };
+function Se(i22) {
+  return Math.pow(2, i22 / 1200);
+}
+var vr = class {
+  constructor(e, t, s, r, n) {
+    Object.defineProperty(this, "key", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "generators", { enumerable: true, configurable: true, writable: true, value: t }), Object.defineProperty(this, "modulators", { enumerable: true, configurable: true, writable: true, value: s }), Object.defineProperty(this, "sample", { enumerable: true, configurable: true, writable: true, value: r }), Object.defineProperty(this, "sampleHeader", { enumerable: true, configurable: true, writable: true, value: n }), Object.defineProperty(this, "controllerToDestinations", { enumerable: true, configurable: true, writable: true, value: /* @__PURE__ */ new Map() }), Object.defineProperty(this, "destinationToModulators", { enumerable: true, configurable: true, writable: true, value: /* @__PURE__ */ new Map() }), Object.defineProperty(this, "voiceHandlers", { enumerable: true, configurable: true, writable: true, value: { modLfoToPitch: (o, a) => {
+      o.modLfoToPitch = this.clamp("modLfoToPitch", a);
+    }, vibLfoToPitch: (o, a) => {
+      o.vibLfoToPitch = this.clamp("vibLfoToPitch", a);
+    }, modEnvToPitch: (o, a) => {
+      o.modEnvToPitch = this.clamp("modEnvToPitch", a);
+    }, initialFilterFc: (o, a) => {
+      o.initialFilterFc = this.clamp("initialFilterFc", a);
+    }, initialFilterQ: (o, a) => {
+      o.initialFilterQ = this.clamp("initialFilterQ", a);
+    }, modLfoToFilterFc: (o, a) => {
+      o.modLfoToFilterFc = this.clamp("modLfoToFilterFc", a);
+    }, modEnvToFilterFc: (o, a) => {
+      o.modEnvToFilterFc = this.clamp("modEnvToFilterFc", a);
+    }, modLfoToVolume: (o, a) => {
+      o.modLfoToVolume = this.clamp("modLfoToVolume", a);
+    }, chorusEffectsSend: (o, a) => {
+      o.chorusEffectsSend = this.clamp("chorusEffectsSend", a) / 1e3;
+    }, reverbEffectsSend: (o, a) => {
+      o.reverbEffectsSend = this.clamp("reverbEffectsSend", a) / 1e3;
+    }, pan: (o, a) => {
+      o.pan = this.clamp("pan", a) / 1e3;
+    }, delayModLFO: (o, a) => {
+      o.delayModLFO = Se(this.clamp("delayModLFO", a));
+    }, freqModLFO: (o, a) => {
+      o.freqModLFO = this.clamp("freqModLFO", a);
+    }, delayVibLFO: (o, a) => {
+      o.delayVibLFO = Se(this.clamp("delayVibLFO", a));
+    }, freqVibLFO: (o, a) => {
+      o.freqVibLFO = this.clamp("freqVibLFO", a);
+    }, delayModEnv: (o, a) => {
+      o.modDelay = Se(this.clamp("delayModEnv", a));
+    }, attackModEnv: (o, a) => {
+      o.modAttack = Se(this.clamp("attackModEnv", a));
+    }, holdModEnv: (o, a) => {
+      let c = this.clamp("holdModEnv", a), l = this.clamp("keynumToModEnvHold", a);
+      o.modHold = this.getModHold(c, l);
+    }, decayModEnv: (o, a) => {
+      let c = this.clamp("decayModEnv", a), l = this.clamp("keynumToModEnvDecay", a);
+      o.modDecay = this.getModDecay(c, l);
+    }, sustainModEnv: (o, a) => {
+      o.modSustain = this.clamp("sustainModEnv", a) / 1e3;
+    }, releaseModEnv: (o, a) => {
+      o.modRelease = Se(this.clamp("releaseModEnv", a));
+    }, keynumToModEnvHold: (o, a) => {
+      let c = this.clamp("holdModEnv", a), l = this.clamp("keynumToModEnvHold", a);
+      o.modHold = this.getModHold(c, l);
+    }, keynumToModEnvDecay: (o, a) => {
+      let c = this.clamp("decayModEnv", a), l = this.clamp("keynumToModEnvDecay", a);
+      o.modDecay = this.getModDecay(c, l);
+    }, delayVolEnv: (o, a) => {
+      o.volDelay = Se(this.clamp("delayVolEnv", a));
+    }, attackVolEnv: (o, a) => {
+      o.volAttack = Se(this.clamp("attackVolEnv", a));
+    }, holdVolEnv: (o, a) => {
+      let c = this.clamp("holdVolEnv", a), l = this.clamp("keynumToVolEnvHold", a);
+      o.volHold = this.getVolHold(c, l);
+    }, decayVolEnv: (o, a) => {
+      let c = this.clamp("decayVolEnv", a), l = this.clamp("keynumToVolEnvDecay", a);
+      o.volDecay = this.getVolDecay(c, l);
+    }, sustainVolEnv: (o, a) => {
+      o.volSustain = this.clamp("sustainVolEnv", a) / 1e3;
+    }, releaseVolEnv: (o, a) => {
+      o.volRelease = Se(this.clamp("releaseVolEnv", a));
+    }, keynumToVolEnvHold: (o, a) => {
+      let c = this.clamp("holdVolEnv", a), l = this.clamp("keynumToVolEnvHold", a);
+      o.modHold = this.getVolHold(c, l);
+    }, keynumToVolEnvDecay: (o, a) => {
+      let c = this.clamp("decayVolEnv", a), l = this.clamp("keynumToVolEnvDecay", a);
+      o.modDecay = this.getVolDecay(c, l);
+    }, initialAttenuation: (o, a) => {
+      o.initialAttenuation = this.clamp("initialAttenuation", a);
+    }, coarseTune: (o, a) => {
+      o.detune = this.getDetune(a);
+    }, fineTune: (o, a) => {
+      o.detune = this.getDetune(a);
+    }, scaleTuning: (o, a) => {
+      o.playbackRate = this.getPlaybackRate(a);
+    } } }), this.setControllerToDestinations(), this.setDestinationToModulators();
+  }
+  setControllerToDestinations() {
+    for (let e = 0; e < this.modulators.length; e++) {
+      let t = this.modulators[e], s = t.sourceOper.controllerType, r = t.destinationOper, n = this.controllerToDestinations.get(s);
+      n ? n.add(t.destinationOper) : this.controllerToDestinations.set(s, /* @__PURE__ */ new Set([r]));
+    }
+  }
+  setDestinationToModulators() {
+    for (let e = 0; e < this.modulators.length; e++) {
+      let t = this.modulators[e], s = t.destinationOper, r = this.destinationToModulators.get(s);
+      r ? r.push(t) : this.destinationToModulators.set(s, [t]);
+    }
+  }
+  getModHold(e, t) {
+    return Se(e + (this.key - 60) * t);
+  }
+  getModDecay(e, t) {
+    return Se(e + (this.key - 60) * t);
+  }
+  getVolHold(e, t) {
+    return Se(e + (this.key - 60) * t);
+  }
+  getVolDecay(e, t) {
+    return Se(e + (this.key - 60) * t);
+  }
+  getPlaybackRate(e) {
+    let t = this.clamp("overridingRootKey", e), s = this.clamp("scaleTuning", e), r = t === -1 ? this.sampleHeader.originalPitch : t;
+    return Math.pow(2, (this.key - r) * s / 1200);
+  }
+  getDetune(e) {
+    let t = this.clamp("coarseTune", e) * 100, s = this.clamp("fineTune", e), r = this.sampleHeader.pitchCorrection;
+    return t + s + r;
+  }
+  transformParams(e, t) {
+    let s = {}, r = this.controllerToDestinations.get(e);
+    if (!r) return s;
+    for (let n of r) {
+      let o = Ee[n];
+      if (!o || !ln(o)) continue;
+      let a = this.destinationToModulators.get(n);
+      if (a) {
+        s[o] = this.generators[o];
+        for (let c of a) {
+          let l = c.sourceOper, u = l.map(t[l.controllerType]), h = 1, f = c.amountSourceOper;
+          if (!(f.cc === 0 && f.index === 0)) {
+            let p = t[f.controllerType];
+            h = f.map(p);
+          }
+          let d = c.transform(u * h);
+          Number.isNaN(d) || (s[o] += d);
+        }
+      }
+    }
+    return s;
+  }
+  transformAllParams(e) {
+    let t = structuredClone(this.generators);
+    for (let s of this.modulators) {
+      let r = s.sourceOper.controllerType, n = e[r];
+      if (!n) continue;
+      let o = Ee[s.destinationOper];
+      if (!o || !ln(o)) continue;
+      let c = s.sourceOper.map(n), l = 1, u = s.amountSourceOper;
+      if (!(u.cc === 0 && u.index === 0)) {
+        let f = e[u.controllerType];
+        l = u.map(f);
+      }
+      let h = s.transform(c * l);
+      Number.isNaN(h) || (t[o] += h);
+    }
+    return t;
+  }
+  clamp(e, t) {
+    return yr[e].clamp(t[e]);
+  }
+  getParams(e, t) {
+    let s = {}, r = structuredClone(this.generators), n = this.transformParams(e, t), o = Object.keys(n);
+    for (let a of o) r[a] = n[a];
+    for (let a of o) this.voiceHandlers[a](s, r);
+    return s;
+  }
+  getAllParams(e) {
+    let t = { start: this.generators.startAddrsCoarseOffset * 32768 + this.generators.startAddrsOffset, end: this.generators.endAddrsCoarseOffset * 32768 + this.generators.endAddrsOffset, loopStart: this.sampleHeader.loopStart + this.generators.startloopAddrsCoarseOffset * 32768 + this.generators.startloopAddrsOffset, loopEnd: this.sampleHeader.loopEnd + this.generators.endloopAddrsCoarseOffset * 32768 + this.generators.endloopAddrsOffset, instrument: this.generators.instrument, sampleID: this.generators.sampleID, sample: this.sample, sampleRate: this.sampleHeader.sampleRate, sampleName: this.sampleHeader.sampleName, sampleModes: this.generators.sampleModes, exclusiveClass: this.clamp("exclusiveClass", this.generators) }, s = this.transformAllParams(e);
+    for (let r = 0; r < gr.length; r++) {
+      let n = gr[r];
+      this.voiceHandlers[n](t, s);
+    }
+    return t;
+  }
+};
+var co = [new X(_.parse(1282), 48, 960, _.parse(0), 0), new X(_.parse(258), 8, -2400, _.parse(0), 0), new X(_.parse(13), 6, 50, _.parse(0), 0), new X(_.parse(129), 6, 50, _.parse(0), 0), new X(_.parse(1415), 48, 960, _.parse(0), 0), new X(_.parse(650), 48, 1, _.parse(0), 0), new X(_.parse(1419), 48, 960, _.parse(0), 0), new X(_.parse(219), 16, 0.2, _.parse(0), 0), new X(_.parse(221), 15, 0.2, _.parse(0), 0), new X(_.parse(526), 51, 127, _.parse(16), 0)];
+var Sr = class {
+  constructor(e, t) {
+    Object.defineProperty(this, "generators", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "modulators", { enumerable: true, configurable: true, writable: true, value: t });
+  }
+};
+var xr = class {
+  constructor(e, t) {
+    Object.defineProperty(this, "generators", { enumerable: true, configurable: true, writable: true, value: e }), Object.defineProperty(this, "modulators", { enumerable: true, configurable: true, writable: true, value: t });
+  }
+};
+var hs = class {
+  constructor(e) {
+    Object.defineProperty(this, "parsed", { enumerable: true, configurable: true, writable: true, value: e });
+  }
+  getGeneratorParams(e, t, s, r) {
+    let n = new Array(r - s);
+    for (let o = s; o < r; o++) {
+      let a = t[o].generatorIndex, c = t[o + 1].generatorIndex;
+      n[o - s] = e.slice(a, c);
+    }
+    return n;
+  }
+  getPresetGenerators(e) {
+    let t = this.parsed.presetHeaders[e], s = this.parsed.presetHeaders[e + 1], r = s ? s.presetBagIndex : this.parsed.presetZone.length - 1;
+    return this.getGeneratorParams(this.parsed.presetGenerators, this.parsed.presetZone, t.presetBagIndex, r);
+  }
+  getInstrumentGenerators(e) {
+    let t = this.parsed.instruments[e], s = this.parsed.instruments[e + 1], r = s ? s.instrumentBagIndex : this.parsed.instrumentZone.length - 1;
+    return this.getGeneratorParams(this.parsed.instrumentGenerators, this.parsed.instrumentZone, t.instrumentBagIndex, r);
+  }
+  getModulators(e, t, s, r) {
+    let n = new Array(r - s);
+    for (let o = s; o < r; o++) {
+      let a = t[o].modulatorIndex, c = t[o + 1].modulatorIndex;
+      n[o - s] = e.slice(a, c);
+    }
+    return n;
+  }
+  getPresetModulators(e) {
+    let t = this.parsed.presetHeaders[e], s = this.parsed.presetHeaders[e + 1], r = s ? s.presetBagIndex : this.parsed.presetZone.length - 1;
+    return this.getModulators(this.parsed.presetModulators, this.parsed.presetZone, t.presetBagIndex, r);
+  }
+  getInstrumentModulators(e) {
+    let t = this.parsed.instruments[e], s = this.parsed.instruments[e + 1], r = s ? s.instrumentBagIndex : this.parsed.instrumentZone.length - 1;
+    return this.getModulators(this.parsed.instrumentModulators, this.parsed.instrumentZone, t.instrumentBagIndex, r);
+  }
+  findInstrumentZone(e, t, s) {
+    let r = this.getInstrumentGenerators(e), n = this.getInstrumentModulators(e), o, a = [];
+    for (let c = 0; c < r.length; c++) {
+      let l = ao(r[c]);
+      if (l.sampleID === void 0) {
+        o = l, a = n[c];
+        continue;
+      }
+      if (!(l.keyRange && !l.keyRange.in(t)) && !(l.velRange && !l.velRange.in(s))) if (o) {
+        let u = { ...o, ...l }, h = [...a, ...n[c]];
+        return new Sr(u, h);
+      } else return new Sr(l, n[c]);
+    }
+  }
+  findInstrument(e, t, s) {
+    let r = this.getPresetGenerators(e), n = this.getPresetModulators(e), o, a = [];
+    for (let c = 0; c < r.length; c++) {
+      let l = io(r[c]);
+      if (l.instrument === void 0) {
+        o = l, a = n[c];
+        continue;
+      }
+      if (l.keyRange && !l.keyRange.in(t) || l.velRange && !l.velRange.in(s)) continue;
+      let u = this.findInstrumentZone(l.instrument, t, s);
+      if (u) if (o) {
+        let h = { ...o, ...l }, f = [...a, ...n[c]], d = new xr(h, f);
+        return this.createVoice(t, d, u);
+      } else {
+        let h = new xr(l, n[c]);
+        return this.createVoice(t, h, u);
+      }
+    }
+    return null;
+  }
+  createVoice(e, t, s) {
+    let r = oo(yr);
+    Object.assign(r, s.generators);
+    let n = Object.keys(t.generators);
+    for (let u = 0; u < n.length; u++) {
+      let h = n[u];
+      us(h) || (r[h] += t.generators[h]);
+    }
+    let o = [...co, ...t.modulators, ...s.modulators], a = r.sampleID, c = this.parsed.samples[a], l = this.parsed.sampleHeaders[a];
+    return new vr(e, r, o, c, l);
+  }
+  getVoice(e, t, s, r) {
+    let n = this.parsed.presetHeaders.findIndex((a) => a.preset === t && a.bank === e);
+    if (n < 0) return console.warn("preset not found: bank=%s instrument=%s", e, t), null;
+    let o = this.findInstrument(n, s, r);
+    return o || (console.warn("instrument not found: bank=%s instrument=%s", e, t), null);
+  }
+  getPresetNames() {
+    let e = {}, t = this.parsed.presetHeaders;
+    for (let s = 0; s < t.length; s++) {
+      let r = t[s];
+      e[r.bank] || (e[r.bank] = {}), e[r.bank][r.preset] = r.presetName;
+    }
+    return e;
+  }
+};
+var Ni = (i22, e = 4294967295, t = 79764919) => {
+  let s = new Int32Array(256), r, n, o, a = e;
+  for (r = 0; r < 256; r++) {
+    for (o = r << 24, n = 8; n > 0; --n) o = 2147483648 & o ? o << 1 ^ t : o << 1;
+    s[r] = o;
+  }
+  for (r = 0; r < i22.length; r++) a = a << 8 ^ s[255 & (a >> 24 ^ i22[r])];
+  return a;
+};
+var un = (i22, e = Ni) => {
+  let t = (m) => new Uint8Array(m.length / 2).map(((b, v) => parseInt(m.substring(2 * v, 2 * (v + 1)), 16))), s = (m) => t(m)[0], r = /* @__PURE__ */ new Map();
+  [, 8364, , 8218, 402, 8222, 8230, 8224, 8225, 710, 8240, 352, 8249, 338, , 381, , , 8216, 8217, 8220, 8221, 8226, 8211, 8212, 732, 8482, 353, 8250, 339, , 382, 376].forEach(((m, b) => r.set(m, b)));
+  let n = new Uint8Array(i22.length), o, a, c, l = false, u = 0, h = 42, f = i22.length > 13 && i22.substring(0, 9) === "dynEncode", d = 0;
+  f && (d = 11, a = s(i22.substring(9, d)), a <= 1 && (d += 2, h = s(i22.substring(11, d))), a === 1 && (d += 8, c = ((m) => new DataView(t(m).buffer).getInt32(0, true))(i22.substring(13, d))));
+  let p = 256 - h;
+  for (let m = d; m < i22.length; m++) if (o = i22.charCodeAt(m), o !== 61 || l) {
+    if (o === 92 && m < i22.length - 5 && f) {
+      let b = i22.charCodeAt(m + 1);
+      b !== 117 && b !== 85 || (o = parseInt(i22.substring(m + 2, m + 6), 16), m += 5);
+    }
+    if (o > 255) {
+      let b = r.get(o);
+      b && (o = b + 127);
+    }
+    l && (l = false, o -= 64), n[u++] = o < h && o > 0 ? o + p : o - h;
+  } else l = true;
+  let y = n.subarray(0, u);
+  if (f && a === 1) {
+    let m = e(y);
+    if (m !== c) {
+      let b = "Decode failed crc32 validation";
+      throw console.error("`simple-yenc`\n", b + `
+`, "Expected: " + c + "; Got: " + m + `
+`, "Visit https://github.com/eshaz/simple-yenc for more information"), Error(b);
+    }
+  }
+  return y;
+};
+function U() {
+  let i22 = Uint8Array, e = Float32Array;
+  U.modules || Object.defineProperties(U, { modules: { value: /* @__PURE__ */ new WeakMap() }, setModule: { value(t, s) {
+    U.modules.set(t, Promise.resolve(s));
+  } }, getModule: { value(t, s) {
+    let r = U.modules.get(t);
+    return r || (s ? r = WebAssembly.compile(un(s)) : (s = t.wasm, r = U.inflateDynEncodeString(s).then((n) => WebAssembly.compile(n))), U.modules.set(t, r)), r;
+  } }, concatFloat32: { value(t, s) {
+    let r = new e(s), n = 0, o = 0;
+    for (; n < t.length; ) r.set(t[n], o), o += t[n++].length;
+    return r;
+  } }, getDecodedAudio: { value: (t, s, r, n, o) => ({ errors: t, channelData: s, samplesDecoded: r, sampleRate: n, bitDepth: o }) }, getDecodedAudioMultiChannel: { value(t, s, r, n, o, a) {
+    let c = [], l, u;
+    for (l = 0; l < r; l++) {
+      let h = [];
+      for (u = 0; u < s.length; ) h.push(s[u++][l] || []);
+      c.push(U.concatFloat32(h, n));
+    }
+    return U.getDecodedAudio(t, c, n, o, a);
+  } }, inflateDynEncodeString: { value(t) {
+    return t = un(t), new Promise((s) => {
+      let r = String.raw`dynEncode012804c7886d()((()>+*§§)§,§§§§)§+§§§)§+.-()(*)-+)(.7*§)i¸¸,3§(i¸¸,3/G+.¡*(,(,3+)2å:-),§H(P*DI*H(P*@I++hH)H*r,hH(H(P*<J,i)^*<H,H(P*4U((I-H(H*i0J,^*DH+H-H*I+H,I*4)33H(H*H)^*DH(H+H)^*@H+i§H)i§3æ*).§K(iHI/+§H,iHn,§H+i(H+i(rCJ0I,H*I-+hH,,hH(H-V)(i)J.H.W)(i)c)(H,i)I,H-i*I-4)33i(I.*hH(V)(H+n5(H(i*I-i(I,i)I.+hH,i*J+iHn,hi(I-i*I,+hH,H/H-c)(H,iFn,hi(I,+hH,H0n5-H*V)(J(,hH/H(i)J(H(V)(J(i)c)(H)H(i)H,c)(3H*i*I*H,i)I,4(3(-H(H,W)(H-I-H,i*I,4)3(3(3H,H-I1H+I,H.i)H1V)(J.i(v5(33H.-H(H,i(c)(H,i*I,4)333)-§i*I*+§H*iHn,hi73H,H(i)8(H+J+H)P*(H*V)(J-r,§H)P*,H.i)H+H,i)V)(-H*i*I*H+i)I+H-H.I.H,H-i)I,4)333Ã+)-§iø7i(^*(iü7I,*h+hH+iDn,h*hilI+i)I,+hH+,hH+iô7H,c)(i)H+i´8W)(H,I,H+i*I+4)-+hH(H)8*J-i(p5.*h*h*hH-i')u,hH(P*(J+,hH(P*0J,H(P*,n50H+H,H-b((3H(P*0i)I.4)3H-i¨*n5*H-iÅ*s,hi73H-i)J+V)&+I,H(H+V)æ,8(I.H(H*8*J-i(p51H-i)J+i¸7V)(H(H+iø7V)(8(J/H(P*0J+s,hi73H+H,H.J,I.H(P*(m5(H.H(P*,s5.+hH,m5*H(P*(J.H+H.H+H/U((b((H(H(P*0i)J+^*0H,i)I,4(3(3H(H.^*03H-i¨*o5)33i(73(3(3-H,H+i)c)(H,i*I,H+i)I+4)33i)I-3H-3!2)0§K(i2J,L(H,H(^*(H,H*^*4H,i(^*0H,i(^*DH,j(_*<H,H)P*(^*,H,H+P*(^*8*h*h+hH,i)8(I3i§I**h*h*h*h*h*h*hH,i*8(6+(),03H,j(_*@i*I-H,P*<J.i,J(H,P*8J/s50H,H.i+J0^*<i¦I*H.H,P*4J1J.U(*H.U((J2i')o5/H.U()I.H,H(^*<H0H1U((H.i0J.i§i0i')o5/H/H.H2J*H(J.q50H,P*0J/H*I-H,P*(J0,hH,P*,H-q,hi)I-423+hH*m5+H/H0H(H1U((b((H/i)I/H(i)I(H*i)I*4(3(3H,H.^*<H,H-^*04*3iØ1U((5+i(I(i¨7i1^*(i$6iè1^*(i°7iè6^*(i¬7iÈ6^*(+hH(iÈ*n,hiÈ*I(+hH(i¨,n,hi¨,I(+hH(iØ,n,hiØ,I(+hH(iè,o,hH,i-H(i0c)(H(i*I(4)33iè1i1H,i-iÈ*8)Bi(I(+hH(ido,hH,i-H(i-c)(H(i*I(4)33iÈ6iè6H,i-iF8)BiØ1i)b((41-H,i-H(i/c)(H(i*I(4)3(3(-H,i-H(i1c)(H(i*I(4)3(3(-H,i-H(i0c)(H(i*I(4)3(3(3H,H/^*0H,H(^*<3i(I*4*3H,H,i¸)^*TH,H,iø-^*PH,H,iX^*LH,H,i(^*HH,i-8(I(H,i-8(I-i¥I*H,i,8(I.H(iErH-iEr5)H(i©*I1H-i)I0i(i;H.i,J(i(H(i(rCJ(J*H*i;sCI*i¨1I-H(I/+hH/,hH,i-H-V)(i)H,i+8(c)(H/i)I/H-i*I-H*i)I*4)-H(i)i¨1I/+hH(H*o,hH,i-H/V)(i)i(c)(H/i*I/H(i)I(4)33i¤I*H,iø-H,i¸)H,i-i;8)5+H0H1I2i(I-+hH-H2p,hH,H,iP8*J*i(p5-H*i7u,hH,i-H-i)H*c)(H-i)I-4*3i(I/i+I.i+I(*h*h*hH*i86*(*)3H-m,hi£I*403H-i)H,W)-I/i*I(4)3i3I.i/I(3H2H,H(8(H.J(H-J.p,hi¢I*4.3H,i-H-i)I*+hH(,hH*H/c)(H*i*I*H(i)I(4)-H.I-4+3(3(33H,W)1m,hiI*4,3H,iø-H,i¸)H,i-H18)J(,hi¡I*H(i(p5,H1H,V)ú-H,V)ø-o5,3H,i(H,iXH,i-H1i)H08)J(,hi I*H(i(p5,H0H,V)H,V)o5,3H,H,iPH,iH8+I*4+3(3(3H,i$6i¬78+I*3H*H3m5(3i)I-H*i(r5)3H)H,P*0^*(H+H,P*<^*(H*I-3H,i2L(H-33Á)+(i¨03b+(,(-(.(/(0(1(2(3(5(7(9(;(?(C(G(K(S([(c(k({(((«(Ë(ë((*)(iø03O)()()()(*(*(*(*(+(+(+(+(,(,(,(,(-(-(-(-(i¨13M8(9(:(((0(/(1(.(2(-(3(,(4(+(5(*(6()(7(T7*S7US0U `;
+      U.getModule(U, r).then((n) => WebAssembly.instantiate(n, {})).then(({ exports: n }) => {
+        let o = new Map(Object.entries(n)), a = o.get("puff"), c = o.get("memory").buffer, l = new i22(c), u = new DataView(c), h = o.get("__heap_base"), f = t.length, d = h;
+        h += 4, u.setInt32(d, f, true);
+        let p = h;
+        h += f, l.set(t, p);
+        let y = h;
+        h += 4, u.setInt32(y, l.byteLength - h, true), a(h, y, p, d), s(l.slice(h, h + u.getInt32(y, true)));
+      });
+    });
+  } } }), Object.defineProperty(this, "wasm", { enumerable: true, get: () => this._wasm }), this.getOutputChannels = (t, s, r) => {
+    let n = [], o = 0;
+    for (; o < s; ) n.push(t.slice(o * r, o++ * r + r));
+    return n;
+  }, this.allocateTypedArray = (t, s, r = true) => {
+    let n = this._wasm.malloc(s.BYTES_PER_ELEMENT * t);
+    return r && this._pointers.add(n), { ptr: n, len: t, buf: new s(this._wasm.HEAP, n, t) };
+  }, this.free = () => {
+    this._pointers.forEach((t) => {
+      this._wasm.free(t);
+    }), this._pointers.clear();
+  }, this.codeToString = (t) => {
+    let s = [], r = new Uint8Array(this._wasm.HEAP);
+    for (let n = r[t]; n !== 0; n = r[++t]) s.push(n);
+    return String.fromCharCode.apply(null, s);
+  }, this.addError = (t, s, r, n, o, a) => {
+    t.push({ message: s, frameLength: r, frameNumber: n, inputBytes: o, outputSamples: a });
+  }, this.instantiate = (t, s) => (s && U.setModule(t, s), this._wasm = new t(U).instantiate(), this._pointers = /* @__PURE__ */ new Set(), this._wasm.ready.then(() => this));
+}
+var ho = Kn(uo(), 1);
+var Vi = () => globalThis.Worker || ho.default;
+var Gt = class extends Vi() {
+  constructor(e, t, s, r) {
+    U.modules || new U();
+    let n = U.modules.get(s);
+    if (!n) {
+      let o = "text/javascript", a, c = `'use strict';(${((l, u, h) => {
+        let f, d, p = new Promise((y) => {
+          d = y;
+        });
+        self.onmessage = ({ data: { id: y, command: m, data: b } }) => {
+          let v = p, S = { id: y }, M;
+          m === "init" ? (Object.defineProperties(l, { WASMAudioDecoderCommon: { value: u }, EmscriptenWASM: { value: h }, module: { value: b.module }, isWebWorker: { value: true } }), f = new l(b.options), d()) : m === "free" ? f.free() : m === "ready" ? v = v.then(() => f.ready) : m === "reset" ? v = v.then(() => f.reset()) : (Object.assign(S, f[m](Array.isArray(b) ? b.map((x) => new Uint8Array(x)) : new Uint8Array(b))), M = S.channelData ? S.channelData.map((x) => x.buffer) : []), v.then(() => self.postMessage(S, M));
+        };
+      }).toString()})(${s}, ${U}, ${r})`;
+      try {
+        a = typeof process.versions.node < "u";
+      } catch {
+      }
+      n = a ? `data:${o};base64,${Buffer.from(c).toString("base64")}` : URL.createObjectURL(new Blob([c], { type: o })), U.modules.set(s, n);
+    }
+    super(n, { name: t }), this._id = Number.MIN_SAFE_INTEGER, this._enqueuedOperations = /* @__PURE__ */ new Map(), this.onmessage = ({ data: o }) => {
+      let { id: a, ...c } = o;
+      this._enqueuedOperations.get(a)(c), this._enqueuedOperations.delete(a);
+    }, new r(U).getModule().then((o) => {
+      this.postToDecoder("init", { module: o, options: e });
+    });
+  }
+  async postToDecoder(e, t) {
+    return new Promise((s) => {
+      this.postMessage({ command: e, id: this._id, data: t }), this._enqueuedOperations.set(this._id++, s);
+    });
+  }
+  get ready() {
+    return this.postToDecoder("ready");
+  }
+  async free() {
+    await this.postToDecoder("free").finally(() => {
+      this.terminate();
+    });
+  }
+  async reset() {
+    await this.postToDecoder("reset");
+  }
+};
+var wr = (i22, e) => {
+  Object.defineProperty(i22, "name", { value: e });
+};
+var G = Symbol;
+var fo = ", ";
+var F = (() => {
+  let i22 = "front", e = "side", t = "rear", s = "left", r = "center", n = "right";
+  return ["", i22 + " ", e + " ", t + " "].map((o) => [[s, n], [s, n, r], [s, r, n], [r, s, n], [r]].flatMap((a) => a.map((c) => o + c).join(fo)));
+})();
+var Ae = "LFE";
+var st = "monophonic (mono)";
+var rt = "stereo";
+var ds = "surround";
+var q = (i22, ...e) => `${[st, rt, `linear ${ds}`, "quadraphonic", `5.0 ${ds}`, `5.1 ${ds}`, `6.1 ${ds}`, `7.1 ${ds}`][i22 - 1]} (${e.join(fo)})`;
+var fs = [st, q(2, F[0][0]), q(3, F[0][2]), q(4, F[1][0], F[3][0]), q(5, F[1][2], F[3][0]), q(6, F[1][2], F[3][0], Ae), q(7, F[1][2], F[2][0], F[3][4], Ae), q(8, F[1][2], F[2][0], F[3][0], Ae)];
+var po = 192e3;
+var mo = 176400;
+var Mr = 96e3;
+var Pr = 88200;
+var bo = 64e3;
+var nt = 48e3;
+var jt = 44100;
+var qt = 32e3;
+var Kt = 24e3;
+var Qt = 22050;
+var Wt = 16e3;
+var Cr = 12e3;
+var Tr = 11025;
+var zt = 8e3;
+var go = 7350;
+var ke = "absoluteGranulePosition";
+var D = "bandwidth";
+var te = "bitDepth";
+var se = "bitrate";
+var ps = se + "Maximum";
+var ms = se + "Minimum";
+var bs = se + "Nominal";
+var _e = "buffer";
+var gs = _e + "Fullness";
+var R = "codec";
+var re = R + "Frames";
+var ys = "coupledStreamCount";
+var $t = "crc";
+var vs = $t + "16";
+var Ss = $t + "32";
+var O = "data";
+var T = "description";
+var Oe = "duration";
+var Xt = "emphasis";
+var xs = "hasOpusPadding";
+var fe = "header";
+var ot = "isContinuedPacket";
+var ws = "isCopyrighted";
+var it = "isFirstPage";
+var Ms = "isHome";
+var pe = "isLastPage";
+var Ke = "isOriginal";
+var Qe = "isPrivate";
+var Ps = "isVbr";
+var ue = "layer";
+var g = "length";
+var k = "mode";
+var We = k + "Extension";
+var Fr = "mpeg";
+var ze = Fr + "Version";
+var Cs = "numberAACFrames";
+var Ts = "outputGain";
+var wt = "preSkip";
+var Fs = "profile";
+var Er = G();
+var $e = "protection";
+var hn = "rawData";
+var xe = "segments";
+var I = "subarray";
+var at = "version";
+var Mt = "vorbis";
+var Es = Mt + "Comments";
+var Jt = Mt + "Setup";
+var kr = "block";
+var ks = kr + "ingStrategy";
+var Dr = G();
+var Xe = kr + "Size";
+var ct = kr + "size0";
+var lt = kr + "size1";
+var Ds = G();
+var Ir = "channel";
+var Je = Ir + "MappingFamily";
+var Is = Ir + "MappingTable";
+var ne = Ir + "Mode";
+var Hs = G();
+var C = Ir + "s";
+var yo = "copyright";
+var Ns = yo + "Id";
+var Vs = yo + "IdStart";
+var Ze = "frame";
+var Ye = Ze + "Count";
+var he = Ze + "Length";
+var Hr = "Number";
+var et = Ze + Hr;
+var Re = Ze + "Padding";
+var E = Ze + "Size";
+var vo = "Rate";
+var Bs = "inputSample" + vo;
+var dn = "page";
+var Pt = dn + "Checksum";
+var Zt = G();
+var ut = dn + "SegmentTable";
+var W = dn + "Sequence" + Hr;
+var fn = "sample";
+var As = fn + Hr;
+var H = fn + vo;
+var Le = G();
+var N = fn + "s";
+var Nr = "stream";
+var _s = Nr + "Count";
+var Os = Nr + "Info";
+var Ue = Nr + "Serial" + Hr;
+var pn = Nr + "StructureVersion";
+var mn = "total";
+var Ct = mn + "BytesOut";
+var Tt = mn + "Duration";
+var Ft = mn + "Samples";
+var V = G();
+var we = G();
+var Rs = G();
+var ht = G();
+var De = G();
+var Vr = G();
+var bn = G();
+var dt = G();
+var B = G();
+var Me = G();
+var Pe = G();
+var Ge = G();
+var ft = G();
+var Br = G();
+var Ie = G();
+var He = G();
+var Ce = G();
+var Ar = G();
+var oe = Uint8Array;
+var pt = DataView;
+var A = "reserved";
+var ie = "bad";
+var Yt = "free";
+var Ls = "none";
+var _r = "16bit CRC";
+var gn = (i22, e, t) => {
+  for (let s = 0; s < i22[g]; s++) {
+    let r = e(s);
+    for (let n = 8; n > 0; n--) r = t(r);
+    i22[s] = r;
+  }
+  return i22;
+};
+var Ai = gn(new oe(256), (i22) => i22, (i22) => i22 & 128 ? 7 ^ i22 << 1 : i22 << 1);
+var K = [gn(new Uint16Array(256), (i22) => i22 << 8, (i22) => i22 << 1 ^ (i22 & 32768 ? 32773 : 0))];
+var Q = [gn(new Uint32Array(256), (i22) => i22, (i22) => i22 >>> 1 ^ (i22 & 1) * 3988292384)];
+for (let i22 = 0; i22 < 15; i22++) {
+  K.push(new Uint16Array(256)), Q.push(new Uint32Array(256));
+  for (let e = 0; e <= 255; e++) K[i22 + 1][e] = K[0][K[i22][e] >>> 8] ^ K[i22][e] << 8, Q[i22 + 1][e] = Q[i22][e] >>> 8 ^ Q[0][Q[i22][e] & 255];
+}
+var xo = (i22) => {
+  let e = 0, t = i22[g];
+  for (let s = 0; s !== t; s++) e = Ai[e ^ i22[s]];
+  return e;
+};
+var wo = (i22) => {
+  let e = i22[g], t = e - 16, s = 0, r = 0;
+  for (; r <= t; ) s ^= i22[r++] << 8 | i22[r++], s = K[15][s >> 8] ^ K[14][s & 255] ^ K[13][i22[r++]] ^ K[12][i22[r++]] ^ K[11][i22[r++]] ^ K[10][i22[r++]] ^ K[9][i22[r++]] ^ K[8][i22[r++]] ^ K[7][i22[r++]] ^ K[6][i22[r++]] ^ K[5][i22[r++]] ^ K[4][i22[r++]] ^ K[3][i22[r++]] ^ K[2][i22[r++]] ^ K[1][i22[r++]] ^ K[0][i22[r++]];
+  for (; r !== e; ) s = (s & 255) << 8 ^ K[0][s >> 8 ^ i22[r++]];
+  return s;
+};
+var Mo = (i22) => {
+  let e = i22[g], t = e - 16, s = 0, r = 0;
+  for (; r <= t; ) s = Q[15][(i22[r++] ^ s) & 255] ^ Q[14][(i22[r++] ^ s >>> 8) & 255] ^ Q[13][(i22[r++] ^ s >>> 16) & 255] ^ Q[12][i22[r++] ^ s >>> 24] ^ Q[11][i22[r++]] ^ Q[10][i22[r++]] ^ Q[9][i22[r++]] ^ Q[8][i22[r++]] ^ Q[7][i22[r++]] ^ Q[6][i22[r++]] ^ Q[5][i22[r++]] ^ Q[4][i22[r++]] ^ Q[3][i22[r++]] ^ Q[2][i22[r++]] ^ Q[1][i22[r++]] ^ Q[0][i22[r++]];
+  for (; r !== e; ) s = Q[0][(s ^ i22[r++]) & 255] ^ s >>> 8;
+  return s ^ -1;
+};
+var Gs = (...i22) => {
+  let e = new oe(i22.reduce((t, s) => t + s[g], 0));
+  return i22.reduce((t, s) => (e.set(s, t), t + s[g]), 0), e;
+};
+var me = (i22) => String.fromCharCode(...i22);
+var So = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15];
+var Us = (i22) => So[i22 & 15] << 4 | So[i22 >> 4];
+var Or = class {
+  constructor(e) {
+    this._data = e, this._pos = e[g] * 8;
+  }
+  set position(e) {
+    this._pos = e;
+  }
+  get position() {
+    return this._pos;
+  }
+  read(e) {
+    let t = Math.floor(this._pos / 8), s = this._pos % 8;
+    return this._pos -= e, (Us(this._data[t - 1]) << 8) + Us(this._data[t]) >> 7 - s & 255;
+  }
+};
+var Po = (i22, e) => {
+  try {
+    return i22.getBigInt64(e, true);
+  } catch {
+    let t = i22.getUint8(e + 7) & 128 ? -1 : 1, s = i22.getUint32(e, true), r = i22.getUint32(e + 4, true);
+    return t === -1 && (s = ~s + 1, r = ~r + 1), r > 1048575 && console.warn("This platform does not support BigInt"), t * (s + r * 2 ** 32);
+  }
+};
+var js = class {
+  constructor(e, t) {
+    this._onCodecHeader = e, this._onCodecUpdate = t, this[Ie]();
+  }
+  [He]() {
+    this._isEnabled = true;
+  }
+  [Ie]() {
+    this._headerCache = /* @__PURE__ */ new Map(), this._codecUpdateData = /* @__PURE__ */ new WeakMap(), this._codecHeaderSent = false, this._codecShouldUpdate = false, this._bitrate = null, this._isEnabled = false;
+  }
+  [Br](e, t) {
+    if (this._onCodecUpdate) {
+      this._bitrate !== e && (this._bitrate = e, this._codecShouldUpdate = true);
+      let s = this._codecUpdateData.get(this._headerCache.get(this._currentHeader));
+      this._codecShouldUpdate && s && this._onCodecUpdate({ bitrate: e, ...s }, t), this._codecShouldUpdate = false;
+    }
+  }
+  [B](e) {
+    let t = this._headerCache.get(e);
+    return t && this._updateCurrentHeader(e), t;
+  }
+  [Me](e, t, s) {
+    this._isEnabled && (this._codecHeaderSent || (this._onCodecHeader({ ...t }), this._codecHeaderSent = true), this._updateCurrentHeader(e), this._headerCache.set(e, t), this._codecUpdateData.set(t, s));
+  }
+  _updateCurrentHeader(e) {
+    this._onCodecUpdate && e !== this._currentHeader && (this._codecShouldUpdate = true, this._currentHeader = e);
+  }
+};
+var $ = /* @__PURE__ */ new WeakMap();
+var J = /* @__PURE__ */ new WeakMap();
+var ae = class {
+  constructor(e, t) {
+    this._codecParser = e, this._headerCache = t;
+  }
+  *[bn]() {
+    let e;
+    do {
+      if (e = yield* this.Frame[Pe](this._codecParser, this._headerCache, 0), e) return e;
+      this._codecParser[we](1);
+    } while (true);
+  }
+  *[dt](e) {
+    let t = yield* this[bn](), s = J.get(t)[g];
+    if (e || this._codecParser._flushing || (yield* this.Header[B](this._codecParser, this._headerCache, s))) return this._headerCache[He](), this._codecParser[we](s), this._codecParser[ht](t), t;
+    this._codecParser[De](`Missing ${Ze} at ${s} bytes from current position.`, `Dropping current ${Ze} and trying again.`), this._headerCache[Ie](), this._codecParser[we](1);
+  }
+};
+var Et = class {
+  constructor(e, t) {
+    J.set(this, { [fe]: e }), this[O] = t;
+  }
+};
+var be = class extends Et {
+  static *[Pe](e, t, s, r, n) {
+    let o = yield* e[B](s, r, n);
+    if (o) {
+      let a = $.get(o)[he], c = $.get(o)[N], l = (yield* s[V](a, n))[I](0, a);
+      return new t(o, l, c);
+    } else return null;
+  }
+  constructor(e, t, s) {
+    super(e, t), this[fe] = e, this[N] = s, this[Oe] = s / e[H] * 1e3, this[et] = null, this[Ct] = null, this[Ft] = null, this[Tt] = null, J.get(this)[g] = t[g];
+  }
+};
+var yn = "unsynchronizationFlag";
+var vn = "extendedHeaderFlag";
+var Sn = "experimentalFlag";
+var xn = "footerPresent";
+var qs = class i11 {
+  static *getID3v2Header(e, t, s) {
+    let n = {}, o = yield* e[V](3, s);
+    if (o[0] !== 73 || o[1] !== 68 || o[2] !== 51 || (o = yield* e[V](10, s), n[at] = `id3v2.${o[3]}.${o[4]}`, o[5] & 15) || (n[yn] = !!(o[5] & 128), n[vn] = !!(o[5] & 64), n[Sn] = !!(o[5] & 32), n[xn] = !!(o[5] & 16), o[6] & 128 || o[7] & 128 || o[8] & 128 || o[9] & 128)) return null;
+    let a = o[6] << 21 | o[7] << 14 | o[8] << 7 | o[9];
+    return n[g] = 10 + a, new i11(n);
+  }
+  constructor(e) {
+    this[at] = e[at], this[yn] = e[yn], this[vn] = e[vn], this[Sn] = e[Sn], this[xn] = e[xn], this[g] = e[g];
+  }
+};
+var ge = class {
+  constructor(e) {
+    $.set(this, e), this[te] = e[te], this[se] = null, this[C] = e[C], this[ne] = e[ne], this[H] = e[H];
+  }
+};
+var ko = { 0: [Yt, Yt, Yt, Yt, Yt], 16: [32, 32, 32, 32, 8], 240: [ie, ie, ie, ie, ie] };
+var Rr = (i22, e, t) => 8 * ((i22 + t) % e + e) * (1 << (i22 + t) / e) - 8 * e * (e / 8 | 0);
+for (let i22 = 2; i22 < 15; i22++) ko[i22 << 4] = [i22 * 32, Rr(i22, 4, 0), Rr(i22, 4, -1), Rr(i22, 8, 4), Rr(i22, 8, 0)];
+var _i = 0;
+var Oi = 1;
+var Ri = 2;
+var Li = 3;
+var Co = 4;
+var Lr = "bands ";
+var Ur = " to 31";
+var To = { 0: Lr + 4 + Ur, 16: Lr + 8 + Ur, 32: Lr + 12 + Ur, 48: Lr + 16 + Ur };
+var kt = "bitrateIndex";
+var Ks = "v2";
+var Qr = "v1";
+var Gr = "Intensity stereo ";
+var jr = ", MS stereo ";
+var qr = "on";
+var Kr = "off";
+var Ui = { 0: Gr + Kr + jr + Kr, 16: Gr + qr + jr + Kr, 32: Gr + Kr + jr + qr, 48: Gr + qr + jr + qr };
+var wn = { 0: { [T]: A }, 2: { [T]: "Layer III", [Re]: 1, [We]: Ui, [Qr]: { [kt]: Ri, [N]: 1152 }, [Ks]: { [kt]: Co, [N]: 576 } }, 4: { [T]: "Layer II", [Re]: 1, [We]: To, [N]: 1152, [Qr]: { [kt]: Oi }, [Ks]: { [kt]: Co } }, 6: { [T]: "Layer I", [Re]: 4, [We]: To, [N]: 384, [Qr]: { [kt]: _i }, [Ks]: { [kt]: Li } } };
+var Mn = "MPEG Version ";
+var Fo = "ISO/IEC ";
+var Gi = { 0: { [T]: `${Mn}2.5 (later extension of MPEG 2)`, [ue]: Ks, [H]: { 0: Tr, 4: Cr, 8: zt, 12: A } }, 8: { [T]: A }, 16: { [T]: `${Mn}2 (${Fo}13818-3)`, [ue]: Ks, [H]: { 0: Qt, 4: Kt, 8: Wt, 12: A } }, 24: { [T]: `${Mn}1 (${Fo}11172-3)`, [ue]: Qr, [H]: { 0: jt, 4: nt, 8: qt, 12: A } }, length: g };
+var ji = { 0: _r, 1: Ls };
+var qi = { 0: Ls, 1: "50/15 ms", 2: A, 3: "CCIT J.17" };
+var Eo = { 0: { [C]: 2, [T]: rt }, 64: { [C]: 2, [T]: "joint " + rt }, 128: { [C]: 2, [T]: "dual channel" }, 192: { [C]: 1, [T]: st } };
+var Dt = class i12 extends ge {
+  static *[B](e, t, s) {
+    let r = {}, n = yield* qs.getID3v2Header(e, t, s);
+    n && (yield* e[V](n[g], s), e[we](n[g]));
+    let o = yield* e[V](4, s), a = me(o[I](0, 4)), c = t[B](a);
+    if (c) return new i12(c);
+    if (o[0] !== 255 || o[1] < 224) return null;
+    let l = Gi[o[1] & 24];
+    if (l[T] === A) return null;
+    let u = o[1] & 6;
+    if (wn[u][T] === A) return null;
+    let h = { ...wn[u], ...wn[u][l[ue]] };
+    if (r[ze] = l[T], r[ue] = h[T], r[N] = h[N], r[$e] = ji[o[1] & 1], r[g] = 4, r[se] = ko[o[2] & 240][h[kt]], r[se] === ie || (r[H] = l[H][o[2] & 12], r[H] === A) || (r[Re] = o[2] & 2 && h[Re], r[Qe] = !!(o[2] & 1), r[he] = Math.floor(125 * r[se] * r[N] / r[H] + r[Re]), !r[he])) return null;
+    let f = o[3] & 192;
+    if (r[ne] = Eo[f][T], r[C] = Eo[f][C], r[We] = h[We][o[3] & 48], r[ws] = !!(o[3] & 8), r[Ke] = !!(o[3] & 4), r[Xt] = qi[o[3] & 3], r[Xt] === A) return null;
+    r[te] = 16;
+    {
+      let { length: d, frameLength: p, samples: y, ...m } = r;
+      t[Me](a, r, m);
+    }
+    return new i12(r);
+  }
+  constructor(e) {
+    super(e), this[se] = e[se], this[Xt] = e[Xt], this[Re] = e[Re], this[ws] = e[ws], this[Ke] = e[Ke], this[Qe] = e[Qe], this[ue] = e[ue], this[We] = e[We], this[ze] = e[ze], this[$e] = e[$e];
+  }
+};
+var Qs = class i13 extends be {
+  static *[Pe](e, t, s) {
+    return yield* super[Pe](Dt, i13, e, t, s);
+  }
+  constructor(e, t, s) {
+    super(e, t, s);
+  }
+};
+var Ws = class extends ae {
+  constructor(e, t, s) {
+    super(e, t), this.Frame = Qs, this.Header = Dt, s(this[R]);
+  }
+  get [R]() {
+    return Fr;
+  }
+  *[Ge]() {
+    return yield* this[dt]();
+  }
+};
+var Ki = { 0: "MPEG-4", 8: "MPEG-2" };
+var Qi = { 0: "valid", 2: ie, 4: ie, 6: ie };
+var Wi = { 0: _r, 1: Ls };
+var zi = { 0: "AAC Main", 64: "AAC LC (Low Complexity)", 128: "AAC SSR (Scalable Sample Rate)", 192: "AAC LTP (Long Term Prediction)" };
+var $i = { 0: Mr, 4: Pr, 8: bo, 12: nt, 16: jt, 20: qt, 24: Kt, 28: Qt, 32: Wt, 36: Cr, 40: Tr, 44: zt, 48: go, 52: A, 56: A, 60: "frequency is written explicitly" };
+var Do = { 0: { [C]: 0, [T]: "Defined in AOT Specific Config" }, 64: { [C]: 1, [T]: st }, 128: { [C]: 2, [T]: q(2, F[0][0]) }, 192: { [C]: 3, [T]: q(3, F[1][3]) }, 256: { [C]: 4, [T]: q(4, F[1][3], F[3][4]) }, 320: { [C]: 5, [T]: q(5, F[1][3], F[3][0]) }, 384: { [C]: 6, [T]: q(6, F[1][3], F[3][0], Ae) }, 448: { [C]: 8, [T]: q(8, F[1][3], F[2][0], F[3][0], Ae) } };
+var It = class i14 extends ge {
+  static *[B](e, t, s) {
+    let r = {}, n = yield* e[V](7, s), o = me([n[0], n[1], n[2], n[3] & 252 | n[6] & 3]), a = t[B](o);
+    if (a) Object.assign(r, a);
+    else {
+      if (n[0] !== 255 || n[1] < 240 || (r[ze] = Ki[n[1] & 8], r[ue] = Qi[n[1] & 6], r[ue] === ie)) return null;
+      let l = n[1] & 1;
+      r[$e] = Wi[l], r[g] = l ? 7 : 9, r[Er] = n[2] & 192, r[Le] = n[2] & 60;
+      let u = n[2] & 2;
+      if (r[Fs] = zi[r[Er]], r[H] = $i[r[Le]], r[H] === A) return null;
+      r[Qe] = !!u, r[Hs] = (n[2] << 8 | n[3]) & 448, r[ne] = Do[r[Hs]][T], r[C] = Do[r[Hs]][C], r[Ke] = !!(n[3] & 32), r[Ms] = !!(n[3] & 8), r[Ns] = !!(n[3] & 8), r[Vs] = !!(n[3] & 4), r[te] = 16, r[N] = 1024, r[Cs] = n[6] & 3;
+      {
+        let { length: h, channelModeBits: f, profileBits: d, sampleRateBits: p, frameLength: y, samples: m, numberAACFrames: b, ...v } = r;
+        t[Me](o, r, v);
+      }
+    }
+    if (r[he] = (n[3] << 11 | n[4] << 3 | n[5] >> 5) & 8191, !r[he]) return null;
+    let c = (n[5] << 6 | n[6] >> 2) & 2047;
+    return r[gs] = c === 2047 ? "VBR" : c, new i14(r);
+  }
+  constructor(e) {
+    super(e), this[Ns] = e[Ns], this[Vs] = e[Vs], this[gs] = e[gs], this[Ms] = e[Ms], this[Ke] = e[Ke], this[Qe] = e[Qe], this[ue] = e[ue], this[g] = e[g], this[ze] = e[ze], this[Cs] = e[Cs], this[Fs] = e[Fs], this[$e] = e[$e];
+  }
+  get audioSpecificConfig() {
+    let e = $.get(this), t = e[Er] + 64 << 5 | e[Le] << 5 | e[Hs] >> 3, s = new oe(2);
+    return new pt(s[_e]).setUint16(0, t, false), s;
+  }
+};
+var zs = class i15 extends be {
+  static *[Pe](e, t, s) {
+    return yield* super[Pe](It, i15, e, t, s);
+  }
+  constructor(e, t, s) {
+    super(e, t, s);
+  }
+};
+var $s = class extends ae {
+  constructor(e, t, s) {
+    super(e, t), this.Frame = zs, this.Header = It, s(this[R]);
+  }
+  get [R]() {
+    return "aac";
+  }
+  *[Ge]() {
+    return yield* this[dt]();
+  }
+};
+var mt = class i16 extends be {
+  static _getFrameFooterCrc16(e) {
+    return (e[e[g] - 2] << 8) + e[e[g] - 1];
+  }
+  static [Ar](e) {
+    let t = i16._getFrameFooterCrc16(e), s = wo(e[I](0, -2));
+    return t === s;
+  }
+  constructor(e, t, s) {
+    t[Os] = s, t[vs] = i16._getFrameFooterCrc16(e), super(t, e, $.get(t)[N]);
+  }
+};
+var Io = "get from STREAMINFO metadata block";
+var Xi = { 0: "Fixed", 1: "Variable" };
+var Ho = { 0: A, 16: 192 };
+for (let i22 = 2; i22 < 16; i22++) Ho[i22 << 4] = i22 < 6 ? 576 * 2 ** (i22 - 2) : 2 ** i22;
+var Ji = { 0: Io, 1: Pr, 2: mo, 3: po, 4: zt, 5: Wt, 6: Qt, 7: Kt, 8: qt, 9: jt, 10: nt, 11: Mr, 15: ie };
+var Zi = { 0: { [C]: 1, [T]: st }, 16: { [C]: 2, [T]: q(2, F[0][0]) }, 32: { [C]: 3, [T]: q(3, F[0][1]) }, 48: { [C]: 4, [T]: q(4, F[1][0], F[3][0]) }, 64: { [C]: 5, [T]: q(5, F[1][1], F[3][0]) }, 80: { [C]: 6, [T]: q(6, F[1][1], Ae, F[3][0]) }, 96: { [C]: 7, [T]: q(7, F[1][1], Ae, F[3][4], F[2][0]) }, 112: { [C]: 8, [T]: q(8, F[1][1], Ae, F[3][0], F[2][0]) }, 128: { [C]: 2, [T]: `${rt} (left, diff)` }, 144: { [C]: 2, [T]: `${rt} (diff, right)` }, 160: { [C]: 2, [T]: `${rt} (avg, diff)` }, 176: A, 192: A, 208: A, 224: A, 240: A };
+var Yi = { 0: Io, 2: 8, 4: 12, 6: A, 8: 16, 10: 20, 12: 24, 14: A };
+var bt = class i17 extends ge {
+  static _decodeUTF8Int(e) {
+    if (e[0] > 254) return null;
+    if (e[0] < 128) return { value: e[0], length: 1 };
+    let t = 1;
+    for (let o = 64; o & e[0]; o >>= 1) t++;
+    let s = t - 1, r = 0, n = 0;
+    for (; s > 0; n += 6, s--) {
+      if ((e[s] & 192) !== 128) return null;
+      r |= (e[s] & 63) << n;
+    }
+    return r |= (e[s] & 127 >> t) << n, { value: r, length: t };
+  }
+  static [Ce](e, t) {
+    let s = { [V]: function* () {
+      return e;
+    } };
+    return i17[B](s, t, 0).next().value;
+  }
+  static *[B](e, t, s) {
+    let r = yield* e[V](6, s);
+    if (r[0] !== 255 || !(r[1] === 248 || r[1] === 249)) return null;
+    let n = {}, o = me(r[I](0, 4)), a = t[B](o);
+    if (a) Object.assign(n, a);
+    else {
+      if (n[Dr] = r[1] & 1, n[ks] = Xi[n[Dr]], n[Ds] = r[2] & 240, n[Le] = r[2] & 15, n[Xe] = Ho[n[Ds]], n[Xe] === A || (n[H] = Ji[n[Le]], n[H] === ie) || r[3] & 1) return null;
+      let l = Zi[r[3] & 240];
+      if (l === A || (n[C] = l[C], n[ne] = l[T], n[te] = Yi[r[3] & 14], n[te] === A)) return null;
+    }
+    n[g] = 5, r = yield* e[V](n[g] + 8, s);
+    let c = i17._decodeUTF8Int(r[I](4));
+    if (!c || (n[Dr] ? n[As] = c.value : n[et] = c.value, n[g] += c[g], n[Ds] === 96 ? (r[g] < n[g] && (r = yield* e[V](n[g], s)), n[Xe] = r[n[g] - 1] + 1, n[g] += 1) : n[Ds] === 112 && (r[g] < n[g] && (r = yield* e[V](n[g], s)), n[Xe] = (r[n[g] - 1] << 8) + r[n[g]] + 1, n[g] += 2), n[N] = n[Xe], n[Le] === 12 ? (r[g] < n[g] && (r = yield* e[V](n[g], s)), n[H] = r[n[g] - 1] * 1e3, n[g] += 1) : n[Le] === 13 ? (r[g] < n[g] && (r = yield* e[V](n[g], s)), n[H] = (r[n[g] - 1] << 8) + r[n[g]], n[g] += 2) : n[Le] === 14 && (r[g] < n[g] && (r = yield* e[V](n[g], s)), n[H] = ((r[n[g] - 1] << 8) + r[n[g]]) * 10, n[g] += 2), r[g] < n[g] && (r = yield* e[V](n[g], s)), n[$t] = r[n[g] - 1], n[$t] !== xo(r[I](0, n[g] - 1)))) return null;
+    if (!a) {
+      let { blockingStrategyBits: l, frameNumber: u, sampleNumber: h, samples: f, sampleRateBits: d, blockSizeBits: p, crc: y, length: m, ...b } = n;
+      t[Me](o, n, b);
+    }
+    return new i17(n);
+  }
+  constructor(e) {
+    super(e), this[vs] = null, this[ks] = e[ks], this[Xe] = e[Xe], this[et] = e[et], this[As] = e[As], this[Os] = null;
+  }
+};
+var ea = 2;
+var ta = 512 * 1024;
+var Ht = class extends ae {
+  constructor(e, t, s) {
+    super(e, t), this.Frame = mt, this.Header = bt, s(this[R]);
+  }
+  get [R]() {
+    return "flac";
+  }
+  *_getNextFrameSyncOffset(e) {
+    let t = yield* this._codecParser[V](2, 0), s = t[g] - 2;
+    for (; e < s; ) {
+      if (t[e] === 255) {
+        let n = t[e + 1];
+        if (n === 248 || n === 249) break;
+        n !== 255 && e++;
+      }
+      e++;
+    }
+    return e;
+  }
+  *[Ge]() {
+    do {
+      let e = yield* bt[B](this._codecParser, this._headerCache, 0);
+      if (e) {
+        let t = $.get(e)[g] + ea;
+        for (; t <= ta; ) {
+          if (this._codecParser._flushing || (yield* bt[B](this._codecParser, this._headerCache, t))) {
+            let s = yield* this._codecParser[V](t);
+            if (this._codecParser._flushing || (s = s[I](0, t)), mt[Ar](s)) {
+              let r = new mt(s, e);
+              return this._headerCache[He](), this._codecParser[we](t), this._codecParser[ht](r), r;
+            }
+          }
+          t = yield* this._getNextFrameSyncOffset(t + 1);
+        }
+        this._codecParser[De](`Unable to sync FLAC frame after searching ${t} bytes.`), this._codecParser[we](t);
+      } else this._codecParser[we](yield* this._getNextFrameSyncOffset(1));
+    } while (true);
+  }
+  [ft](e) {
+    return e[W] === 0 ? (this._headerCache[He](), this._streamInfo = e[O][I](13)) : e[W] === 1 || (e[re] = J.get(e)[xe].map((t) => {
+      let s = bt[Ce](t, this._headerCache);
+      if (s) return new mt(t, s, this._streamInfo);
+      this._codecParser[De]("Failed to parse Ogg FLAC frame", "Skipping invalid FLAC frame");
+    }).filter((t) => !!t)), e;
+  }
+};
+var Nt = class i18 {
+  static *[B](e, t, s) {
+    let r = {}, n = yield* e[V](28, s);
+    if (n[0] !== 79 || n[1] !== 103 || n[2] !== 103 || n[3] !== 83 || (r[pn] = n[4], n[5] & 248)) return null;
+    r[pe] = !!(n[5] & 4), r[it] = !!(n[5] & 2), r[ot] = !!(n[5] & 1);
+    let a = new pt(oe.from(n[I](0, 28))[_e]);
+    r[ke] = Po(a, 6), r[Ue] = a.getInt32(14, true), r[W] = a.getInt32(18, true), r[Pt] = a.getInt32(22, true);
+    let c = n[26];
+    r[g] = c + 27, n = yield* e[V](r[g], s), r[he] = 0, r[ut] = [], r[Zt] = oe.from(n[I](27, r[g]));
+    for (let l = 0, u = 0; l < c; l++) {
+      let h = r[Zt][l];
+      r[he] += h, u += h, (h !== 255 || l === c - 1) && (r[ut].push(u), u = 0);
+    }
+    return new i18(r);
+  }
+  constructor(e) {
+    $.set(this, e), this[ke] = e[ke], this[ot] = e[ot], this[it] = e[it], this[pe] = e[pe], this[ut] = e[ut], this[W] = e[W], this[Pt] = e[Pt], this[Ue] = e[Ue];
+  }
+};
+var Xs = class i19 extends Et {
+  static *[Pe](e, t, s) {
+    let r = yield* Nt[B](e, t, s);
+    if (r) {
+      let n = $.get(r)[he], o = $.get(r)[g], a = o + n, c = (yield* e[V](a, 0))[I](0, a), l = c[I](o, a);
+      return new i19(r, l, c);
+    } else return null;
+  }
+  constructor(e, t, s) {
+    super(e, t), J.get(this)[g] = s[g], this[re] = [], this[hn] = s, this[ke] = e[ke], this[Ss] = e[Pt], this[Oe] = 0, this[ot] = e[ot], this[it] = e[it], this[pe] = e[pe], this[W] = e[W], this[N] = 0, this[Ue] = e[Ue];
+  }
+};
+var es = class extends be {
+  constructor(e, t, s) {
+    super(t, e, s);
+  }
+};
+var No = { 0: fs.slice(0, 2), 1: fs };
+var Te = "SILK-only";
+var Z = "CELT-only";
+var Wr = "Hybrid";
+var gt = "narrowband";
+var zr = "medium-band";
+var yt = "wideband";
+var ts = "super-wideband";
+var ss = "fullband";
+var sa = { 0: { [k]: Te, [D]: gt, [E]: 10 }, 8: { [k]: Te, [D]: gt, [E]: 20 }, 16: { [k]: Te, [D]: gt, [E]: 40 }, 24: { [k]: Te, [D]: gt, [E]: 60 }, 32: { [k]: Te, [D]: zr, [E]: 10 }, 40: { [k]: Te, [D]: zr, [E]: 20 }, 48: { [k]: Te, [D]: zr, [E]: 40 }, 56: { [k]: Te, [D]: zr, [E]: 60 }, 64: { [k]: Te, [D]: yt, [E]: 10 }, 72: { [k]: Te, [D]: yt, [E]: 20 }, 80: { [k]: Te, [D]: yt, [E]: 40 }, 88: { [k]: Te, [D]: yt, [E]: 60 }, 96: { [k]: Wr, [D]: ts, [E]: 10 }, 104: { [k]: Wr, [D]: ts, [E]: 20 }, 112: { [k]: Wr, [D]: ss, [E]: 10 }, 120: { [k]: Wr, [D]: ss, [E]: 20 }, 128: { [k]: Z, [D]: gt, [E]: 2.5 }, 136: { [k]: Z, [D]: gt, [E]: 5 }, 144: { [k]: Z, [D]: gt, [E]: 10 }, 152: { [k]: Z, [D]: gt, [E]: 20 }, 160: { [k]: Z, [D]: yt, [E]: 2.5 }, 168: { [k]: Z, [D]: yt, [E]: 5 }, 176: { [k]: Z, [D]: yt, [E]: 10 }, 184: { [k]: Z, [D]: yt, [E]: 20 }, 192: { [k]: Z, [D]: ts, [E]: 2.5 }, 200: { [k]: Z, [D]: ts, [E]: 5 }, 208: { [k]: Z, [D]: ts, [E]: 10 }, 216: { [k]: Z, [D]: ts, [E]: 20 }, 224: { [k]: Z, [D]: ss, [E]: 2.5 }, 232: { [k]: Z, [D]: ss, [E]: 5 }, 240: { [k]: Z, [D]: ss, [E]: 10 }, 248: { [k]: Z, [D]: ss, [E]: 20 } };
+var rs = class i20 extends ge {
+  static [Ce](e, t, s) {
+    let r = {};
+    if (r[C] = e[9], r[Je] = e[18], r[g] = r[Je] !== 0 ? 21 + r[C] : 19, e[g] < r[g]) throw new Error("Out of data while inside an Ogg Page");
+    let n = t[0] & 3, o = n === 3 ? 2 : 1, a = me(e[I](0, r[g])) + me(t[I](0, o)), c = s[B](a);
+    if (c) return new i20(c);
+    if (a.substr(0, 8) !== "OpusHead" || e[8] !== 1) return null;
+    r[O] = oe.from(e[I](0, r[g]));
+    let l = new pt(r[O][_e]);
+    if (r[te] = 16, r[wt] = l.getUint16(10, true), r[Bs] = l.getUint32(12, true), r[H] = nt, r[Ts] = l.getInt16(16, true), r[Je] in No && (r[ne] = No[r[Je]][r[C] - 1], !r[ne])) return null;
+    r[Je] !== 0 && (r[_s] = e[19], r[ys] = e[20], r[Is] = [...e[I](21, r[C] + 21)]);
+    let u = sa[248 & t[0]];
+    switch (r[k] = u[k], r[D] = u[D], r[E] = u[E], n) {
+      case 0:
+        r[Ye] = 1;
+        break;
+      case 1:
+      case 2:
+        r[Ye] = 2;
+        break;
+      case 3:
+        r[Ps] = !!(128 & t[1]), r[xs] = !!(64 & t[1]), r[Ye] = 63 & t[1];
+        break;
+      default:
+        return null;
+    }
+    {
+      let { length: h, data: f, channelMappingFamily: d, ...p } = r;
+      s[Me](a, r, p);
+    }
+    return new i20(r);
+  }
+  constructor(e) {
+    super(e), this[O] = e[O], this[D] = e[D], this[Je] = e[Je], this[Is] = e[Is], this[ys] = e[ys], this[Ye] = e[Ye], this[E] = e[E], this[xs] = e[xs], this[Bs] = e[Bs], this[Ps] = e[Ps], this[k] = e[k], this[Ts] = e[Ts], this[wt] = e[wt], this[_s] = e[_s];
+  }
+};
+var Js = class extends ae {
+  constructor(e, t, s) {
+    super(e, t), this.Frame = es, this.Header = rs, s(this[R]), this._identificationHeader = null, this._preSkipRemaining = null;
+  }
+  get [R]() {
+    return "opus";
+  }
+  [ft](e) {
+    return e[W] === 0 ? (this._headerCache[He](), this._identificationHeader = e[O]) : e[W] === 1 || (e[re] = J.get(e)[xe].map((t) => {
+      let s = rs[Ce](this._identificationHeader, t, this._headerCache);
+      if (s) {
+        this._preSkipRemaining === null && (this._preSkipRemaining = s[wt]);
+        let r = s[E] * s[Ye] / 1e3 * s[H];
+        return this._preSkipRemaining > 0 && (this._preSkipRemaining -= r, r = this._preSkipRemaining < 0 ? -this._preSkipRemaining : 0), new es(t, s, r);
+      }
+      this._codecParser[Vr]("Failed to parse Ogg Opus Header", "Not a valid Ogg Opus file");
+    })), e;
+  }
+};
+var ns = class extends be {
+  constructor(e, t, s) {
+    super(t, e, s);
+  }
+};
+var Pn = {};
+for (let i22 = 0; i22 < 8; i22++) Pn[i22 + 6] = 2 ** (6 + i22);
+var Zs = class i21 extends ge {
+  static [Ce](e, t, s, r) {
+    if (e[g] < 30) throw new Error("Out of data while inside an Ogg Page");
+    let n = me(e[I](0, 30)), o = t[B](n);
+    if (o) return new i21(o);
+    let a = { [g]: 30 };
+    if (n.substr(0, 7) !== "vorbis") return null;
+    a[O] = oe.from(e[I](0, 30));
+    let c = new pt(a[O][_e]);
+    if (a[at] = c.getUint32(7, true), a[at] !== 0 || (a[C] = e[11], a[ne] = fs[a[C] - 1] || "application defined", a[H] = c.getUint32(12, true), a[ps] = c.getInt32(16, true), a[bs] = c.getInt32(20, true), a[ms] = c.getInt32(24, true), a[lt] = Pn[(e[28] & 240) >> 4], a[ct] = Pn[e[28] & 15], a[ct] > a[lt]) || e[29] !== 1) return null;
+    a[te] = 32, a[Jt] = r, a[Es] = s;
+    {
+      let { length: l, data: u, version: h, vorbisSetup: f, vorbisComments: d, ...p } = a;
+      t[Me](n, a, p);
+    }
+    return new i21(a);
+  }
+  constructor(e) {
+    super(e), this[ps] = e[ps], this[ms] = e[ms], this[bs] = e[bs], this[ct] = e[ct], this[lt] = e[lt], this[O] = e[O], this[Es] = e[Es], this[Jt] = e[Jt];
+  }
+};
+var Ys = class extends ae {
+  constructor(e, t, s) {
+    super(e, t), this.Frame = ns, s(this[R]), this._identificationHeader = null, this._setupComplete = false, this._prevBlockSize = null;
+  }
+  get [R]() {
+    return Mt;
+  }
+  [ft](e) {
+    e[re] = [];
+    for (let t of J.get(e)[xe]) if (t[0] === 1) this._headerCache[He](), this._identificationHeader = e[O], this._setupComplete = false;
+    else if (t[0] === 3) this._vorbisComments = t;
+    else if (t[0] === 5) this._vorbisSetup = t, this._mode = this._parseSetupHeader(t), this._setupComplete = true;
+    else if (this._setupComplete) {
+      let s = Zs[Ce](this._identificationHeader, this._headerCache, this._vorbisComments, this._vorbisSetup);
+      s ? e[re].push(new ns(t, s, this._getSamples(t, s))) : this._codecParser[logError]("Failed to parse Ogg Vorbis Header", "Not a valid Ogg Vorbis file");
+    }
+    return e;
+  }
+  _getSamples(e, t) {
+    let r = this._mode.blockFlags[e[0] >> 1 & this._mode.mask] ? t[lt] : t[ct], n = this._prevBlockSize === null ? 0 : (this._prevBlockSize + r) / 4;
+    return this._prevBlockSize = r, n;
+  }
+  _parseSetupHeader(e) {
+    let t = new Or(e), s = { count: 0, blockFlags: [] };
+    for (; (t.read(1) & 1) !== 1; ) ;
+    let r;
+    for (; s.count < 64 && t.position > 0; ) {
+      Us(t.read(8));
+      let n = 0;
+      for (; t.read(8) === 0 && n++ < 3; ) ;
+      if (n === 4) r = t.read(7), s.blockFlags.unshift(r & 1), t.position += 6, s.count++;
+      else {
+        ((Us(r) & 126) >> 1) + 1 !== s.count && this._codecParser[De]("vorbis derived mode count did not match actual mode count");
+        break;
+      }
+    }
+    return s.mask = (1 << Math.log2(s.count)) - 1, s;
+  }
+};
+var Cn = class {
+  constructor(e, t, s) {
+    this._codecParser = e, this._headerCache = t, this._onCodec = s, this._continuedPacket = new oe(), this._codec = null, this._isSupported = null, this._previousAbsoluteGranulePosition = null;
+  }
+  get [R]() {
+    return this._codec || "";
+  }
+  _updateCodec(e, t) {
+    this._codec !== e && (this._headerCache[Ie](), this._parser = new t(this._codecParser, this._headerCache, this._onCodec), this._codec = e);
+  }
+  _checkCodecSupport({ data: e }) {
+    let t = me(e[I](0, 8));
+    switch (t) {
+      case "fishead\0":
+        return false;
+      case "OpusHead":
+        return this._updateCodec("opus", Js), true;
+      case (/^\x7fFLAC/.test(t) && t):
+        return this._updateCodec("flac", Ht), true;
+      case (/^\x01vorbis/.test(t) && t):
+        return this._updateCodec(Mt, Ys), true;
+      default:
+        return false;
+    }
+  }
+  _checkPageSequenceNumber(e) {
+    e[W] !== this._pageSequenceNumber + 1 && this._pageSequenceNumber > 1 && e[W] > 1 && this._codecParser[De]("Unexpected gap in Ogg Page Sequence Number.", `Expected: ${this._pageSequenceNumber + 1}, Got: ${e[W]}`), this._pageSequenceNumber = e[W];
+  }
+  _parsePage(e) {
+    this._isSupported === null && (this._pageSequenceNumber = e[W], this._isSupported = this._checkCodecSupport(e)), this._checkPageSequenceNumber(e);
+    let t = J.get(e), s = $.get(t[fe]), r = 0;
+    if (t[xe] = s[ut].map((n) => e[O][I](r, r += n)), this._continuedPacket[g] && (t[xe][0] = Gs(this._continuedPacket, t[xe][0]), this._continuedPacket = new oe()), s[Zt][s[Zt][g] - 1] === 255 && (this._continuedPacket = Gs(this._continuedPacket, t[xe].pop())), this._previousAbsoluteGranulePosition !== null && (e[N] = Number(e[ke] - this._previousAbsoluteGranulePosition)), this._previousAbsoluteGranulePosition = e[ke], this._isSupported) {
+      let n = this._parser[ft](e);
+      return this._codecParser[ht](n), n;
+    } else return e;
+  }
+};
+var er = class extends ae {
+  constructor(e, t, s) {
+    super(e, t), this._onCodec = s, this.Frame = Xs, this.Header = Nt, this._streams = /* @__PURE__ */ new Map(), this._currentSerialNumber = null;
+  }
+  get [R]() {
+    let e = this._streams.get(this._currentSerialNumber);
+    return e ? e.codec : "";
+  }
+  *[Ge]() {
+    let e = yield* this[dt](true);
+    this._currentSerialNumber = e[Ue];
+    let t = this._streams.get(this._currentSerialNumber);
+    return t || (t = new Cn(this._codecParser, this._headerCache, this._onCodec), this._streams.set(this._currentSerialNumber, t)), e[pe] && this._streams.delete(this._currentSerialNumber), t._parsePage(e);
+  }
+};
+var Tn = () => {
+};
+var tr = class {
+  constructor(e, { onCodec: t, onCodecHeader: s, onCodecUpdate: r, enableLogging: n = false, enableFrameCRC32: o = true } = {}) {
+    this._inputMimeType = e, this._onCodec = t || Tn, this._onCodecHeader = s || Tn, this._onCodecUpdate = r, this._enableLogging = n, this._crc32 = o ? Mo : Tn, this[Ie]();
+  }
+  get [R]() {
+    return this._parser ? this._parser[R] : "";
+  }
+  [Ie]() {
+    this._headerCache = new js(this._onCodecHeader, this._onCodecUpdate), this._generator = this._getGenerator(), this._generator.next();
+  }
+  *flush() {
+    this._flushing = true;
+    for (let e = this._generator.next(); e.value; e = this._generator.next()) yield e.value;
+    this._flushing = false, this[Ie]();
+  }
+  *parseChunk(e) {
+    for (let t = this._generator.next(e); t.value; t = this._generator.next()) yield t.value;
+  }
+  parseAll(e) {
+    return [...this.parseChunk(e), ...this.flush()];
+  }
+  *_getGenerator() {
+    if (this._inputMimeType.match(/aac/)) this._parser = new $s(this, this._headerCache, this._onCodec);
+    else if (this._inputMimeType.match(/mpeg/)) this._parser = new Ws(this, this._headerCache, this._onCodec);
+    else if (this._inputMimeType.match(/flac/)) this._parser = new Ht(this, this._headerCache, this._onCodec);
+    else if (this._inputMimeType.match(/ogg/)) this._parser = new er(this, this._headerCache, this._onCodec);
+    else throw new Error(`Unsupported Codec ${mimeType}`);
+    for (this._frameNumber = 0, this._currentReadPosition = 0, this._totalBytesIn = 0, this._totalBytesOut = 0, this._totalSamples = 0, this._sampleRate = void 0, this._rawData = new Uint8Array(0); ; ) {
+      let e = yield* this._parser[Ge]();
+      e && (yield e);
+    }
+  }
+  *[V](e = 0, t = 0) {
+    let s;
+    for (; this._rawData[g] <= e + t; ) {
+      if (s = yield, this._flushing) return this._rawData[I](t);
+      s && (this._totalBytesIn += s[g], this._rawData = Gs(this._rawData, s));
+    }
+    return this._rawData[I](t);
+  }
+  [we](e) {
+    this._currentReadPosition += e, this._rawData = this._rawData[I](e);
+  }
+  [Rs](e) {
+    this._sampleRate = e[fe][H], e[fe][se] = e[Oe] > 0 ? Math.round(e[O][g] / e[Oe]) * 8 : 0, e[et] = this._frameNumber++, e[Ct] = this._totalBytesOut, e[Ft] = this._totalSamples, e[Tt] = this._totalSamples / this._sampleRate * 1e3, e[Ss] = this._crc32(e[O]), this._headerCache[Br](e[fe][se], e[Tt]), this._totalBytesOut += e[O][g], this._totalSamples += e[N];
+  }
+  [ht](e) {
+    if (e[re]) {
+      if (e[pe]) {
+        let t = e[N];
+        e[re].forEach((s) => {
+          let r = s[N];
+          t < r && (s[N] = t > 0 ? t : 0, s[Oe] = s[N] / s[fe][H] * 1e3), t -= r, this[Rs](s);
+        });
+      } else e[N] = 0, e[re].forEach((t) => {
+        e[N] += t[N], this[Rs](t);
+      });
+      e[Oe] = e[N] / this._sampleRate * 1e3 || 0, e[Ft] = this._totalSamples, e[Tt] = this._totalSamples / this._sampleRate * 1e3 || 0, e[Ct] = this._totalBytesOut;
+    } else this[Rs](e);
+  }
+  _log(e, t) {
+    if (this._enableLogging) {
+      let s = [`${R}:         ${this[R]}`, `inputMimeType: ${this._inputMimeType}`, `readPosition:  ${this._currentReadPosition}`, `totalBytesIn:  ${this._totalBytesIn}`, `${Ct}: ${this._totalBytesOut}`], r = Math.max(...s.map((n) => n[g]));
+      t.push(`--stats--${"-".repeat(r - 9)}`, ...s, "-".repeat(r)), e("codec-parser", t.reduce((n, o) => n + `
+  ` + o, ""));
+    }
+  }
+  [De](...e) {
+    this._log(console.warn, e);
+  }
+  [Vr](...e) {
+    this._log(console.error, e);
+  }
+};
+var Vo = tr;
+var $r = re;
+var Xr = O;
+var Bo = fe;
+var Ao = pe;
+var _o = Jt;
+var Oo = Ft;
+function tt(i22) {
+  var e = e;
+  function t() {
+  }
+  e = {};
+  function s(P) {
+    throw P;
+  }
+  var r, n, o, a, c, l, u, h, f, d, p;
+  function y() {
+    var P = p.buffer;
+    r = new Int8Array(P), n = new Int16Array(P), a = new Uint8Array(P), c = new Uint16Array(P), o = new Int32Array(P), l = new Uint32Array(P), u = new Float32Array(P), h = new Float64Array(P), f = new BigInt64Array(P), d = new BigUint64Array(P);
+  }
+  for (var m = (P) => {
+    for (var ve, as, Rt = 0, ir = 0, ar = P.length, cr = new Uint8Array((ar * 3 >> 2) - (P[ar - 2] == "=") - (P[ar - 1] == "=")); Rt < ar; Rt += 4, ir += 3) ve = de[P.charCodeAt(Rt + 1)], as = de[P.charCodeAt(Rt + 2)], cr[ir] = de[P.charCodeAt(Rt)] << 2 | ve >> 4, cr[ir + 1] = ve << 4 | as >> 2, cr[ir + 2] = as << 6 | de[P.charCodeAt(Rt + 3)];
+    return cr;
+  }, b = () => s(""), v = () => {
+  }, S = {}, M = (P) => P(), x = () => performance.now(), L = (P, ve) => {
+    if (S[P] && (clearTimeout(S[P].id), delete S[P]), !ve) return 0;
+    var as = setTimeout(() => {
+      delete S[P], M(() => jn(P, x()));
+    }, ve);
+    return S[P] = { id: as, timeout_ms: ve }, 0;
+  }, j = Math.atan, ce = Math.cos, le = Math.exp, Fe = Math.log, je = Math.pow, Ot = Math.sin, St = (P) => {
+    var ve = a.length;
+    return P >>>= 0, false;
+  }, Ve = (P) => {
+    throw `exit(${P})`;
+  }, de = new Uint8Array(123), ye = 25; ye >= 0; --ye) de[48 + ye] = 52 + ye, de[65 + ye] = ye, de[97 + ye] = 26 + ye;
+  de[43] = 62, de[47] = 63;
+  var en = { e: b, d: v, f: L, b: j, a: ce, i: le, h: Fe, g: je, c: Ot, k: St, j: Ve };
+  function tn(P) {
+    An = P.n, _n = P.o, On = P.p, Rn = P.q, Ln = P.r, Un = P.s, Gn = P.t, jn = P.v;
+  }
+  var An, _n, On, Rn, Ln, Un, Gn, jn;
+  function Yo(P) {
+    P.m();
+  }
+  tt.wasm || Object.defineProperty(tt, "wasm", { get: () => String.raw`dynEncode012091253f87dì%nä= 4& ¿nÝØäÂLÚªã9ÚØ[äº\ ¼¡³R=}L]Èÿ2 ÿù¶J1jj¡é,zäV|i¸Qk¹= 
 ¨¨%ýv²±»oúâLa:ê±ÊäÌÓ.÷Øý×>àW>z¯°8¯ñ\Ñós9\§ôÊ@Ü (tÃø4° ¢7fqÓg²Jè6x[zç®&4=} p.(°tÍÞã¾>÷CõË"*k?¿~7~H2ÛÜâ.ÏQä;6{ÜãFÑá'DD¤±°HQ>MínÎÏÎöÊµÑÓÞÌP¼P¨Þ* X²E=MÂ¦qíxMÃ±=MÌë4/<gNO/¢	¢>a~Ï®ììììì0ìaç¬¡çëOÓÇM	Q9tùµyuéµµÞÏ/±Óõò}E{òÓJ¹Û|·ôfÒ c¬WêaûÿlÊ½p¹|)ÖEL¦	}ypÕSÏ¹I]¢ºãæ°ÿo¶7ÛRq¾ÔÅEßØ]æËwÚ{óçVwó1¾E­Øpàe"Æùû¡Áª Ààð´LõÎxEÓ¢N¦9ëùi&	Ò§Ø!ÇFçS=MbäO?ß·ç¸ª7ùa}5ðûÕtsUþ£KïgN¾)ø§\V0uSIö:ÌU4Ð¶¯´Õn9ÔèE£ZÆ¼{hµmÙ¾6ÆÑ+xñ´«þ¸=Mß¤·å®«ïÆGFÝì|H?ä E"þ!9«Æïpæ'][¯ù·£W÷O§&#ax$qf=}ø ô bÏ×W÷LôoÝWQÕÓ)u÷½èV|¥Gà¨Ö¸@ê|ÇK5ò	A·Â9CS2¸¼¿,äÝÑÝy!ÑR%ÆÝÎ0Âv§ qTcó±hØÉã=}Z=}Ælü­ën¯ð(-°ÜwVÏï.th¥í­S~SÏ»ZZÔZ 
 3BÌÛ¬<éæO)ÎyÚ¯O*®uìÛ$öI¥Ý9ôø³\¤ò³Ù¹ÇP¸J×y@ÔyOÇmô½ü¾|S?2àú¤F?½ûoo3ô;<àáûÜ8ì²7ïë¨RäY¹|ÓºÌF,Ð-¸*\P!FJÒ8= o6HwLrúº¶ÐÛ\Ù¬o¢9IqÝ.ôf¶ÎÈ{Äª×N|Mfs¤ÉÝàâ§*+ã§­ô¯î¬7ç×§ä)!Z¨É,Äp~ý·wsSGóäsE\ýïé§Ö:Ò'Cç(_X$\¦½eÒ8$ XF|eíÙÓ¡¤Û<ØÞÛ¸9¿ðÃÎ#b~× 4éîÿÏq
  ód|0wU&®è·vh6¨{ÚçÚ18Ó(ÓY\0¦= çèíß)Ø=}[xü-v?N(Kkg 0}âÚ´ð¬ÕQNÍ¢usÑ³=}.	ëgû= ÍMBp'²¨ x4è@9t§eÝµ¾âð½ z?Z¹FH'Ì¯¿<K,üµ<{	¶JãývåàÆeù0Ð"F¥ÃÒÞþÔÉvCzl}ðN£	Í^P%²¸FX»WÎêô¶äÉJ^g×SÃã.Ät*'ªG«ÒB<ÜÓ¿ºp­\àuV¯£ÅÝ½áÞ ùß=}ÎÚ^ÿí>¥! ¨ â=M·?*/¤"å)â·ÿîÿî*(%*2[½"üríÔ4l½»a}¯CwpCÓèìGc-ã6®=M32k?Êg­!So-x>³G+ã@ò, ÁïáåN0þÙè.~È÷¡vTr¶­Ã[üB±º»ávëw¹{pÜºû"Aæ±9Æ^¹³òïRIAy5GÂwÉf4@Tù|qý7ðªwBL|Ôqv!ª°|]KiÐJVQ5¸åõ§å"H¼0e¬<óBîÚSÏUìHPÙA+çÉ'seÌNf°@ÈM,ð½egÖ¬x©û½2~«Ò1;Ö«¯°4&90èE»Ó×ºçÊ§J<Æ¿&~Nu¼ãÙµ¢.UÇä(qQô^ö·%!É
@@ -138,18 +2161,2888 @@ KÙ:KµºKí{K]ûK£[KÚKóKÓ½R×¿ÿ'P^j9TîçmóþL¿_o©×hÙtÙ
 Ái;ªäÀ%n= =M+W= ÓÖc[aS
 FÁð]NôÝ'= qr(¶ù¤nü«òÿ¿d&ÿÈõT4Þ=}z|ö ¿OW×SMtdH.ÏãRX&§o3ØÜXÍ^ÊMí£W´iâ]NüOå£S£Å·ç÷­ Ý§½GÑUy¹¦ß§/6P0(Cúýb"þ¥°VÙÄá£ÓÙ@¾YýòD{òÃv?EP©=MBé­\Ä½YäýRò	øfâëEEf¼D+gC×úÇ±GÅÿ±Ç?TzÙ¡±ÏÁÕ¯¦ðvZmT}3xËz×cºrÑM=Mc-É©Ô7½wæc§Î»cû¾yfÙWòÆÝÔc¥³ôØf«Äñ·9ø%­g:y^+{U]¤þ[&fÓÏYë«Gªõ¹¦Öðþ¬moÛø?/ÛS.[S9ÛùC/û2²Y£ÎÑ%/sy ¢×ÌùJ­W6Oí\g0^JùêßÏ0í[Ü'ÏÔ>À-¿[ÔW?Y]±ØÙÃî<~ÎëR~Ìf¾Z/×¼_á¾Þê+îoÐñ{Þ\e3K%©¹§íB¹§(c=}ËÈ·SzÔnf§èx}o\9öf|%Ýå¥~©IÇüñY8}Ffú@Rú1éþ3÷ËótQøvû|³Îaá,Óé>BG6Òê}ÃJ|¶=} °öf6õk¶ÌºHgNjÒ{æ¾M;9·é§WèO±Ä3ÒËÒyt	;ù´à©a|Ó^!ÝøûÂÄ
 (VV¸ÇÙcÏ>yoçzÃvòG{3Þ£½c×ôíÅé;°OÛGØ<wÜW>	rU]q­{û'ùÝír{*øï?t-ígùWÿ&§]m}×ût¥Ë~ß&>&Õv!b#ÅÌq¢µ|jÍüùÉ^Æ&ôþ~sIµ"]d)uâ´ºvk	Å\<Íÿ­öê½Â
-ïBçÏ§mÙIólÜoëVb¦¯éWÇû3`}),g={a:m},this.setModule=t=>{e.setModule(tt,t)},this.getModule=()=>e.getModule(tt),this.instantiate=()=>(this.getModule().then(e=>WebAssembly.instantiate(e,g)).then(e=>{let t=e.exports;D(t),i=t.l,T(),$(t),v()}),this.ready=new Promise(e=>{v=e}).then(()=>{this.HEAP=i.buffer,this.malloc=u,this.free=f,this.create_decoder=h,this.send_setup=d,this.init_dsp=a,this.decode_packets=c,this.destroy_decoder=l}),this)}function Vt(){return this._init=()=>(new this._WASMAudioDecoderCommon).instantiate(this._EmscriptenWASM,this._module).then(e=>{this._common=e,this._input=this._common.allocateTypedArray(this._inputSize,Uint8Array),this._firstPage=!0,this._inputLen=this._common.allocateTypedArray(1,Uint32Array),this._outputBufferPtr=this._common.allocateTypedArray(1,Uint32Array),this._channels=this._common.allocateTypedArray(1,Uint32Array),this._sampleRate=this._common.allocateTypedArray(1,Uint32Array),this._samplesDecoded=this._common.allocateTypedArray(1,Uint32Array);let t=256;this._errors=this._common.allocateTypedArray(t,Uint32Array),this._errorsLength=this._common.allocateTypedArray(1,Int32Array),this._frameNumber=0,this._inputBytes=0,this._outputSamples=0,this._decoder=this._common.wasm.create_decoder(this._input.ptr,this._inputLen.ptr,this._outputBufferPtr.ptr,this._channels.ptr,this._sampleRate.ptr,this._samplesDecoded.ptr,this._errors.ptr,this._errorsLength.ptr,t)}),Object.defineProperty(this,"ready",{enumerable:!0,get:()=>this._ready}),this.reset=()=>(this.free(),this._init()),this.free=()=>{this._common.wasm.destroy_decoder(this._decoder),this._common.free()},this.sendSetupHeader=e=>{this._input.buf.set(e),this._inputLen.buf[0]=e.length,this._common.wasm.send_setup(this._decoder,this._firstPage),this._firstPage=!1},this.initDsp=()=>{this._common.wasm.init_dsp(this._decoder)},this.decodePackets=e=>{let t=[],n=0,s=[];for(let a=0;a<e.length;a++){let i=e[a];this._input.buf.set(i),this._inputLen.buf[0]=i.length,this._common.wasm.decode_packets(this._decoder);let o=this._samplesDecoded.buf[0],r=[],c=new Uint32Array(this._common.wasm.HEAP,this._outputBufferPtr.buf[0],this._channels.buf[0]);for(let e=0;e<this._channels.buf[0];e++){let t=new Float32Array(o);o&&t.set(new Float32Array(this._common.wasm.HEAP,c[e],o)),r.push(t)}t.push(r),n+=o,this._frameNumber++,this._inputBytes+=i.length,this._outputSamples+=o;for(let e=0;e<this._errorsLength.buf;e+=2){let t=this._common.codeToString(this._errors.buf[e]),n=this._common.codeToString(this._errors.buf[e+1]);s.push({message:t+" vorbis_synthesis"+n,frameLength:i.length,frameNumber:this._frameNumber,inputBytes:this._inputBytes,outputSamples:this._outputSamples})}this._errorsLength.buf[0]=0}return this._WASMAudioDecoderCommon.getDecodedAudioMultiChannel(s,t,this._channels.buf[0],n,this._sampleRate.buf[0],16)},this._isWebWorker=Vt.isWebWorker,this._WASMAudioDecoderCommon=Vt.WASMAudioDecoderCommon||U,this._EmscriptenWASM=Vt.EmscriptenWASM||tt,this._module=Vt.module,this._inputSize=128*1024,this._ready=this._init(),this}Jr=Symbol(),Bt=class{constructor(){this._onCodec=e=>{if(e!=="vorbis")throw new Error("@wasm-audio-decoders/ogg-vorbis does not support this codec "+e)},new U,this._init(),this._ready=this[Jr](Vt)}_init(){this._vorbisSetupInProgress=!0,this._totalSamplesDecoded=0,this._codecParser=new Vo("audio/ogg",{onCodec:this._onCodec,enableFrameCRC32:!1})}async[Jr](e){if(this._decoder){let e=this._decoder;await e.ready.then(()=>e.free())}return this._decoder=new e,this._decoder.ready}get ready(){return this._ready}async reset(){return this._init(),this._decoder.reset()}free(){this._decoder.free()}async decodeOggPages(e){let s=[];for(let n=0;n<e.length;n++){let t=e[n];if(this._vorbisSetupInProgress&&(t[Xr][0]===1&&this._decoder.sendSetupHeader(t[Xr]),t[$r].length)){let e=t[$r][0][Bo];this._decoder.sendSetupHeader(e[_o]),this._decoder.initDsp(),this._vorbisSetupInProgress=!1}s.push(...t[$r].map(e=>e[Xr]))}let t=await this._decoder.decodePackets(s);this._totalSamplesDecoded+=t.samplesDecoded;let n=e[e.length-1];if(n&&n[Ao]){let e=this._totalSamplesDecoded-n[Oo];if(e>0){for(let n=0;n<t.channelData.length;n++)t.channelData[n]=t.channelData[n].subarray(0,t.samplesDecoded-e);t.samplesDecoded-=e,this._totalSamplesDecoded-=e}}return t}async decode(e){return this.decodeOggPages([...this._codecParser.parseChunk(e)])}async flush(){let e=await this.decodeOggPages([...this._codecParser.flush()]);return await this.reset(),e}async decodeFile(e){let t=await this.decodeOggPages([...this._codecParser.parseAll(e)]);return await this.reset(),t}},Fn=class extends Gt{constructor(e){super(e,"ogg-vorbis-decoder",Vt,tt)}async sendSetupHeader(e){return this.postToDecoder("sendSetupHeader",e)}async initDsp(){return this.postToDecoder("initDsp")}async decodePackets(e){return this.postToDecoder("decodePackets",e)}},At=class extends Bt{constructor(){super(),this._ready=super[Jr](Fn)}async free(){await this._decoder.free()}terminate(){this._decoder.terminate()}},wr(Bt,"OggVorbisDecoder"),wr(At,"OggVorbisDecoderWebWorker");function Lo(e,t,n){let s=e.sampleRate,o=s*t,i=new AudioBuffer({numberOfChannels:2,length:o,sampleRate:s}),a=Math.min(s*n,o);for(let e=0;e<i.numberOfChannels;e++){let n=i.getChannelData(e);for(let e=0;e<a;e++)n[e]=Math.random()*2-1;let r=1/(s*t);for(let e=a;e<o;e++){let t=Math.exp(-(e-a)*r);n[e]=(Math.random()*2-1)*t}}return i}function En(e,t){let n=new ConvolverNode(e,{buffer:t});return{input:n,output:n}}function ra(e,t,n,s){let o=new DelayNode(e,{maxDelayTime:n,delayTime:n}),i=new GainNode(e,{gain:s});return t.connect(o),o.connect(i),i.connect(o),o}function sr(e,t,n,s){let o=new DelayNode(e,{maxDelayTime:n,delayTime:n}),i=new GainNode(e,{gain:s}),a=new GainNode(e,{gain:1-s});return t.connect(o),o.connect(i),i.connect(o),o.connect(a),a}function Uo(e,t,n,s,o){let i=new DelayNode(e,{maxDelayTime:n,delayTime:n}),a=new GainNode(e,{gain:s}),r=Math.max(0,Math.min(1,o)),c=new IIRFilterNode(e,{feedforward:[1-r],feedback:[1,-r]});return t.connect(i),i.connect(c),c.connect(a),a.connect(i),i}function Go(e,t,n,s,o){let a=new GainNode(e),r=new GainNode(e);for(let s=0;s<n.length;s++)ra(e,a,n[s],t[s]).connect(r);let i=[];for(let t=0;t<o.length;t++){let n=t===0?r:i.at(-1),a=sr(e,n,o[t],s[t]);i.push(a)}return{input:a,output:i.at(-1)}}function na(e,t,n,s,o,i,a,r){let u=new GainNode(e),c=new GainNode(e);for(let s=0;s<t.length;s++){let o=new DelayNode(e,{maxDelayTime:t[s],delayTime:t[s]}),i=new GainNode(e,{gain:n[s]});u.connect(o),o.connect(i),i.connect(c)}let h=new GainNode(e);for(let t=0;t<s.length;t++)Uo(e,c,s[t],o[t],i).connect(h);let l=[];for(let t=0;t<a.length;t++){let n=t===0?h:l.at(-1),s=sr(e,n,a[t],r[t]);l.push(s)}let d=new GainNode(e);return c.connect(d),l.at(-1).connect(d),{input:u,output:d}}function jo(e,{rt60:t=2,damping:n=.3}={}){let o=e.sampleRate,i=[.0043,.0215,.0225,.0268,.027,.0298,.0458],a=[.841,.504,.491,.379,.38,.346,.289],s=[1309,1635,1811,1926,2053,2667].map(e=>e/o),r=s.map(e=>Math.pow(10,-3*e/t));return na(e,i,a,s,r,n,[.005,.0017],[.7,.7])}function oa(e,t,n,s=.2,o=5e-4){let a=t.length;if(a!==4)throw new Error("createFDN: only N=4 is supported (4x4 Hadamard)");let r=[[.5,.5,.5,.5],[.5,-.5,.5,-.5],[.5,.5,-.5,-.5],[.5,-.5,-.5,.5]],c=new GainNode(e),l=new GainNode(e),i=t.map(t=>new DelayNode(e,{maxDelayTime:t+o,delayTime:t})),d=i.map(()=>{let t=Math.max(0,Math.min(1,s));return new IIRFilterNode(e,{feedforward:[1-t],feedback:[1,-t]})}),u=n.map(t=>new GainNode(e,{gain:t}));o>0&&i.forEach((t,n)=>{let s=new OscillatorNode(e,{frequency:.3+n*.07}),i=new GainNode(e,{gain:o});s.connect(i),i.connect(t.delayTime),s.start()});let h=new GainNode(e,{gain:1/a});c.connect(h),i.forEach(e=>h.connect(e));for(let e=0;e<a;e++)i[e].connect(d[e]),d[e].connect(u[e]);for(let t=0;t<a;t++){for(let n=0;n<a;n++){if(r[t][n]===0)continue;let s=new GainNode(e,{gain:r[t][n]});u[n].connect(s),s.connect(i[t])}i[t].connect(l)}return{input:c,output:l}}function qo(e,{rt60:t=2,damping:n=.2,modulation:s=5e-4}={}){let i=e.sampleRate,o=[1049,1327,1601,1873].map(e=>e/i),a=o.map(e=>Math.pow(10,-3*e/t));return oa(e,o,a,n,s)}function Ko(e,{decay:t=.7,damping:n=5e-4,bandwidth:s=.9995}={}){let o=e.sampleRate,v=Math.max(0,Math.min(1,s)),g=new IIRFilterNode(e,{feedforward:[1-v],feedback:[1,-v]}),i=o/29761,p=[142,107,379,277],b=[.75,.75,.625,.625],u=new GainNode(e);u.connect(g);let c=[];for(let t=0;t<p.length;t++){let n=t===0?g:c.at(-1),s=sr(e,n,p[t]*i/o,b[t]);c.push(s)}let d=c.at(-1),j=[672,908],y=[.5,.5],h=[4453,4217],m=[3720,3163],f=Math.max(0,Math.min(1,n)),r=[new GainNode(e),new GainNode(e)];d.connect(r[0]),d.connect(r[1]);let a=[];for(let n=0;n<2;n++){let u=sr(e,r[n],j[n]*i/o,y[n]),s=new DelayNode(e,{maxDelayTime:h[n]*i/o,delayTime:h[n]*i/o}),c=new IIRFilterNode(e,{feedforward:[1-f],feedback:[1,-f]}),l=new DelayNode(e,{maxDelayTime:m[n]*i/o,delayTime:m[n]*i/o}),d=new GainNode(e,{gain:t});u.connect(s),s.connect(c),c.connect(l),l.connect(d),a.push(d)}a[0].connect(r[1]),a[1].connect(r[0]);let l=new GainNode(e,{gain:.5});return a[0].connect(l),a[1].connect(l),{input:u,output:l}}ia=[1116,1188,1277,1356,1422,1491,1557,1617],aa=23,Ro=[225,341,441,556],ca=.5;function Qo(e,{roomSize:t=.84,damping:n=.2}={}){let s=e.sampleRate,r=t*.28+.7,o=t=>{let i=new GainNode(e),a=new GainNode(e);for(let o of ia){let c=(o+t)/s;Uo(e,i,c,r,n).connect(a)}let o=[];for(let t=0;t<Ro.length;t++){let n=t===0?a:o.at(-1),i=sr(e,n,Ro[t]/s,ca);o.push(i)}return{input:i,output:o.at(-1)}},i=o(0),a=o(aa);return{inputL:i.input,inputR:a.input,outputL:i.output,outputR:a.output}}function la(e,t,n=2e3){let s=e.sampleRate,o=Math.ceil(s*t),i=new AudioBuffer({numberOfChannels:2,length:o,sampleRate:s}),a=Math.max(1,Math.round(s/n));for(let e=0;e<2;e++){let n=i.getChannelData(e);for(let e=0;e<o;e+=a){let i=e+Math.floor(Math.random()*a);if(i<o){let e=Math.exp(-i/(s*t*.3));n[i]=(Math.random()>.5?1:-1)*e}}}return i}function Wo(e,t,n){let s=la(e,t,n);return En(e,s)}ua="ads",Zo=new ArrayBuffer(8),ha=new Float64Array(Zo),da=new BigUint64Array(Zo);function zo(e){return ha[0]=e,da[0]}kn=null,$o=Promise.resolve();function fa(){if(!kn){let e=new At;kn=e.ready.then(()=>e)}return kn}In=class{voice;voiceParams;adjustedBaseFreq=2e4;index=-1;ending=!1;bufferSource;timelineIndex=null;renderedBuffer=null;fullCacheVoiceId=null;filterEnvelopeNode;volumeEnvelopeNode;volumeNode;modLfo;modLfoToPitch;modLfoToFilterFc;modLfoToVolume;vibLfo;vibLfoToPitch;reverbSend;chorusSend;portamentoNoteNumber=-1;pressure=0;constructor(e,t,n){this.noteNumber=e,this.velocity=t,this.startTime=n,this.ready=new Promise(e=>{this.resolveReady=e})}},Hn=class{channelNumber=0;isDrum=!1;programNumber=0;detune=0;bankMSB=121;bankLSB=0;dataMSB=0;dataLSB=0;rpnMSB=127;rpnLSB=127;mono=!1;modulationDepthRange=50;fineTuning=0;coarseTuning=0;activeNotes=new Array(128);sustainNotes=[];sostenutoNotes=[];controlTable=new Int8Array(Vn);scaleOctaveTuningTable=new Float32Array(12);channelPressureTable=new Int8Array(nr);polyphonicKeyPressureTable=new Int8Array(nr);keyBasedTable=new Int8Array(16384).fill(-1);keyBasedGainLs=new Array(128);keyBasedGainRs=new Array(128);lastNote=null;currentBufferSource=null;constructor(e,t,n){this.channelNumber=e,Object.assign(this,t),Object.assign(this,n),this.state=new Nn}resetSettings(e){Object.assign(this,e)}resetTable(){this.controlTable.set(Vn),this.scaleOctaveTuningTable.fill(0),this.channelPressureTable.set(nr),this.polyphonicKeyPressureTable.set(nr),this.keyBasedTable.fill(-1)}},or=new Array(57),pa=10,Y=new Uint8Array(128),Y[42]=1,Y[44]=1,Y[46]=1,Y[71]=2,Y[72]=2,Y[73]=3,Y[74]=3,Y[78]=4,Y[79]=4,Y[80]=5,Y[81]=5,Y[29]=6,Y[30]=6,Y[86]=7,Y[87]=7,or[0]=Y,Zr=new Uint8Array(128),Zr[42]=8,Zr[44]=8,Zr[46]=8,or[25]=Zr,Yr=new Uint8Array(128),Yr[27]=9,Yr[28]=9,Yr[29]=9,or[48]=Yr,Bn=new Uint8Array(128),Bn[41]=10,Bn[42]=10,or[56]=Bn,_t={noteOnVelocity:{type:2,defaultValue:0},noteOnKeyNumber:{type:3,defaultValue:0},polyphonicKeyPressure:{type:10,defaultValue:0},channelPressure:{type:13,defaultValue:0},pitchWheel:{type:14,defaultValue:8192/16383},pitchWheelSensitivity:{type:16,defaultValue:2/128},link:{type:127,defaultValue:0},modulationDepthMSB:{type:129,defaultValue:0},portamentoTimeMSB:{type:133,defaultValue:0},volumeMSB:{type:135,defaultValue:100/127},panMSB:{type:138,defaultValue:64/127},expressionMSB:{type:139,defaultValue:1},modulationDepthLSB:{type:161,defaultValue:0},portamentoTimeLSB:{type:165,defaultValue:0},volumeLSB:{type:167,defaultValue:0},panLSB:{type:170,defaultValue:0},expressionLSB:{type:171,defaultValue:0},sustainPedal:{type:192,defaultValue:0},portamento:{type:193,defaultValue:0},sostenutoPedal:{type:194,defaultValue:0},softPedal:{type:195,defaultValue:0},filterResonance:{type:199,defaultValue:64/127},releaseTime:{type:200,defaultValue:64/127},attackTime:{type:201,defaultValue:64/127},brightness:{type:202,defaultValue:64/127},decayTime:{type:203,defaultValue:64/127},vibratoRate:{type:204,defaultValue:64/127},vibratoDepth:{type:205,defaultValue:64/127},vibratoDelay:{type:206,defaultValue:64/127},portamentoNoteNumber:{type:212,defaultValue:0},reverbSendLevel:{type:219,defaultValue:0},chorusSendLevel:{type:221,defaultValue:0}},Nn=class{array=new Float32Array(256);constructor(){let e=Object.entries(_t);for(let[n,{type:t,defaultValue:s}]of e)this.array[t]=s,Object.defineProperty(this,n,{get:()=>this.array[t],set:e=>this.array[t]=e,enumerable:!0,configurable:!0})}},ma=["volDelay","volAttack","volHold","volDecay","volSustain","volRelease","initialAttenuation"],ba=new Set(ma),ga=["modEnvToPitch","initialFilterFc","modEnvToFilterFc","modDelay","modAttack","modHold","modDecay","modSustain"],ya=new Set(ga),va=["modEnvToPitch","modDelay","modAttack","modHold","modDecay","modSustain","playbackRate"],Sa=new Set(va),Dn=[2400/64,9600/64,1/64,600/127,2400/127,1/127],rr=new Int8Array([64,64,0,0,0,0]),nr=new Int8Array([64,64,64,0,0,0]),Vn=new Int8Array([-1,-1,-1,-1,-1,-1,...nr]),Ne=class{buffer;isLoop;isFull;adsDuration;loopStart;loopDuration;noteDuration;releaseDuration;constructor(e,t={}){this.buffer=e,this.isLoop=t.isLoop??!1,this.isFull=t.isFull??!1,this.adsDuration=t.adsDuration,this.loopStart=t.loopStart,this.loopDuration=t.loopDuration,this.noteDuration=t.noteDuration,this.releaseDuration=t.releaseDuration}};function is(e){return Math.pow(10,e/200)}os=1/-Math.log(is(-1e3)),vt=1/-Math.log(is(-600)),Xo=class extends EventTarget{perceptualSmoothingTime=.004;mode="GM2";masterFineTuning=0;masterCoarseTuning=0;reverb={algorithm:"Schroeder",time:this.getReverbTime(64),feedback:.8};chorus={modRate:this.getChorusModRate(3),modDepth:this.getChorusModDepth(19),feedback:this.getChorusFeedback(8),sendToReverb:this.getChorusSendToReverb(0),delayTimes:this.generateDistributedArray(.02,2,.5)};numChannels=16;ticksPerBeat=120;totalTime=0;lastActiveSensing=0;activeSensingThreshold=.3;noteCheckInterval=.1;lookAhead=1;startDelay=.1;startTime=0;resumeTime=0;soundFonts=[];soundFontTable=Array.from({length:128},()=>[]);voiceCounter=new Map;voiceCache=new Map;realtimeVoiceCache=new Map;decodeMethod="wasm-audio-decoders";isPlaying=!1;isPausing=!1;isPaused=!1;isStopping=!1;isSeeking=!1;totalTimeEventTypes=new Set(["noteOff"]);tempo=1;loop=!1;loopStart=0;playPromise;timeline=[];notePromises=[];instruments=new Set;exclusiveClassNotes=new Array(128);drumExclusiveClassNotes=new Array(this.numChannels*pa);adsrVoiceCache=new Map;noteOnDurations=new Map;noteOnEvents=new Map;fullVoiceCache=new Map;renderedAudioBuffer=null;isRendering=!1;audioModeBufferSource=null;mpeEnabled=!1;lowerMPEMembers=0;upperMPEMembers=0;mpeState={channelToNotes:new Map};static channelSettings={detune:0,programNumber:0,bankMSB:121,bankLSB:0,dataMSB:0,dataLSB:0,rpnMSB:127,rpnLSB:127,mono:!1,modulationDepthRange:50,fineTuning:0,coarseTuning:0,portamentoControl:!1,isMPEMember:!1,isMPEManager:!1};constructor(e){super(),this.audioContext=e,this.cacheMode=ua,this.masterVolume=new GainNode(e),this.scheduler=new GainNode(e,{gain:0}),this.schedulerBuffer=new AudioBuffer({length:1,sampleRate:e.sampleRate}),this.messageHandlers=this.createMessageHandlers(),this.voiceParamsHandlers=this.createVoiceParamsHandlers(),this.controlChangeHandlers=this.createControlChangeHandlers(),this.keyBasedControllerHandlers=this.createKeyBasedControllerHandlers(),this.effectHandlers=this.createEffectHandlers(),this.channels=this.createChannels(),this.reverbEffect=this.createReverbEffect(this.reverb.algorithm),this.chorusEffect=this.createChorusEffect(),this.chorusEffect.output.connect(this.masterVolume),this.reverbEffect.output.connect(this.masterVolume),this.masterVolume.connect(e.destination),this.scheduler.connect(e.destination),this.GM2SystemOn()}addSoundFont(e){let n=this.soundFonts.length;this.soundFonts.push(e);let t=e.parsed.presetHeaders,s=this.soundFontTable;for(let e=0;e<t.length;e++){let{preset:o,bank:i}=t[e];s[o][i]=n}}async toUint8Array(e){let t;if(typeof e=="string"){let n=await(await fetch(e)).arrayBuffer();t=new Uint8Array(n)}else if(e instanceof Uint8Array)t=e;else throw new TypeError("input must be a URL string or Uint8Array");return t}async loadSoundFont(e){if(this.voiceCounter.clear(),Array.isArray(e)){let t=new Array(e.length);for(let n=0;n<e.length;n++)t[n]=this.toUint8Array(e[n]);let n=await Promise.all(t);for(let e=0;e<n.length;e++){let t=cn(n[e]),s=new hs(t);this.addSoundFont(s)}}else{let t=await this.toUint8Array(e),n=cn(t),s=new hs(n);this.addSoundFont(s)}}async loadMIDI(e){this.voiceCounter.clear();let s=await this.toUint8Array(e),t=(0,Jo.parseMidi)(s);this.ticksPerBeat=t.header.ticksPerBeat;let n=this.extractMidiData(t);this.instruments=n.instruments,this.timeline=n.timeline,this.totalTime=this.calcTotalTime(),this.cacheMode==="audio"&&await this.render()}buildNoteOnDurations(){let{timeline:r,totalTime:d,noteOnDurations:c,noteOnEvents:l,numChannels:t}=this;c.clear(),l.clear();let u=1/this.tempo,o=new Uint8Array(t),a=new Uint8Array(t),i=new Array(t).fill(null).map(()=>new Set),e=new Map,n=new Map,s=(e,t,n)=>{let s=Math.max(0,t-e.startTime),o=n==null||n===1/0?1/0:Math.max(0,n-e.startTicks);c.set(e.idx,s),l.set(e.idx,{duration:s,durationTicks:o,startTime:e.startTime,events:e.events})};for(let d=0;d<r.length;d++){let c=r[d],l=c.startTime*u;switch(c.type){case"noteOn":{let s=c.noteNumber*t+c.channel;e.has(s)||e.set(s,[]),e.get(s).push({idx:d,startTime:l,startTicks:c.ticks,events:[]});let o=n.get(s);o&&o.length>0&&o.shift();break}case"noteOff":{let r=c.channel,a=c.noteNumber*t+r,d=i[r].has(a);if(o[r]||d)n.has(a)||n.set(a,[]),n.get(a).push({t:l,ticks:c.ticks});else{let t=e.get(a);t&&t.length>0&&(s(t.shift(),l,c.ticks),t.length===0&&e.delete(a))}break}case"controller":{let r=c.channel;for(let[n,s]of e)if(n%t===r)for(let e of s)e.events.push(c);switch(c.controllerType){case 64:{let i=c.value>=64;if(o[r]=i?1:0,!i)for(let[o,a]of n){if(o%t!==r)continue;let i=e.get(o);for(let{t,ticks:n}of a)i&&i.length>0&&(s(i.shift(),t,n),i.length===0&&e.delete(o));n.delete(o)}break}case 66:{let n=c.value>=64;if(n&&!a[r])for(let[n]of e)n%t===r&&i[r].add(n);else n||i[r].clear();a[r]=n?1:0;break}case 121:o[r]=0,a[r]=0,i[r].clear();break;case 120:case 123:{for(let[n,o]of e)if(n%t===r){for(let e of o)s(e,l,c.ticks);e.delete(n)}for(let e of n.keys())e%t===r&&n.delete(e);break}}break}case"sysEx":if(c.data[0]===126&&c.data[1]===9&&c.data[2]===3){if(c.data[3]===1||c.data[3]===3){o.fill(0),n.clear();for(let[,t]of e)for(let e of t)s(e,l,c.ticks);e.clear()}}else for(let[,t]of e)for(let e of t)e.events.push(c);break;case"pitchBend":case"programChange":case"channelAftertouch":case"noteAftertouch":{let n=c.channel;for(let[s,o]of e)if(s%t===n)for(let e of o)e.events.push(c)}}}for(let[,t]of e)for(let e of t)s(e,d,1/0)}cacheVoiceIds(){let{channels:s,timeline:n,voiceCounter:e,cacheMode:t}=this;for(let o=0;o<n.length;o++){let t=n[o];switch(t.type){case"noteOn":{let n=this.getVoiceId(s[t.channel],t.noteNumber,t.velocity);e.set(n,(e.get(n)??0)+1);break}case"controller":t.controllerType===0?this.setBankMSB(t.channel,t.value):t.controllerType===32&&this.setBankLSB(t.channel,t.value);break;case"programChange":this.setProgramChange(t.channel,t.programNumber,t.startTime)}}for(let[t,n]of e)n===1&&e.delete(t);this.GM2SystemOn(),(t==="adsr"||t==="note"||t==="audio")&&this.buildNoteOnDurations()}getVoiceId(e,t,n){let a=e.programNumber,o=this.soundFontTable[a];if(!o)return;let s=e.isDrum?128:e.bankLSB;if(o[s]===void 0){if(e.isDrum)return;s=0}let i=o[s];if(i===void 0)return;let r=this.soundFonts[i].getVoice(s,a,t,n);if(!r)return;let{instrument:c,sampleID:l}=r.generators;return i*2**31+c*2**24+(l<<8)}createChannelAudioNodes(e){let{gainLeft:o,gainRight:i}=this.panToGain(_t.panMSB.defaultValue),n=new GainNode(e,{gain:o}),s=new GainNode(e,{gain:i}),t=new ChannelMergerNode(e,{numberOfInputs:2});return n.connect(t,0,0),s.connect(t,0,1),t.connect(this.masterVolume),{gainL:n,gainR:s,merger:t}}createChannels(){let e=this.constructor.channelSettings,t=this.audioContext;return Array.from({length:this.numChannels},(n,s)=>new Hn(s,this.createChannelAudioNodes(t),e))}decodeOggVorbis(e){let t=$o.then(async()=>{let o=await fa(),i=e.data.slice(),{channelData:t,sampleRate:a,errors:n}=await o.decodeFile(i);if(0<n.length)throw new Error(n.join(", "));let s=new AudioBuffer({numberOfChannels:t.length,length:t[0].length,sampleRate:a});for(let e=0;e<t.length;e++)s.getChannelData(e).set(t[e]);return s});return $o=t.catch(()=>{}),t}async createAudioBuffer(e){let t=e.sample;if(t.type==="compressed")switch(this.decodeMethod){case"decodeAudioData":{let e=t.data.slice().buffer;return await this.audioContext.decodeAudioData(e)}case"wasm-audio-decoders":return await this.decodeOggVorbis(t);default:throw new Error(`Unknown decodeMethod: ${this.decodeMethod}`)}else{let n=t.data,i=n.length+e.end,a=n.subarray(e.start,i),s=t.decodePCM(a),o=new AudioBuffer({numberOfChannels:1,length:s.length,sampleRate:t.sampleHeader.sampleRate});return o.getChannelData(0).set(s),o}}isLoopDrum(e,t){let n=e.programNumber;return n===48&&t===88||n===56&&47<=t&&t<=84}createBufferSource(e,t,n,s){let i=s instanceof Ne,a=i?s.buffer:s,o=new AudioBufferSourceNode(this.audioContext);o.buffer=a;let r=e.isDrum?this.isLoopDrum(e,t):n.sampleModes%2!==0,c=i?s.isLoop:r;return o.loop=c,o.loop&&(i&&s.adsDuration!=null?(o.loopStart=s.loopStart,o.loopEnd=s.loopStart+s.loopDuration):(o.loopStart=n.loopStart/n.sampleRate,o.loopEnd=n.loopEnd/n.sampleRate)),o}scheduleTimelineEvents(e,t){let n=this.resumeTime-this.startTime,o=e+n+this.lookAhead,i=this.startDelay-n,s=this.timeline,a=1/this.tempo;for(;t<s.length;){let e=s[t],r=e.startTime*a;if(o<r)break;let n=r+i;switch(e.type){case"noteOn":{let s=this.createNote(e.channel,e.noteNumber,e.velocity,n);s.timelineIndex=t,this.setupNote(e.channel,s,n);break}case"noteOff":this.noteOff(e.channel,e.noteNumber,e.velocity,n,!1);break;case"controller":this.setControlChange(e.channel,e.controllerType,e.value,n);break;case"programChange":this.setProgramChange(e.channel,e.programNumber,n);break;case"pitchBend":this.setPitchBend(e.channel,e.value+8192,n);break;case"sysEx":this.handleSysEx(e.data,n);break;case"channelAftertouch":this.setChannelPressure(e.channel,e.amount,n);break;case"noteAftertouch":this.setPolyphonicKeyPressure(e.channel,e.noteNumber,e.amount,n)}t++}return t}getQueueIndex(e){let t=this.timeline,n=1/this.tempo;for(let s=0;s<t.length;s++)if(e<=t[s].startTime*n)return s;return 0}resetAllStates(){this.exclusiveClassNotes.fill(void 0),this.drumExclusiveClassNotes.fill(void 0),this.voiceCache.clear(),this.realtimeVoiceCache.clear(),this.adsrVoiceCache.clear();let e=this.channels;for(let t=0;t<e.length;t++){let n=e[t];n.lastNote=null,n.activeNotes=new Array(128),n.sustainNotes=[],n.sostenutoNotes=[],this.resetChannelStates(t)}this.mpeState.channelToNotes.clear()}updateStates(e,t){let{timeline:i,resumeTime:n}=this,s=1/this.tempo,o=this.audioContext.currentTime;t<e&&(e=0);for(let r=e;r<t;r++){let a=i[r];switch(a.type){case"controller":this.setControlChange(a.channel,a.controllerType,a.value,o-n+a.startTime*s);break;case"programChange":this.setProgramChange(a.channel,a.programNumber,o-n+a.startTime*s);break;case"pitchBend":this.setPitchBend(a.channel,a.value+8192,o-n+a.startTime*s);break;case"sysEx":this.handleSysEx(a.data,o-n+a.startTime*s);break;case"channelAftertouch":this.setChannelPressure(a.channel,a.amount,o-n+a.startTime*s);break;case"noteAftertouch":this.setPolyphonicKeyPressure(a.channel,a.noteNumber,a.amount,o-n+a.startTime*s)}}}async playAudioBuffer(){let e=this.audioContext,n=this.isPaused;this.isPlaying=!0,this.isPaused=!1,this.startTime=e.currentTime,n?this.dispatchEvent(new Event("resumed")):this.dispatchEvent(new Event("started"));let t;e:for(;;){let s=this.renderedAudioBuffer,n=new AudioBufferSourceNode(e,{buffer:s});n.playbackRate.value=this.tempo,n.connect(this.masterVolume);let i=Math.min(Math.max(this.resumeTime,0),s.duration);n.start(e.currentTime,i),this.audioModeBufferSource=n;let o=!1;for(n.onended=()=>{o=!0};;){let s=e.currentTime;if(await this.scheduleTask(()=>{},s+this.noteCheckInterval),o||this.currentTime()>=this.totalTime){if(n.disconnect(),this.audioModeBufferSource=null,this.loop){this.resumeTime=0,this.startTime=e.currentTime,this.dispatchEvent(new Event("looped"));continue e}await e.suspend(),t="ended";break e}if(this.isPausing){this.resumeTime=this.currentTime(),n.stop(),n.disconnect(),this.audioModeBufferSource=null,await e.suspend(),this.isPausing=!1,t="paused";break e}if(this.isStopping){n.stop(),n.disconnect(),this.audioModeBufferSource=null,await e.suspend(),this.isStopping=!1,t="stopped";break e}if(this.isSeeking){n.stop(),n.disconnect(),this.audioModeBufferSource=null,this.startTime=e.currentTime,this.isSeeking=!1,this.dispatchEvent(new Event("seeked"));continue e}}}this.isPlaying=!1,t==="paused"?(this.isPaused=!0,this.dispatchEvent(new Event("paused"))):t!==void 0&&(this.isPaused=!1,this.dispatchEvent(new Event(t)))}async playNotes(){let e=this.audioContext;if(e.state==="suspended"&&await e.resume(),this.cacheMode==="audio"&&this.renderedAudioBuffer)return await this.playAudioBuffer();let s=this.isPaused;this.isPlaying=!0,this.isPaused=!1,this.startTime=e.currentTime,s?this.dispatchEvent(new Event("resumed")):this.dispatchEvent(new Event("started"));let t=this.getQueueIndex(this.resumeTime),n;for(this.notePromises=[];;){let s=e.currentTime;if(0<this.lastActiveSensing&&this.activeSensingThreshold<performance.now()-this.lastActiveSensing){await this.stopNotes(s),await e.suspend(),n="aborted";break}if(this.totalTime<this.currentTime()||this.timeline.length<=t){let s=this.notePromises.slice();if(this.notePromises=[],await Promise.allSettled(s),this.loop){if(this.resetAllStates(),this.startTime=e.currentTime,this.resumeTime=this.loopStart,0<this.loopStart){let e=this.getQueueIndex(this.resumeTime);this.updateStates(t,e),t=e}else t=0;this.dispatchEvent(new Event("looped"));continue}await e.suspend(),n="ended";break}if(this.isPausing){await this.stopNotes(s),await e.suspend(),this.isPausing=!1,n="paused";break}if(this.isStopping){await this.stopNotes(s),await e.suspend(),this.isStopping=!1,n="stopped";break}if(this.isSeeking){this.stopNotes(s),this.startTime=e.currentTime;let n=this.getQueueIndex(this.resumeTime);this.updateStates(t,n),t=n,this.isSeeking=!1,this.dispatchEvent(new Event("seeked"));continue}t=this.scheduleTimelineEvents(s,t);let o=s+this.noteCheckInterval;await this.scheduleTask(()=>{},o)}n!=="paused"&&(this.resetAllStates(),this.lastActiveSensing=0),this.isPlaying=!1,n==="paused"?(this.isPaused=!0,this.dispatchEvent(new Event("paused"))):(this.isPaused=!1,this.dispatchEvent(new Event(n)))}ticksToSecond(e,t){return e*t/this.ticksPerBeat}secondToTicks(e,t){return e*this.ticksPerBeat/t}getSoundFontId(e){let t=e.programNumber,n=(e.isDrum?128:e.bankLSB).toString().padStart(3,"0"),s=t.toString().padStart(3,"0");return`${n}:${s}`}extractMidiData(e){let n=new Set,t=[],i=this.channels;for(let s=0;s<e.tracks.length;s++){let o=e.tracks[s],a=0;for(let s=0;s<o.length;s++){let e=o[s];switch(a+=e.deltaTime,e.ticks=a,e.type){case"noteOn":{let t=i[e.channel];n.add(this.getSoundFontId(t));break}case"controller":switch(e.controllerType){case 0:this.setBankMSB(e.channel,e.value);break;case 32:this.setBankLSB(e.channel,e.value);break}break;case"programChange":{let t=i[e.channel];this.setProgramChange(e.channel,e.programNumber),n.add(this.getSoundFontId(t));break}case"sysEx":{let t=e.data;if(t[0]===126&&t[1]===9&&t[2]===3)switch(t[3]){case 1:this.GM1SystemOn();break;case 2:break;case 3:this.GM2SystemOn();break;default:console.warn(`Unsupported Exclusive Message: ${t}`)}}}delete e.deltaTime,t.push(e)}}let a={controller:0,sysEx:1,noteOff:2,noteOn:3};t.sort((e,t)=>e.ticks!==t.ticks?e.ticks-t.ticks:(a[e.type]||4)-(a[t.type]||4));let r=0,s=0,o=.5;for(let n=0;n<t.length;n++){let e=t[n],i=this.ticksToSecond(e.ticks-s,o);e.startTime=r+i,e.type==="setTempo"&&(r+=this.ticksToSecond(e.ticks-s,o),o=e.microsecondsPerBeat/1e6,s=e.ticks)}return{instruments:n,timeline:t}}async stopChannelNotes(e,t){let n=this.channels[e],s=[],o=this.perceptualSmoothingTime/5;for(let e=0;e<128;e++){let i=n.activeNotes[e];if(i)for(let n=0;n<i.length;n++){let e=i[n],a=e.ready.then(()=>{if(!e.voice)return;let s=this.audioContext.currentTime,n=Math.max(t,s);e.volumeNode.gain.cancelScheduledValues(n).setTargetAtTime(0,n,o),e.bufferSource.stop(n+this.perceptualSmoothingTime)});s.push(a)}}await Promise.all(s),n.lastNote=null,n.activeNotes=new Array(128),n.sustainNotes=[],n.sostenutoNotes=[],this.notePromises=[]}async stopNotes(e){for(let t=0;t<this.channels.length;t++)await this.stopChannelNotes(t,e);let t=Promise.all(this.notePromises);return this.notePromises=[],t}async render(){if(this.isRendering||this.timeline.length===0)return;this.voiceCounter.size===0&&this.cacheVoiceIds(),this.isRendering=!0,this.renderedAudioBuffer=null,this.dispatchEvent(new Event("rendering"));let c=this.audioContext.sampleRate,d=Math.ceil((this.totalTime+this.startDelay)*c),t=new Uint8Array(this.numChannels),s=new Uint8Array(this.numChannels),o=new Uint8Array(this.numChannels),e=new Uint8Array(this.numChannels),i=new Uint8Array(this.numChannels*128);t.fill(121),e[9]=1,t[9]=120;let n=Array.from({length:this.numChannels},()=>{let e=new Float32Array(256);for(let{type:t,defaultValue:n}of Object.values(_t))e[t]=n;return e}),a=[],l=this.timeline,u=1/this.tempo;for(let d=0;d<l.length;d++){let c=l[d],r=c.channel;switch(c.type){case"noteOn":{let b=this.noteOnEvents.get(d),j=b?.duration??this.noteOnDurations.get(d)??0;if(j<=0)continue;let{noteNumber:l,velocity:m}=c,f=e[r]===1,p=o[r],g=this.soundFontTable[p];if(!g)continue;let t=f?128:s[r];if(g[t]===void 0){if(f)continue;t=0}let v=g[t];if(v===void 0)continue;let w=this.soundFonts[v],O=i[r*128+l],h={channelNumber:r,state:{array:n[r].slice()},programNumber:p,isDrum:f,modulationDepthRange:50,detune:0},x=this.getControllerState(h,l,m,O),y=w.getVoice(t,p,l,m);if(!y)continue;let _=y.getAllParams(x),C=c.startTime*u+this.startDelay,E={voiceParams:_,channel:r,noteNumber:l,velocity:m},k=(async()=>{try{return await this.createFullRenderedBuffer(h,E,_,j,b)}catch(e){return console.warn("render: note render failed",e),null}})();a.push({t:C,promise:k,fakeChannel:h});break}case"controller":{let{controllerType:i,value:o}=c;switch(i){case 0:t[r]=o,this.mode==="GM2"&&(o===120?e[r]=1:o===121&&(e[r]=0));break;case 32:s[r]=o;break;default:{let e=128+i;e<256&&(n[r][e]=o/127);break}}break}case"pitchBend":n[r][14]=(c.value+8192)/16383;break;case"programChange":o[r]=c.programNumber,this.mode==="GM2"&&(t[r]===120?e[r]=1:t[r]===121&&(e[r]=0));break;case"sysEx":{let a=c.data;if(a[0]===126&&a[1]===9&&a[2]===3)if(a[3]===1){t.fill(0),s.fill(0),o.fill(0),e.fill(0),e[9]=1,t[9]=1;for(let e=0;e<this.numChannels;e++)for(let{type:t,defaultValue:s}of Object.values(_t))n[e][t]=s;i.fill(0)}else if(a[3]===3){t.fill(121),s.fill(0),o.fill(0),e.fill(0),e[9]=1,t[9]=120;for(let e=0;e<this.numChannels;e++)for(let{type:t,defaultValue:s}of Object.values(_t))n[e][t]=s;i.fill(0)}break}case"channelAftertouch":n[r][13]=c.amount/127;break;case"noteAftertouch":i[r*128+c.noteNumber]=c.amount;break}}let r=new OfflineAudioContext(2,d,c);for(let t=0;t<a.length;t++){let{t:s,promise:o}=a[t],e=await o;if(!e)continue;let i=e instanceof Ne?e.buffer:e,n=new AudioBufferSourceNode(r,{buffer:i});n.connect(r.destination),n.start(s)}return this.renderedAudioBuffer=await r.startRendering(),this.isRendering=!1,this.dispatchEvent(new Event("rendered")),this.renderedAudioBuffer}async start(){this.isPlaying||this.isPaused||(this.resumeTime=0,this.voiceCounter.size===0&&this.cacheVoiceIds(),this.playPromise=this.playNotes(),await this.playPromise)}async stop(){this.isPlaying&&(this.isStopping=!0,await this.playPromise)}async pause(){if(!this.isPlaying||this.isPaused)return;let e=this.audioContext.currentTime;this.resumeTime=e+this.resumeTime-this.startTime,this.isPausing=!0,await this.playPromise}async resume(){this.isPaused&&(this.playPromise=this.playNotes(),await this.playPromise)}seekTo(e){this.resumeTime=e,this.isPlaying&&(this.isSeeking=!0)}tempoChange(e){let t=this.cacheMode,n=this.tempo/e;this.resumeTime=this.resumeTime*n,this.tempo=e,this.totalTime=this.calcTotalTime(),this.seekTo(this.currentTime()*n),(t==="adsr"||t==="note"||t==="audio")&&(this.buildNoteOnDurations(),this.fullVoiceCache.clear(),this.adsrVoiceCache.clear()),t==="audio"&&this.audioModeBufferSource&&this.audioModeBufferSource.playbackRate.setValueAtTime(this.tempo,this.audioContext.currentTime)}calcTotalTime(){let n=this.totalTimeEventTypes,t=this.timeline,s=1/this.tempo,e=0;for(let o=0;o<t.length;o++){let i=t[o];if(!n.has(i.type))continue;let a=i.startTime*s;e<a&&(e=a)}return e+this.startDelay}currentTime(){if(!this.isPlaying)return this.resumeTime;let e=this.audioContext.currentTime;return this.cacheMode==="audio"?this.resumeTime+(e-this.startTime)*this.tempo:e+this.resumeTime-this.startTime}async processScheduledNotes(e,t){let n=[];for(let s=0;s<128;s++){let o=e.activeNotes[s];if(o)for(let e=0;e<o.length;e++){let s=o[e];if(s.ending)continue;let i=s.ready.then(()=>t(s));n.push(i)}}return await Promise.all(n)}async processActiveNotes(e,t,n){let s=[];for(let o=0;o<128;o++){let i=e.activeNotes[o];if(i)for(let o=0;o<i.length;o++){let e=i[o];if(e.ending||t<e.startTime)continue;let a=e.ready.then(()=>n(e));s.push(a)}}return await Promise.all(s)}applyToMPEChannels(e,t){if(t(e),!!this.channels[e].isMPEManager)if(e===0)for(let e=1;e<=this.lowerMPEMembers;e++)t(e);else if(e===15)for(let e=15-this.upperMPEMembers;e<=14;e++)t(e)}generateDistributedArray(e,t,n=.1,s=.05){let o=e*n,i=new Array(t);for(let n=0;n<t;n++){let a=n/(t-1||1),r=e-o+a*2*o;i[n]=r*(1-(Math.random()*2-1)*s)}return i}setReverbEffect(e){this.reverbEffect&&this.reverbEffect.output.disconnect(),this.reverbEffect=this.createReverbEffect(e),this.reverb.algorithm=e}createReverbEffect(e){let{audioContext:t,reverb:o}=this,{time:s,feedback:n}=o;switch(e){case"Convolution":{let e=Lo(t,s,this.calcDelay(s,n));return En(t,e)}case"Schroeder":{let e=this.generateDistributedArray(n,4),i=e.map(e=>this.calcDelay(s,e)),o=this.generateDistributedArray(n,4),a=o.map(e=>this.calcDelay(s,e));return Go(t,e,i,o,a)}case"Moorer":return jo(t,{rt60:s,damping:1-n});case"FDN":return qo(t,{rt60:s,damping:1-n});case"Dattorro":{let e=n*.28+.7;return Ko(t,{decay:e,damping:1-n})}case"Freeverb":{let o=1-n,{inputL:i,inputR:a,outputL:r,outputR:c}=Qo(t,{roomSize:n,damping:o}),e=new GainNode(t),s=new GainNode(t,{gain:.5});return e.connect(i),e.connect(a),r.connect(s),c.connect(s),{input:e,output:s}}case"VelvetNoise":return Wo(t,s);default:throw new Error(`Unknown reverb algorithm: ${e}`)}}createChorusEffect(){let e=this.audioContext,o=new GainNode(e),t=new GainNode(e),i=new GainNode(e),n=new OscillatorNode(e,{frequency:this.chorus.modRate}),s=new GainNode(e,{gain:this.chorus.modDepth/2}),a=this.chorus.delayTimes,r=[],c=[];for(let i=0;i<a.length;i++){let d=a[i],n=new DelayNode(e,{maxDelayTime:.1,delayTime:d}),l=new GainNode(e,{gain:this.chorus.feedback});r.push(n),c.push(l),o.connect(n),s.connect(n.delayTime),n.connect(l),l.connect(n),n.connect(t)}return t.connect(i),n.connect(s),n.start(),{input:o,output:t,sendGain:i,lfo:n,lfoGain:s,delayNodes:r,feedbackGains:c}}rateToCent(e){return 1200*Math.log2(e)}centToRate(e){return Math.pow(2,e/1200)}centToHz(e){return 8.176*this.centToRate(e)}calcChannelDetune(e){let t=e.isDrum?0:this.masterCoarseTuning+this.masterFineTuning,n=e.coarseTuning+e.fineTuning,s=t+n,o=e.state.pitchWheel*2-1,i=e.state.pitchWheelSensitivity*12800,a=o*i,r=this.getChannelPitchControl(e);return s+a+r}updateChannelDetune(e,t){this.processScheduledNotes(e,n=>{n.renderedBuffer?.isFull||(this.isPortamento(e,n)?this.setPortamentoDetune(e,n,t):this.setDetune(e,n,t))})}calcScaleOctaveTuning(e,t){return e.scaleOctaveTuningTable[t.noteNumber%12]}calcNoteDetune(e,t){let n=t.voiceParams.detune+this.calcScaleOctaveTuning(e,t),s=this.getNotePitchControl(e,t);return e.detune+n+s}getPortamentoTime(e,t){let{portamentoTimeMSB:n,portamentoTimeLSB:s}=e.state,o=n+s/128,i=Math.abs(t.noteNumber-t.portamentoNoteNumber),a=Math.ceil(o*128);return i/this.getPitchIncrementSpeed(a)/10}getPitchIncrementSpeed(e){let u=[[0,1e3],[6,100],[16,20],[32,10],[48,5],[64,2.5],[80,1],[96,.4],[112,.15],[127,.01]],t=new Array(u.length);for(let n=0;n<u.length;n++){let[s,o]=u[n];if(e===s)return o;t[n]=[s,Math.log(o)]}let n=0;for(let s=1;s<t.length;s++)if(e<=t[s][0]){n=s-1;break}let[h,i]=t[n],[m,r]=t[n+1],c=m-h,o=(e-h)/c,d,l;if(n===0)d=(r-i)/c;else{let[e,s]=t[n-1];d=(r-s)/(m-e)}if(n===t.length-2)l=(r-i)/c;else{let[e,s]=t[n+2];l=(s-i)/(e-h)}let s=o*o,a=s*o,f=2*a-3*s+1,p=a-2*s+o,g=-2*a+3*s,v=a-s,b=f*i+g*r+c*(p*d+v*l);return Math.exp(b)}setPortamentoVolumeEnvelope(e,t,n){let{voiceParams:s,startTime:o}=t,i=is(-s.initialAttenuation)*(1+this.getChannelAmplitudeControl(e))*(1-s.volSustain),a=o+this.getPortamentoTime(e,t);t.volumeEnvelopeNode.gain.cancelScheduledValues(n).exponentialRampToValueAtTime(i,a)}setVolumeEnvelope(e,t,n){if(!t.volumeEnvelopeNode)return;let{voiceParams:s,startTime:i,noteNumber:a}=t,o=is(-s.initialAttenuation)*(1+this.getChannelAmplitudeControl(e)),d=o*(1-s.volSustain),r=i+s.volDelay,u=this.getRelativeKeyBasedValue(e,a,73)*2,c=r+s.volAttack*u,l=c+s.volHold,h=this.getRelativeKeyBasedValue(e,a,75)*2,m=s.volDecay*h;t.volumeEnvelopeNode.gain.cancelScheduledValues(n).setValueAtTime(0,i).setValueAtTime(1e-6,r).exponentialRampToValueAtTime(o,c).setValueAtTime(o,l).setTargetAtTime(d,l,m*os)}setVolumeNode(e,t,n){let s=1+this.getNoteAmplitudeControl(e,t),o=this.perceptualSmoothingTime/5;t.volumeNode.gain.cancelAndHoldAtTime(n).setTargetAtTime(s,n,o)}setPortamentoDetune(e,t,n){if(e.portamentoControl){let n=e.state,s=Math.ceil(n.portamentoNoteNumber*127);t.portamentoNoteNumber=s,e.portamentoControl=!1,n.portamentoNoteNumber=0}let s=this.calcNoteDetune(e,t),o=t.startTime,i=(t.noteNumber-t.portamentoNoteNumber)*100,a=o+this.getPortamentoTime(e,t);t.bufferSource.detune.cancelScheduledValues(n).setValueAtTime(s-i,n).linearRampToValueAtTime(s,a)}setDetune(e,t,n){let s=this.calcNoteDetune(e,t),o=this.perceptualSmoothingTime/5;t.bufferSource.detune.cancelAndHoldAtTime(n).setTargetAtTime(s,n,o)}setPortamentoPitchEnvelope(e,t,n){let s=t.voiceParams.playbackRate,o=t.startTime+this.getPortamentoTime(e,t);t.bufferSource.playbackRate.cancelScheduledValues(n).exponentialRampToValueAtTime(s,o)}setPitchEnvelope(e,t){let{bufferSource:o,voiceParams:n}=e,s=n.playbackRate;o.playbackRate.cancelScheduledValues(t).setValueAtTime(s,t);let i=n.modEnvToPitch;if(i===0)return;let a=s*this.centToRate(i),r=e.startTime+n.modDelay,c=r+n.modAttack,l=c+n.modHold,d=n.modDecay;o.playbackRate.setValueAtTime(s,r).exponentialRampToValueAtTime(a,c).setValueAtTime(a,l).setTargetAtTime(s,l,d*os)}clampCutoffFrequency(e){return Math.max(20,Math.min(e,2e4))}setPortamentoFilterEnvelope(e,t,n){if(!t.filterEnvelopeNode)return;let{voiceParams:s,startTime:o,noteNumber:f}=t,l=this.getSoftPedalFactor(e,t),m=this.getRelativeKeyBasedValue(e,f,74)*2,c=l*m,i=s.initialFilterFc+this.getFilterCutoffControl(e,t),d=i+s.modEnvToFilterFc*(1-s.modSustain),u=this.centToHz(i)*c,h=this.centToHz(d)*c,r=this.clampCutoffFrequency(u),a=this.clampCutoffFrequency(h),p=o+this.getPortamentoTime(e,t),g=o+s.modDelay;t.adjustedBaseFreq=a,t.filterEnvelopeNode.frequency.cancelScheduledValues(n).setValueAtTime(r,o).setValueAtTime(r,g).exponentialRampToValueAtTime(a,p)}setFilterEnvelope(e,t,n){if(!t.filterEnvelopeNode)return;let{voiceParams:s,startTime:r,noteNumber:_}=t,l=s.modEnvToFilterFc,o=s.initialFilterFc+this.getFilterCutoffControl(e,t),y=o+l,j=o+l*(1-s.modSustain),v=this.getSoftPedalFactor(e,t),g=this.getRelativeKeyBasedValue(e,_,74)*2,a=v*g,m=this.centToHz(o)*a,f=this.centToHz(y)*a,p=this.centToHz(j)*a,i=this.clampCutoffFrequency(m),h=this.clampCutoffFrequency(f),b=this.clampCutoffFrequency(p),u=r+s.modDelay,d=u+s.modAttack,c=d+s.modHold,w=s.modDecay;t.adjustedBaseFreq=i,t.filterEnvelopeNode.frequency.cancelScheduledValues(n).setValueAtTime(i,r).setValueAtTime(i,u).exponentialRampToValueAtTime(h,d).setValueAtTime(h,c).setTargetAtTime(b,c,w*os)}startModulation(e,t,n){let s=this.audioContext,{voiceParams:o}=t;t.modLfo=new OscillatorNode(s,{frequency:this.centToHz(o.freqModLFO)}),t.modLfoToFilterFc=new GainNode(s,{gain:o.modLfoToFilterFc}),t.modLfoToPitch=new GainNode(s),this.setModLfoToPitch(e,t,n),t.modLfoToVolume=new GainNode(s),this.setModLfoToVolume(e,t,n),t.modLfo.start(t.startTime+o.delayModLFO),t.modLfo.connect(t.modLfoToFilterFc),t.filterEnvelopeNode&&t.modLfoToFilterFc.connect(t.filterEnvelopeNode.frequency),t.modLfo.connect(t.modLfoToPitch),t.modLfoToPitch.connect(t.bufferSource.detune),t.modLfo.connect(t.modLfoToVolume);let i=t.volumeEnvelopeNode??t.volumeNode;t.modLfoToVolume.connect(i.gain)}startVibrato(e,t,n){let s=this.audioContext,{voiceParams:o,noteNumber:i}=t,a=this.getRelativeKeyBasedValue(e,i,76)*2,r=this.getRelativeKeyBasedValue(e,i,78)*2;t.vibLfo=new OscillatorNode(s,{frequency:this.centToHz(o.freqVibLFO)*a}),t.vibLfo.start(t.startTime+o.delayVibLFO*r),t.vibLfoToPitch=new GainNode(s),this.setVibLfoToPitch(e,t,n),t.vibLfo.connect(t.vibLfoToPitch),t.vibLfoToPitch.connect(t.bufferSource.detune)}async createAdsRenderedBuffer(e,t,n,s,o=!1){let a=!o&&n.sampleModes%2!==0,O=n.volDelay+n.volAttack+n.volHold,w=n.volDecay,h=O+w*os*5,m=n.loopStart/n.sampleRate,v=a?(n.loopEnd-n.loopStart)/n.sampleRate:0,c=n.playbackRate,f=m/c,l=v/c,y=a&&h>f?Math.ceil((h-f)/l):0,p=f+y*l,j=a?p+l:s.duration/c,g=this.audioContext.sampleRate,r=new OfflineAudioContext(s.numberOfChannels,Math.ceil(j*g),g),i=new AudioBufferSourceNode(r);i.buffer=s,i.playbackRate.value=c,i.loop=a,a&&(i.loopStart=m,i.loopEnd=m+v);let _=this.clampCutoffFrequency(this.centToHz(n.initialFilterFc)),u=new BiquadFilterNode(r,{type:"lowpass",Q:n.initialFilterQ/10,frequency:_}),d=new GainNode(r),b={...t,startTime:0,bufferSource:i,filterEnvelopeNode:u,volumeEnvelopeNode:d};this.setVolumeEnvelope(e,b,0),this.setFilterEnvelope(e,b,0),i.connect(u),u.connect(d),d.connect(r.destination),n.sample.type==="compressed"?i.start(0,n.start/s.sampleRate):i.start(0);let x=await r.startRendering();return new Ne(x,{isLoop:a,adsDuration:h,loopStart:p,loopDuration:l})}async createAdsrRenderedBuffer(e,t,n,s,o){let r=n.sampleModes%2!==0,k=n.volDelay+n.volAttack+n.volHold,E=n.volDecay,C=k+E*os*5,g=n.volRelease,d=n.loopStart/n.sampleRate,f=r?(n.loopEnd-n.loopStart)/n.sampleRate:0,O=r&&o>d?Math.ceil((o-d)/f):0,i=r?d+O*f:o,x=i+g,y=this.audioContext.sampleRate,c=new OfflineAudioContext(s.numberOfChannels,Math.ceil(x*y),y),a=new AudioBufferSourceNode(c);a.buffer=s,a.playbackRate.value=n.playbackRate,a.loop=r,r&&(a.loopStart=d,a.loopEnd=d+f);let v=this.clampCutoffFrequency(this.centToHz(n.initialFilterFc)),m=new BiquadFilterNode(c,{type:"lowpass",Q:n.initialFilterQ/10,frequency:v}),h=new GainNode(c),b={...t,startTime:0,bufferSource:a,filterEnvelopeNode:m,volumeEnvelopeNode:h};this.setVolumeEnvelope(e,b,0),this.setFilterEnvelope(e,b,0);let u=is(-n.initialAttenuation),j=u*(1-n.volSustain),p=n.volDelay,_=p+n.volAttack,w=_+n.volHold,l;if(i<=p)l=0;else if(i<=_)l=1e-6+(u-1e-6)*(i-p)/n.volAttack;else if(i<=w)l=u;else{let e=i-w;l=j+(u-j)*Math.exp(-e/(os*n.volDecay))}h.gain.cancelScheduledValues(i).setValueAtTime(l,i).setTargetAtTime(0,i,g*vt),m.frequency.cancelScheduledValues(i).setValueAtTime(v,i).setTargetAtTime(v,i,n.modRelease*vt),a.connect(m),m.connect(h),h.connect(c.destination),r?a.start(0,n.start/s.sampleRate):a.start(0);let A=await c.startRendering();return new Ne(A,{isLoop:!1,isFull:!1,adsDuration:C,noteDuration:i,releaseDuration:g})}async createFullRenderedBuffer(e,t,n,s,o={}){let{startTime:u=0,events:h=[]}=o,a=e.channelNumber,l=n.volRelease*vt*5,m=s+l,d=this.audioContext.sampleRate,c=new OfflineAudioContext(2,Math.ceil(m*d),d),i=new this.constructor(c,{cacheMode:"none"});c.suspend=()=>Promise.resolve(),c.resume=()=>Promise.resolve(),i.soundFonts=this.soundFonts,i.soundFontTable=this.soundFontTable;let r=i.channels[a];r.state.array.set(e.state.array),r.isDrum=e.isDrum,r.programNumber=e.programNumber,r.modulationDepthRange=e.modulationDepthRange,r.detune=this.calcChannelDetune(r),await i.noteOn(a,t.noteNumber,t.velocity,0);for(let e of h){let t=e.startTime/this.tempo-u;if(!(t<0||t>s))switch(e.type){case"controller":i.setControlChange(a,e.controllerType,e.value,t);break;case"pitchBend":i.setPitchBend(a,e.value+8192,t);break;case"sysEx":i.handleSysEx(e.data,t);break;case"channelAftertouch":i.setChannelPressure(a,e.amount,t);break;case"noteAftertouch":i.setPolyphonicKeyPressure(a,e.noteNumber,e.amount,t)}}i.noteOff(a,t.noteNumber,0,s,!0);let f=await c.startRendering();return new Ne(f,{isLoop:!1,isFull:!0,noteDuration:s,releaseDuration:l})}async getAudioBuffer(e,t,n){let s=this.cacheMode,{noteNumber:i,velocity:a}=t,o=this.getVoiceId(e,i,a);if(!n){if(s==="note")return await this.getFullCachedBuffer(e,t,o);if(s==="adsr")return await this.getAdsrCachedBuffer(e,t,o)}return s==="none"?await this.createAudioBuffer(t.voiceParams):await this.getAdsCachedBuffer(e,t,o,n)}async getAdsCachedBuffer(e,t,n,s){let o=n+(t.noteNumber<<1)+1,a=t.voiceParams;if(s){let n=this.realtimeVoiceCache.get(o);if(n)return n;let i=await this.createAudioBuffer(a),s=await this.createAdsRenderedBuffer(e,t,a,i,e.isDrum);return this.realtimeVoiceCache.set(o,s),s}let i=this.voiceCache.get(o);if(i)return i.counter+=1,i.maxCount<=i.counter&&this.voiceCache.delete(o),i.audioBuffer;{let s=this.voiceCounter.get(o)??0,i=await this.createAudioBuffer(a),n=await this.createAdsRenderedBuffer(e,t,a,i,e.isDrum),r={audioBuffer:n,maxCount:s,counter:1};return this.voiceCache.set(o,r),n}}async getAdsrCachedBuffer(e,t,n){let o=t.voiceParams,d=t.timelineIndex,r=this.noteOnEvents.get(d),c=r?.durationTicks??0,u=c===1/0?4294967295n:BigInt(c),h=zo(o.volRelease),m=zo(o.playbackRate),i=BigInt(n)<<160n|m<<96n|u<<64n|h,s=this.adsrVoiceCache.get(n);s||(s=new Map,this.adsrVoiceCache.set(n,s));let a=s.get(i);if(a instanceof Ne)return a;if(a instanceof Promise){let e=await a;return e??await this.createAudioBuffer(o)}let f=r?.duration??0,l=(async()=>{try{let a=await this.createAudioBuffer(o),n=await this.createAdsrRenderedBuffer(e,t,o,a,f);return s.set(i,n),n}catch(e){throw s.delete(i),e}})();return s.set(i,l),await l}async getFullCachedBuffer(e,t,n){let a=t.voiceParams,r=t.timelineIndex,c=this.noteOnEvents.get(r),d=c?.duration??0,o=r,s=this.fullVoiceCache.get(n);s||(s=new Map,this.fullVoiceCache.set(n,s));let i=s.get(o);if(i instanceof Ne)return t.fullCacheVoiceId=n,i;if(i instanceof Promise){let e=await i;return e==null?await this.createAudioBuffer(a):(t.fullCacheVoiceId=n,e)}let l=(async()=>{try{let n=await this.createFullRenderedBuffer(e,t,a,d,c);return s.set(o,n),n}catch(e){throw s.delete(o),e}})();s.set(o,l);let u=await l;return t.fullCacheVoiceId=n,u}async setNoteAudioNode(e,t,n){let o=this.audioContext,s=o.currentTime,{noteNumber:r,velocity:u,startTime:l}=t,c=e.state,h=this.getControllerState(e,r,u,0),i=t.voice.getAllParams(h);t.voiceParams=i;let a=await this.getAudioBuffer(e,t,n),d=a instanceof Ne;t.renderedBuffer=d?a:null,t.bufferSource=this.createBufferSource(e,r,i,a),t.volumeNode=new GainNode(o);let m=this.cacheMode,f=d&&a.isFull===!0;if(m==="none"){t.volumeEnvelopeNode=new GainNode(o),t.filterEnvelopeNode=new BiquadFilterNode(o,{type:"lowpass",Q:i.initialFilterQ/10});let n=e.lastNote;n&&n.noteNumber!==r&&(t.portamentoNoteNumber=n.noteNumber),!e.isDrum&&this.isPortamento(e,t)?(this.setPortamentoVolumeEnvelope(e,t,s),this.setPortamentoFilterEnvelope(e,t,s),this.setPortamentoPitchEnvelope(e,t,s),this.setPortamentoDetune(e,t,s)):(this.setVolumeEnvelope(e,t,s),this.setFilterEnvelope(e,t,s),this.setPitchEnvelope(t,s),this.setDetune(e,t,s)),0<c.vibratoDepth&&this.startVibrato(e,t,s),0<c.modulationDepthMSB&&this.startModulation(e,t,s),e.mono&&e.currentBufferSource&&(e.currentBufferSource.stop(l),e.currentBufferSource=t.bufferSource),t.bufferSource.connect(t.filterEnvelopeNode),t.filterEnvelopeNode.connect(t.volumeEnvelopeNode),t.volumeEnvelopeNode.connect(t.volumeNode),this.setChorusSend(e,t,s),this.setReverbSend(e,t,s)}else f?(t.volumeEnvelopeNode=null,t.filterEnvelopeNode=null,t.bufferSource.connect(t.volumeNode),this.setChorusSend(e,t,s),this.setReverbSend(e,t,s)):(t.volumeEnvelopeNode=null,t.filterEnvelopeNode=null,this.setDetune(e,t,s),0<c.modulationDepthMSB&&this.startModulation(e,t,s),t.bufferSource.connect(t.volumeNode),this.setChorusSend(e,t,s),this.setReverbSend(e,t,s));return i.sample.type,t.bufferSource.start(l),t}handleExclusiveClass(e,t,n){let s=e.voiceParams.exclusiveClass;if(s===0)return;let o=this.exclusiveClassNotes[s];if(o){let[e,t]=o;e&&!e.ending&&this.noteOff(t,e.noteNumber,0,n,!0)}this.exclusiveClassNotes[s]=[e,t]}handleDrumExclusiveClass(e,t,n){let o=this.channels[t];if(!o.isDrum)return;let i=or[o.programNumber];if(!i)return;let a=i[e.noteNumber];if(a===0)return;let r=(a-1)*this.channels.length+t,s=this.drumExclusiveClassNotes[r];s&&!s.ending&&this.noteOff(t,s.noteNumber,0,n,!0),this.drumExclusiveClassNotes[r]=e}setNoteRouting(e,t,n){let o=this.channels[e],{volumeNode:s}=t;if(t.renderedBuffer?.isFull)s.connect(this.masterVolume);else if(o.isDrum){let e=t.noteNumber,{keyBasedGainLs:i,keyBasedGainRs:a}=o,n=i[e],r=a[e];if(!n){let t=this.createChannelAudioNodes(this.audioContext);n=i[e]=t.gainL,r=a[e]=t.gainR}s.connect(n),s.connect(r)}else s.connect(o.gainL),s.connect(o.gainR);this.handleExclusiveClass(t,e,n),this.handleDrumExclusiveClass(t,e,n)}async noteOn(e,t,n,s){this.mpeEnabled&&(this.mpeState.channelToNotes.has(e)||this.mpeState.channelToNotes.set(e,new Set));let i=this.createNote(e,t,n,s),o=await this.setupNote(e,i,s);return this.mpeEnabled&&o&&this.mpeState.channelToNotes.get(e).add(o),o}createNote(e,t,n,s){0<=s||(s=this.audioContext.currentTime);let o=new In(t,n,s);return o.channel=e,o}async setupNote(e,t,n){let c=n===void 0,s=this.channels[e],a=s.programNumber,i=this.soundFontTable[a];if(!i)return;let o=s.isDrum?128:s.bankLSB;if(i[o]===void 0){if(s.isDrum)return;o=0}let r=i[o];if(r===void 0)return;let l=this.soundFonts[r];if(t.voice=l.getVoice(o,a,t.noteNumber,t.velocity),!!t.voice)return s.activeNotes[t.noteNumber]||(s.activeNotes[t.noteNumber]=[]),s.activeNotes[t.noteNumber].push(t),await this.setNoteAudioNode(s,t,c),s.lastNote=t,this.setNoteRouting(e,t,n),t.resolveReady(),.5<=s.state.sustainPedal&&s.sustainNotes.push(t),.5<=s.state.sostenutoPedal&&s.sostenutoNotes.push(t),t}disconnectNote(e){e.bufferSource.disconnect(),e.filterEnvelopeNode?.disconnect(),e.volumeEnvelopeNode?.disconnect(),e.volumeNode.disconnect(),e.modLfoToPitch&&(e.modLfoToVolume.disconnect(),e.modLfoToPitch.disconnect(),e.modLfo.stop()),e.vibLfoToPitch&&(e.vibLfoToPitch.disconnect(),e.vibLfo.stop()),e.reverbSend&&e.reverbSend.disconnect(),e.chorusSend&&e.chorusSend.disconnect()}releaseFullCache(e){if(e.timelineIndex==null||e.fullCacheVoiceId==null)return;let t=this.fullVoiceCache.get(e.fullCacheVoiceId);if(!t)return;t.get(e.timelineIndex)instanceof Ne&&(t.delete(e.timelineIndex),t.size===0&&this.fullVoiceCache.delete(e.fullCacheVoiceId))}releaseNote(e,t,n){let i=this.audioContext.currentTime;n??=i;let s=()=>{this.disconnectNote(t)};if(t.renderedBuffer?.isFull){let o=t.renderedBuffer,a=t.startTime+o.buffer.duration,r=t.startTime+(o.noteDuration??0);if(n<r){let o=this.getRelativeKeyBasedValue(e,t.noteNumber,72)*2,s=t.voiceParams.volRelease*o,i=n+s;t.volumeNode.gain.cancelScheduledValues(n).setTargetAtTime(0,n,s*vt),t.bufferSource.stop(i)}else{if(a<=i)return s(),this.releaseFullCache(t),Promise.resolve();t.bufferSource.stop(a)}return new Promise(e=>{t.bufferSource.onended=()=>{s(),this.releaseFullCache(t),e()}})}let r=this.getRelativeKeyBasedValue(e,t.noteNumber,72)*2,o=t.voiceParams.volRelease*r,a=n+o;if(t.volumeEnvelopeNode)t.filterEnvelopeNode.frequency.cancelScheduledValues(n).setTargetAtTime(t.adjustedBaseFreq,n,t.voiceParams.modRelease*vt),t.volumeEnvelopeNode.gain.cancelScheduledValues(n).setTargetAtTime(0,n,o*vt);else{if(t.renderedBuffer?.releaseDuration!=null&&!t.renderedBuffer.isFull){let e=t.renderedBuffer,i=t.startTime+e.buffer.duration,r=t.startTime+(e.noteDuration??0);return n<r?(t.volumeNode.gain.cancelScheduledValues(n).setTargetAtTime(0,n,o*vt),t.bufferSource.stop(a)):t.bufferSource.stop(i),new Promise(e=>{t.bufferSource.onended=()=>{s(),e()}})}t.volumeNode.gain.cancelScheduledValues(n).setTargetAtTime(0,n,o*vt)}return t.bufferSource.stop(a),new Promise(e=>{t.bufferSource.onended=()=>{s(),e()}})}noteOff(e,t,n,s,o){if(this.mpeEnabled){let o=this.mpeState.channelToNotes.get(e);if(!o||o.size===0)return;let n;for(let e of o)if(e.noteNumber===t&&!e.ending){n=e;break}if(!n)return;let i=this.channels[e];return n.ending=!0,o.delete(n),o.size===0&&this.mpeState.channelToNotes.delete(e),n.ready.then(()=>this.releaseNote(i,n,s))}return this.stopNote(e,t,n,s,o)}stopNote(e,t,n,s,o){let i=this.channels[e],r=i.state;if(!o){if(i.isDrum&&!this.isLoopDrum(i,t)){this.removeFromActiveNotes(i,t);return}if(.5<=r.sustainPedal||.5<=r.sostenutoPedal)return}let a=this.findNoteForOff(i,t);if(!a)return;a.ending=!0,this.removeFromActiveNotes(i,t);let c=a.ready.then(()=>{if(a.voice)return this.releaseNote(i,a,s)});return this.notePromises.push(c),c}findNoteForOff(e,t){let n=e.activeNotes[t];if(n)for(let e=0;e<n.length;e++)if(!n[e].ending)return n[e]}removeFromActiveNotes(e,t){let n=e.activeNotes[t];!n||n.length===0||n.shift()}releaseSustainPedal(e,t,n){let i=t*2,s=this.channels[e],o=[];for(let t=0;t<s.sustainNotes.length;t++){let a=this.noteOff(e,s.sustainNotes[t].noteNumber,i,n,!0);o.push(a)}return s.sustainNotes=[],o}releaseSostenutoPedal(e,t,n){let a=t*2,s=this.channels[e],o=[],i=s.sostenutoNotes;s.state.sostenutoPedal=0;for(let t=0;t<i.length;t++){let s=i[t],r=this.noteOff(e,s.noteNumber,a,n);o.push(r)}return s.sostenutoNotes=[],o}soundOffNote(e,t){if(e.ending=!0,!e.voice)return Promise.resolve();let o=this.audioContext.currentTime,n=Math.max(t,o),s=this.perceptualSmoothingTime,i=s/5;return e.volumeNode.gain.cancelScheduledValues(n).setTargetAtTime(0,n,i),e.bufferSource.stop(n+s),new Promise(t=>{e.bufferSource.onended=()=>{this.disconnectNote(e),t()}})}soundOff(e,t,n){let o=this.channels[e],s=this.findNoteForOff(o,t);return s?(this.removeFromActiveNotes(o,s.noteNumber),this.soundOffNote(s,n)):Promise.resolve()}createMessageHandlers(){let e=new Array(256);return e[128]=(e,t)=>this.noteOff(e[0]&15,e[1],e[2],t),e[144]=(e,t)=>this.noteOn(e[0]&15,e[1],e[2],t),e[160]=(e,t)=>this.setPolyphonicKeyPressure(e[0]&15,e[1],e[2],t),e[176]=(e,t)=>this.setControlChange(e[0]&15,e[1],e[2],t),e[192]=(e,t)=>this.setProgramChange(e[0]&15,e[1],t),e[208]=(e,t)=>this.setChannelPressure(e[0]&15,e[1],t),e[224]=(e,t)=>this.handlePitchBendMessage(e[0]&15,e[1],e[2],t),e[254]=()=>this.activeSensing(),e}handleMessage(e,t){let n=e[0];if(n===240)return this.handleSysEx(e.subarray(1),t);let s=this.messageHandlers[n];s&&s(e,t)}activeSensing(){this.lastActiveSensing=performance.now()}setPolyphonicKeyPressure(e,t,n,s){let o=this.channels[e];o.isMPEMember||(0<=s||(s=this.audioContext.currentTime),this.processActiveNotes(o,s,e=>{e.noteNumber===t&&(e.pressure=n,this.setPolyphonicKeyPressureEffects(o,e,s))}),this.applyVoiceParams(o,10,s))}setProgramChange(e,t,n){this.applyToMPEChannels(e,e=>{this.applyProgramChange(e,t,n)})}applyProgramChange(e,t){let s=this.channels[e];if(s.programNumber=t,this.mode==="GM2")switch(s.bankMSB){case 120:s.isDrum=!0,s.keyBasedTable.fill(-1);break;case 121:s.isDrum=!1;break}}setChannelPressure(e,t,n){0<=n||(n=this.audioContext.currentTime),this.applyToMPEChannels(e,e=>{this.applyChannelPressure(e,t,n)})}applyChannelPressure(e,t,n){let s=this.channels[e];if(s.isDrum)return;let o=this.calcChannelPressureEffectValue(s,0);s.state.channelPressure=t/127;let i=this.calcChannelPressureEffectValue(s,0);s.detune+=i-o,this.processActiveNotes(s,n,e=>{this.setChannelPressureEffects(s,e,n)}),this.applyVoiceParams(s,13,n)}handlePitchBendMessage(e,t,n,s){let o=n*128+t;this.setPitchBend(e,o,s)}setPitchBend(e,t,n){this.applyToMPEChannels(e,e=>{this.applyPitchBend(e,t,n)})}applyPitchBend(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let o=s.state,i=o.pitchWheel*2-1,a=(t-8192)/8192;o.pitchWheel=t/16383,s.detune+=(a-i)*o.pitchWheelSensitivity*12800,this.updateChannelDetune(s,n),this.applyVoiceParams(s,14,n)}setModLfoToPitch(e,t,n){if(t.modLfoToPitch){let{modulationDepthMSB:o,modulationDepthLSB:i}=e.state,a=o+i/128,s=t.voiceParams.modLfoToPitch+this.getLFOPitchDepth(e,t),r=(Math.abs(s)+a)*Math.sign(s);t.modLfoToPitch.gain.cancelScheduledValues(n).setValueAtTime(r,n)}else this.startModulation(e,t,n)}setVibLfoToPitch(e,t,n){if(t.vibLfoToPitch){let o=this.getRelativeKeyBasedValue(e,t.noteNumber,77)*2,s=t.voiceParams.vibLfoToPitch,i=Math.abs(s)*o*Math.sign(s);t.vibLfoToPitch.gain.cancelScheduledValues(n).setValueAtTime(i,n)}else this.startVibrato(e,t,n)}setModLfoToFilterFc(e,t,n){let s=t.voiceParams.modLfoToFilterFc+this.getLFOFilterDepth(e,t);t.modLfoToFilterFc.gain.cancelScheduledValues(n).setValueAtTime(s,n)}setModLfoToVolume(e,t,n){let s=t.voiceParams.modLfoToVolume,o=(is(Math.abs(s))-1)*Math.sign(s)*(1+this.getLFOAmplitudeDepth(e,t));t.modLfoToVolume.gain.cancelScheduledValues(n).setValueAtTime(o,n)}setReverbSend(e,t,n){let s=t.voiceParams.reverbEffectsSend*e.state.reverbSendLevel;if(e.isDrum){let n=this.getKeyBasedValue(e,t.noteNumber,91);0<=n&&(s=n/127)}if(t.reverbSend)if(t.reverbSend.gain.cancelScheduledValues(n).setValueAtTime(s,n),0<s)t.volumeNode.connect(t.reverbSend);else try{t.volumeNode.disconnect(t.reverbSend)}catch{}else 0<s&&(t.reverbSend=new GainNode(this.audioContext,{gain:s}),t.volumeNode.connect(t.reverbSend),t.reverbSend.connect(this.reverbEffect.input))}setChorusSend(e,t,n){let s=t.voiceParams.chorusEffectsSend*e.state.chorusSendLevel;if(e.isDrum){let n=this.getKeyBasedValue(e,t.noteNumber,93);0<=n&&(s=n/127)}if(t.chorusSend)if(t.chorusSend.gain.cancelScheduledValues(n).setValueAtTime(s,n),0<s)t.volumeNode.connect(t.chorusSend);else try{t.volumeNode.disconnect(t.chorusSend)}catch{}else 0<s&&(t.chorusSend=new GainNode(this.audioContext,{gain:s}),t.volumeNode.connect(t.chorusSend),t.chorusSend.connect(this.chorusEffect.input))}setDelayModLFO(e){let t=e.startTime+e.voiceParams.delayModLFO;try{e.modLfo.start(t)}catch{}}setFreqModLFO(e,t){let n=e.voiceParams.freqModLFO;e.modLfo.frequency.cancelScheduledValues(t).setValueAtTime(n,t)}setDelayVibLFO(e,t){let n=this.getRelativeKeyBasedValue(e,t.noteNumber,78)*2,s=t.voiceParams.delayVibLFO,o=t.startTime+s*n;try{t.vibLfo.start(o)}catch{}}setFreqVibLFO(e,t,n){let s=this.getRelativeKeyBasedValue(e,t.noteNumber,76)*2,o=t.voiceParams.freqVibLFO;t.vibLfo.frequency.cancelScheduledValues(n).setValueAtTime(o*s,n)}createVoiceParamsHandlers(){return{modLfoToPitch:(e,t,n)=>{let{modulationDepthMSB:s,modulationDepthLSB:o}=e.state;0<s+o&&this.setModLfoToPitch(e,t,n)},vibLfoToPitch:(e,t,n)=>{0<e.state.vibratoDepth&&this.setVibLfoToPitch(e,t,n)},modLfoToFilterFc:(e,t,n)=>{let{modulationDepthMSB:s,modulationDepthLSB:o}=e.state;0<s+o&&this.setModLfoToFilterFc(e,t,n)},modLfoToVolume:(e,t,n)=>{let{modulationDepthMSB:s,modulationDepthLSB:o}=e.state;0<s+o&&this.setModLfoToVolume(e,t,n)},chorusEffectsSend:(e,t,n)=>{this.setChorusSend(e,t,n)},reverbEffectsSend:(e,t,n)=>{this.setReverbSend(e,t,n)},delayModLFO:(e,t)=>{let{modulationDepthMSB:s,modulationDepthLSB:o}=e.state;0<s+o&&this.setDelayModLFO(t)},freqModLFO:(e,t,n)=>{let{modulationDepthMSB:s,modulationDepthLSB:o}=channel.state;0<s+o&&this.setFreqModLFO(t,n)},delayVibLFO:(e,t)=>{0<e.state.vibratoDepth&&this.setDelayVibLFO(e,t)},freqVibLFO:(e,t,n)=>{0<e.state.vibratoDepth&&this.setFreqVibLFO(e,t,n)},detune:(e,t,n)=>{this.isPortamento(e,t)?this.setPortamentoDetune(e,t,n):this.setDetune(e,t,n)}}}getControllerState(e,t,n,s){let o=new Float32Array(e.state.array.length);return o.set(e.state.array),o[2]=n/127,o[3]=t/127,o[10]=s/127,o}applyVoiceParams(e,t,n){this.processScheduledNotes(e,s=>{if(s.renderedBuffer?.isFull)return;let r=this.getControllerState(e,s.noteNumber,s.velocity,s.pressure),c=s.voice.getParams(t,r),o=!1,i=!1,a=!1;for(let[t,r]of Object.entries(c)){let l=s.voiceParams[t];r!==l&&(s.voiceParams[t]=r,t in this.voiceParamsHandlers?this.voiceParamsHandlers[t](e,s,n):(ba.has(t)&&(o=!0),ya.has(t)&&(i=!0),Sa.has(t)&&(a=!0)))}o&&this.setVolumeEnvelope(e,s,n),i&&this.setFilterEnvelope(e,s,n),a&&this.setPitchEnvelope(s,n)})}createControlChangeHandlers(){let e=new Array(128);return e[0]=this.setBankMSB,e[1]=this.setModulationDepth,e[5]=this.setPortamentoTime,e[6]=this.dataEntryMSB,e[7]=this.setVolume,e[10]=this.setPan,e[11]=this.setExpression,e[32]=this.setBankLSB,e[33]=this.setModulationDepth,e[37]=this.setPortamentoTime,e[38]=this.dataEntryLSB,e[39]=this.setVolume,e[42]=this.setPan,e[43]=this.setExpression,e[64]=this.setSustainPedal,e[65]=this.setPortamento,e[66]=this.setSostenutoPedal,e[67]=this.setSoftPedal,e[71]=this.setFilterResonance,e[72]=this.setReleaseTime,e[73]=this.setAttackTime,e[74]=this.setBrightness,e[75]=this.setDecayTime,e[76]=this.setVibratoRate,e[77]=this.setVibratoDepth,e[78]=this.setVibratoDelay,e[84]=this.setPortamentoNoteNumber,e[91]=this.setReverbSendLevel,e[93]=this.setChorusSendLevel,e[96]=this.dataIncrement,e[97]=this.dataDecrement,e[100]=this.setRPNLSB,e[101]=this.setRPNMSB,e[111]=this.setRPGMakerLoop,e[120]=this.allSoundOff,e[121]=this.resetAllControllers,e[123]=this.allNotesOff,e[124]=this.omniOff,e[125]=this.omniOn,e[126]=this.monoOn,e[127]=this.polyOn,e}setControlChange(e,t,n,s){0<=s||(s=this.audioContext.currentTime),this.applyToMPEChannels(e,e=>{this.applyControlChange(e,t,n,s)})}applyControlChange(e,t,n,s){let o=this.controlChangeHandlers[t];if(o){o.call(this,e,n,s);let i=this.channels[e];this.applyVoiceParams(i,t+128,s),this.processActiveNotes(i,s,e=>{this.setControlChangeEffects(i,e,s)})}else console.warn(`Unsupported Control change: controllerType=${t} value=${n}`)}setBankMSB(e,t){this.channels[e].bankMSB=t}updateModulation(e,t){let{modulationDepthMSB:n,modulationDepthLSB:s}=e.state,o=(n+s/128)*e.modulationDepthRange;this.processScheduledNotes(e,n=>{n.renderedBuffer?.isFull||(n.modLfoToPitch?n.modLfoToPitch.gain.setValueAtTime(o,t):this.startModulation(e,n,t))})}setModulationDepth(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let o=s.state,i=Math.trunc(t);o.modulationDepthMSB=i/127,o.modulationDepthLSB=t-i,this.updateModulation(s,n)}updatePortamento(e,t){e.isDrum||this.processScheduledNotes(e,n=>{this.isPortamento(e,n)?(this.setPortamentoVolumeEnvelope(e,n,t),this.setPortamentoFilterEnvelope(e,n,t),this.setPortamentoPitchEnvelope(e,n,t),this.setPortamentoDetune(e,n,t)):(this.setVolumeEnvelope(e,n,t),this.setFilterEnvelope(e,n,t),this.setPitchEnvelope(n,t),this.setDetune(e,n,t))})}setPortamentoTime(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e],o=s.state,i=Math.trunc(t);o.portamentoTimeMSB=i/127,o.portamentoTimeLSB=t-127,!s.isDrum&&this.updatePortamento(s,n)}setVolume(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e],o=s.state,i=Math.trunc(t);o.volumeMSB=i/127,o.volumeLSB=t-i,this.applyVolume(s,n)}applyVolume(e,t){if(e.isDrum)for(let n=0;n<128;n++)this.updateKeyBasedVolume(e,n,t);else this.updateChannelVolume(e,t)}panToGain(e){let t=Math.PI/2*Math.max(0,e*127-1)/126;return{gainLeft:Math.cos(t),gainRight:Math.sin(t)}}setPan(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e],o=s.state,i=Math.trunc(t);if(o.panMSB=i/127,o.panLSB=t-i,s.isDrum)for(let e=0;e<128;e++)this.updateKeyBasedVolume(s,e,n);else this.updateChannelVolume(s,n)}setExpression(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e],o=s.state,i=Math.trunc(t);o.expressionMSB=i/127,o.expressionLSB=t-i,this.updateChannelVolume(s,n)}setBankLSB(e,t){this.channels[e].bankLSB=t}dataEntryLSB(e,t,n){this.channels[e].dataLSB=t,this.handleRPN(e,0,n)}updateChannelVolume(e,t){let{expressionMSB:c,expressionLSB:h,volumeMSB:o,volumeLSB:i,panMSB:a,panLSB:r}=e.state,s=o+i/128,l=c+h/128,d=a+r/128,u=this.getChannelAmplitudeControl(e),n=s*l*(1+u),{gainLeft:m,gainRight:f}=this.panToGain(d);e.gainL.gain.cancelScheduledValues(t).setValueAtTime(n*m,t),e.gainR.gain.cancelScheduledValues(t).setValueAtTime(n*f,t)}updateKeyBasedVolume(e,t,n){let r=e.keyBasedGainLs[t];if(!r)return;let v=e.keyBasedGainRs[t],{expressionMSB:g,expressionLSB:p,volumeMSB:c,volumeLSB:m,panMSB:l,panLSB:d}=e.state,u=c+m/128,h=g+p/128,s=u*h,f=l+d/128,a=this.getKeyBasedValue(e,t,7),i=0<=a?s*a/64:s,o=this.getKeyBasedValue(e,t,10),b=0<=o?o/127:f,{gainLeft:j,gainRight:y}=this.panToGain(b);r.gain.cancelScheduledValues(n).setValueAtTime(i*j,n),v.gain.cancelScheduledValues(n).setValueAtTime(i*y,n)}setSustainPedal(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let o=s.state,i=o.sustainPedal;o.sustainPedal=t/127,64<=t?i<.5&&this.processScheduledNotes(s,e=>{s.sustainNotes.push(e)}):this.releaseSustainPedal(e,t,n)}isPortamento(e,t){return.5<=e.state.portamento&&0<=t.portamentoNoteNumber}setPortamento(e,t,n){let s=this.channels[e];s.isDrum||(0<=n||(n=this.audioContext.currentTime),s.state.portamento=t/127,this.updatePortamento(s,n))}setSostenutoPedal(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let o=s.state,i=o.sostenutoPedal;if(o.sostenutoPedal=t/127,64<=t){if(i<.5){let e=[];this.processActiveNotes(s,n,t=>{e.push(t)}),s.sostenutoNotes=e}}else this.releaseSostenutoPedal(e,t,n)}getSoftPedalFactor(e,t){return 1-(.1+t.noteNumber/127*.2)*e.state.softPedal}setSoftPedal(e,t,n){let s=this.channels[e];if(s.isDrum)return;let o=s.state;0<=n||(n=this.audioContext.currentTime),o.softPedal=t/127,this.processScheduledNotes(s,e=>{this.isPortamento(s,e)?(this.setPortamentoVolumeEnvelope(s,e,n),this.setPortamentoFilterEnvelope(s,e,n)):(this.setVolumeEnvelope(s,e,n),this.setFilterEnvelope(s,e,n))})}setFilterQ(e,t,n){if(!t.filterEnvelopeNode)return;let s=this.getRelativeKeyBasedValue(e,t.noteNumber,71),o=t.voiceParams.initialFilterQ/5*s;t.filterEnvelopeNode.Q.setValueAtTime(o,n)}setFilterResonance(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let o=s.state;o.filterResonance=t/127,this.processScheduledNotes(s,e=>{this.setFilterQ(s,e,n)})}setReleaseTime(e,t,n){let s=this.channels[e];s.isDrum||(0<=n||(n=this.audioContext.currentTime),s.state.releaseTime=t/127)}setAttackTime(e,t,n){let s=this.channels[e];s.isDrum||(0<=n||(n=this.audioContext.currentTime),s.state.attackTime=t/127,this.processScheduledNotes(s,e=>{n<e.startTime&&this.setVolumeEnvelope(s,e,n)}))}setBrightness(e,t,n){let s=this.channels[e];if(s.isDrum)return;let o=s.state;0<=n||(n=this.audioContext.currentTime),o.brightness=t/127,this.processScheduledNotes(s,e=>{this.isPortamento(s,e)?this.setPortamentoFilterEnvelope(s,e,n):this.setFilterEnvelope(s,e,n)})}setDecayTime(e,t,n){let s=this.channels[e];s.isDrum||(0<=n||(n=this.audioContext.currentTime),s.state.decayTime=t/127,this.processScheduledNotes(s,e=>{this.setVolumeEnvelope(s,e,n)}))}setVibratoRate(e,t,n){let s=this.channels[e];s.isDrum||(0<=n||(n=this.audioContext.currentTime),s.state.vibratoRate=t/127,!(s.vibratoDepth<=0)&&this.processScheduledNotes(s,e=>{this.setVibLfoToPitch(s,e,n)}))}setVibratoDepth(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let o=s.state.vibratoDepth;s.state.vibratoDepth=t/127,0<o?this.processScheduledNotes(s,e=>{this.setFreqVibLFO(s,e,n)}):this.processScheduledNotes(s,e=>{this.startVibrato(s,e,n)})}setVibratoDelay(e,t,n){let s=this.channels[e];s.isDrum||(0<=n||(n=this.audioContext.currentTime),s.state.vibratoDelay=t/127,0<s.state.vibratoDepth&&this.processScheduledNotes(s,e=>{this.startVibrato(s,e,n)}))}setPortamentoNoteNumber(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e];s.portamentoControl=!0,s.state.portamentoNoteNumber=t/127}setReverbSendLevel(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e],o=s.state;o.reverbSendLevel=t/127,this.processScheduledNotes(s,e=>{this.setReverbSend(s,e,n)})}setChorusSendLevel(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e],o=s.state;o.chorusSendLevel=t/127,this.processScheduledNotes(s,e=>{this.setChorusSend(s,e,n)})}limitData(e,t,n,s,o){o<e.dataLSB?(e.dataMSB++,e.dataLSB=s):e.dataLSB<0&&(e.dataMSB--,e.dataLSB=o),n<e.dataMSB?(e.dataMSB=n,e.dataLSB=o):e.dataMSB<0&&(e.dataMSB=t,e.dataLSB=s)}limitDataMSB(e,t,n){n<e.dataMSB?e.dataMSB=n:e.dataMSB<0&&(e.dataMSB=t)}handleRPN(e,t,n){let s=this.channels[e];switch(s.rpnMSB*128+s.rpnLSB){case 0:s.dataLSB+=t,this.handlePitchBendRangeRPN(e,n);break;case 1:s.dataLSB+=t,this.handleFineTuningRPN(e,n);break;case 2:s.dataMSB+=t,this.handleCoarseTuningRPN(e,n);break;case 5:s.dataLSB+=t,this.handleModulationDepthRangeRPN(e,n);break;case 6:s.dataLSB+=t,this.handleMIDIPolyphonicExpressionRPN(e,n);break;case 16383:break;default:console.warn(`Channel ${e}: Unsupported RPN MSB=${s.rpnMSB} LSB=${s.rpnLSB}`)}}dataIncrement(e,t){0<=t||(t=this.audioContext.currentTime),this.handleRPN(e,1,t)}dataDecrement(e,t){0<=t||(t=this.audioContext.currentTime),this.handleRPN(e,-1,t)}setRPNMSB(e,t){this.channels[e].rpnMSB=t}setRPNLSB(e,t){this.channels[e].rpnLSB=t}dataEntryMSB(e,t,n){this.channels[e].dataMSB=t,this.handleRPN(e,0,n)}handlePitchBendRangeRPN(e,t){let n=this.channels[e];this.limitData(n,0,127,0,127);let s=(n.dataMSB+n.dataLSB/128)*100;this.setPitchBendRange(e,s,t)}setPitchBendRange(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let o=s.state,a=o.pitchWheelSensitivity,i=t/12800;o.pitchWheelSensitivity=i,s.detune+=(o.pitchWheel*2-1)*(i-a)*12800,this.updateChannelDetune(s,n),this.applyVoiceParams(s,16,n)}handleFineTuningRPN(e,t){let n=this.channels[e];this.limitData(n,0,127,0,127);let s=(n.dataMSB*128+n.dataLSB-8192)/8192*100;this.setFineTuning(e,s,t)}setFineTuning(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let i=s.fineTuning,o=t;s.fineTuning=o,s.detune+=o-i,this.updateChannelDetune(s,n)}handleCoarseTuningRPN(e,t){let n=this.channels[e];this.limitDataMSB(n,0,127);let s=(n.dataMSB-64)*100;this.setCoarseTuning(e,s,t)}setCoarseTuning(e,t,n){let s=this.channels[e];if(s.isDrum)return;0<=n||(n=this.audioContext.currentTime);let i=s.coarseTuning,o=t;s.coarseTuning=o,s.detune+=o-i,this.updateChannelDetune(s,n)}handleModulationDepthRangeRPN(e,t){let n=this.channels[e];this.limitData(n,0,127,0,127);let s=(n.dataMSB+n.dataLSB/128)*100;this.setModulationDepthRange(e,s,t)}setModulationDepthRange(e,t,n){let s=this.channels[e];s.isDrum||(0<=n||(n=this.audioContext.currentTime),s.modulationDepthRange=t,this.updateModulation(s,n))}handleMIDIPolyphonicExpressionRPN(e){let n=this.channels[e];this.setMIDIPolyphonicExpression(e,n.dataMSB)}setMIDIPolyphonicExpression(e,t){if(e!==0&&e!==15)return;let n=t&15;e===0?this.lowerMPEMembers=n:this.upperMPEMembers=n,this.mpeEnabled=this.lowerMPEMembers>0||this.upperMPEMembers>0;let i=1,a=this.lowerMPEMembers,r=16-this.upperMPEMembers,c=14,{channels:s,lowerMPEMembers:l,upperMPEMembers:d,mpeEnabled:o}=this;for(let e=0;e<16;e++){let t=l&&i<=e&&e<=a,n=d&&r<=e&&e<=c;s[e].isMPEMember=o&&(t||n),s[e].isMPEManager=o&&(e===0||e===15)}}setRPGMakerLoop(e,t,n){n??=this.audioContext.currentTime,this.loopStart=n+this.resumeTime-this.startTime}allSoundOff(e,t,n){this.channels[e].isMPEManager||this.applyAllSoundOff(e,t,n)}applyAllSoundOff(e,t,n){0<=n||(n=this.audioContext.currentTime);let s=this.channels[e],o=[];return this.processActiveNotes(s,n,e=>{o.push(this.soundOffNote(s,e,n))}),Promise.all(o)}resetChannelStates(e){let n=this.audioContext.currentTime,t=this.channels[e],s=t.state,o=Object.entries(_t);for(let[a,{type:t,defaultValue:i}]of o)128<=t?this.setControlChange(e,t-128,Math.ceil(i*127),n):s[a]=i;t.resetSettings(this.constructor.channelSettings),t.resetTable(),this.mode="GM2",this.masterFineTuning=0,this.masterCoarseTuning=0}resetAllControllers(e,t,n){let s=["polyphonicKeyPressure","channelPressure","pitchWheel","expressionMSB","expressionLSB","modulationDepthMSB","modulationDepthLSB","sustainPedal","portamento","sostenutoPedal","softPedal"],o=this.channels[e],a=o.state;for(let t=0;t<s.length;t++){let o=s[t],{type:i,defaultValue:r}=_t[o];128<=i?this.setControlChange(e,i-128,Math.ceil(r*127),n):a[o]=r}this.setPitchBend(e,8192,n);let i=["rpnMSB","rpnLSB"];for(let e=0;e<i.length;e++){let t=i[e];o[t]=this.constructor.channelSettings[t]}}allNotesOff(e,t,n){0<=n||(n=this.audioContext.currentTime);let o=this.channels[e],s=[];return this.processActiveNotes(o,n,t=>{let o=this.noteOff(e,t.noteNumber,0,n,!1);s.push(o)}),Promise.all(s)}omniOff(e,t,n){this.mpeEnabled||this.allNotesOff(e,t,n)}omniOn(e,t,n){this.mpeEnabled||this.allNotesOff(e,t,n)}monoOn(e,t,n){let s=this.channels[e];s.isMPEManager||(this.allNotesOff(e,t,n),s.mono=!0)}polyOn(e,t,n){let s=this.channels[e];s.isMPEManager||(this.allNotesOff(e,t,n),s.mono=!1)}handleUniversalNonRealTimeExclusiveMessage(e,t){switch(e[2]){case 8:switch(e[3]){case 8:return this.handleScaleOctaveTuning1ByteFormatSysEx(e,!1,t);case 9:return this.handleScaleOctaveTuning2ByteFormatSysEx(e,!1,t);default:console.warn(`Unsupported Exclusive Message: ${e}`)}break;case 9:switch(e[3]){case 1:this.GM1SystemOn(t);break;case 2:break;case 3:this.GM2SystemOn(t);break;default:console.warn(`Unsupported Exclusive Message: ${e}`)}break;default:console.warn(`Unsupported Exclusive Message: ${e}`)}}GM1SystemOn(e){let t=this.channels;0<=e||(e=this.audioContext.currentTime),this.mode="GM1";for(let n=0;n<t.length;n++){this.applyAllSoundOff(n,0,e);let s=t[n];s.bankMSB=0,s.bankLSB=0,s.isDrum=!1}t[9].bankMSB=1,t[9].isDrum=!0}GM2SystemOn(e){let t=this.channels;0<=e||(e=this.audioContext.currentTime),this.mode="GM2";for(let n=0;n<t.length;n++){this.applyAllSoundOff(n,0,e);let s=t[n];s.bankMSB=121,s.bankLSB=0,s.isDrum=!1}t[9].bankMSB=120,t[9].isDrum=!0}handleUniversalRealTimeExclusiveMessage(e,t){switch(e[2]){case 4:switch(e[3]){case 1:return this.handleMasterVolumeSysEx(e,t);case 3:return this.handleMasterFineTuningSysEx(e,t);case 4:return this.handleMasterCoarseTuningSysEx(e,t);case 5:return this.handleGlobalParameterControlSysEx(e,t);default:console.warn(`Unsupported Exclusive Message: ${e}`)}break;case 8:switch(e[3]){case 8:return this.handleScaleOctaveTuning1ByteFormatSysEx(e,!0,t);case 9:return this.handleScaleOctaveTuning2ByteFormatSysEx(e,!0,t);default:console.warn(`Unsupported Exclusive Message: ${e}`)}break;case 9:switch(e[3]){case 1:return this.handleChannelPressureSysEx(e,t);case 2:return this.handlePolyphonicKeyPressureSysEx(e,t);case 3:return this.handleControlChangeSysEx(e,t);default:console.warn(`Unsupported Exclusive Message: ${e}`)}break;case 10:if(e[3]===1)return this.handleKeyBasedInstrumentControlSysEx(e,t);console.warn(`Unsupported Exclusive Message: ${e}`);break;default:console.warn(`Unsupported Exclusive Message: ${e}`)}}handleMasterVolumeSysEx(e,t){let n=(e[5]*128+e[4])/16383;this.setMasterVolume(n,t)}setMasterVolume(e,t){0<=t||(t=this.audioContext.currentTime);let n=this.perceptualSmoothingTime/5;this.masterVolume.gain.cancelAndHoldAtTime(t).setTargetAtTime(e*e,t,n)}handleMasterFineTuningSysEx(e,t){let n=((e[5]*128+e[4])/16383-8192)/8192*100;this.setMasterFineTuning(n,t)}setMasterFineTuning(e,t){let o=this.masterFineTuning,n=e;this.masterFineTuning=n;let i=n-o,s=this.channels;for(let e=0;e<s.length;e++){let n=s[e];n.isDrum||(n.detune+=i,this.updateChannelDetune(n,t))}}handleMasterCoarseTuningSysEx(e,t){let n=(e[4]-64)*100;this.setMasterCoarseTuning(n,t)}setMasterCoarseTuning(e,t){let o=this.masterCoarseTuning,n=e;this.masterCoarseTuning=n;let i=n-o,s=this.channels;for(let e=0;e<s.length;e++){let n=s[e];n.isDrum||(n.detune+=i,this.updateChannelDetune(n,t))}}handleGlobalParameterControlSysEx(e,t){if(e[7]===1)switch(e[8]){case 1:return this.handleReverbParameterSysEx(e);case 2:return this.handleChorusParameterSysEx(e,t);default:console.warn(`Unsupported Global Parameter Control Message: ${e}`)}else console.warn(`Unsupported Global Parameter Control Message: ${e}`)}handleReverbParameterSysEx(e){switch(e[9]){case 0:return this.setReverbType(e[10]);case 1:return this.setReverbTime(e[10])}}setReverbType(e){this.reverb.time=this.getReverbTimeFromType(e),this.reverb.feedback=e===8?.9:.8,this.reverbEffect=this.setReverbEffect(this.reverb.algorithm)}getReverbTimeFromType(e){switch(e){case 0:return this.getReverbTime(44);case 1:return this.getReverbTime(50);case 2:return this.getReverbTime(56);case 3:return this.getReverbTime(64);case 4:return this.getReverbTime(64);case 8:return this.getReverbTime(50);default:console.warn(`Unsupported Reverb Time: ${e}`)}}setReverbTime(e){this.reverb.time=this.getReverbTime(e),this.reverbEffect=this.setReverbEffect(this.reverb.algorithm)}getReverbTime(e){return Math.exp((e-40)*.025)}calcDelay(e,t){return-e*Math.log10(t)/3}handleChorusParameterSysEx(e,t){switch(e[9]){case 0:return this.setChorusType(e[10],t);case 1:return this.setChorusModRate(e[10],t);case 2:return this.setChorusModDepth(e[10],t);case 3:return this.setChorusFeedback(e[10],t);case 4:return this.setChorusSendToReverb(e[10],t)}}setChorusType(e,t){switch(e){case 0:return this.setChorusParameter(3,5,0,0,t);case 1:return this.setChorusParameter(9,19,5,0,t);case 2:return this.setChorusParameter(3,19,8,0,t);case 3:return this.setChorusParameter(9,16,16,0,t);case 4:return this.setChorusParameter(2,24,64,0,t);case 5:return this.setChorusParameter(1,5,112,0,t);default:console.warn(`Unsupported Chorus Type: ${e}`)}}setChorusParameter(e,t,n,s,o){this.setChorusModRate(e,o),this.setChorusModDepth(t,o),this.setChorusFeedback(n,o),this.setChorusSendToReverb(s,o)}setChorusModRate(e,t){let n=this.getChorusModRate(e);this.chorus.modRate=n,this.chorusEffect.lfo.frequency.setValueAtTime(n,t)}getChorusModRate(e){return e*.122}setChorusModDepth(e,t){let n=this.getChorusModDepth(e);this.chorus.modDepth=n,this.chorusEffect.lfoGain.gain.cancelScheduledValues(t).setValueAtTime(n/2,t)}getChorusModDepth(e){return(e+1)/3200}setChorusFeedback(e,t){let n=this.getChorusFeedback(e);this.chorus.feedback=n;let s=this.chorusEffect;for(let e=0;e<s.feedbackGains.length;e++)s.feedbackGains[e].gain.cancelScheduledValues(t).setValueAtTime(n,t)}getChorusFeedback(e){return e*.00763}setChorusSendToReverb(e,t){let n=this.getChorusSendToReverb(e),s=this.chorusEffect.sendGain;0<this.chorus.sendToReverb?(this.chorus.sendToReverb=n,0<n?s.gain.cancelScheduledValues(t).setValueAtTime(n,t):s.disconnect()):(this.chorus.sendToReverb=n,0<n&&(s.connect(this.reverbEffect.input),s.gain.cancelScheduledValues(t).setValueAtTime(n,t)))}getChorusSendToReverb(e){return e*.00787}getChannelBitmap(e){let t=new Array(this.channels.length).fill(!1),n=e[4]&3,s=e[5]&127,o=e[6]&127;for(let e=0;e<7;e++)o&1<<e&&(t[e]=!0);for(let e=0;e<7;e++)s&1<<e&&(t[e+7]=!0);for(let e=0;e<2;e++)n&1<<e&&(t[e+14]=!0);return t}handleScaleOctaveTuning1ByteFormatSysEx(e,t,n){if(e.length<19){console.error("Data length is too short");return}let s=this.getChannelBitmap(e);for(let o=0;o<s.length;o++){if(!s[o])continue;let i=this.channels[o];if(!i.isDrum){for(let t=0;t<12;t++){let n=e[t+7]-64;i.scaleOctaveTuningTable[t]=n}t&&this.updateChannelDetune(i,n)}}}handleScaleOctaveTuning2ByteFormatSysEx(e,t,n){if(e.length<31){console.error("Data length is too short");return}let s=this.getChannelBitmap(e);for(let o=0;o<s.length;o++){if(!s[o])continue;let i=this.channels[o];if(!i.isDrum){for(let t=0;t<12;t++){let n=7+t*2,s=e[n]&127,o=e[n+1]&127,a=(s*128+o-8192)/8.192;i.scaleOctaveTuningTable[t]=a}t&&this.updateChannelDetune(i,n)}}}calcEffectValue(e,t,n){return this.calcChannelEffectValue(e,n)+this.calcNoteEffectValue(e,t,n)}calcChannelEffectValue(e,t){return this.calcControlChangeEffectValue(e,t)+this.calcChannelPressureEffectValue(e,t)}calcControlChangeEffectValue(e,t){let n=e.controlTable[t];if(n<0)return 0;let s=e.state.array[n];if(s<=0)return 0;let o=rr[t];return(e.controlTable[t+6]-o)*s*Dn[t]}calcChannelPressureEffectValue(e,t){let n=e.state.channelPressure;if(n<=0)return 0;let s=rr[t];return(e.channelPressureTable[t]-s)*n*Dn[t]}calcNoteEffectValue(e,t,n){let s=t.pressure;if(s<=0)return 0;let o=rr[n];return(e.polyphonicKeyPressureTable[n]-o)*s/127*Dn[n]}getChannelPitchControl(e){return this.calcChannelEffectValue(e,0)}getNotePitchControl(e,t){return this.calcNoteEffectValue(e,t,0)}getPitchControl(e,t){return this.calcEffectValue(e,t,0)}getFilterCutoffControl(e,t){return this.calcEffectValue(e,t,1)}getChannelAmplitudeControl(e){return this.calcChannelEffectValue(e,2)}getNoteAmplitudeControl(e,t){return this.calcNoteEffectValue(e,t,2)}getAmplitudeControl(e,t){return this.calcEffectValue(e,t,2)}getLFOPitchDepth(e,t){return this.calcEffectValue(e,t,3)}getLFOFilterDepth(e,t){return this.calcEffectValue(e,t,4)}getLFOAmplitudeDepth(e,t){return this.calcEffectValue(e,t,5)}createEffectHandlers(){let e=new Array(6);return e[0]=(e,t,n,s)=>{this.isPortamento(e,t)?this.setPortamentoDetune(e,t,s):this.setDetune(e,t,s)},e[1]=(e,t,n,s)=>{.5<=e.state.portamento&&0<=t.portamentoNoteNumber?this.setPortamentoFilterEnvelope(e,t,s):this.setFilterEnvelope(e,t,s)},e[2]=(e,t,n,s)=>{n==="polyphonicKeyPressureTable"?this.setVolumeNode(e,t,s):this.applyVolume(e,s)},e[3]=(e,t,n,s)=>this.setModLfoToPitch(e,t,s),e[4]=(e,t,n,s)=>this.setModLfoToFilterFc(e,t,s),e[5]=(e,t,n,s)=>this.setModLfoToVolume(e,t,s),e}setControlChangeEffects(e,t,n){let s=this.effectHandlers;for(let o=0;o<s.length;o++){let i=rr[o],a=e.controlTable[o+6];i!==a&&s[o](e,t,"controlTable",n)}}setChannelPressureEffects(e,t,n){this.setPressureEffects(e,t,"channelPressureTable",n)}setPolyphonicKeyPressureEffects(e,t,n){this.setPressureEffects(e,t,"polyphonicKeyPressureTable",n)}setPressureEffects(e,t,n,s){let o=this.effectHandlers,i=e[n];for(let a=0;a<o.length;a++){let r=rr[a],c=i[a];r!==c&&o[a](e,t,n,s)}}handleChannelPressureSysEx(e,t){this.handlePressureSysEx(e,"channelPressureTable",t)}handlePolyphonicKeyPressureSysEx(e,t){this.handlePressureSysEx(e,"polyphonicKeyPressureTable",t)}handlePressureSysEx(e,t,n){let o=e[4],s=this.channels[o];if(s.isDrum)return;let i=s[t];for(let o=5;o<e.length-1;o+=2){let a=e[o],c=e[o+1];i[a]=c;let r=this.effectHandlers[a];this.processActiveNotes(s,n,e=>{r&&r(s,e,t,n)})}}handleControlChangeSysEx(e,t){let o=e[4],n=this.channels[o];if(n.isDrum)return;let s=n.controlTable;s.set(Vn);let i=e[5];for(let o=6;o<e.length;o+=2){let a=e[o],c=e[o+1];s[a]=i,s[a+6]=c;let r=this.effectHandlers[a];this.processActiveNotes(n,t,e=>{r&&r(n,e,"controlTable",t)})}}getRelativeKeyBasedValue(e,t,n){let s=e.state.array[128+n];if(!e.isDrum)return s;let o=this.getKeyBasedValue(e,t,n);return o<0?s:s*o/64}getKeyBasedValue(e,t,n){let s=t*128+n;return e.keyBasedTable[s]}createKeyBasedControllerHandlers(){let e=new Array(128);return e[7]=(e,t,n)=>this.updateKeyBasedVolume(e,t,n),e[10]=(e,t,n)=>this.updateKeyBasedVolume(e,t,n),e[71]=(e,t,n)=>this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setFilterQ(e,s,n)}),e[73]=(e,t,n)=>this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setVolumeEnvelope(e,s,n)}),e[74]=(e,t,n)=>this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setFilterEnvelope(e,s,n)}),e[75]=(e,t,n)=>this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setVolumeEnvelope(e,s,n)}),e[76]=(e,t,n)=>{e.state.vibratoDepth<=0||this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setFreqVibLFO(e,s,n)})},e[77]=(e,t,n)=>{e.state.vibratoDepth<=0||this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setVibLfoToPitch(e,s,n)})},e[78]=(e,t)=>{e.state.vibratoDepth<=0||this.processScheduledNotes(e,n=>{n.noteNumber===t&&this.setDelayVibLFO(e,n)})},e[91]=(e,t,n)=>this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setReverbSend(e,s,n)}),e[93]=(e,t,n)=>this.processScheduledNotes(e,s=>{s.noteNumber===t&&this.setChorusSend(e,s,n)}),e}handleKeyBasedInstrumentControlSysEx(e,t){let o=e[4],n=this.channels[o];if(!n.isDrum)return;let s=e[5],i=n.keyBasedTable;for(let o=6;o<e.length;o+=2){let a=e[o],c=e[o+1],l=s*128+a;i[l]=c;let r=this.keyBasedControllerHandlers[a];r&&r(n,s,t)}}handleSysEx(e,t){switch(e[0]){case 126:return this.handleUniversalNonRealTimeExclusiveMessage(e,t);case 127:return this.handleUniversalRealTimeExclusiveMessage(e,t);default:console.warn(`Unsupported Exclusive Message: ${e}`)}}scheduleTask(e,t){return new Promise(n=>{let s=new AudioBufferSourceNode(this.audioContext,{buffer:this.schedulerBuffer});s.connect(this.scheduler),s.onended=()=>{try{e()}finally{s.disconnect(),n()}},s.start(t)})}};import{AudioBufferSource,BufferTarget,canEncodeAudio,FlacOutputFormat,Mp3OutputFormat,Mp4OutputFormat,OggOutputFormat,Output,QUALITY_HIGH,WavOutputFormat}from"https://cdn.jsdelivr.net/npm/mediabunny@1.45.2/+esm";function toggleDarkMode(){const e=document.documentElement,t=e.getAttribute("data-bs-theme")==="dark"?"light":"dark";e.setAttribute("data-bs-theme",t),localStorage.setItem("darkMode",t)}function getRandomInt(e,t){return e=Math.ceil(e),t=Math.floor(t),Math.floor(Math.random()*(t-e))+e}function shuffle(e){for(let t=e.length;1<t;t--){const n=Math.floor(Math.random()*t);[e[n],e[t-1]]=[e[t-1],e[n]]}return e}function setSampleEvents(){document.getElementById("samples").addEventListener("change",e=>{const t=e.target;switch(t.name){case"sampleMIDI":{getSampleMIDI("https://midi-db.pages.dev/"+t.value);break}case"sampleSoundFont":soundFontURL="https://soundfonts.pages.dev/"+t.value}})}async function getSampleMIDI(e){const t=await fetch(e),n=await t.blob();await loadMIDI(n)}async function getSampleMIDIList(){const a=document.getElementById("sampleMIDI"),r=await fetch("https://midi-db.pages.dev/collections.json"),t=await r.json(),n=t[getRandomInt(0,t.length)],{license:e,maintainer:s}=n,c=e.startsWith("http")?`<a href="${e}">custom</a>`:e,l=await fetch(`https://midi-db.pages.dev/json/${n.id}/${htmlLang}.json`),d=await l.json(),o=d.filter(e=>!e.time.startsWith("0:"));shuffle(o);let i="";for(let e=0;e<15;e++){const t=o[e],n=s||t.maintainer;i+=`
+ïBçÏ§mÙIólÜoëVb¦¯éWÇû3` });
+  var ei = { a: en };
+  this.setModule = (P) => {
+    i22.setModule(tt, P);
+  }, this.getModule = () => i22.getModule(tt), this.instantiate = () => (this.getModule().then((P) => WebAssembly.instantiate(P, ei)).then((P) => {
+    let ve = P.exports;
+    tn(ve), p = ve.l, y(), Yo(ve), t();
+  }), this.ready = new Promise((P) => {
+    t = P;
+  }).then(() => {
+    this.HEAP = p.buffer, this.malloc = _n, this.free = Gn, this.create_decoder = An, this.send_setup = On, this.init_dsp = Rn, this.decode_packets = Ln, this.destroy_decoder = Un;
+  }), this);
+}
+function Vt() {
+  return this._init = () => new this._WASMAudioDecoderCommon().instantiate(this._EmscriptenWASM, this._module).then((i22) => {
+    this._common = i22, this._input = this._common.allocateTypedArray(this._inputSize, Uint8Array), this._firstPage = true, this._inputLen = this._common.allocateTypedArray(1, Uint32Array), this._outputBufferPtr = this._common.allocateTypedArray(1, Uint32Array), this._channels = this._common.allocateTypedArray(1, Uint32Array), this._sampleRate = this._common.allocateTypedArray(1, Uint32Array), this._samplesDecoded = this._common.allocateTypedArray(1, Uint32Array);
+    let e = 256;
+    this._errors = this._common.allocateTypedArray(e, Uint32Array), this._errorsLength = this._common.allocateTypedArray(1, Int32Array), this._frameNumber = 0, this._inputBytes = 0, this._outputSamples = 0, this._decoder = this._common.wasm.create_decoder(this._input.ptr, this._inputLen.ptr, this._outputBufferPtr.ptr, this._channels.ptr, this._sampleRate.ptr, this._samplesDecoded.ptr, this._errors.ptr, this._errorsLength.ptr, e);
+  }), Object.defineProperty(this, "ready", { enumerable: true, get: () => this._ready }), this.reset = () => (this.free(), this._init()), this.free = () => {
+    this._common.wasm.destroy_decoder(this._decoder), this._common.free();
+  }, this.sendSetupHeader = (i22) => {
+    this._input.buf.set(i22), this._inputLen.buf[0] = i22.length, this._common.wasm.send_setup(this._decoder, this._firstPage), this._firstPage = false;
+  }, this.initDsp = () => {
+    this._common.wasm.init_dsp(this._decoder);
+  }, this.decodePackets = (i22) => {
+    let e = [], t = 0, s = [];
+    for (let r = 0; r < i22.length; r++) {
+      let n = i22[r];
+      this._input.buf.set(n), this._inputLen.buf[0] = n.length, this._common.wasm.decode_packets(this._decoder);
+      let o = this._samplesDecoded.buf[0], a = [], c = new Uint32Array(this._common.wasm.HEAP, this._outputBufferPtr.buf[0], this._channels.buf[0]);
+      for (let l = 0; l < this._channels.buf[0]; l++) {
+        let u = new Float32Array(o);
+        o && u.set(new Float32Array(this._common.wasm.HEAP, c[l], o)), a.push(u);
+      }
+      e.push(a), t += o, this._frameNumber++, this._inputBytes += n.length, this._outputSamples += o;
+      for (let l = 0; l < this._errorsLength.buf; l += 2) {
+        let u = this._common.codeToString(this._errors.buf[l]), h = this._common.codeToString(this._errors.buf[l + 1]);
+        s.push({ message: u + " vorbis_synthesis" + h, frameLength: n.length, frameNumber: this._frameNumber, inputBytes: this._inputBytes, outputSamples: this._outputSamples });
+      }
+      this._errorsLength.buf[0] = 0;
+    }
+    return this._WASMAudioDecoderCommon.getDecodedAudioMultiChannel(s, e, this._channels.buf[0], t, this._sampleRate.buf[0], 16);
+  }, this._isWebWorker = Vt.isWebWorker, this._WASMAudioDecoderCommon = Vt.WASMAudioDecoderCommon || U, this._EmscriptenWASM = Vt.EmscriptenWASM || tt, this._module = Vt.module, this._inputSize = 128 * 1024, this._ready = this._init(), this;
+}
+var Jr = /* @__PURE__ */ Symbol();
+var Bt = class {
+  constructor() {
+    this._onCodec = (e) => {
+      if (e !== "vorbis") throw new Error("@wasm-audio-decoders/ogg-vorbis does not support this codec " + e);
+    }, new U(), this._init(), this._ready = this[Jr](Vt);
+  }
+  _init() {
+    this._vorbisSetupInProgress = true, this._totalSamplesDecoded = 0, this._codecParser = new Vo("audio/ogg", { onCodec: this._onCodec, enableFrameCRC32: false });
+  }
+  async [Jr](e) {
+    if (this._decoder) {
+      let t = this._decoder;
+      await t.ready.then(() => t.free());
+    }
+    return this._decoder = new e(), this._decoder.ready;
+  }
+  get ready() {
+    return this._ready;
+  }
+  async reset() {
+    return this._init(), this._decoder.reset();
+  }
+  free() {
+    this._decoder.free();
+  }
+  async decodeOggPages(e) {
+    let t = [];
+    for (let n = 0; n < e.length; n++) {
+      let o = e[n];
+      if (this._vorbisSetupInProgress && (o[Xr][0] === 1 && this._decoder.sendSetupHeader(o[Xr]), o[$r].length)) {
+        let a = o[$r][0][Bo];
+        this._decoder.sendSetupHeader(a[_o]), this._decoder.initDsp(), this._vorbisSetupInProgress = false;
+      }
+      t.push(...o[$r].map((a) => a[Xr]));
+    }
+    let s = await this._decoder.decodePackets(t);
+    this._totalSamplesDecoded += s.samplesDecoded;
+    let r = e[e.length - 1];
+    if (r && r[Ao]) {
+      let n = this._totalSamplesDecoded - r[Oo];
+      if (n > 0) {
+        for (let o = 0; o < s.channelData.length; o++) s.channelData[o] = s.channelData[o].subarray(0, s.samplesDecoded - n);
+        s.samplesDecoded -= n, this._totalSamplesDecoded -= n;
+      }
+    }
+    return s;
+  }
+  async decode(e) {
+    return this.decodeOggPages([...this._codecParser.parseChunk(e)]);
+  }
+  async flush() {
+    let e = await this.decodeOggPages([...this._codecParser.flush()]);
+    return await this.reset(), e;
+  }
+  async decodeFile(e) {
+    let t = await this.decodeOggPages([...this._codecParser.parseAll(e)]);
+    return await this.reset(), t;
+  }
+};
+var Fn = class extends Gt {
+  constructor(e) {
+    super(e, "ogg-vorbis-decoder", Vt, tt);
+  }
+  async sendSetupHeader(e) {
+    return this.postToDecoder("sendSetupHeader", e);
+  }
+  async initDsp() {
+    return this.postToDecoder("initDsp");
+  }
+  async decodePackets(e) {
+    return this.postToDecoder("decodePackets", e);
+  }
+};
+var At = class extends Bt {
+  constructor() {
+    super(), this._ready = super[Jr](Fn);
+  }
+  async free() {
+    await this._decoder.free();
+  }
+  terminate() {
+    this._decoder.terminate();
+  }
+};
+wr(Bt, "OggVorbisDecoder");
+wr(At, "OggVorbisDecoderWebWorker");
+function Lo(i22, e, t) {
+  let s = i22.sampleRate, r = s * e, n = new AudioBuffer({ numberOfChannels: 2, length: r, sampleRate: s }), o = Math.min(s * t, r);
+  for (let a = 0; a < n.numberOfChannels; a++) {
+    let c = n.getChannelData(a);
+    for (let u = 0; u < o; u++) c[u] = Math.random() * 2 - 1;
+    let l = 1 / (s * e);
+    for (let u = o; u < r; u++) {
+      let h = Math.exp(-(u - o) * l);
+      c[u] = (Math.random() * 2 - 1) * h;
+    }
+  }
+  return n;
+}
+function En(i22, e) {
+  let t = new ConvolverNode(i22, { buffer: e });
+  return { input: t, output: t };
+}
+function ra(i22, e, t, s) {
+  let r = new DelayNode(i22, { maxDelayTime: t, delayTime: t }), n = new GainNode(i22, { gain: s });
+  return e.connect(r), r.connect(n), n.connect(r), r;
+}
+function sr(i22, e, t, s) {
+  let r = new DelayNode(i22, { maxDelayTime: t, delayTime: t }), n = new GainNode(i22, { gain: s }), o = new GainNode(i22, { gain: 1 - s });
+  return e.connect(r), r.connect(n), n.connect(r), r.connect(o), o;
+}
+function Uo(i22, e, t, s, r) {
+  let n = new DelayNode(i22, { maxDelayTime: t, delayTime: t }), o = new GainNode(i22, { gain: s }), a = Math.max(0, Math.min(1, r)), c = new IIRFilterNode(i22, { feedforward: [1 - a], feedback: [1, -a] });
+  return e.connect(n), n.connect(c), c.connect(o), o.connect(n), n;
+}
+function Go(i22, e, t, s, r) {
+  let n = new GainNode(i22), o = new GainNode(i22);
+  for (let c = 0; c < t.length; c++) ra(i22, n, t[c], e[c]).connect(o);
+  let a = [];
+  for (let c = 0; c < r.length; c++) {
+    let l = c === 0 ? o : a.at(-1), u = sr(i22, l, r[c], s[c]);
+    a.push(u);
+  }
+  return { input: n, output: a.at(-1) };
+}
+function na(i22, e, t, s, r, n, o, a) {
+  let c = new GainNode(i22), l = new GainNode(i22);
+  for (let d = 0; d < e.length; d++) {
+    let p = new DelayNode(i22, { maxDelayTime: e[d], delayTime: e[d] }), y = new GainNode(i22, { gain: t[d] });
+    c.connect(p), p.connect(y), y.connect(l);
+  }
+  let u = new GainNode(i22);
+  for (let d = 0; d < s.length; d++) Uo(i22, l, s[d], r[d], n).connect(u);
+  let h = [];
+  for (let d = 0; d < o.length; d++) {
+    let p = d === 0 ? u : h.at(-1), y = sr(i22, p, o[d], a[d]);
+    h.push(y);
+  }
+  let f = new GainNode(i22);
+  return l.connect(f), h.at(-1).connect(f), { input: c, output: f };
+}
+function jo(i22, { rt60: e = 2, damping: t = 0.3 } = {}) {
+  let s = i22.sampleRate, r = [43e-4, 0.0215, 0.0225, 0.0268, 0.027, 0.0298, 0.0458], n = [0.841, 0.504, 0.491, 0.379, 0.38, 0.346, 0.289], a = [1309, 1635, 1811, 1926, 2053, 2667].map((h) => h / s), c = a.map((h) => Math.pow(10, -3 * h / e));
+  return na(i22, r, n, a, c, t, [5e-3, 17e-4], [0.7, 0.7]);
+}
+function oa(i22, e, t, s = 0.2, r = 5e-4) {
+  let n = e.length;
+  if (n !== 4) throw new Error("createFDN: only N=4 is supported (4x4 Hadamard)");
+  let o = [[0.5, 0.5, 0.5, 0.5], [0.5, -0.5, 0.5, -0.5], [0.5, 0.5, -0.5, -0.5], [0.5, -0.5, -0.5, 0.5]], a = new GainNode(i22), c = new GainNode(i22), l = e.map((d) => new DelayNode(i22, { maxDelayTime: d + r, delayTime: d })), u = l.map(() => {
+    let d = Math.max(0, Math.min(1, s));
+    return new IIRFilterNode(i22, { feedforward: [1 - d], feedback: [1, -d] });
+  }), h = t.map((d) => new GainNode(i22, { gain: d }));
+  r > 0 && l.forEach((d, p) => {
+    let y = new OscillatorNode(i22, { frequency: 0.3 + p * 0.07 }), m = new GainNode(i22, { gain: r });
+    y.connect(m), m.connect(d.delayTime), y.start();
+  });
+  let f = new GainNode(i22, { gain: 1 / n });
+  a.connect(f), l.forEach((d) => f.connect(d));
+  for (let d = 0; d < n; d++) l[d].connect(u[d]), u[d].connect(h[d]);
+  for (let d = 0; d < n; d++) {
+    for (let p = 0; p < n; p++) {
+      if (o[d][p] === 0) continue;
+      let y = new GainNode(i22, { gain: o[d][p] });
+      h[p].connect(y), y.connect(l[d]);
+    }
+    l[d].connect(c);
+  }
+  return { input: a, output: c };
+}
+function qo(i22, { rt60: e = 2, damping: t = 0.2, modulation: s = 5e-4 } = {}) {
+  let r = i22.sampleRate, o = [1049, 1327, 1601, 1873].map((c) => c / r), a = o.map((c) => Math.pow(10, -3 * c / e));
+  return oa(i22, o, a, t, s);
+}
+function Ko(i22, { decay: e = 0.7, damping: t = 5e-4, bandwidth: s = 0.9995 } = {}) {
+  let r = i22.sampleRate, n = Math.max(0, Math.min(1, s)), o = new IIRFilterNode(i22, { feedforward: [1 - n], feedback: [1, -n] }), a = r / 29761, c = [142, 107, 379, 277], l = [0.75, 0.75, 0.625, 0.625], u = new GainNode(i22);
+  u.connect(o);
+  let h = [];
+  for (let x = 0; x < c.length; x++) {
+    let L = x === 0 ? o : h.at(-1), j = sr(i22, L, c[x] * a / r, l[x]);
+    h.push(j);
+  }
+  let f = h.at(-1), d = [672, 908], p = [0.5, 0.5], y = [4453, 4217], m = [3720, 3163], b = Math.max(0, Math.min(1, t)), v = [new GainNode(i22), new GainNode(i22)];
+  f.connect(v[0]), f.connect(v[1]);
+  let S = [];
+  for (let x = 0; x < 2; x++) {
+    let L = sr(i22, v[x], d[x] * a / r, p[x]), j = new DelayNode(i22, { maxDelayTime: y[x] * a / r, delayTime: y[x] * a / r }), ce = new IIRFilterNode(i22, { feedforward: [1 - b], feedback: [1, -b] }), le = new DelayNode(i22, { maxDelayTime: m[x] * a / r, delayTime: m[x] * a / r }), Fe = new GainNode(i22, { gain: e });
+    L.connect(j), j.connect(ce), ce.connect(le), le.connect(Fe), S.push(Fe);
+  }
+  S[0].connect(v[1]), S[1].connect(v[0]);
+  let M = new GainNode(i22, { gain: 0.5 });
+  return S[0].connect(M), S[1].connect(M), { input: u, output: M };
+}
+var ia = [1116, 1188, 1277, 1356, 1422, 1491, 1557, 1617];
+var aa = 23;
+var Ro = [225, 341, 441, 556];
+var ca = 0.5;
+function Qo(i22, { roomSize: e = 0.84, damping: t = 0.2 } = {}) {
+  let s = i22.sampleRate, r = e * 0.28 + 0.7, n = (c) => {
+    let l = new GainNode(i22), u = new GainNode(i22);
+    for (let f of ia) {
+      let d = (f + c) / s;
+      Uo(i22, l, d, r, t).connect(u);
+    }
+    let h = [];
+    for (let f = 0; f < Ro.length; f++) {
+      let d = f === 0 ? u : h.at(-1), p = sr(i22, d, Ro[f] / s, ca);
+      h.push(p);
+    }
+    return { input: l, output: h.at(-1) };
+  }, o = n(0), a = n(aa);
+  return { inputL: o.input, inputR: a.input, outputL: o.output, outputR: a.output };
+}
+function la(i22, e, t = 2e3) {
+  let s = i22.sampleRate, r = Math.ceil(s * e), n = new AudioBuffer({ numberOfChannels: 2, length: r, sampleRate: s }), o = Math.max(1, Math.round(s / t));
+  for (let a = 0; a < 2; a++) {
+    let c = n.getChannelData(a);
+    for (let l = 0; l < r; l += o) {
+      let u = l + Math.floor(Math.random() * o);
+      if (u < r) {
+        let h = Math.exp(-u / (s * e * 0.3));
+        c[u] = (Math.random() > 0.5 ? 1 : -1) * h;
+      }
+    }
+  }
+  return n;
+}
+function Wo(i22, e, t) {
+  let s = la(i22, e, t);
+  return En(i22, s);
+}
+var ua = "ads";
+var Zo = new ArrayBuffer(8);
+var ha = new Float64Array(Zo);
+var da = new BigUint64Array(Zo);
+function zo(i22) {
+  return ha[0] = i22, da[0];
+}
+var kn = null;
+var $o = Promise.resolve();
+function fa() {
+  if (!kn) {
+    let i22 = new At();
+    kn = i22.ready.then(() => i22);
+  }
+  return kn;
+}
+var In = class {
+  voice;
+  voiceParams;
+  adjustedBaseFreq = 2e4;
+  index = -1;
+  ending = false;
+  bufferSource;
+  timelineIndex = null;
+  renderedBuffer = null;
+  fullCacheVoiceId = null;
+  filterEnvelopeNode;
+  volumeEnvelopeNode;
+  volumeNode;
+  modLfo;
+  modLfoToPitch;
+  modLfoToFilterFc;
+  modLfoToVolume;
+  vibLfo;
+  vibLfoToPitch;
+  reverbSend;
+  chorusSend;
+  portamentoNoteNumber = -1;
+  pressure = 0;
+  constructor(e, t, s) {
+    this.noteNumber = e, this.velocity = t, this.startTime = s, this.ready = new Promise((r) => {
+      this.resolveReady = r;
+    });
+  }
+};
+var Hn = class {
+  channelNumber = 0;
+  isDrum = false;
+  programNumber = 0;
+  detune = 0;
+  bankMSB = 121;
+  bankLSB = 0;
+  dataMSB = 0;
+  dataLSB = 0;
+  rpnMSB = 127;
+  rpnLSB = 127;
+  mono = false;
+  modulationDepthRange = 50;
+  fineTuning = 0;
+  coarseTuning = 0;
+  activeNotes = new Array(128);
+  sustainNotes = [];
+  sostenutoNotes = [];
+  controlTable = new Int8Array(Vn);
+  scaleOctaveTuningTable = new Float32Array(12);
+  channelPressureTable = new Int8Array(nr);
+  polyphonicKeyPressureTable = new Int8Array(nr);
+  keyBasedTable = new Int8Array(16384).fill(-1);
+  keyBasedGainLs = new Array(128);
+  keyBasedGainRs = new Array(128);
+  lastNote = null;
+  currentBufferSource = null;
+  constructor(e, t, s) {
+    this.channelNumber = e, Object.assign(this, t), Object.assign(this, s), this.state = new Nn();
+  }
+  resetSettings(e) {
+    Object.assign(this, e);
+  }
+  resetTable() {
+    this.controlTable.set(Vn), this.scaleOctaveTuningTable.fill(0), this.channelPressureTable.set(nr), this.polyphonicKeyPressureTable.set(nr), this.keyBasedTable.fill(-1);
+  }
+};
+var or = new Array(57);
+var pa = 10;
+var Y = new Uint8Array(128);
+Y[42] = 1;
+Y[44] = 1;
+Y[46] = 1;
+Y[71] = 2;
+Y[72] = 2;
+Y[73] = 3;
+Y[74] = 3;
+Y[78] = 4;
+Y[79] = 4;
+Y[80] = 5;
+Y[81] = 5;
+Y[29] = 6;
+Y[30] = 6;
+Y[86] = 7;
+Y[87] = 7;
+or[0] = Y;
+var Zr = new Uint8Array(128);
+Zr[42] = 8;
+Zr[44] = 8;
+Zr[46] = 8;
+or[25] = Zr;
+var Yr = new Uint8Array(128);
+Yr[27] = 9;
+Yr[28] = 9;
+Yr[29] = 9;
+or[48] = Yr;
+var Bn = new Uint8Array(128);
+Bn[41] = 10;
+Bn[42] = 10;
+or[56] = Bn;
+var _t = { noteOnVelocity: { type: 2, defaultValue: 0 }, noteOnKeyNumber: { type: 3, defaultValue: 0 }, polyphonicKeyPressure: { type: 10, defaultValue: 0 }, channelPressure: { type: 13, defaultValue: 0 }, pitchWheel: { type: 14, defaultValue: 8192 / 16383 }, pitchWheelSensitivity: { type: 16, defaultValue: 2 / 128 }, link: { type: 127, defaultValue: 0 }, modulationDepthMSB: { type: 129, defaultValue: 0 }, portamentoTimeMSB: { type: 133, defaultValue: 0 }, volumeMSB: { type: 135, defaultValue: 100 / 127 }, panMSB: { type: 138, defaultValue: 64 / 127 }, expressionMSB: { type: 139, defaultValue: 1 }, modulationDepthLSB: { type: 161, defaultValue: 0 }, portamentoTimeLSB: { type: 165, defaultValue: 0 }, volumeLSB: { type: 167, defaultValue: 0 }, panLSB: { type: 170, defaultValue: 0 }, expressionLSB: { type: 171, defaultValue: 0 }, sustainPedal: { type: 192, defaultValue: 0 }, portamento: { type: 193, defaultValue: 0 }, sostenutoPedal: { type: 194, defaultValue: 0 }, softPedal: { type: 195, defaultValue: 0 }, filterResonance: { type: 199, defaultValue: 64 / 127 }, releaseTime: { type: 200, defaultValue: 64 / 127 }, attackTime: { type: 201, defaultValue: 64 / 127 }, brightness: { type: 202, defaultValue: 64 / 127 }, decayTime: { type: 203, defaultValue: 64 / 127 }, vibratoRate: { type: 204, defaultValue: 64 / 127 }, vibratoDepth: { type: 205, defaultValue: 64 / 127 }, vibratoDelay: { type: 206, defaultValue: 64 / 127 }, portamentoNoteNumber: { type: 212, defaultValue: 0 }, reverbSendLevel: { type: 219, defaultValue: 0 }, chorusSendLevel: { type: 221, defaultValue: 0 } };
+var Nn = class {
+  array = new Float32Array(256);
+  constructor() {
+    let e = Object.entries(_t);
+    for (let [t, { type: s, defaultValue: r }] of e) this.array[s] = r, Object.defineProperty(this, t, { get: () => this.array[s], set: (n) => this.array[s] = n, enumerable: true, configurable: true });
+  }
+};
+var ma = ["volDelay", "volAttack", "volHold", "volDecay", "volSustain", "volRelease", "initialAttenuation"];
+var ba = new Set(ma);
+var ga = ["modEnvToPitch", "initialFilterFc", "modEnvToFilterFc", "modDelay", "modAttack", "modHold", "modDecay", "modSustain"];
+var ya = new Set(ga);
+var va = ["modEnvToPitch", "modDelay", "modAttack", "modHold", "modDecay", "modSustain", "playbackRate"];
+var Sa = new Set(va);
+var Dn = [2400 / 64, 9600 / 64, 1 / 64, 600 / 127, 2400 / 127, 1 / 127];
+var rr = new Int8Array([64, 64, 0, 0, 0, 0]);
+var nr = new Int8Array([64, 64, 64, 0, 0, 0]);
+var Vn = new Int8Array([-1, -1, -1, -1, -1, -1, ...nr]);
+var Ne = class {
+  buffer;
+  isLoop;
+  isFull;
+  adsDuration;
+  loopStart;
+  loopDuration;
+  noteDuration;
+  releaseDuration;
+  constructor(e, t = {}) {
+    this.buffer = e, this.isLoop = t.isLoop ?? false, this.isFull = t.isFull ?? false, this.adsDuration = t.adsDuration, this.loopStart = t.loopStart, this.loopDuration = t.loopDuration, this.noteDuration = t.noteDuration, this.releaseDuration = t.releaseDuration;
+  }
+};
+function is(i22) {
+  return Math.pow(10, i22 / 200);
+}
+var os = 1 / -Math.log(is(-1e3));
+var vt = 1 / -Math.log(is(-600));
+var Xo = class extends EventTarget {
+  perceptualSmoothingTime = 4e-3;
+  mode = "GM2";
+  masterFineTuning = 0;
+  masterCoarseTuning = 0;
+  reverb = { algorithm: "Schroeder", time: this.getReverbTime(64), feedback: 0.8 };
+  chorus = { modRate: this.getChorusModRate(3), modDepth: this.getChorusModDepth(19), feedback: this.getChorusFeedback(8), sendToReverb: this.getChorusSendToReverb(0), delayTimes: this.generateDistributedArray(0.02, 2, 0.5) };
+  numChannels = 16;
+  ticksPerBeat = 120;
+  totalTime = 0;
+  lastActiveSensing = 0;
+  activeSensingThreshold = 0.3;
+  noteCheckInterval = 0.1;
+  lookAhead = 1;
+  startDelay = 0.1;
+  startTime = 0;
+  resumeTime = 0;
+  soundFonts = [];
+  soundFontTable = Array.from({ length: 128 }, () => []);
+  voiceCounter = /* @__PURE__ */ new Map();
+  voiceCache = /* @__PURE__ */ new Map();
+  realtimeVoiceCache = /* @__PURE__ */ new Map();
+  decodeMethod = "wasm-audio-decoders";
+  isPlaying = false;
+  isPausing = false;
+  isPaused = false;
+  isStopping = false;
+  isSeeking = false;
+  totalTimeEventTypes = /* @__PURE__ */ new Set(["noteOff"]);
+  tempo = 1;
+  loop = false;
+  loopStart = 0;
+  playPromise;
+  timeline = [];
+  notePromises = [];
+  instruments = /* @__PURE__ */ new Set();
+  exclusiveClassNotes = new Array(128);
+  drumExclusiveClassNotes = new Array(this.numChannels * pa);
+  adsrVoiceCache = /* @__PURE__ */ new Map();
+  noteOnDurations = /* @__PURE__ */ new Map();
+  noteOnEvents = /* @__PURE__ */ new Map();
+  fullVoiceCache = /* @__PURE__ */ new Map();
+  renderedAudioBuffer = null;
+  isRendering = false;
+  audioModeBufferSource = null;
+  mpeEnabled = false;
+  lowerMPEMembers = 0;
+  upperMPEMembers = 0;
+  mpeState = { channelToNotes: /* @__PURE__ */ new Map() };
+  static channelSettings = { detune: 0, programNumber: 0, bankMSB: 121, bankLSB: 0, dataMSB: 0, dataLSB: 0, rpnMSB: 127, rpnLSB: 127, mono: false, modulationDepthRange: 50, fineTuning: 0, coarseTuning: 0, portamentoControl: false, isMPEMember: false, isMPEManager: false };
+  constructor(e) {
+    super(), this.audioContext = e, this.cacheMode = ua, this.masterVolume = new GainNode(e), this.scheduler = new GainNode(e, { gain: 0 }), this.schedulerBuffer = new AudioBuffer({ length: 1, sampleRate: e.sampleRate }), this.messageHandlers = this.createMessageHandlers(), this.voiceParamsHandlers = this.createVoiceParamsHandlers(), this.controlChangeHandlers = this.createControlChangeHandlers(), this.keyBasedControllerHandlers = this.createKeyBasedControllerHandlers(), this.effectHandlers = this.createEffectHandlers(), this.channels = this.createChannels(), this.reverbEffect = this.createReverbEffect(this.reverb.algorithm), this.chorusEffect = this.createChorusEffect(), this.chorusEffect.output.connect(this.masterVolume), this.reverbEffect.output.connect(this.masterVolume), this.masterVolume.connect(e.destination), this.scheduler.connect(e.destination), this.GM2SystemOn();
+  }
+  addSoundFont(e) {
+    let t = this.soundFonts.length;
+    this.soundFonts.push(e);
+    let s = e.parsed.presetHeaders, r = this.soundFontTable;
+    for (let n = 0; n < s.length; n++) {
+      let { preset: o, bank: a } = s[n];
+      r[o][a] = t;
+    }
+  }
+  async toUint8Array(e) {
+    let t;
+    if (typeof e == "string") {
+      let r = await (await fetch(e)).arrayBuffer();
+      t = new Uint8Array(r);
+    } else if (e instanceof Uint8Array) t = e;
+    else throw new TypeError("input must be a URL string or Uint8Array");
+    return t;
+  }
+  async loadSoundFont(e) {
+    if (this.voiceCounter.clear(), Array.isArray(e)) {
+      let t = new Array(e.length);
+      for (let r = 0; r < e.length; r++) t[r] = this.toUint8Array(e[r]);
+      let s = await Promise.all(t);
+      for (let r = 0; r < s.length; r++) {
+        let n = cn(s[r]), o = new hs(n);
+        this.addSoundFont(o);
+      }
+    } else {
+      let t = await this.toUint8Array(e), s = cn(t), r = new hs(s);
+      this.addSoundFont(r);
+    }
+  }
+  async loadMIDI(e) {
+    this.voiceCounter.clear();
+    let t = await this.toUint8Array(e), s = (0, Jo.parseMidi)(t);
+    this.ticksPerBeat = s.header.ticksPerBeat;
+    let r = this.extractMidiData(s);
+    this.instruments = r.instruments, this.timeline = r.timeline, this.totalTime = this.calcTotalTime(), this.cacheMode === "audio" && await this.render();
+  }
+  buildNoteOnDurations() {
+    let { timeline: e, totalTime: t, noteOnDurations: s, noteOnEvents: r, numChannels: n } = this;
+    s.clear(), r.clear();
+    let o = 1 / this.tempo, a = new Uint8Array(n), c = new Uint8Array(n), l = new Array(n).fill(null).map(() => /* @__PURE__ */ new Set()), u = /* @__PURE__ */ new Map(), h = /* @__PURE__ */ new Map(), f = (d, p, y) => {
+      let m = Math.max(0, p - d.startTime), b = y == null || y === 1 / 0 ? 1 / 0 : Math.max(0, y - d.startTicks);
+      s.set(d.idx, m), r.set(d.idx, { duration: m, durationTicks: b, startTime: d.startTime, events: d.events });
+    };
+    for (let d = 0; d < e.length; d++) {
+      let p = e[d], y = p.startTime * o;
+      switch (p.type) {
+        case "noteOn": {
+          let m = p.noteNumber * n + p.channel;
+          u.has(m) || u.set(m, []), u.get(m).push({ idx: d, startTime: y, startTicks: p.ticks, events: [] });
+          let b = h.get(m);
+          b && b.length > 0 && b.shift();
+          break;
+        }
+        case "noteOff": {
+          let m = p.channel, b = p.noteNumber * n + m, v = l[m].has(b);
+          if (a[m] || v) h.has(b) || h.set(b, []), h.get(b).push({ t: y, ticks: p.ticks });
+          else {
+            let S = u.get(b);
+            S && S.length > 0 && (f(S.shift(), y, p.ticks), S.length === 0 && u.delete(b));
+          }
+          break;
+        }
+        case "controller": {
+          let m = p.channel;
+          for (let [b, v] of u) if (b % n === m) for (let S of v) S.events.push(p);
+          switch (p.controllerType) {
+            case 64: {
+              let b = p.value >= 64;
+              if (a[m] = b ? 1 : 0, !b) for (let [v, S] of h) {
+                if (v % n !== m) continue;
+                let M = u.get(v);
+                for (let { t: x, ticks: L } of S) M && M.length > 0 && (f(M.shift(), x, L), M.length === 0 && u.delete(v));
+                h.delete(v);
+              }
+              break;
+            }
+            case 66: {
+              let b = p.value >= 64;
+              if (b && !c[m]) for (let [v] of u) v % n === m && l[m].add(v);
+              else b || l[m].clear();
+              c[m] = b ? 1 : 0;
+              break;
+            }
+            case 121:
+              a[m] = 0, c[m] = 0, l[m].clear();
+              break;
+            case 120:
+            case 123: {
+              for (let [b, v] of u) if (b % n === m) {
+                for (let S of v) f(S, y, p.ticks);
+                u.delete(b);
+              }
+              for (let b of h.keys()) b % n === m && h.delete(b);
+              break;
+            }
+          }
+          break;
+        }
+        case "sysEx":
+          if (p.data[0] === 126 && p.data[1] === 9 && p.data[2] === 3) {
+            if (p.data[3] === 1 || p.data[3] === 3) {
+              a.fill(0), h.clear();
+              for (let [, m] of u) for (let b of m) f(b, y, p.ticks);
+              u.clear();
+            }
+          } else for (let [, m] of u) for (let b of m) b.events.push(p);
+          break;
+        case "pitchBend":
+        case "programChange":
+        case "channelAftertouch":
+        case "noteAftertouch": {
+          let m = p.channel;
+          for (let [b, v] of u) if (b % n === m) for (let S of v) S.events.push(p);
+        }
+      }
+    }
+    for (let [, d] of u) for (let p of d) f(p, t, 1 / 0);
+  }
+  cacheVoiceIds() {
+    let { channels: e, timeline: t, voiceCounter: s, cacheMode: r } = this;
+    for (let n = 0; n < t.length; n++) {
+      let o = t[n];
+      switch (o.type) {
+        case "noteOn": {
+          let a = this.getVoiceId(e[o.channel], o.noteNumber, o.velocity);
+          s.set(a, (s.get(a) ?? 0) + 1);
+          break;
+        }
+        case "controller":
+          o.controllerType === 0 ? this.setBankMSB(o.channel, o.value) : o.controllerType === 32 && this.setBankLSB(o.channel, o.value);
+          break;
+        case "programChange":
+          this.setProgramChange(o.channel, o.programNumber, o.startTime);
+      }
+    }
+    for (let [n, o] of s) o === 1 && s.delete(n);
+    this.GM2SystemOn(), (r === "adsr" || r === "note" || r === "audio") && this.buildNoteOnDurations();
+  }
+  getVoiceId(e, t, s) {
+    let r = e.programNumber, n = this.soundFontTable[r];
+    if (!n) return;
+    let o = e.isDrum ? 128 : e.bankLSB;
+    if (n[o] === void 0) {
+      if (e.isDrum) return;
+      o = 0;
+    }
+    let a = n[o];
+    if (a === void 0) return;
+    let l = this.soundFonts[a].getVoice(o, r, t, s);
+    if (!l) return;
+    let { instrument: u, sampleID: h } = l.generators;
+    return a * 2 ** 31 + u * 2 ** 24 + (h << 8);
+  }
+  createChannelAudioNodes(e) {
+    let { gainLeft: t, gainRight: s } = this.panToGain(_t.panMSB.defaultValue), r = new GainNode(e, { gain: t }), n = new GainNode(e, { gain: s }), o = new ChannelMergerNode(e, { numberOfInputs: 2 });
+    return r.connect(o, 0, 0), n.connect(o, 0, 1), o.connect(this.masterVolume), { gainL: r, gainR: n, merger: o };
+  }
+  createChannels() {
+    let e = this.constructor.channelSettings, t = this.audioContext;
+    return Array.from({ length: this.numChannels }, (s, r) => new Hn(r, this.createChannelAudioNodes(t), e));
+  }
+  decodeOggVorbis(e) {
+    let t = $o.then(async () => {
+      let s = await fa(), r = e.data.slice(), { channelData: n, sampleRate: o, errors: a } = await s.decodeFile(r);
+      if (0 < a.length) throw new Error(a.join(", "));
+      let c = new AudioBuffer({ numberOfChannels: n.length, length: n[0].length, sampleRate: o });
+      for (let l = 0; l < n.length; l++) c.getChannelData(l).set(n[l]);
+      return c;
+    });
+    return $o = t.catch(() => {
+    }), t;
+  }
+  async createAudioBuffer(e) {
+    let t = e.sample;
+    if (t.type === "compressed") switch (this.decodeMethod) {
+      case "decodeAudioData": {
+        let s = t.data.slice().buffer;
+        return await this.audioContext.decodeAudioData(s);
+      }
+      case "wasm-audio-decoders":
+        return await this.decodeOggVorbis(t);
+      default:
+        throw new Error(`Unknown decodeMethod: ${this.decodeMethod}`);
+    }
+    else {
+      let s = t.data, r = s.length + e.end, n = s.subarray(e.start, r), o = t.decodePCM(n), a = new AudioBuffer({ numberOfChannels: 1, length: o.length, sampleRate: t.sampleHeader.sampleRate });
+      return a.getChannelData(0).set(o), a;
+    }
+  }
+  isLoopDrum(e, t) {
+    let s = e.programNumber;
+    return s === 48 && t === 88 || s === 56 && 47 <= t && t <= 84;
+  }
+  createBufferSource(e, t, s, r) {
+    let n = r instanceof Ne, o = n ? r.buffer : r, a = new AudioBufferSourceNode(this.audioContext);
+    a.buffer = o;
+    let c = e.isDrum ? this.isLoopDrum(e, t) : s.sampleModes % 2 !== 0, l = n ? r.isLoop : c;
+    return a.loop = l, a.loop && (n && r.adsDuration != null ? (a.loopStart = r.loopStart, a.loopEnd = r.loopStart + r.loopDuration) : (a.loopStart = s.loopStart / s.sampleRate, a.loopEnd = s.loopEnd / s.sampleRate)), a;
+  }
+  scheduleTimelineEvents(e, t) {
+    let s = this.resumeTime - this.startTime, r = e + s + this.lookAhead, n = this.startDelay - s, o = this.timeline, a = 1 / this.tempo;
+    for (; t < o.length; ) {
+      let c = o[t], l = c.startTime * a;
+      if (r < l) break;
+      let u = l + n;
+      switch (c.type) {
+        case "noteOn": {
+          let h = this.createNote(c.channel, c.noteNumber, c.velocity, u);
+          h.timelineIndex = t, this.setupNote(c.channel, h, u);
+          break;
+        }
+        case "noteOff":
+          this.noteOff(c.channel, c.noteNumber, c.velocity, u, false);
+          break;
+        case "controller":
+          this.setControlChange(c.channel, c.controllerType, c.value, u);
+          break;
+        case "programChange":
+          this.setProgramChange(c.channel, c.programNumber, u);
+          break;
+        case "pitchBend":
+          this.setPitchBend(c.channel, c.value + 8192, u);
+          break;
+        case "sysEx":
+          this.handleSysEx(c.data, u);
+          break;
+        case "channelAftertouch":
+          this.setChannelPressure(c.channel, c.amount, u);
+          break;
+        case "noteAftertouch":
+          this.setPolyphonicKeyPressure(c.channel, c.noteNumber, c.amount, u);
+      }
+      t++;
+    }
+    return t;
+  }
+  getQueueIndex(e) {
+    let t = this.timeline, s = 1 / this.tempo;
+    for (let r = 0; r < t.length; r++) if (e <= t[r].startTime * s) return r;
+    return 0;
+  }
+  resetAllStates() {
+    this.exclusiveClassNotes.fill(void 0), this.drumExclusiveClassNotes.fill(void 0), this.voiceCache.clear(), this.realtimeVoiceCache.clear(), this.adsrVoiceCache.clear();
+    let e = this.channels;
+    for (let t = 0; t < e.length; t++) {
+      let s = e[t];
+      s.lastNote = null, s.activeNotes = new Array(128), s.sustainNotes = [], s.sostenutoNotes = [], this.resetChannelStates(t);
+    }
+    this.mpeState.channelToNotes.clear();
+  }
+  updateStates(e, t) {
+    let { timeline: s, resumeTime: r } = this, n = 1 / this.tempo, o = this.audioContext.currentTime;
+    t < e && (e = 0);
+    for (let a = e; a < t; a++) {
+      let c = s[a];
+      switch (c.type) {
+        case "controller":
+          this.setControlChange(c.channel, c.controllerType, c.value, o - r + c.startTime * n);
+          break;
+        case "programChange":
+          this.setProgramChange(c.channel, c.programNumber, o - r + c.startTime * n);
+          break;
+        case "pitchBend":
+          this.setPitchBend(c.channel, c.value + 8192, o - r + c.startTime * n);
+          break;
+        case "sysEx":
+          this.handleSysEx(c.data, o - r + c.startTime * n);
+          break;
+        case "channelAftertouch":
+          this.setChannelPressure(c.channel, c.amount, o - r + c.startTime * n);
+          break;
+        case "noteAftertouch":
+          this.setPolyphonicKeyPressure(c.channel, c.noteNumber, c.amount, o - r + c.startTime * n);
+      }
+    }
+  }
+  async playAudioBuffer() {
+    let e = this.audioContext, t = this.isPaused;
+    this.isPlaying = true, this.isPaused = false, this.startTime = e.currentTime, t ? this.dispatchEvent(new Event("resumed")) : this.dispatchEvent(new Event("started"));
+    let s;
+    e: for (; ; ) {
+      let r = this.renderedAudioBuffer, n = new AudioBufferSourceNode(e, { buffer: r });
+      n.playbackRate.value = this.tempo, n.connect(this.masterVolume);
+      let o = Math.min(Math.max(this.resumeTime, 0), r.duration);
+      n.start(e.currentTime, o), this.audioModeBufferSource = n;
+      let a = false;
+      for (n.onended = () => {
+        a = true;
+      }; ; ) {
+        let c = e.currentTime;
+        if (await this.scheduleTask(() => {
+        }, c + this.noteCheckInterval), a || this.currentTime() >= this.totalTime) {
+          if (n.disconnect(), this.audioModeBufferSource = null, this.loop) {
+            this.resumeTime = 0, this.startTime = e.currentTime, this.dispatchEvent(new Event("looped"));
+            continue e;
+          }
+          await e.suspend(), s = "ended";
+          break e;
+        }
+        if (this.isPausing) {
+          this.resumeTime = this.currentTime(), n.stop(), n.disconnect(), this.audioModeBufferSource = null, await e.suspend(), this.isPausing = false, s = "paused";
+          break e;
+        } else if (this.isStopping) {
+          n.stop(), n.disconnect(), this.audioModeBufferSource = null, await e.suspend(), this.isStopping = false, s = "stopped";
+          break e;
+        } else if (this.isSeeking) {
+          n.stop(), n.disconnect(), this.audioModeBufferSource = null, this.startTime = e.currentTime, this.isSeeking = false, this.dispatchEvent(new Event("seeked"));
+          continue e;
+        }
+      }
+    }
+    this.isPlaying = false, s === "paused" ? (this.isPaused = true, this.dispatchEvent(new Event("paused"))) : s !== void 0 && (this.isPaused = false, this.dispatchEvent(new Event(s)));
+  }
+  async playNotes() {
+    let e = this.audioContext;
+    if (e.state === "suspended" && await e.resume(), this.cacheMode === "audio" && this.renderedAudioBuffer) return await this.playAudioBuffer();
+    let t = this.isPaused;
+    this.isPlaying = true, this.isPaused = false, this.startTime = e.currentTime, t ? this.dispatchEvent(new Event("resumed")) : this.dispatchEvent(new Event("started"));
+    let s = this.getQueueIndex(this.resumeTime), r;
+    for (this.notePromises = []; ; ) {
+      let n = e.currentTime;
+      if (0 < this.lastActiveSensing && this.activeSensingThreshold < performance.now() - this.lastActiveSensing) {
+        await this.stopNotes(n), await e.suspend(), r = "aborted";
+        break;
+      }
+      if (this.totalTime < this.currentTime() || this.timeline.length <= s) {
+        let a = this.notePromises.slice();
+        if (this.notePromises = [], await Promise.allSettled(a), this.loop) {
+          if (this.resetAllStates(), this.startTime = e.currentTime, this.resumeTime = this.loopStart, 0 < this.loopStart) {
+            let c = this.getQueueIndex(this.resumeTime);
+            this.updateStates(s, c), s = c;
+          } else s = 0;
+          this.dispatchEvent(new Event("looped"));
+          continue;
+        } else {
+          await e.suspend(), r = "ended";
+          break;
+        }
+      }
+      if (this.isPausing) {
+        await this.stopNotes(n), await e.suspend(), this.isPausing = false, r = "paused";
+        break;
+      } else if (this.isStopping) {
+        await this.stopNotes(n), await e.suspend(), this.isStopping = false, r = "stopped";
+        break;
+      } else if (this.isSeeking) {
+        this.stopNotes(n), this.startTime = e.currentTime;
+        let a = this.getQueueIndex(this.resumeTime);
+        this.updateStates(s, a), s = a, this.isSeeking = false, this.dispatchEvent(new Event("seeked"));
+        continue;
+      }
+      s = this.scheduleTimelineEvents(n, s);
+      let o = n + this.noteCheckInterval;
+      await this.scheduleTask(() => {
+      }, o);
+    }
+    r !== "paused" && (this.resetAllStates(), this.lastActiveSensing = 0), this.isPlaying = false, r === "paused" ? (this.isPaused = true, this.dispatchEvent(new Event("paused"))) : (this.isPaused = false, this.dispatchEvent(new Event(r)));
+  }
+  ticksToSecond(e, t) {
+    return e * t / this.ticksPerBeat;
+  }
+  secondToTicks(e, t) {
+    return e * this.ticksPerBeat / t;
+  }
+  getSoundFontId(e) {
+    let t = e.programNumber, r = (e.isDrum ? 128 : e.bankLSB).toString().padStart(3, "0"), n = t.toString().padStart(3, "0");
+    return `${r}:${n}`;
+  }
+  extractMidiData(e) {
+    let t = /* @__PURE__ */ new Set(), s = [], r = this.channels;
+    for (let l = 0; l < e.tracks.length; l++) {
+      let u = e.tracks[l], h = 0;
+      for (let f = 0; f < u.length; f++) {
+        let d = u[f];
+        switch (h += d.deltaTime, d.ticks = h, d.type) {
+          case "noteOn": {
+            let p = r[d.channel];
+            t.add(this.getSoundFontId(p));
+            break;
+          }
+          case "controller":
+            switch (d.controllerType) {
+              case 0:
+                this.setBankMSB(d.channel, d.value);
+                break;
+              case 32:
+                this.setBankLSB(d.channel, d.value);
+                break;
+            }
+            break;
+          case "programChange": {
+            let p = r[d.channel];
+            this.setProgramChange(d.channel, d.programNumber), t.add(this.getSoundFontId(p));
+            break;
+          }
+          case "sysEx": {
+            let p = d.data;
+            if (p[0] === 126 && p[1] === 9 && p[2] === 3) switch (p[3]) {
+              case 1:
+                this.GM1SystemOn();
+                break;
+              case 2:
+                break;
+              case 3:
+                this.GM2SystemOn();
+                break;
+              default:
+                console.warn(`Unsupported Exclusive Message: ${p}`);
+            }
+          }
+        }
+        delete d.deltaTime, s.push(d);
+      }
+    }
+    let n = { controller: 0, sysEx: 1, noteOff: 2, noteOn: 3 };
+    s.sort((l, u) => l.ticks !== u.ticks ? l.ticks - u.ticks : (n[l.type] || 4) - (n[u.type] || 4));
+    let o = 0, a = 0, c = 0.5;
+    for (let l = 0; l < s.length; l++) {
+      let u = s[l], h = this.ticksToSecond(u.ticks - a, c);
+      u.startTime = o + h, u.type === "setTempo" && (o += this.ticksToSecond(u.ticks - a, c), c = u.microsecondsPerBeat / 1e6, a = u.ticks);
+    }
+    return { instruments: t, timeline: s };
+  }
+  async stopChannelNotes(e, t) {
+    let s = this.channels[e], r = [], n = this.perceptualSmoothingTime / 5;
+    for (let o = 0; o < 128; o++) {
+      let a = s.activeNotes[o];
+      if (a) for (let c = 0; c < a.length; c++) {
+        let l = a[c], u = l.ready.then(() => {
+          if (!l.voice) return;
+          let h = this.audioContext.currentTime, f = Math.max(t, h);
+          l.volumeNode.gain.cancelScheduledValues(f).setTargetAtTime(0, f, n), l.bufferSource.stop(f + this.perceptualSmoothingTime);
+        });
+        r.push(u);
+      }
+    }
+    await Promise.all(r), s.lastNote = null, s.activeNotes = new Array(128), s.sustainNotes = [], s.sostenutoNotes = [], this.notePromises = [];
+  }
+  async stopNotes(e) {
+    for (let s = 0; s < this.channels.length; s++) await this.stopChannelNotes(s, e);
+    let t = Promise.all(this.notePromises);
+    return this.notePromises = [], t;
+  }
+  async render() {
+    if (this.isRendering || this.timeline.length === 0) return;
+    this.voiceCounter.size === 0 && this.cacheVoiceIds(), this.isRendering = true, this.renderedAudioBuffer = null, this.dispatchEvent(new Event("rendering"));
+    let e = this.audioContext.sampleRate, t = Math.ceil((this.totalTime + this.startDelay) * e), s = new Uint8Array(this.numChannels), r = new Uint8Array(this.numChannels), n = new Uint8Array(this.numChannels), o = new Uint8Array(this.numChannels), a = new Uint8Array(this.numChannels * 128);
+    s.fill(121), o[9] = 1, s[9] = 120;
+    let c = Array.from({ length: this.numChannels }, () => {
+      let d = new Float32Array(256);
+      for (let { type: p, defaultValue: y } of Object.values(_t)) d[p] = y;
+      return d;
+    }), l = [], u = this.timeline, h = 1 / this.tempo;
+    for (let d = 0; d < u.length; d++) {
+      let p = u[d], y = p.channel;
+      switch (p.type) {
+        case "noteOn": {
+          let m = this.noteOnEvents.get(d), b = m?.duration ?? this.noteOnDurations.get(d) ?? 0;
+          if (b <= 0) continue;
+          let { noteNumber: v, velocity: S } = p, M = o[y] === 1, x = n[y], L = this.soundFontTable[x];
+          if (!L) continue;
+          let j = M ? 128 : r[y];
+          if (L[j] === void 0) {
+            if (M) continue;
+            j = 0;
+          }
+          let ce = L[j];
+          if (ce === void 0) continue;
+          let le = this.soundFonts[ce], Fe = a[y * 128 + v], je = { channelNumber: y, state: { array: c[y].slice() }, programNumber: x, isDrum: M, modulationDepthRange: 50, detune: 0 }, Ot = this.getControllerState(je, v, S, Fe), St = le.getVoice(j, x, v, S);
+          if (!St) continue;
+          let Ve = St.getAllParams(Ot), de = p.startTime * h + this.startDelay, ye = { voiceParams: Ve, channel: y, noteNumber: v, velocity: S }, en = (async () => {
+            try {
+              return await this.createFullRenderedBuffer(je, ye, Ve, b, m);
+            } catch (tn) {
+              return console.warn("render: note render failed", tn), null;
+            }
+          })();
+          l.push({ t: de, promise: en, fakeChannel: je });
+          break;
+        }
+        case "controller": {
+          let { controllerType: m, value: b } = p;
+          switch (m) {
+            case 0:
+              s[y] = b, this.mode === "GM2" && (b === 120 ? o[y] = 1 : b === 121 && (o[y] = 0));
+              break;
+            case 32:
+              r[y] = b;
+              break;
+            default: {
+              let v = 128 + m;
+              v < 256 && (c[y][v] = b / 127);
+              break;
+            }
+          }
+          break;
+        }
+        case "pitchBend":
+          c[y][14] = (p.value + 8192) / 16383;
+          break;
+        case "programChange":
+          n[y] = p.programNumber, this.mode === "GM2" && (s[y] === 120 ? o[y] = 1 : s[y] === 121 && (o[y] = 0));
+          break;
+        case "sysEx": {
+          let m = p.data;
+          if (m[0] === 126 && m[1] === 9 && m[2] === 3) {
+            if (m[3] === 1) {
+              s.fill(0), r.fill(0), n.fill(0), o.fill(0), o[9] = 1, s[9] = 1;
+              for (let b = 0; b < this.numChannels; b++) for (let { type: v, defaultValue: S } of Object.values(_t)) c[b][v] = S;
+              a.fill(0);
+            } else if (m[3] === 3) {
+              s.fill(121), r.fill(0), n.fill(0), o.fill(0), o[9] = 1, s[9] = 120;
+              for (let b = 0; b < this.numChannels; b++) for (let { type: v, defaultValue: S } of Object.values(_t)) c[b][v] = S;
+              a.fill(0);
+            }
+          }
+          break;
+        }
+        case "channelAftertouch":
+          c[y][13] = p.amount / 127;
+          break;
+        case "noteAftertouch":
+          a[y * 128 + p.noteNumber] = p.amount;
+          break;
+      }
+    }
+    let f = new OfflineAudioContext(2, t, e);
+    for (let d = 0; d < l.length; d++) {
+      let { t: p, promise: y } = l[d], m = await y;
+      if (!m) continue;
+      let b = m instanceof Ne ? m.buffer : m, v = new AudioBufferSourceNode(f, { buffer: b });
+      v.connect(f.destination), v.start(p);
+    }
+    return this.renderedAudioBuffer = await f.startRendering(), this.isRendering = false, this.dispatchEvent(new Event("rendered")), this.renderedAudioBuffer;
+  }
+  async start() {
+    this.isPlaying || this.isPaused || (this.resumeTime = 0, this.voiceCounter.size === 0 && this.cacheVoiceIds(), this.playPromise = this.playNotes(), await this.playPromise);
+  }
+  async stop() {
+    this.isPlaying && (this.isStopping = true, await this.playPromise);
+  }
+  async pause() {
+    if (!this.isPlaying || this.isPaused) return;
+    let e = this.audioContext.currentTime;
+    this.resumeTime = e + this.resumeTime - this.startTime, this.isPausing = true, await this.playPromise;
+  }
+  async resume() {
+    this.isPaused && (this.playPromise = this.playNotes(), await this.playPromise);
+  }
+  seekTo(e) {
+    this.resumeTime = e, this.isPlaying && (this.isSeeking = true);
+  }
+  tempoChange(e) {
+    let t = this.cacheMode, s = this.tempo / e;
+    this.resumeTime = this.resumeTime * s, this.tempo = e, this.totalTime = this.calcTotalTime(), this.seekTo(this.currentTime() * s), (t === "adsr" || t === "note" || t === "audio") && (this.buildNoteOnDurations(), this.fullVoiceCache.clear(), this.adsrVoiceCache.clear()), t === "audio" && this.audioModeBufferSource && this.audioModeBufferSource.playbackRate.setValueAtTime(this.tempo, this.audioContext.currentTime);
+  }
+  calcTotalTime() {
+    let e = this.totalTimeEventTypes, t = this.timeline, s = 1 / this.tempo, r = 0;
+    for (let n = 0; n < t.length; n++) {
+      let o = t[n];
+      if (!e.has(o.type)) continue;
+      let a = o.startTime * s;
+      r < a && (r = a);
+    }
+    return r + this.startDelay;
+  }
+  currentTime() {
+    if (!this.isPlaying) return this.resumeTime;
+    let e = this.audioContext.currentTime;
+    return this.cacheMode === "audio" ? this.resumeTime + (e - this.startTime) * this.tempo : e + this.resumeTime - this.startTime;
+  }
+  async processScheduledNotes(e, t) {
+    let s = [];
+    for (let r = 0; r < 128; r++) {
+      let n = e.activeNotes[r];
+      if (n) for (let o = 0; o < n.length; o++) {
+        let a = n[o];
+        if (a.ending) continue;
+        let c = a.ready.then(() => t(a));
+        s.push(c);
+      }
+    }
+    return await Promise.all(s);
+  }
+  async processActiveNotes(e, t, s) {
+    let r = [];
+    for (let n = 0; n < 128; n++) {
+      let o = e.activeNotes[n];
+      if (o) for (let a = 0; a < o.length; a++) {
+        let c = o[a];
+        if (c.ending || t < c.startTime) continue;
+        let l = c.ready.then(() => s(c));
+        r.push(l);
+      }
+    }
+    return await Promise.all(r);
+  }
+  applyToMPEChannels(e, t) {
+    if (t(e), !!this.channels[e].isMPEManager) {
+      if (e === 0) for (let r = 1; r <= this.lowerMPEMembers; r++) t(r);
+      else if (e === 15) for (let r = 15 - this.upperMPEMembers; r <= 14; r++) t(r);
+    }
+  }
+  generateDistributedArray(e, t, s = 0.1, r = 0.05) {
+    let n = e * s, o = new Array(t);
+    for (let a = 0; a < t; a++) {
+      let c = a / (t - 1 || 1), l = e - n + c * 2 * n;
+      o[a] = l * (1 - (Math.random() * 2 - 1) * r);
+    }
+    return o;
+  }
+  setReverbEffect(e) {
+    this.reverbEffect && this.reverbEffect.output.disconnect(), this.reverbEffect = this.createReverbEffect(e), this.reverb.algorithm = e;
+  }
+  createReverbEffect(e) {
+    let { audioContext: t, reverb: s } = this, { time: r, feedback: n } = s;
+    switch (e) {
+      case "Convolution": {
+        let o = Lo(t, r, this.calcDelay(r, n));
+        return En(t, o);
+      }
+      case "Schroeder": {
+        let o = this.generateDistributedArray(n, 4), a = o.map((u) => this.calcDelay(r, u)), c = this.generateDistributedArray(n, 4), l = c.map((u) => this.calcDelay(r, u));
+        return Go(t, o, a, c, l);
+      }
+      case "Moorer":
+        return jo(t, { rt60: r, damping: 1 - n });
+      case "FDN":
+        return qo(t, { rt60: r, damping: 1 - n });
+      case "Dattorro": {
+        let o = n * 0.28 + 0.7;
+        return Ko(t, { decay: o, damping: 1 - n });
+      }
+      case "Freeverb": {
+        let o = 1 - n, { inputL: a, inputR: c, outputL: l, outputR: u } = Qo(t, { roomSize: n, damping: o }), h = new GainNode(t), f = new GainNode(t, { gain: 0.5 });
+        return h.connect(a), h.connect(c), l.connect(f), u.connect(f), { input: h, output: f };
+      }
+      case "VelvetNoise":
+        return Wo(t, r);
+      default:
+        throw new Error(`Unknown reverb algorithm: ${e}`);
+    }
+  }
+  createChorusEffect() {
+    let e = this.audioContext, t = new GainNode(e), s = new GainNode(e), r = new GainNode(e), n = new OscillatorNode(e, { frequency: this.chorus.modRate }), o = new GainNode(e, { gain: this.chorus.modDepth / 2 }), a = this.chorus.delayTimes, c = [], l = [];
+    for (let u = 0; u < a.length; u++) {
+      let h = a[u], f = new DelayNode(e, { maxDelayTime: 0.1, delayTime: h }), d = new GainNode(e, { gain: this.chorus.feedback });
+      c.push(f), l.push(d), t.connect(f), o.connect(f.delayTime), f.connect(d), d.connect(f), f.connect(s);
+    }
+    return s.connect(r), n.connect(o), n.start(), { input: t, output: s, sendGain: r, lfo: n, lfoGain: o, delayNodes: c, feedbackGains: l };
+  }
+  rateToCent(e) {
+    return 1200 * Math.log2(e);
+  }
+  centToRate(e) {
+    return Math.pow(2, e / 1200);
+  }
+  centToHz(e) {
+    return 8.176 * this.centToRate(e);
+  }
+  calcChannelDetune(e) {
+    let t = e.isDrum ? 0 : this.masterCoarseTuning + this.masterFineTuning, s = e.coarseTuning + e.fineTuning, r = t + s, n = e.state.pitchWheel * 2 - 1, o = e.state.pitchWheelSensitivity * 12800, a = n * o, c = this.getChannelPitchControl(e);
+    return r + a + c;
+  }
+  updateChannelDetune(e, t) {
+    this.processScheduledNotes(e, (s) => {
+      s.renderedBuffer?.isFull || (this.isPortamento(e, s) ? this.setPortamentoDetune(e, s, t) : this.setDetune(e, s, t));
+    });
+  }
+  calcScaleOctaveTuning(e, t) {
+    return e.scaleOctaveTuningTable[t.noteNumber % 12];
+  }
+  calcNoteDetune(e, t) {
+    let s = t.voiceParams.detune + this.calcScaleOctaveTuning(e, t), r = this.getNotePitchControl(e, t);
+    return e.detune + s + r;
+  }
+  getPortamentoTime(e, t) {
+    let { portamentoTimeMSB: s, portamentoTimeLSB: r } = e.state, n = s + r / 128, o = Math.abs(t.noteNumber - t.portamentoNoteNumber), a = Math.ceil(n * 128);
+    return o / this.getPitchIncrementSpeed(a) / 10;
+  }
+  getPitchIncrementSpeed(e) {
+    let t = [[0, 1e3], [6, 100], [16, 20], [32, 10], [48, 5], [64, 2.5], [80, 1], [96, 0.4], [112, 0.15], [127, 0.01]], s = new Array(t.length);
+    for (let M = 0; M < t.length; M++) {
+      let [x, L] = t[M];
+      if (e === x) return L;
+      s[M] = [x, Math.log(L)];
+    }
+    let r = 0;
+    for (let M = 1; M < s.length; M++) if (e <= s[M][0]) {
+      r = M - 1;
+      break;
+    }
+    let [n, o] = s[r], [a, c] = s[r + 1], l = a - n, u = (e - n) / l, h, f;
+    if (r === 0) h = (c - o) / l;
+    else {
+      let [M, x] = s[r - 1];
+      h = (c - x) / (a - M);
+    }
+    if (r === s.length - 2) f = (c - o) / l;
+    else {
+      let [M, x] = s[r + 2];
+      f = (x - o) / (M - n);
+    }
+    let d = u * u, p = d * u, y = 2 * p - 3 * d + 1, m = p - 2 * d + u, b = -2 * p + 3 * d, v = p - d, S = y * o + b * c + l * (m * h + v * f);
+    return Math.exp(S);
+  }
+  setPortamentoVolumeEnvelope(e, t, s) {
+    let { voiceParams: r, startTime: n } = t, a = is(-r.initialAttenuation) * (1 + this.getChannelAmplitudeControl(e)) * (1 - r.volSustain), c = n + this.getPortamentoTime(e, t);
+    t.volumeEnvelopeNode.gain.cancelScheduledValues(s).exponentialRampToValueAtTime(a, c);
+  }
+  setVolumeEnvelope(e, t, s) {
+    if (!t.volumeEnvelopeNode) return;
+    let { voiceParams: r, startTime: n, noteNumber: o } = t, a = is(-r.initialAttenuation) * (1 + this.getChannelAmplitudeControl(e)), c = a * (1 - r.volSustain), l = n + r.volDelay, u = this.getRelativeKeyBasedValue(e, o, 73) * 2, h = l + r.volAttack * u, f = h + r.volHold, d = this.getRelativeKeyBasedValue(e, o, 75) * 2, p = r.volDecay * d;
+    t.volumeEnvelopeNode.gain.cancelScheduledValues(s).setValueAtTime(0, n).setValueAtTime(1e-6, l).exponentialRampToValueAtTime(a, h).setValueAtTime(a, f).setTargetAtTime(c, f, p * os);
+  }
+  setVolumeNode(e, t, s) {
+    let r = 1 + this.getNoteAmplitudeControl(e, t), n = this.perceptualSmoothingTime / 5;
+    t.volumeNode.gain.cancelAndHoldAtTime(s).setTargetAtTime(r, s, n);
+  }
+  setPortamentoDetune(e, t, s) {
+    if (e.portamentoControl) {
+      let c = e.state, l = Math.ceil(c.portamentoNoteNumber * 127);
+      t.portamentoNoteNumber = l, e.portamentoControl = false, c.portamentoNoteNumber = 0;
+    }
+    let r = this.calcNoteDetune(e, t), n = t.startTime, o = (t.noteNumber - t.portamentoNoteNumber) * 100, a = n + this.getPortamentoTime(e, t);
+    t.bufferSource.detune.cancelScheduledValues(s).setValueAtTime(r - o, s).linearRampToValueAtTime(r, a);
+  }
+  setDetune(e, t, s) {
+    let r = this.calcNoteDetune(e, t), n = this.perceptualSmoothingTime / 5;
+    t.bufferSource.detune.cancelAndHoldAtTime(s).setTargetAtTime(r, s, n);
+  }
+  setPortamentoPitchEnvelope(e, t, s) {
+    let r = t.voiceParams.playbackRate, n = t.startTime + this.getPortamentoTime(e, t);
+    t.bufferSource.playbackRate.cancelScheduledValues(s).exponentialRampToValueAtTime(r, n);
+  }
+  setPitchEnvelope(e, t) {
+    let { bufferSource: s, voiceParams: r } = e, n = r.playbackRate;
+    s.playbackRate.cancelScheduledValues(t).setValueAtTime(n, t);
+    let o = r.modEnvToPitch;
+    if (o === 0) return;
+    let a = n * this.centToRate(o), c = e.startTime + r.modDelay, l = c + r.modAttack, u = l + r.modHold, h = r.modDecay;
+    s.playbackRate.setValueAtTime(n, c).exponentialRampToValueAtTime(a, l).setValueAtTime(a, u).setTargetAtTime(n, u, h * os);
+  }
+  clampCutoffFrequency(e) {
+    return Math.max(20, Math.min(e, 2e4));
+  }
+  setPortamentoFilterEnvelope(e, t, s) {
+    if (!t.filterEnvelopeNode) return;
+    let { voiceParams: r, startTime: n, noteNumber: o } = t, a = this.getSoftPedalFactor(e, t), c = this.getRelativeKeyBasedValue(e, o, 74) * 2, l = a * c, u = r.initialFilterFc + this.getFilterCutoffControl(e, t), h = u + r.modEnvToFilterFc * (1 - r.modSustain), f = this.centToHz(u) * l, d = this.centToHz(h) * l, p = this.clampCutoffFrequency(f), y = this.clampCutoffFrequency(d), m = n + this.getPortamentoTime(e, t), b = n + r.modDelay;
+    t.adjustedBaseFreq = y, t.filterEnvelopeNode.frequency.cancelScheduledValues(s).setValueAtTime(p, n).setValueAtTime(p, b).exponentialRampToValueAtTime(y, m);
+  }
+  setFilterEnvelope(e, t, s) {
+    if (!t.filterEnvelopeNode) return;
+    let { voiceParams: r, startTime: n, noteNumber: o } = t, a = r.modEnvToFilterFc, c = r.initialFilterFc + this.getFilterCutoffControl(e, t), l = c + a, u = c + a * (1 - r.modSustain), h = this.getSoftPedalFactor(e, t), f = this.getRelativeKeyBasedValue(e, o, 74) * 2, d = h * f, p = this.centToHz(c) * d, y = this.centToHz(l) * d, m = this.centToHz(u) * d, b = this.clampCutoffFrequency(p), v = this.clampCutoffFrequency(y), S = this.clampCutoffFrequency(m), M = n + r.modDelay, x = M + r.modAttack, L = x + r.modHold, j = r.modDecay;
+    t.adjustedBaseFreq = b, t.filterEnvelopeNode.frequency.cancelScheduledValues(s).setValueAtTime(b, n).setValueAtTime(b, M).exponentialRampToValueAtTime(v, x).setValueAtTime(v, L).setTargetAtTime(S, L, j * os);
+  }
+  startModulation(e, t, s) {
+    let r = this.audioContext, { voiceParams: n } = t;
+    t.modLfo = new OscillatorNode(r, { frequency: this.centToHz(n.freqModLFO) }), t.modLfoToFilterFc = new GainNode(r, { gain: n.modLfoToFilterFc }), t.modLfoToPitch = new GainNode(r), this.setModLfoToPitch(e, t, s), t.modLfoToVolume = new GainNode(r), this.setModLfoToVolume(e, t, s), t.modLfo.start(t.startTime + n.delayModLFO), t.modLfo.connect(t.modLfoToFilterFc), t.filterEnvelopeNode && t.modLfoToFilterFc.connect(t.filterEnvelopeNode.frequency), t.modLfo.connect(t.modLfoToPitch), t.modLfoToPitch.connect(t.bufferSource.detune), t.modLfo.connect(t.modLfoToVolume);
+    let o = t.volumeEnvelopeNode ?? t.volumeNode;
+    t.modLfoToVolume.connect(o.gain);
+  }
+  startVibrato(e, t, s) {
+    let r = this.audioContext, { voiceParams: n, noteNumber: o } = t, a = this.getRelativeKeyBasedValue(e, o, 76) * 2, c = this.getRelativeKeyBasedValue(e, o, 78) * 2;
+    t.vibLfo = new OscillatorNode(r, { frequency: this.centToHz(n.freqVibLFO) * a }), t.vibLfo.start(t.startTime + n.delayVibLFO * c), t.vibLfoToPitch = new GainNode(r), this.setVibLfoToPitch(e, t, s), t.vibLfo.connect(t.vibLfoToPitch), t.vibLfoToPitch.connect(t.bufferSource.detune);
+  }
+  async createAdsRenderedBuffer(e, t, s, r, n = false) {
+    let o = n ? false : s.sampleModes % 2 !== 0, c = s.volDelay + s.volAttack + s.volHold, l = s.volDecay, u = c + l * os * 5, h = s.loopStart / s.sampleRate, f = o ? (s.loopEnd - s.loopStart) / s.sampleRate : 0, d = s.playbackRate, p = h / d, y = f / d, m = o && u > p ? Math.ceil((u - p) / y) : 0, b = p + m * y, v = o ? b + y : r.duration / d, S = this.audioContext.sampleRate, M = new OfflineAudioContext(r.numberOfChannels, Math.ceil(v * S), S), x = new AudioBufferSourceNode(M);
+    x.buffer = r, x.playbackRate.value = d, x.loop = o, o && (x.loopStart = h, x.loopEnd = h + f);
+    let L = this.clampCutoffFrequency(this.centToHz(s.initialFilterFc)), j = new BiquadFilterNode(M, { type: "lowpass", Q: s.initialFilterQ / 10, frequency: L }), ce = new GainNode(M), le = { ...t, startTime: 0, bufferSource: x, filterEnvelopeNode: j, volumeEnvelopeNode: ce };
+    this.setVolumeEnvelope(e, le, 0), this.setFilterEnvelope(e, le, 0), x.connect(j), j.connect(ce), ce.connect(M.destination), s.sample.type === "compressed" ? x.start(0, s.start / r.sampleRate) : x.start(0);
+    let Fe = await M.startRendering();
+    return new Ne(Fe, { isLoop: o, adsDuration: u, loopStart: b, loopDuration: y });
+  }
+  async createAdsrRenderedBuffer(e, t, s, r, n) {
+    let o = s.sampleModes % 2 !== 0, c = s.volDelay + s.volAttack + s.volHold, l = s.volDecay, u = c + l * os * 5, h = s.volRelease, f = s.loopStart / s.sampleRate, d = o ? (s.loopEnd - s.loopStart) / s.sampleRate : 0, p = o && n > f ? Math.ceil((n - f) / d) : 0, m = o ? f + p * d : n, b = m + h, v = this.audioContext.sampleRate, S = new OfflineAudioContext(r.numberOfChannels, Math.ceil(b * v), v), M = new AudioBufferSourceNode(S);
+    M.buffer = r, M.playbackRate.value = s.playbackRate, M.loop = o, o && (M.loopStart = f, M.loopEnd = f + d);
+    let x = this.clampCutoffFrequency(this.centToHz(s.initialFilterFc)), L = new BiquadFilterNode(S, { type: "lowpass", Q: s.initialFilterQ / 10, frequency: x }), j = new GainNode(S), ce = { ...t, startTime: 0, bufferSource: M, filterEnvelopeNode: L, volumeEnvelopeNode: j };
+    this.setVolumeEnvelope(e, ce, 0), this.setFilterEnvelope(e, ce, 0);
+    let le = is(-s.initialAttenuation), Fe = le * (1 - s.volSustain), je = s.volDelay, Ot = je + s.volAttack, St = Ot + s.volHold, Ve;
+    if (m <= je) Ve = 0;
+    else if (m <= Ot) Ve = 1e-6 + (le - 1e-6) * (m - je) / s.volAttack;
+    else if (m <= St) Ve = le;
+    else {
+      let ye = m - St;
+      Ve = Fe + (le - Fe) * Math.exp(-ye / (os * s.volDecay));
+    }
+    j.gain.cancelScheduledValues(m).setValueAtTime(Ve, m).setTargetAtTime(0, m, h * vt), L.frequency.cancelScheduledValues(m).setValueAtTime(x, m).setTargetAtTime(x, m, s.modRelease * vt), M.connect(L), L.connect(j), j.connect(S.destination), o ? M.start(0, s.start / r.sampleRate) : M.start(0);
+    let de = await S.startRendering();
+    return new Ne(de, { isLoop: false, isFull: false, adsDuration: u, noteDuration: m, releaseDuration: h });
+  }
+  async createFullRenderedBuffer(e, t, s, r, n = {}) {
+    let { startTime: o = 0, events: a = [] } = n, c = e.channelNumber, l = s.volRelease * vt * 5, u = r + l, h = this.audioContext.sampleRate, f = new OfflineAudioContext(2, Math.ceil(u * h), h), d = new this.constructor(f, { cacheMode: "none" });
+    f.suspend = () => Promise.resolve(), f.resume = () => Promise.resolve(), d.soundFonts = this.soundFonts, d.soundFontTable = this.soundFontTable;
+    let p = d.channels[c];
+    p.state.array.set(e.state.array), p.isDrum = e.isDrum, p.programNumber = e.programNumber, p.modulationDepthRange = e.modulationDepthRange, p.detune = this.calcChannelDetune(p), await d.noteOn(c, t.noteNumber, t.velocity, 0);
+    for (let m of a) {
+      let b = m.startTime / this.tempo - o;
+      if (!(b < 0 || b > r)) switch (m.type) {
+        case "controller":
+          d.setControlChange(c, m.controllerType, m.value, b);
+          break;
+        case "pitchBend":
+          d.setPitchBend(c, m.value + 8192, b);
+          break;
+        case "sysEx":
+          d.handleSysEx(m.data, b);
+          break;
+        case "channelAftertouch":
+          d.setChannelPressure(c, m.amount, b);
+          break;
+        case "noteAftertouch":
+          d.setPolyphonicKeyPressure(c, m.noteNumber, m.amount, b);
+      }
+    }
+    d.noteOff(c, t.noteNumber, 0, r, true);
+    let y = await f.startRendering();
+    return new Ne(y, { isLoop: false, isFull: true, noteDuration: r, releaseDuration: l });
+  }
+  async getAudioBuffer(e, t, s) {
+    let r = this.cacheMode, { noteNumber: n, velocity: o } = t, a = this.getVoiceId(e, n, o);
+    if (!s) {
+      if (r === "note") return await this.getFullCachedBuffer(e, t, a);
+      if (r === "adsr") return await this.getAdsrCachedBuffer(e, t, a);
+    }
+    return r === "none" ? await this.createAudioBuffer(t.voiceParams) : await this.getAdsCachedBuffer(e, t, a, s);
+  }
+  async getAdsCachedBuffer(e, t, s, r) {
+    let n = s + (t.noteNumber << 1) + 1, o = t.voiceParams;
+    if (r) {
+      let a = this.realtimeVoiceCache.get(n);
+      if (a) return a;
+      let c = await this.createAudioBuffer(o), l = await this.createAdsRenderedBuffer(e, t, o, c, e.isDrum);
+      return this.realtimeVoiceCache.set(n, l), l;
+    } else {
+      let a = this.voiceCache.get(n);
+      if (a) return a.counter += 1, a.maxCount <= a.counter && this.voiceCache.delete(n), a.audioBuffer;
+      {
+        let c = this.voiceCounter.get(n) ?? 0, l = await this.createAudioBuffer(o), u = await this.createAdsRenderedBuffer(e, t, o, l, e.isDrum), h = { audioBuffer: u, maxCount: c, counter: 1 };
+        return this.voiceCache.set(n, h), u;
+      }
+    }
+  }
+  async getAdsrCachedBuffer(e, t, s) {
+    let r = t.voiceParams, n = t.timelineIndex, o = this.noteOnEvents.get(n), a = o?.durationTicks ?? 0, c = a === 1 / 0 ? 0xFFFFFFFFn : BigInt(a), l = zo(r.volRelease), u = zo(r.playbackRate), h = BigInt(s) << 160n | u << 96n | c << 64n | l, f = this.adsrVoiceCache.get(s);
+    f || (f = /* @__PURE__ */ new Map(), this.adsrVoiceCache.set(s, f));
+    let d = f.get(h);
+    if (d instanceof Ne) return d;
+    if (d instanceof Promise) {
+      let m = await d;
+      return m ?? await this.createAudioBuffer(r);
+    }
+    let p = o?.duration ?? 0, y = (async () => {
+      try {
+        let m = await this.createAudioBuffer(r), b = await this.createAdsrRenderedBuffer(e, t, r, m, p);
+        return f.set(h, b), b;
+      } catch (m) {
+        throw f.delete(h), m;
+      }
+    })();
+    return f.set(h, y), await y;
+  }
+  async getFullCachedBuffer(e, t, s) {
+    let r = t.voiceParams, n = t.timelineIndex, o = this.noteOnEvents.get(n), a = o?.duration ?? 0, c = n, l = this.fullVoiceCache.get(s);
+    l || (l = /* @__PURE__ */ new Map(), this.fullVoiceCache.set(s, l));
+    let u = l.get(c);
+    if (u instanceof Ne) return t.fullCacheVoiceId = s, u;
+    if (u instanceof Promise) {
+      let d = await u;
+      return d == null ? await this.createAudioBuffer(r) : (t.fullCacheVoiceId = s, d);
+    }
+    let h = (async () => {
+      try {
+        let d = await this.createFullRenderedBuffer(e, t, r, a, o);
+        return l.set(c, d), d;
+      } catch (d) {
+        throw l.delete(c), d;
+      }
+    })();
+    l.set(c, h);
+    let f = await h;
+    return t.fullCacheVoiceId = s, f;
+  }
+  async setNoteAudioNode(e, t, s) {
+    let r = this.audioContext, n = r.currentTime, { noteNumber: o, velocity: a, startTime: c } = t, l = e.state, u = this.getControllerState(e, o, a, 0), h = t.voice.getAllParams(u);
+    t.voiceParams = h;
+    let f = await this.getAudioBuffer(e, t, s), d = f instanceof Ne;
+    t.renderedBuffer = d ? f : null, t.bufferSource = this.createBufferSource(e, o, h, f), t.volumeNode = new GainNode(r);
+    let p = this.cacheMode, y = d && f.isFull === true;
+    if (p === "none") {
+      t.volumeEnvelopeNode = new GainNode(r), t.filterEnvelopeNode = new BiquadFilterNode(r, { type: "lowpass", Q: h.initialFilterQ / 10 });
+      let m = e.lastNote;
+      m && m.noteNumber !== o && (t.portamentoNoteNumber = m.noteNumber), !e.isDrum && this.isPortamento(e, t) ? (this.setPortamentoVolumeEnvelope(e, t, n), this.setPortamentoFilterEnvelope(e, t, n), this.setPortamentoPitchEnvelope(e, t, n), this.setPortamentoDetune(e, t, n)) : (this.setVolumeEnvelope(e, t, n), this.setFilterEnvelope(e, t, n), this.setPitchEnvelope(t, n), this.setDetune(e, t, n)), 0 < l.vibratoDepth && this.startVibrato(e, t, n), 0 < l.modulationDepthMSB && this.startModulation(e, t, n), e.mono && e.currentBufferSource && (e.currentBufferSource.stop(c), e.currentBufferSource = t.bufferSource), t.bufferSource.connect(t.filterEnvelopeNode), t.filterEnvelopeNode.connect(t.volumeEnvelopeNode), t.volumeEnvelopeNode.connect(t.volumeNode), this.setChorusSend(e, t, n), this.setReverbSend(e, t, n);
+    } else y ? (t.volumeEnvelopeNode = null, t.filterEnvelopeNode = null, t.bufferSource.connect(t.volumeNode), this.setChorusSend(e, t, n), this.setReverbSend(e, t, n)) : (t.volumeEnvelopeNode = null, t.filterEnvelopeNode = null, this.setDetune(e, t, n), 0 < l.modulationDepthMSB && this.startModulation(e, t, n), t.bufferSource.connect(t.volumeNode), this.setChorusSend(e, t, n), this.setReverbSend(e, t, n));
+    return h.sample.type, t.bufferSource.start(c), t;
+  }
+  handleExclusiveClass(e, t, s) {
+    let r = e.voiceParams.exclusiveClass;
+    if (r === 0) return;
+    let n = this.exclusiveClassNotes[r];
+    if (n) {
+      let [o, a] = n;
+      o && !o.ending && this.noteOff(a, o.noteNumber, 0, s, true);
+    }
+    this.exclusiveClassNotes[r] = [e, t];
+  }
+  handleDrumExclusiveClass(e, t, s) {
+    let r = this.channels[t];
+    if (!r.isDrum) return;
+    let n = or[r.programNumber];
+    if (!n) return;
+    let o = n[e.noteNumber];
+    if (o === 0) return;
+    let a = (o - 1) * this.channels.length + t, c = this.drumExclusiveClassNotes[a];
+    c && !c.ending && this.noteOff(t, c.noteNumber, 0, s, true), this.drumExclusiveClassNotes[a] = e;
+  }
+  setNoteRouting(e, t, s) {
+    let r = this.channels[e], { volumeNode: n } = t;
+    if (t.renderedBuffer?.isFull) n.connect(this.masterVolume);
+    else if (r.isDrum) {
+      let o = t.noteNumber, { keyBasedGainLs: a, keyBasedGainRs: c } = r, l = a[o], u = c[o];
+      if (!l) {
+        let h = this.createChannelAudioNodes(this.audioContext);
+        l = a[o] = h.gainL, u = c[o] = h.gainR;
+      }
+      n.connect(l), n.connect(u);
+    } else n.connect(r.gainL), n.connect(r.gainR);
+    this.handleExclusiveClass(t, e, s), this.handleDrumExclusiveClass(t, e, s);
+  }
+  async noteOn(e, t, s, r) {
+    this.mpeEnabled && (this.mpeState.channelToNotes.has(e) || this.mpeState.channelToNotes.set(e, /* @__PURE__ */ new Set()));
+    let n = this.createNote(e, t, s, r), o = await this.setupNote(e, n, r);
+    return this.mpeEnabled && o && this.mpeState.channelToNotes.get(e).add(o), o;
+  }
+  createNote(e, t, s, r) {
+    0 <= r || (r = this.audioContext.currentTime);
+    let n = new In(t, s, r);
+    return n.channel = e, n;
+  }
+  async setupNote(e, t, s) {
+    let r = s === void 0, n = this.channels[e], o = n.programNumber, a = this.soundFontTable[o];
+    if (!a) return;
+    let c = n.isDrum ? 128 : n.bankLSB;
+    if (a[c] === void 0) {
+      if (n.isDrum) return;
+      c = 0;
+    }
+    let l = a[c];
+    if (l === void 0) return;
+    let u = this.soundFonts[l];
+    if (t.voice = u.getVoice(c, o, t.noteNumber, t.velocity), !!t.voice) return n.activeNotes[t.noteNumber] || (n.activeNotes[t.noteNumber] = []), n.activeNotes[t.noteNumber].push(t), await this.setNoteAudioNode(n, t, r), n.lastNote = t, this.setNoteRouting(e, t, s), t.resolveReady(), 0.5 <= n.state.sustainPedal && n.sustainNotes.push(t), 0.5 <= n.state.sostenutoPedal && n.sostenutoNotes.push(t), t;
+  }
+  disconnectNote(e) {
+    e.bufferSource.disconnect(), e.filterEnvelopeNode?.disconnect(), e.volumeEnvelopeNode?.disconnect(), e.volumeNode.disconnect(), e.modLfoToPitch && (e.modLfoToVolume.disconnect(), e.modLfoToPitch.disconnect(), e.modLfo.stop()), e.vibLfoToPitch && (e.vibLfoToPitch.disconnect(), e.vibLfo.stop()), e.reverbSend && e.reverbSend.disconnect(), e.chorusSend && e.chorusSend.disconnect();
+  }
+  releaseFullCache(e) {
+    if (e.timelineIndex == null || e.fullCacheVoiceId == null) return;
+    let t = this.fullVoiceCache.get(e.fullCacheVoiceId);
+    if (!t) return;
+    t.get(e.timelineIndex) instanceof Ne && (t.delete(e.timelineIndex), t.size === 0 && this.fullVoiceCache.delete(e.fullCacheVoiceId));
+  }
+  releaseNote(e, t, s) {
+    let r = this.audioContext.currentTime;
+    s ??= r;
+    let n = () => {
+      this.disconnectNote(t);
+    };
+    if (t.renderedBuffer?.isFull) {
+      let l = t.renderedBuffer, u = t.startTime + l.buffer.duration, h = t.startTime + (l.noteDuration ?? 0);
+      if (s < h) {
+        let d = this.getRelativeKeyBasedValue(e, t.noteNumber, 72) * 2, p = t.voiceParams.volRelease * d, y = s + p;
+        t.volumeNode.gain.cancelScheduledValues(s).setTargetAtTime(0, s, p * vt), t.bufferSource.stop(y);
+      } else {
+        if (u <= r) return n(), this.releaseFullCache(t), Promise.resolve();
+        t.bufferSource.stop(u);
+      }
+      return new Promise((d) => {
+        t.bufferSource.onended = () => {
+          n(), this.releaseFullCache(t), d();
+        };
+      });
+    }
+    let o = this.getRelativeKeyBasedValue(e, t.noteNumber, 72) * 2, a = t.voiceParams.volRelease * o, c = s + a;
+    if (t.volumeEnvelopeNode) t.filterEnvelopeNode.frequency.cancelScheduledValues(s).setTargetAtTime(t.adjustedBaseFreq, s, t.voiceParams.modRelease * vt), t.volumeEnvelopeNode.gain.cancelScheduledValues(s).setTargetAtTime(0, s, a * vt);
+    else {
+      if (t.renderedBuffer?.releaseDuration != null && !t.renderedBuffer.isFull) {
+        let u = t.renderedBuffer, h = t.startTime + u.buffer.duration, f = t.startTime + (u.noteDuration ?? 0);
+        return s < f ? (t.volumeNode.gain.cancelScheduledValues(s).setTargetAtTime(0, s, a * vt), t.bufferSource.stop(c)) : t.bufferSource.stop(h), new Promise((p) => {
+          t.bufferSource.onended = () => {
+            n(), p();
+          };
+        });
+      }
+      t.volumeNode.gain.cancelScheduledValues(s).setTargetAtTime(0, s, a * vt);
+    }
+    return t.bufferSource.stop(c), new Promise((l) => {
+      t.bufferSource.onended = () => {
+        n(), l();
+      };
+    });
+  }
+  noteOff(e, t, s, r, n) {
+    if (this.mpeEnabled) {
+      let o = this.mpeState.channelToNotes.get(e);
+      if (!o || o.size === 0) return;
+      let a;
+      for (let u of o) if (u.noteNumber === t && !u.ending) {
+        a = u;
+        break;
+      }
+      if (!a) return;
+      let c = this.channels[e];
+      return a.ending = true, o.delete(a), o.size === 0 && this.mpeState.channelToNotes.delete(e), a.ready.then(() => this.releaseNote(c, a, r));
+    } else return this.stopNote(e, t, s, r, n);
+  }
+  stopNote(e, t, s, r, n) {
+    let o = this.channels[e], a = o.state;
+    if (!n) {
+      if (o.isDrum && !this.isLoopDrum(o, t)) {
+        this.removeFromActiveNotes(o, t);
+        return;
+      }
+      if (0.5 <= a.sustainPedal || 0.5 <= a.sostenutoPedal) return;
+    }
+    let c = this.findNoteForOff(o, t);
+    if (!c) return;
+    c.ending = true, this.removeFromActiveNotes(o, t);
+    let l = c.ready.then(() => {
+      if (c.voice) return this.releaseNote(o, c, r);
+    });
+    return this.notePromises.push(l), l;
+  }
+  findNoteForOff(e, t) {
+    let s = e.activeNotes[t];
+    if (s) {
+      for (let r = 0; r < s.length; r++) if (!s[r].ending) return s[r];
+    }
+  }
+  removeFromActiveNotes(e, t) {
+    let s = e.activeNotes[t];
+    !s || s.length === 0 || s.shift();
+  }
+  releaseSustainPedal(e, t, s) {
+    let r = t * 2, n = this.channels[e], o = [];
+    for (let a = 0; a < n.sustainNotes.length; a++) {
+      let c = this.noteOff(e, n.sustainNotes[a].noteNumber, r, s, true);
+      o.push(c);
+    }
+    return n.sustainNotes = [], o;
+  }
+  releaseSostenutoPedal(e, t, s) {
+    let r = t * 2, n = this.channels[e], o = [], a = n.sostenutoNotes;
+    n.state.sostenutoPedal = 0;
+    for (let c = 0; c < a.length; c++) {
+      let l = a[c], u = this.noteOff(e, l.noteNumber, r, s);
+      o.push(u);
+    }
+    return n.sostenutoNotes = [], o;
+  }
+  soundOffNote(e, t) {
+    if (e.ending = true, !e.voice) return Promise.resolve();
+    let s = this.audioContext.currentTime, r = Math.max(t, s), n = this.perceptualSmoothingTime, o = n / 5;
+    return e.volumeNode.gain.cancelScheduledValues(r).setTargetAtTime(0, r, o), e.bufferSource.stop(r + n), new Promise((a) => {
+      e.bufferSource.onended = () => {
+        this.disconnectNote(e), a();
+      };
+    });
+  }
+  soundOff(e, t, s) {
+    let r = this.channels[e], n = this.findNoteForOff(r, t);
+    return n ? (this.removeFromActiveNotes(r, n.noteNumber), this.soundOffNote(n, s)) : Promise.resolve();
+  }
+  createMessageHandlers() {
+    let e = new Array(256);
+    return e[128] = (t, s) => this.noteOff(t[0] & 15, t[1], t[2], s), e[144] = (t, s) => this.noteOn(t[0] & 15, t[1], t[2], s), e[160] = (t, s) => this.setPolyphonicKeyPressure(t[0] & 15, t[1], t[2], s), e[176] = (t, s) => this.setControlChange(t[0] & 15, t[1], t[2], s), e[192] = (t, s) => this.setProgramChange(t[0] & 15, t[1], s), e[208] = (t, s) => this.setChannelPressure(t[0] & 15, t[1], s), e[224] = (t, s) => this.handlePitchBendMessage(t[0] & 15, t[1], t[2], s), e[254] = (t, s) => this.activeSensing(), e;
+  }
+  handleMessage(e, t) {
+    let s = e[0];
+    if (s === 240) return this.handleSysEx(e.subarray(1), t);
+    let r = this.messageHandlers[s];
+    r && r(e, t);
+  }
+  activeSensing() {
+    this.lastActiveSensing = performance.now();
+  }
+  setPolyphonicKeyPressure(e, t, s, r) {
+    let n = this.channels[e];
+    n.isMPEMember || (0 <= r || (r = this.audioContext.currentTime), this.processActiveNotes(n, r, (o) => {
+      o.noteNumber === t && (o.pressure = s, this.setPolyphonicKeyPressureEffects(n, o, r));
+    }), this.applyVoiceParams(n, 10, r));
+  }
+  setProgramChange(e, t, s) {
+    this.applyToMPEChannels(e, (r) => {
+      this.applyProgramChange(r, t, s);
+    });
+  }
+  applyProgramChange(e, t, s) {
+    let r = this.channels[e];
+    if (r.programNumber = t, this.mode === "GM2") switch (r.bankMSB) {
+      case 120:
+        r.isDrum = true, r.keyBasedTable.fill(-1);
+        break;
+      case 121:
+        r.isDrum = false;
+        break;
+    }
+  }
+  setChannelPressure(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime), this.applyToMPEChannels(e, (r) => {
+      this.applyChannelPressure(r, t, s);
+    });
+  }
+  applyChannelPressure(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    let n = this.calcChannelPressureEffectValue(r, 0);
+    r.state.channelPressure = t / 127;
+    let o = this.calcChannelPressureEffectValue(r, 0);
+    r.detune += o - n, this.processActiveNotes(r, s, (a) => {
+      this.setChannelPressureEffects(r, a, s);
+    }), this.applyVoiceParams(r, 13, s);
+  }
+  handlePitchBendMessage(e, t, s, r) {
+    let n = s * 128 + t;
+    this.setPitchBend(e, n, r);
+  }
+  setPitchBend(e, t, s) {
+    this.applyToMPEChannels(e, (r) => {
+      this.applyPitchBend(r, t, s);
+    });
+  }
+  applyPitchBend(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.state, o = n.pitchWheel * 2 - 1, a = (t - 8192) / 8192;
+    n.pitchWheel = t / 16383, r.detune += (a - o) * n.pitchWheelSensitivity * 12800, this.updateChannelDetune(r, s), this.applyVoiceParams(r, 14, s);
+  }
+  setModLfoToPitch(e, t, s) {
+    if (t.modLfoToPitch) {
+      let { modulationDepthMSB: r, modulationDepthLSB: n } = e.state, o = r + n / 128, a = t.voiceParams.modLfoToPitch + this.getLFOPitchDepth(e, t), l = (Math.abs(a) + o) * Math.sign(a);
+      t.modLfoToPitch.gain.cancelScheduledValues(s).setValueAtTime(l, s);
+    } else this.startModulation(e, t, s);
+  }
+  setVibLfoToPitch(e, t, s) {
+    if (t.vibLfoToPitch) {
+      let r = this.getRelativeKeyBasedValue(e, t.noteNumber, 77) * 2, n = t.voiceParams.vibLfoToPitch, a = Math.abs(n) * r * Math.sign(n);
+      t.vibLfoToPitch.gain.cancelScheduledValues(s).setValueAtTime(a, s);
+    } else this.startVibrato(e, t, s);
+  }
+  setModLfoToFilterFc(e, t, s) {
+    let r = t.voiceParams.modLfoToFilterFc + this.getLFOFilterDepth(e, t);
+    t.modLfoToFilterFc.gain.cancelScheduledValues(s).setValueAtTime(r, s);
+  }
+  setModLfoToVolume(e, t, s) {
+    let r = t.voiceParams.modLfoToVolume, o = (is(Math.abs(r)) - 1) * Math.sign(r) * (1 + this.getLFOAmplitudeDepth(e, t));
+    t.modLfoToVolume.gain.cancelScheduledValues(s).setValueAtTime(o, s);
+  }
+  setReverbSend(e, t, s) {
+    let r = t.voiceParams.reverbEffectsSend * e.state.reverbSendLevel;
+    if (e.isDrum) {
+      let n = this.getKeyBasedValue(e, t.noteNumber, 91);
+      0 <= n && (r = n / 127);
+    }
+    if (!t.reverbSend) 0 < r && (t.reverbSend = new GainNode(this.audioContext, { gain: r }), t.volumeNode.connect(t.reverbSend), t.reverbSend.connect(this.reverbEffect.input));
+    else if (t.reverbSend.gain.cancelScheduledValues(s).setValueAtTime(r, s), 0 < r) t.volumeNode.connect(t.reverbSend);
+    else try {
+      t.volumeNode.disconnect(t.reverbSend);
+    } catch {
+    }
+  }
+  setChorusSend(e, t, s) {
+    let r = t.voiceParams.chorusEffectsSend * e.state.chorusSendLevel;
+    if (e.isDrum) {
+      let n = this.getKeyBasedValue(e, t.noteNumber, 93);
+      0 <= n && (r = n / 127);
+    }
+    if (!t.chorusSend) 0 < r && (t.chorusSend = new GainNode(this.audioContext, { gain: r }), t.volumeNode.connect(t.chorusSend), t.chorusSend.connect(this.chorusEffect.input));
+    else if (t.chorusSend.gain.cancelScheduledValues(s).setValueAtTime(r, s), 0 < r) t.volumeNode.connect(t.chorusSend);
+    else try {
+      t.volumeNode.disconnect(t.chorusSend);
+    } catch {
+    }
+  }
+  setDelayModLFO(e) {
+    let t = e.startTime + e.voiceParams.delayModLFO;
+    try {
+      e.modLfo.start(t);
+    } catch {
+    }
+  }
+  setFreqModLFO(e, t) {
+    let s = e.voiceParams.freqModLFO;
+    e.modLfo.frequency.cancelScheduledValues(t).setValueAtTime(s, t);
+  }
+  setDelayVibLFO(e, t) {
+    let s = this.getRelativeKeyBasedValue(e, t.noteNumber, 78) * 2, r = t.voiceParams.delayVibLFO, n = t.startTime + r * s;
+    try {
+      t.vibLfo.start(n);
+    } catch {
+    }
+  }
+  setFreqVibLFO(e, t, s) {
+    let r = this.getRelativeKeyBasedValue(e, t.noteNumber, 76) * 2, n = t.voiceParams.freqVibLFO;
+    t.vibLfo.frequency.cancelScheduledValues(s).setValueAtTime(n * r, s);
+  }
+  createVoiceParamsHandlers() {
+    return { modLfoToPitch: (e, t, s) => {
+      let { modulationDepthMSB: r, modulationDepthLSB: n } = e.state;
+      0 < r + n && this.setModLfoToPitch(e, t, s);
+    }, vibLfoToPitch: (e, t, s) => {
+      0 < e.state.vibratoDepth && this.setVibLfoToPitch(e, t, s);
+    }, modLfoToFilterFc: (e, t, s) => {
+      let { modulationDepthMSB: r, modulationDepthLSB: n } = e.state;
+      0 < r + n && this.setModLfoToFilterFc(e, t, s);
+    }, modLfoToVolume: (e, t, s) => {
+      let { modulationDepthMSB: r, modulationDepthLSB: n } = e.state;
+      0 < r + n && this.setModLfoToVolume(e, t, s);
+    }, chorusEffectsSend: (e, t, s) => {
+      this.setChorusSend(e, t, s);
+    }, reverbEffectsSend: (e, t, s) => {
+      this.setReverbSend(e, t, s);
+    }, delayModLFO: (e, t, s) => {
+      let { modulationDepthMSB: r, modulationDepthLSB: n } = e.state;
+      0 < r + n && this.setDelayModLFO(t);
+    }, freqModLFO: (e, t, s) => {
+      let { modulationDepthMSB: r, modulationDepthLSB: n } = channel.state;
+      0 < r + n && this.setFreqModLFO(t, s);
+    }, delayVibLFO: (e, t, s) => {
+      0 < e.state.vibratoDepth && this.setDelayVibLFO(e, t);
+    }, freqVibLFO: (e, t, s) => {
+      0 < e.state.vibratoDepth && this.setFreqVibLFO(e, t, s);
+    }, detune: (e, t, s) => {
+      this.isPortamento(e, t) ? this.setPortamentoDetune(e, t, s) : this.setDetune(e, t, s);
+    } };
+  }
+  getControllerState(e, t, s, r) {
+    let n = new Float32Array(e.state.array.length);
+    return n.set(e.state.array), n[2] = s / 127, n[3] = t / 127, n[10] = r / 127, n;
+  }
+  applyVoiceParams(e, t, s) {
+    this.processScheduledNotes(e, (r) => {
+      if (r.renderedBuffer?.isFull) return;
+      let n = this.getControllerState(e, r.noteNumber, r.velocity, r.pressure), o = r.voice.getParams(t, n), a = false, c = false, l = false;
+      for (let [u, h] of Object.entries(o)) {
+        let f = r.voiceParams[u];
+        h !== f && (r.voiceParams[u] = h, u in this.voiceParamsHandlers ? this.voiceParamsHandlers[u](e, r, s) : (ba.has(u) && (a = true), ya.has(u) && (c = true), Sa.has(u) && (l = true)));
+      }
+      a && this.setVolumeEnvelope(e, r, s), c && this.setFilterEnvelope(e, r, s), l && this.setPitchEnvelope(r, s);
+    });
+  }
+  createControlChangeHandlers() {
+    let e = new Array(128);
+    return e[0] = this.setBankMSB, e[1] = this.setModulationDepth, e[5] = this.setPortamentoTime, e[6] = this.dataEntryMSB, e[7] = this.setVolume, e[10] = this.setPan, e[11] = this.setExpression, e[32] = this.setBankLSB, e[33] = this.setModulationDepth, e[37] = this.setPortamentoTime, e[38] = this.dataEntryLSB, e[39] = this.setVolume, e[42] = this.setPan, e[43] = this.setExpression, e[64] = this.setSustainPedal, e[65] = this.setPortamento, e[66] = this.setSostenutoPedal, e[67] = this.setSoftPedal, e[71] = this.setFilterResonance, e[72] = this.setReleaseTime, e[73] = this.setAttackTime, e[74] = this.setBrightness, e[75] = this.setDecayTime, e[76] = this.setVibratoRate, e[77] = this.setVibratoDepth, e[78] = this.setVibratoDelay, e[84] = this.setPortamentoNoteNumber, e[91] = this.setReverbSendLevel, e[93] = this.setChorusSendLevel, e[96] = this.dataIncrement, e[97] = this.dataDecrement, e[100] = this.setRPNLSB, e[101] = this.setRPNMSB, e[111] = this.setRPGMakerLoop, e[120] = this.allSoundOff, e[121] = this.resetAllControllers, e[123] = this.allNotesOff, e[124] = this.omniOff, e[125] = this.omniOn, e[126] = this.monoOn, e[127] = this.polyOn, e;
+  }
+  setControlChange(e, t, s, r) {
+    0 <= r || (r = this.audioContext.currentTime), this.applyToMPEChannels(e, (n) => {
+      this.applyControlChange(n, t, s, r);
+    });
+  }
+  applyControlChange(e, t, s, r) {
+    let n = this.controlChangeHandlers[t];
+    if (n) {
+      n.call(this, e, s, r);
+      let o = this.channels[e];
+      this.applyVoiceParams(o, t + 128, r), this.processActiveNotes(o, r, (a) => {
+        this.setControlChangeEffects(o, a, r);
+      });
+    } else console.warn(`Unsupported Control change: controllerType=${t} value=${s}`);
+  }
+  setBankMSB(e, t) {
+    this.channels[e].bankMSB = t;
+  }
+  updateModulation(e, t) {
+    let { modulationDepthMSB: s, modulationDepthLSB: r } = e.state, o = (s + r / 128) * e.modulationDepthRange;
+    this.processScheduledNotes(e, (a) => {
+      a.renderedBuffer?.isFull || (a.modLfoToPitch ? a.modLfoToPitch.gain.setValueAtTime(o, t) : this.startModulation(e, a, t));
+    });
+  }
+  setModulationDepth(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.state, o = Math.trunc(t);
+    n.modulationDepthMSB = o / 127, n.modulationDepthLSB = t - o, this.updateModulation(r, s);
+  }
+  updatePortamento(e, t) {
+    e.isDrum || this.processScheduledNotes(e, (s) => {
+      this.isPortamento(e, s) ? (this.setPortamentoVolumeEnvelope(e, s, t), this.setPortamentoFilterEnvelope(e, s, t), this.setPortamentoPitchEnvelope(e, s, t), this.setPortamentoDetune(e, s, t)) : (this.setVolumeEnvelope(e, s, t), this.setFilterEnvelope(e, s, t), this.setPitchEnvelope(s, t), this.setDetune(e, s, t));
+    });
+  }
+  setPortamentoTime(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = r.state, o = Math.trunc(t);
+    n.portamentoTimeMSB = o / 127, n.portamentoTimeLSB = t - 127, !r.isDrum && this.updatePortamento(r, s);
+  }
+  setVolume(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = r.state, o = Math.trunc(t);
+    n.volumeMSB = o / 127, n.volumeLSB = t - o, this.applyVolume(r, s);
+  }
+  applyVolume(e, t) {
+    if (e.isDrum) for (let s = 0; s < 128; s++) this.updateKeyBasedVolume(e, s, t);
+    else this.updateChannelVolume(e, t);
+  }
+  panToGain(e) {
+    let t = Math.PI / 2 * Math.max(0, e * 127 - 1) / 126;
+    return { gainLeft: Math.cos(t), gainRight: Math.sin(t) };
+  }
+  setPan(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = r.state, o = Math.trunc(t);
+    if (n.panMSB = o / 127, n.panLSB = t - o, r.isDrum) for (let a = 0; a < 128; a++) this.updateKeyBasedVolume(r, a, s);
+    else this.updateChannelVolume(r, s);
+  }
+  setExpression(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = r.state, o = Math.trunc(t);
+    n.expressionMSB = o / 127, n.expressionLSB = t - o, this.updateChannelVolume(r, s);
+  }
+  setBankLSB(e, t) {
+    this.channels[e].bankLSB = t;
+  }
+  dataEntryLSB(e, t, s) {
+    this.channels[e].dataLSB = t, this.handleRPN(e, 0, s);
+  }
+  updateChannelVolume(e, t) {
+    let { expressionMSB: s, expressionLSB: r, volumeMSB: n, volumeLSB: o, panMSB: a, panLSB: c } = e.state, l = n + o / 128, u = s + r / 128, h = a + c / 128, f = this.getChannelAmplitudeControl(e), d = l * u * (1 + f), { gainLeft: p, gainRight: y } = this.panToGain(h);
+    e.gainL.gain.cancelScheduledValues(t).setValueAtTime(d * p, t), e.gainR.gain.cancelScheduledValues(t).setValueAtTime(d * y, t);
+  }
+  updateKeyBasedVolume(e, t, s) {
+    let r = e.keyBasedGainLs[t];
+    if (!r) return;
+    let n = e.keyBasedGainRs[t], { expressionMSB: o, expressionLSB: a, volumeMSB: c, volumeLSB: l, panMSB: u, panLSB: h } = e.state, f = c + l / 128, d = o + a / 128, p = f * d, y = u + h / 128, m = this.getKeyBasedValue(e, t, 7), b = 0 <= m ? p * m / 64 : p, v = this.getKeyBasedValue(e, t, 10), S = 0 <= v ? v / 127 : y, { gainLeft: M, gainRight: x } = this.panToGain(S);
+    r.gain.cancelScheduledValues(s).setValueAtTime(b * M, s), n.gain.cancelScheduledValues(s).setValueAtTime(b * x, s);
+  }
+  setSustainPedal(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.state, o = n.sustainPedal;
+    n.sustainPedal = t / 127, 64 <= t ? o < 0.5 && this.processScheduledNotes(r, (a) => {
+      r.sustainNotes.push(a);
+    }) : this.releaseSustainPedal(e, t, s);
+  }
+  isPortamento(e, t) {
+    return 0.5 <= e.state.portamento && 0 <= t.portamentoNoteNumber;
+  }
+  setPortamento(e, t, s) {
+    let r = this.channels[e];
+    r.isDrum || (0 <= s || (s = this.audioContext.currentTime), r.state.portamento = t / 127, this.updatePortamento(r, s));
+  }
+  setSostenutoPedal(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.state, o = n.sostenutoPedal;
+    if (n.sostenutoPedal = t / 127, 64 <= t) {
+      if (o < 0.5) {
+        let a = [];
+        this.processActiveNotes(r, s, (c) => {
+          a.push(c);
+        }), r.sostenutoNotes = a;
+      }
+    } else this.releaseSostenutoPedal(e, t, s);
+  }
+  getSoftPedalFactor(e, t) {
+    return 1 - (0.1 + t.noteNumber / 127 * 0.2) * e.state.softPedal;
+  }
+  setSoftPedal(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    let n = r.state;
+    0 <= s || (s = this.audioContext.currentTime), n.softPedal = t / 127, this.processScheduledNotes(r, (o) => {
+      this.isPortamento(r, o) ? (this.setPortamentoVolumeEnvelope(r, o, s), this.setPortamentoFilterEnvelope(r, o, s)) : (this.setVolumeEnvelope(r, o, s), this.setFilterEnvelope(r, o, s));
+    });
+  }
+  setFilterQ(e, t, s) {
+    if (!t.filterEnvelopeNode) return;
+    let r = this.getRelativeKeyBasedValue(e, t.noteNumber, 71), n = t.voiceParams.initialFilterQ / 5 * r;
+    t.filterEnvelopeNode.Q.setValueAtTime(n, s);
+  }
+  setFilterResonance(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.state;
+    n.filterResonance = t / 127, this.processScheduledNotes(r, (o) => {
+      this.setFilterQ(r, o, s);
+    });
+  }
+  setReleaseTime(e, t, s) {
+    let r = this.channels[e];
+    r.isDrum || (0 <= s || (s = this.audioContext.currentTime), r.state.releaseTime = t / 127);
+  }
+  setAttackTime(e, t, s) {
+    let r = this.channels[e];
+    r.isDrum || (0 <= s || (s = this.audioContext.currentTime), r.state.attackTime = t / 127, this.processScheduledNotes(r, (n) => {
+      s < n.startTime && this.setVolumeEnvelope(r, n, s);
+    }));
+  }
+  setBrightness(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    let n = r.state;
+    0 <= s || (s = this.audioContext.currentTime), n.brightness = t / 127, this.processScheduledNotes(r, (o) => {
+      this.isPortamento(r, o) ? this.setPortamentoFilterEnvelope(r, o, s) : this.setFilterEnvelope(r, o, s);
+    });
+  }
+  setDecayTime(e, t, s) {
+    let r = this.channels[e];
+    r.isDrum || (0 <= s || (s = this.audioContext.currentTime), r.state.decayTime = t / 127, this.processScheduledNotes(r, (n) => {
+      this.setVolumeEnvelope(r, n, s);
+    }));
+  }
+  setVibratoRate(e, t, s) {
+    let r = this.channels[e];
+    r.isDrum || (0 <= s || (s = this.audioContext.currentTime), r.state.vibratoRate = t / 127, !(r.vibratoDepth <= 0) && this.processScheduledNotes(r, (n) => {
+      this.setVibLfoToPitch(r, n, s);
+    }));
+  }
+  setVibratoDepth(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.state.vibratoDepth;
+    r.state.vibratoDepth = t / 127, 0 < n ? this.processScheduledNotes(r, (o) => {
+      this.setFreqVibLFO(r, o, s);
+    }) : this.processScheduledNotes(r, (o) => {
+      this.startVibrato(r, o, s);
+    });
+  }
+  setVibratoDelay(e, t, s) {
+    let r = this.channels[e];
+    r.isDrum || (0 <= s || (s = this.audioContext.currentTime), r.state.vibratoDelay = t / 127, 0 < r.state.vibratoDepth && this.processScheduledNotes(r, (n) => {
+      this.startVibrato(r, n, s);
+    }));
+  }
+  setPortamentoNoteNumber(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e];
+    r.portamentoControl = true, r.state.portamentoNoteNumber = t / 127;
+  }
+  setReverbSendLevel(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = r.state;
+    n.reverbSendLevel = t / 127, this.processScheduledNotes(r, (o) => {
+      this.setReverbSend(r, o, s);
+    });
+  }
+  setChorusSendLevel(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = r.state;
+    n.chorusSendLevel = t / 127, this.processScheduledNotes(r, (o) => {
+      this.setChorusSend(r, o, s);
+    });
+  }
+  limitData(e, t, s, r, n) {
+    n < e.dataLSB ? (e.dataMSB++, e.dataLSB = r) : e.dataLSB < 0 && (e.dataMSB--, e.dataLSB = n), s < e.dataMSB ? (e.dataMSB = s, e.dataLSB = n) : e.dataMSB < 0 && (e.dataMSB = t, e.dataLSB = r);
+  }
+  limitDataMSB(e, t, s) {
+    s < e.dataMSB ? e.dataMSB = s : e.dataMSB < 0 && (e.dataMSB = t);
+  }
+  handleRPN(e, t, s) {
+    let r = this.channels[e];
+    switch (r.rpnMSB * 128 + r.rpnLSB) {
+      case 0:
+        r.dataLSB += t, this.handlePitchBendRangeRPN(e, s);
+        break;
+      case 1:
+        r.dataLSB += t, this.handleFineTuningRPN(e, s);
+        break;
+      case 2:
+        r.dataMSB += t, this.handleCoarseTuningRPN(e, s);
+        break;
+      case 5:
+        r.dataLSB += t, this.handleModulationDepthRangeRPN(e, s);
+        break;
+      case 6:
+        r.dataLSB += t, this.handleMIDIPolyphonicExpressionRPN(e, s);
+        break;
+      case 16383:
+        break;
+      default:
+        console.warn(`Channel ${e}: Unsupported RPN MSB=${r.rpnMSB} LSB=${r.rpnLSB}`);
+    }
+  }
+  dataIncrement(e, t) {
+    0 <= t || (t = this.audioContext.currentTime), this.handleRPN(e, 1, t);
+  }
+  dataDecrement(e, t) {
+    0 <= t || (t = this.audioContext.currentTime), this.handleRPN(e, -1, t);
+  }
+  setRPNMSB(e, t) {
+    this.channels[e].rpnMSB = t;
+  }
+  setRPNLSB(e, t) {
+    this.channels[e].rpnLSB = t;
+  }
+  dataEntryMSB(e, t, s) {
+    this.channels[e].dataMSB = t, this.handleRPN(e, 0, s);
+  }
+  handlePitchBendRangeRPN(e, t) {
+    let s = this.channels[e];
+    this.limitData(s, 0, 127, 0, 127);
+    let r = (s.dataMSB + s.dataLSB / 128) * 100;
+    this.setPitchBendRange(e, r, t);
+  }
+  setPitchBendRange(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.state, o = n.pitchWheelSensitivity, a = t / 12800;
+    n.pitchWheelSensitivity = a, r.detune += (n.pitchWheel * 2 - 1) * (a - o) * 12800, this.updateChannelDetune(r, s), this.applyVoiceParams(r, 16, s);
+  }
+  handleFineTuningRPN(e, t) {
+    let s = this.channels[e];
+    this.limitData(s, 0, 127, 0, 127);
+    let n = (s.dataMSB * 128 + s.dataLSB - 8192) / 8192 * 100;
+    this.setFineTuning(e, n, t);
+  }
+  setFineTuning(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.fineTuning, o = t;
+    r.fineTuning = o, r.detune += o - n, this.updateChannelDetune(r, s);
+  }
+  handleCoarseTuningRPN(e, t) {
+    let s = this.channels[e];
+    this.limitDataMSB(s, 0, 127);
+    let r = (s.dataMSB - 64) * 100;
+    this.setCoarseTuning(e, r, t);
+  }
+  setCoarseTuning(e, t, s) {
+    let r = this.channels[e];
+    if (r.isDrum) return;
+    0 <= s || (s = this.audioContext.currentTime);
+    let n = r.coarseTuning, o = t;
+    r.coarseTuning = o, r.detune += o - n, this.updateChannelDetune(r, s);
+  }
+  handleModulationDepthRangeRPN(e, t) {
+    let s = this.channels[e];
+    this.limitData(s, 0, 127, 0, 127);
+    let r = (s.dataMSB + s.dataLSB / 128) * 100;
+    this.setModulationDepthRange(e, r, t);
+  }
+  setModulationDepthRange(e, t, s) {
+    let r = this.channels[e];
+    r.isDrum || (0 <= s || (s = this.audioContext.currentTime), r.modulationDepthRange = t, this.updateModulation(r, s));
+  }
+  handleMIDIPolyphonicExpressionRPN(e, t) {
+    let s = this.channels[e];
+    this.setMIDIPolyphonicExpression(e, s.dataMSB);
+  }
+  setMIDIPolyphonicExpression(e, t) {
+    if (e !== 0 && e !== 15) return;
+    let s = t & 15;
+    e === 0 ? this.lowerMPEMembers = s : this.upperMPEMembers = s, this.mpeEnabled = this.lowerMPEMembers > 0 || this.upperMPEMembers > 0;
+    let r = 1, n = this.lowerMPEMembers, o = 16 - this.upperMPEMembers, a = 14, { channels: c, lowerMPEMembers: l, upperMPEMembers: u, mpeEnabled: h } = this;
+    for (let f = 0; f < 16; f++) {
+      let d = l && r <= f && f <= n, p = u && o <= f && f <= a;
+      c[f].isMPEMember = h && (d || p), c[f].isMPEManager = h && (f === 0 || f === 15);
+    }
+  }
+  setRPGMakerLoop(e, t, s) {
+    s ??= this.audioContext.currentTime, this.loopStart = s + this.resumeTime - this.startTime;
+  }
+  allSoundOff(e, t, s) {
+    this.channels[e].isMPEManager || this.applyAllSoundOff(e, t, s);
+  }
+  applyAllSoundOff(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = [];
+    return this.processActiveNotes(r, s, (o) => {
+      n.push(this.soundOffNote(r, o, s));
+    }), Promise.all(n);
+  }
+  resetChannelStates(e) {
+    let t = this.audioContext.currentTime, s = this.channels[e], r = s.state, n = Object.entries(_t);
+    for (let [o, { type: a, defaultValue: c }] of n) 128 <= a ? this.setControlChange(e, a - 128, Math.ceil(c * 127), t) : r[o] = c;
+    s.resetSettings(this.constructor.channelSettings), s.resetTable(), this.mode = "GM2", this.masterFineTuning = 0, this.masterCoarseTuning = 0;
+  }
+  resetAllControllers(e, t, s) {
+    let r = ["polyphonicKeyPressure", "channelPressure", "pitchWheel", "expressionMSB", "expressionLSB", "modulationDepthMSB", "modulationDepthLSB", "sustainPedal", "portamento", "sostenutoPedal", "softPedal"], n = this.channels[e], o = n.state;
+    for (let c = 0; c < r.length; c++) {
+      let l = r[c], { type: u, defaultValue: h } = _t[l];
+      128 <= u ? this.setControlChange(e, u - 128, Math.ceil(h * 127), s) : o[l] = h;
+    }
+    this.setPitchBend(e, 8192, s);
+    let a = ["rpnMSB", "rpnLSB"];
+    for (let c = 0; c < a.length; c++) {
+      let l = a[c];
+      n[l] = this.constructor.channelSettings[l];
+    }
+  }
+  allNotesOff(e, t, s) {
+    0 <= s || (s = this.audioContext.currentTime);
+    let r = this.channels[e], n = [];
+    return this.processActiveNotes(r, s, (o) => {
+      let a = this.noteOff(e, o.noteNumber, 0, s, false);
+      n.push(a);
+    }), Promise.all(n);
+  }
+  omniOff(e, t, s) {
+    this.mpeEnabled || this.allNotesOff(e, t, s);
+  }
+  omniOn(e, t, s) {
+    this.mpeEnabled || this.allNotesOff(e, t, s);
+  }
+  monoOn(e, t, s) {
+    let r = this.channels[e];
+    r.isMPEManager || (this.allNotesOff(e, t, s), r.mono = true);
+  }
+  polyOn(e, t, s) {
+    let r = this.channels[e];
+    r.isMPEManager || (this.allNotesOff(e, t, s), r.mono = false);
+  }
+  handleUniversalNonRealTimeExclusiveMessage(e, t) {
+    switch (e[2]) {
+      case 8:
+        switch (e[3]) {
+          case 8:
+            return this.handleScaleOctaveTuning1ByteFormatSysEx(e, false, t);
+          case 9:
+            return this.handleScaleOctaveTuning2ByteFormatSysEx(e, false, t);
+          default:
+            console.warn(`Unsupported Exclusive Message: ${e}`);
+        }
+        break;
+      case 9:
+        switch (e[3]) {
+          case 1:
+            this.GM1SystemOn(t);
+            break;
+          case 2:
+            break;
+          case 3:
+            this.GM2SystemOn(t);
+            break;
+          default:
+            console.warn(`Unsupported Exclusive Message: ${e}`);
+        }
+        break;
+      default:
+        console.warn(`Unsupported Exclusive Message: ${e}`);
+    }
+  }
+  GM1SystemOn(e) {
+    let t = this.channels;
+    0 <= e || (e = this.audioContext.currentTime), this.mode = "GM1";
+    for (let s = 0; s < t.length; s++) {
+      this.applyAllSoundOff(s, 0, e);
+      let r = t[s];
+      r.bankMSB = 0, r.bankLSB = 0, r.isDrum = false;
+    }
+    t[9].bankMSB = 1, t[9].isDrum = true;
+  }
+  GM2SystemOn(e) {
+    let t = this.channels;
+    0 <= e || (e = this.audioContext.currentTime), this.mode = "GM2";
+    for (let s = 0; s < t.length; s++) {
+      this.applyAllSoundOff(s, 0, e);
+      let r = t[s];
+      r.bankMSB = 121, r.bankLSB = 0, r.isDrum = false;
+    }
+    t[9].bankMSB = 120, t[9].isDrum = true;
+  }
+  handleUniversalRealTimeExclusiveMessage(e, t) {
+    switch (e[2]) {
+      case 4:
+        switch (e[3]) {
+          case 1:
+            return this.handleMasterVolumeSysEx(e, t);
+          case 3:
+            return this.handleMasterFineTuningSysEx(e, t);
+          case 4:
+            return this.handleMasterCoarseTuningSysEx(e, t);
+          case 5:
+            return this.handleGlobalParameterControlSysEx(e, t);
+          default:
+            console.warn(`Unsupported Exclusive Message: ${e}`);
+        }
+        break;
+      case 8:
+        switch (e[3]) {
+          case 8:
+            return this.handleScaleOctaveTuning1ByteFormatSysEx(e, true, t);
+          case 9:
+            return this.handleScaleOctaveTuning2ByteFormatSysEx(e, true, t);
+          default:
+            console.warn(`Unsupported Exclusive Message: ${e}`);
+        }
+        break;
+      case 9:
+        switch (e[3]) {
+          case 1:
+            return this.handleChannelPressureSysEx(e, t);
+          case 2:
+            return this.handlePolyphonicKeyPressureSysEx(e, t);
+          case 3:
+            return this.handleControlChangeSysEx(e, t);
+          default:
+            console.warn(`Unsupported Exclusive Message: ${e}`);
+        }
+        break;
+      case 10:
+        if (e[3] === 1) return this.handleKeyBasedInstrumentControlSysEx(e, t);
+        console.warn(`Unsupported Exclusive Message: ${e}`);
+        break;
+      default:
+        console.warn(`Unsupported Exclusive Message: ${e}`);
+    }
+  }
+  handleMasterVolumeSysEx(e, t) {
+    let s = (e[5] * 128 + e[4]) / 16383;
+    this.setMasterVolume(s, t);
+  }
+  setMasterVolume(e, t) {
+    0 <= t || (t = this.audioContext.currentTime);
+    let s = this.perceptualSmoothingTime / 5;
+    this.masterVolume.gain.cancelAndHoldAtTime(t).setTargetAtTime(e * e, t, s);
+  }
+  handleMasterFineTuningSysEx(e, t) {
+    let r = ((e[5] * 128 + e[4]) / 16383 - 8192) / 8192 * 100;
+    this.setMasterFineTuning(r, t);
+  }
+  setMasterFineTuning(e, t) {
+    let s = this.masterFineTuning, r = e;
+    this.masterFineTuning = r;
+    let n = r - s, o = this.channels;
+    for (let a = 0; a < o.length; a++) {
+      let c = o[a];
+      c.isDrum || (c.detune += n, this.updateChannelDetune(c, t));
+    }
+  }
+  handleMasterCoarseTuningSysEx(e, t) {
+    let s = (e[4] - 64) * 100;
+    this.setMasterCoarseTuning(s, t);
+  }
+  setMasterCoarseTuning(e, t) {
+    let s = this.masterCoarseTuning, r = e;
+    this.masterCoarseTuning = r;
+    let n = r - s, o = this.channels;
+    for (let a = 0; a < o.length; a++) {
+      let c = o[a];
+      c.isDrum || (c.detune += n, this.updateChannelDetune(c, t));
+    }
+  }
+  handleGlobalParameterControlSysEx(e, t) {
+    if (e[7] === 1) switch (e[8]) {
+      case 1:
+        return this.handleReverbParameterSysEx(e);
+      case 2:
+        return this.handleChorusParameterSysEx(e, t);
+      default:
+        console.warn(`Unsupported Global Parameter Control Message: ${e}`);
+    }
+    else console.warn(`Unsupported Global Parameter Control Message: ${e}`);
+  }
+  handleReverbParameterSysEx(e) {
+    switch (e[9]) {
+      case 0:
+        return this.setReverbType(e[10]);
+      case 1:
+        return this.setReverbTime(e[10]);
+    }
+  }
+  setReverbType(e) {
+    this.reverb.time = this.getReverbTimeFromType(e), this.reverb.feedback = e === 8 ? 0.9 : 0.8, this.reverbEffect = this.setReverbEffect(this.reverb.algorithm);
+  }
+  getReverbTimeFromType(e) {
+    switch (e) {
+      case 0:
+        return this.getReverbTime(44);
+      case 1:
+        return this.getReverbTime(50);
+      case 2:
+        return this.getReverbTime(56);
+      case 3:
+        return this.getReverbTime(64);
+      case 4:
+        return this.getReverbTime(64);
+      case 8:
+        return this.getReverbTime(50);
+      default:
+        console.warn(`Unsupported Reverb Time: ${e}`);
+    }
+  }
+  setReverbTime(e) {
+    this.reverb.time = this.getReverbTime(e), this.reverbEffect = this.setReverbEffect(this.reverb.algorithm);
+  }
+  getReverbTime(e) {
+    return Math.exp((e - 40) * 0.025);
+  }
+  calcDelay(e, t) {
+    return -e * Math.log10(t) / 3;
+  }
+  handleChorusParameterSysEx(e, t) {
+    switch (e[9]) {
+      case 0:
+        return this.setChorusType(e[10], t);
+      case 1:
+        return this.setChorusModRate(e[10], t);
+      case 2:
+        return this.setChorusModDepth(e[10], t);
+      case 3:
+        return this.setChorusFeedback(e[10], t);
+      case 4:
+        return this.setChorusSendToReverb(e[10], t);
+    }
+  }
+  setChorusType(e, t) {
+    switch (e) {
+      case 0:
+        return this.setChorusParameter(3, 5, 0, 0, t);
+      case 1:
+        return this.setChorusParameter(9, 19, 5, 0, t);
+      case 2:
+        return this.setChorusParameter(3, 19, 8, 0, t);
+      case 3:
+        return this.setChorusParameter(9, 16, 16, 0, t);
+      case 4:
+        return this.setChorusParameter(2, 24, 64, 0, t);
+      case 5:
+        return this.setChorusParameter(1, 5, 112, 0, t);
+      default:
+        console.warn(`Unsupported Chorus Type: ${e}`);
+    }
+  }
+  setChorusParameter(e, t, s, r, n) {
+    this.setChorusModRate(e, n), this.setChorusModDepth(t, n), this.setChorusFeedback(s, n), this.setChorusSendToReverb(r, n);
+  }
+  setChorusModRate(e, t) {
+    let s = this.getChorusModRate(e);
+    this.chorus.modRate = s, this.chorusEffect.lfo.frequency.setValueAtTime(s, t);
+  }
+  getChorusModRate(e) {
+    return e * 0.122;
+  }
+  setChorusModDepth(e, t) {
+    let s = this.getChorusModDepth(e);
+    this.chorus.modDepth = s, this.chorusEffect.lfoGain.gain.cancelScheduledValues(t).setValueAtTime(s / 2, t);
+  }
+  getChorusModDepth(e) {
+    return (e + 1) / 3200;
+  }
+  setChorusFeedback(e, t) {
+    let s = this.getChorusFeedback(e);
+    this.chorus.feedback = s;
+    let r = this.chorusEffect;
+    for (let n = 0; n < r.feedbackGains.length; n++) r.feedbackGains[n].gain.cancelScheduledValues(t).setValueAtTime(s, t);
+  }
+  getChorusFeedback(e) {
+    return e * 763e-5;
+  }
+  setChorusSendToReverb(e, t) {
+    let s = this.getChorusSendToReverb(e), r = this.chorusEffect.sendGain;
+    0 < this.chorus.sendToReverb ? (this.chorus.sendToReverb = s, 0 < s ? r.gain.cancelScheduledValues(t).setValueAtTime(s, t) : r.disconnect()) : (this.chorus.sendToReverb = s, 0 < s && (r.connect(this.reverbEffect.input), r.gain.cancelScheduledValues(t).setValueAtTime(s, t)));
+  }
+  getChorusSendToReverb(e) {
+    return e * 787e-5;
+  }
+  getChannelBitmap(e) {
+    let t = new Array(this.channels.length).fill(false), s = e[4] & 3, r = e[5] & 127, n = e[6] & 127;
+    for (let o = 0; o < 7; o++) n & 1 << o && (t[o] = true);
+    for (let o = 0; o < 7; o++) r & 1 << o && (t[o + 7] = true);
+    for (let o = 0; o < 2; o++) s & 1 << o && (t[o + 14] = true);
+    return t;
+  }
+  handleScaleOctaveTuning1ByteFormatSysEx(e, t, s) {
+    if (e.length < 19) {
+      console.error("Data length is too short");
+      return;
+    }
+    let r = this.getChannelBitmap(e);
+    for (let n = 0; n < r.length; n++) {
+      if (!r[n]) continue;
+      let o = this.channels[n];
+      if (!o.isDrum) {
+        for (let a = 0; a < 12; a++) {
+          let c = e[a + 7] - 64;
+          o.scaleOctaveTuningTable[a] = c;
+        }
+        t && this.updateChannelDetune(o, s);
+      }
+    }
+  }
+  handleScaleOctaveTuning2ByteFormatSysEx(e, t, s) {
+    if (e.length < 31) {
+      console.error("Data length is too short");
+      return;
+    }
+    let r = this.getChannelBitmap(e);
+    for (let n = 0; n < r.length; n++) {
+      if (!r[n]) continue;
+      let o = this.channels[n];
+      if (!o.isDrum) {
+        for (let a = 0; a < 12; a++) {
+          let c = 7 + a * 2, l = e[c] & 127, u = e[c + 1] & 127, f = (l * 128 + u - 8192) / 8.192;
+          o.scaleOctaveTuningTable[a] = f;
+        }
+        t && this.updateChannelDetune(o, s);
+      }
+    }
+  }
+  calcEffectValue(e, t, s) {
+    return this.calcChannelEffectValue(e, s) + this.calcNoteEffectValue(e, t, s);
+  }
+  calcChannelEffectValue(e, t) {
+    return this.calcControlChangeEffectValue(e, t) + this.calcChannelPressureEffectValue(e, t);
+  }
+  calcControlChangeEffectValue(e, t) {
+    let s = e.controlTable[t];
+    if (s < 0) return 0;
+    let r = e.state.array[s];
+    if (r <= 0) return 0;
+    let n = rr[t];
+    return (e.controlTable[t + 6] - n) * r * Dn[t];
+  }
+  calcChannelPressureEffectValue(e, t) {
+    let s = e.state.channelPressure;
+    if (s <= 0) return 0;
+    let r = rr[t];
+    return (e.channelPressureTable[t] - r) * s * Dn[t];
+  }
+  calcNoteEffectValue(e, t, s) {
+    let r = t.pressure;
+    if (r <= 0) return 0;
+    let n = rr[s];
+    return (e.polyphonicKeyPressureTable[s] - n) * r / 127 * Dn[s];
+  }
+  getChannelPitchControl(e) {
+    return this.calcChannelEffectValue(e, 0);
+  }
+  getNotePitchControl(e, t) {
+    return this.calcNoteEffectValue(e, t, 0);
+  }
+  getPitchControl(e, t) {
+    return this.calcEffectValue(e, t, 0);
+  }
+  getFilterCutoffControl(e, t) {
+    return this.calcEffectValue(e, t, 1);
+  }
+  getChannelAmplitudeControl(e) {
+    return this.calcChannelEffectValue(e, 2);
+  }
+  getNoteAmplitudeControl(e, t) {
+    return this.calcNoteEffectValue(e, t, 2);
+  }
+  getAmplitudeControl(e, t) {
+    return this.calcEffectValue(e, t, 2);
+  }
+  getLFOPitchDepth(e, t) {
+    return this.calcEffectValue(e, t, 3);
+  }
+  getLFOFilterDepth(e, t) {
+    return this.calcEffectValue(e, t, 4);
+  }
+  getLFOAmplitudeDepth(e, t) {
+    return this.calcEffectValue(e, t, 5);
+  }
+  createEffectHandlers() {
+    let e = new Array(6);
+    return e[0] = (t, s, r, n) => {
+      this.isPortamento(t, s) ? this.setPortamentoDetune(t, s, n) : this.setDetune(t, s, n);
+    }, e[1] = (t, s, r, n) => {
+      0.5 <= t.state.portamento && 0 <= s.portamentoNoteNumber ? this.setPortamentoFilterEnvelope(t, s, n) : this.setFilterEnvelope(t, s, n);
+    }, e[2] = (t, s, r, n) => {
+      r === "polyphonicKeyPressureTable" ? this.setVolumeNode(t, s, n) : this.applyVolume(t, n);
+    }, e[3] = (t, s, r, n) => this.setModLfoToPitch(t, s, n), e[4] = (t, s, r, n) => this.setModLfoToFilterFc(t, s, n), e[5] = (t, s, r, n) => this.setModLfoToVolume(t, s, n), e;
+  }
+  setControlChangeEffects(e, t, s) {
+    let r = this.effectHandlers;
+    for (let n = 0; n < r.length; n++) {
+      let o = rr[n], a = e.controlTable[n + 6];
+      o !== a && r[n](e, t, "controlTable", s);
+    }
+  }
+  setChannelPressureEffects(e, t, s) {
+    this.setPressureEffects(e, t, "channelPressureTable", s);
+  }
+  setPolyphonicKeyPressureEffects(e, t, s) {
+    this.setPressureEffects(e, t, "polyphonicKeyPressureTable", s);
+  }
+  setPressureEffects(e, t, s, r) {
+    let n = this.effectHandlers, o = e[s];
+    for (let a = 0; a < n.length; a++) {
+      let c = rr[a], l = o[a];
+      c !== l && n[a](e, t, s, r);
+    }
+  }
+  handleChannelPressureSysEx(e, t) {
+    this.handlePressureSysEx(e, "channelPressureTable", t);
+  }
+  handlePolyphonicKeyPressureSysEx(e, t) {
+    this.handlePressureSysEx(e, "polyphonicKeyPressureTable", t);
+  }
+  handlePressureSysEx(e, t, s) {
+    let r = e[4], n = this.channels[r];
+    if (n.isDrum) return;
+    let o = n[t];
+    for (let a = 5; a < e.length - 1; a += 2) {
+      let c = e[a], l = e[a + 1];
+      o[c] = l;
+      let u = this.effectHandlers[c];
+      this.processActiveNotes(n, s, (h) => {
+        u && u(n, h, t, s);
+      });
+    }
+  }
+  handleControlChangeSysEx(e, t) {
+    let s = e[4], r = this.channels[s];
+    if (r.isDrum) return;
+    let n = r.controlTable;
+    n.set(Vn);
+    let o = e[5];
+    for (let a = 6; a < e.length; a += 2) {
+      let c = e[a], l = e[a + 1];
+      n[c] = o, n[c + 6] = l;
+      let u = this.effectHandlers[c];
+      this.processActiveNotes(r, t, (h) => {
+        u && u(r, h, "controlTable", t);
+      });
+    }
+  }
+  getRelativeKeyBasedValue(e, t, s) {
+    let r = e.state.array[128 + s];
+    if (!e.isDrum) return r;
+    let n = this.getKeyBasedValue(e, t, s);
+    return n < 0 ? r : r * n / 64;
+  }
+  getKeyBasedValue(e, t, s) {
+    let r = t * 128 + s;
+    return e.keyBasedTable[r];
+  }
+  createKeyBasedControllerHandlers() {
+    let e = new Array(128);
+    return e[7] = (t, s, r) => this.updateKeyBasedVolume(t, s, r), e[10] = (t, s, r) => this.updateKeyBasedVolume(t, s, r), e[71] = (t, s, r) => this.processScheduledNotes(t, (n) => {
+      n.noteNumber === s && this.setFilterQ(t, n, r);
+    }), e[73] = (t, s, r) => this.processScheduledNotes(t, (n) => {
+      n.noteNumber === s && this.setVolumeEnvelope(t, n, r);
+    }), e[74] = (t, s, r) => this.processScheduledNotes(t, (n) => {
+      n.noteNumber === s && this.setFilterEnvelope(t, n, r);
+    }), e[75] = (t, s, r) => this.processScheduledNotes(t, (n) => {
+      n.noteNumber === s && this.setVolumeEnvelope(t, n, r);
+    }), e[76] = (t, s, r) => {
+      t.state.vibratoDepth <= 0 || this.processScheduledNotes(t, (n) => {
+        n.noteNumber === s && this.setFreqVibLFO(t, n, r);
+      });
+    }, e[77] = (t, s, r) => {
+      t.state.vibratoDepth <= 0 || this.processScheduledNotes(t, (n) => {
+        n.noteNumber === s && this.setVibLfoToPitch(t, n, r);
+      });
+    }, e[78] = (t, s) => {
+      t.state.vibratoDepth <= 0 || this.processScheduledNotes(t, (r) => {
+        r.noteNumber === s && this.setDelayVibLFO(t, r);
+      });
+    }, e[91] = (t, s, r) => this.processScheduledNotes(t, (n) => {
+      n.noteNumber === s && this.setReverbSend(t, n, r);
+    }), e[93] = (t, s, r) => this.processScheduledNotes(t, (n) => {
+      n.noteNumber === s && this.setChorusSend(t, n, r);
+    }), e;
+  }
+  handleKeyBasedInstrumentControlSysEx(e, t) {
+    let s = e[4], r = this.channels[s];
+    if (!r.isDrum) return;
+    let n = e[5], o = r.keyBasedTable;
+    for (let a = 6; a < e.length; a += 2) {
+      let c = e[a], l = e[a + 1], u = n * 128 + c;
+      o[u] = l;
+      let h = this.keyBasedControllerHandlers[c];
+      h && h(r, n, t);
+    }
+  }
+  handleSysEx(e, t) {
+    switch (e[0]) {
+      case 126:
+        return this.handleUniversalNonRealTimeExclusiveMessage(e, t);
+      case 127:
+        return this.handleUniversalRealTimeExclusiveMessage(e, t);
+      default:
+        console.warn(`Unsupported Exclusive Message: ${e}`);
+    }
+  }
+  scheduleTask(e, t) {
+    return new Promise((s) => {
+      let r = new AudioBufferSourceNode(this.audioContext, { buffer: this.schedulerBuffer });
+      r.connect(this.scheduler), r.onended = () => {
+        try {
+          e();
+        } finally {
+          r.disconnect(), s();
+        }
+      }, r.start(t);
+    });
+  }
+};
+
+// src/index.js
+import {
+  AudioBufferSource,
+  BufferTarget,
+  canEncodeAudio,
+  FlacOutputFormat,
+  Mp3OutputFormat,
+  Mp4OutputFormat,
+  OggOutputFormat,
+  Output,
+  QUALITY_HIGH,
+  WavOutputFormat
+} from "https://cdn.jsdelivr.net/npm/mediabunny@1.45.2/+esm";
+function toggleDarkMode() {
+  const html = document.documentElement;
+  const newTheme = html.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
+  html.setAttribute("data-bs-theme", newTheme);
+  localStorage.setItem("darkMode", newTheme);
+}
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+function shuffle(array) {
+  for (let i22 = array.length; 1 < i22; i22--) {
+    const k2 = Math.floor(Math.random() * i22);
+    [array[k2], array[i22 - 1]] = [array[i22 - 1], array[k2]];
+  }
+  return array;
+}
+function setSampleEvents() {
+  document.getElementById("samples").addEventListener("change", (event) => {
+    const target = event.target;
+    switch (target.name) {
+      case "sampleMIDI": {
+        getSampleMIDI("https://midi-db.pages.dev/" + target.value);
+        break;
+      }
+      case "sampleSoundFont":
+        soundFontURL = "https://soundfonts.pages.dev/" + target.value;
+    }
+  });
+}
+async function getSampleMIDI(url) {
+  const response = await fetch(url);
+  const file = await response.blob();
+  await loadMIDI(file);
+}
+async function getSampleMIDIList() {
+  const root = document.getElementById("sampleMIDI");
+  const homepageResponse = await fetch(
+    "https://midi-db.pages.dev/collections.json"
+  );
+  const homepageList = await homepageResponse.json();
+  const homepage = homepageList[getRandomInt(0, homepageList.length)];
+  const { license: homepageLicense, maintainer: homepageMaintainer } = homepage;
+  const license = homepageLicense.startsWith("http") ? `<a href="${homepageLicense}">custom</a>` : homepageLicense;
+  const fileResponse = await fetch(
+    `https://midi-db.pages.dev/json/${homepage.id}/${htmlLang}.json`
+  );
+  const fileList = await fileResponse.json();
+  const longFileList = fileList.filter((file) => !file.time.startsWith("0:"));
+  shuffle(longFileList);
+  let html = "";
+  for (let i22 = 0; i22 < 15; i22++) {
+    const file = longFileList[i22];
+    const maintainer = !homepageMaintainer ? file.maintainer : homepageMaintainer;
+    html += `
 <div class="form-check">
   <label class="form-check-label">
-    <input class="form-check-input" type="radio" name="sampleMIDI" value="${t.file}">
-    ${t.title}, ${n} (${c})
+    <input class="form-check-input" type="radio" name="sampleMIDI" value="${file.file}">
+    ${file.title}, ${maintainer} (${license})
   </label>
 </div>
-    `,a.innerHTML=i}}async function getSampleSoundFontList(){const n=document.getElementById("sampleSoundFont"),s=await fetch("https://soundfonts.pages.dev/list.json"),e=await s.json();let t="";for(let s=0;s<e.length;s++){const n=e[s],o=n.name==="GeneralUser_GS_v1.471"?"checked":"",i=n.license.startsWith("http")?`<a href="${n.license}">custom</a>`:n.license;t+=`
+    `;
+    root.innerHTML = html;
+  }
+}
+async function getSampleSoundFontList() {
+  const root = document.getElementById("sampleSoundFont");
+  const response = await fetch("https://soundfonts.pages.dev/list.json");
+  const list = await response.json();
+  let html = "";
+  for (let i22 = 0; i22 < list.length; i22++) {
+    const soundFont = list[i22];
+    const checked = soundFont.name === "GeneralUser_GS_v1.471" ? "checked" : "";
+    const license = soundFont.license.startsWith("http") ? `<a href="${soundFont.license}">custom</a>` : soundFont.license;
+    html += `
 <div class="form-check">
   <label class="form-check-label">
-    <input class="form-check-input" type="radio" name="sampleSoundFont" value="${n.name}" ${o}>
-    ${n.name} (${i})
+    <input class="form-check-input" type="radio" name="sampleSoundFont" value="${soundFont.name}" ${checked}>
+    ${soundFont.name} (${license})
   </label>
 </div>
-    `}n.innerHTML=t}function getSoundFontPaths(){const e=[];for(const s of midy.instruments){const[o,t]=s.split(":"),n=Number(o),i=Number(t),a=midy.soundFontTable[i][n];if(a!==void 0)continue;const r=n===128?"128":t;e.push(`${soundFontURL}/${r}.sf3`)}return e}async function loadMIDI(e){if(!e)return;await midy.stop();const t=await e.arrayBuffer(),n=new Uint8Array(t);await midy.loadMIDI(n)}async function loadSoundFont(e){if(!e)return;const t=await e.arrayBuffer(),n=new Uint8Array(t);await midy.loadSoundFont(n)}async function loadFile(e){const t=e.name.split(".").at(-1).toLowerCase();switch(t){case"mid":case"midi":return await loadMIDI(e);case"sf2":case"sf3":return await loadSoundFont(e)}}function setConfigurationEvents(){document.getElementById("configuration").addEventListener("change",e=>{const t=e.target;switch(t.name){case"reverbType":case"chorusType":configuration[t.name]=Number(t.value);break;case"reverbAlgorithm":case"outputFormat":configuration[t.name]=t.value}})}FORMAT_MAP={wav:{mime:"audio/wav",codec:"pcm-f32",fmt:()=>new WavOutputFormat},mp3:{mime:"audio/mpeg",codec:"mp3",fmt:()=>new Mp3OutputFormat},aac:{mime:"audio/x-m4a",codec:"aac",fmt:()=>new Mp4OutputFormat},flac:{mime:"audio/flac",codec:"flac",fmt:()=>new FlacOutputFormat},opus:{mime:"audio/ogg",codec:"opus",fmt:()=>new OggOutputFormat}};async function initEncoders(){if(!await canEncodeAudio("aac")){const{registerAacEncoder:e}=await import("https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.45.2/+esm");e()}if(!await canEncodeAudio("mp3")){const{registerMp3Encoder:e}=await import("https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.45.2/+esm");e()}if(!await canEncodeAudio("flac")){const{registerFlacEncoder:e}=await import("https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.45.2/+esm");e()}document.getElementById("convert").disabled=!1}async function audioBufferToAudio(e,t){const{mime:i,codec:s,fmt:a}=FORMAT_MAP[t],n=new Output({format:a(),target:new BufferTarget}),r=s.startsWith("pcm-"),c=r?{codec:s}:{codec:s,bitrate:QUALITY_HIGH},o=new AudioBufferSource(c);return n.addAudioTrack(o),await n.start(),await o.add(e),await n.finalize(),{output:n,mime:i}}function setAudioTag(e){const s=e.output.target.buffer,o=new Blob([s],{type:e.mime}),t=document.getElementById("resultAudio"),n=t.src;n?.startsWith("blob:")&&URL.revokeObjectURL(n);const i=URL.createObjectURL(o);t.src=i,document.getElementById("convertStatus").classList.remove("d-none")}async function convert(e){e.target.disabled=!0;const t=document.getElementById("convertText"),n=document.getElementById("convertSpinner"),s=document.getElementById("convertAlert");document.getElementById("convertStatus").classList.add("d-none");try{if(midy.instruments.size===0)s.classList.remove("d-none");else{t.classList.add("d-none"),n.classList.remove("d-none"),s.classList.add("d-none");const e=getSoundFontPaths();await midy.loadSoundFont(e),await midy.render();const o=await audioBufferToAudio(midy.renderedAudioBuffer,configuration.outputFormat);setAudioTag(o)}}finally{t.classList.remove("d-none"),n.classList.add("d-none"),e.target.disabled=!1}}function setDragEvent(){const e=document.getElementById("selectPanel");let t=0;e.addEventListener("dragenter",n=>{n.preventDefault(),t++,e.classList.add("border","border-secondary")}),e.addEventListener("dragleave",n=>{n.preventDefault(),t--,t===0&&e.classList.remove("border","border-secondary")}),e.addEventListener("dragover",e=>{e.preventDefault()}),e.addEventListener("drop",t=>{t.preventDefault(),e.classList.remove("border","border-secondary");const n=t.dataTransfer.files[0];loadFile(n)})}htmlLang=document.documentElement.lang,soundFontURL="https://soundfonts.pages.dev/GeneralUser_GS_v1.471",configuration={reverbAlgorithm:"Schroeder",reverbType:4,chorusType:1,outputFormat:"opus"},await getSampleMIDIList(),await getSampleSoundFontList(),setSampleEvents(),setConfigurationEvents(),setDragEvent(),initEncoders(),audioContext=new AudioContext,audioContext.state==="running"&&await audioContext.suspend(),midy=new Xo(audioContext),midy.cacheMode="audio",document.getElementById("toggleDarkMode").onclick=toggleDarkMode,document.getElementById("convert").onclick=convert,document.getElementById("selectFile").onclick=()=>{document.getElementById("inputFile").click()},document.getElementById("inputFile").addEventListener("change",e=>{loadFile(e.target.files[0])}),globalThis.addEventListener("paste",e=>{const n=e.clipboardData.items[0],t=n.getAsFile();if(!t)return;loadFile(t)})
+    `;
+  }
+  root.innerHTML = html;
+}
+function getSoundFontPaths() {
+  const paths = [];
+  for (const instrument of midy.instruments) {
+    const [bank, program] = instrument.split(":");
+    const bankNumber = Number(bank);
+    const programNumber = Number(program);
+    const index = midy.soundFontTable[programNumber][bankNumber];
+    if (index !== void 0) continue;
+    const baseName = bankNumber === 128 ? "128" : program;
+    paths.push(`${soundFontURL}/${baseName}.sf3`);
+  }
+  return paths;
+}
+async function loadMIDI(file) {
+  if (!file) return;
+  await midy.stop();
+  const arrayBuffer = await file.arrayBuffer();
+  const uint8Array = new Uint8Array(arrayBuffer);
+  await midy.loadMIDI(uint8Array);
+}
+async function loadSoundFont(file) {
+  if (!file) return;
+  const arrayBuffer = await file.arrayBuffer();
+  const uint8Array = new Uint8Array(arrayBuffer);
+  await midy.loadSoundFont(uint8Array);
+}
+async function loadFile(file) {
+  const extName = file.name.split(".").at(-1).toLowerCase();
+  switch (extName) {
+    case "mid":
+    case "midi":
+      return await loadMIDI(file);
+    case "sf2":
+    case "sf3":
+      return await loadSoundFont(file);
+  }
+}
+function setConfigurationEvents() {
+  document.getElementById("configuration").addEventListener(
+    "change",
+    (event) => {
+      const target = event.target;
+      switch (target.name) {
+        case "reverbType":
+        case "chorusType":
+          configuration[target.name] = Number(target.value);
+          break;
+        case "reverbAlgorithm":
+        case "outputFormat":
+          configuration[target.name] = target.value;
+      }
+    }
+  );
+}
+var FORMAT_MAP = {
+  wav: {
+    mime: "audio/wav",
+    codec: "pcm-f32",
+    fmt: () => new WavOutputFormat()
+  },
+  mp3: {
+    mime: "audio/mpeg",
+    codec: "mp3",
+    fmt: () => new Mp3OutputFormat()
+  },
+  aac: {
+    // mime: "audio/aac",
+    mime: "audio/x-m4a",
+    codec: "aac",
+    // fmt: () => new AdtsOutputFormat(),
+    fmt: () => new Mp4OutputFormat()
+  },
+  flac: {
+    mime: "audio/flac",
+    codec: "flac",
+    fmt: () => new FlacOutputFormat()
+  },
+  opus: {
+    mime: "audio/ogg",
+    codec: "opus",
+    fmt: () => new OggOutputFormat()
+  }
+};
+async function initEncoders() {
+  if (!await canEncodeAudio("aac")) {
+    const { registerAacEncoder } = await import("https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.45.2/+esm");
+    registerAacEncoder();
+  }
+  if (!await canEncodeAudio("mp3")) {
+    const { registerMp3Encoder } = await import("https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.45.2/+esm");
+    registerMp3Encoder();
+  }
+  if (!await canEncodeAudio("flac")) {
+    const { registerFlacEncoder } = await import("https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.45.2/+esm");
+    registerFlacEncoder();
+  }
+  document.getElementById("convert").disabled = false;
+}
+async function audioBufferToAudio(audioBuffer, format) {
+  const { mime, codec, fmt } = FORMAT_MAP[format];
+  const output = new Output({ format: fmt(), target: new BufferTarget() });
+  const isPcm = codec.startsWith("pcm-");
+  const srcCfg = isPcm ? { codec } : { codec, bitrate: QUALITY_HIGH };
+  const audioSource = new AudioBufferSource(srcCfg);
+  output.addAudioTrack(audioSource);
+  await output.start();
+  await audioSource.add(audioBuffer);
+  await output.finalize();
+  return { output, mime };
+}
+function setAudioTag(audioData) {
+  const buffer = audioData.output.target.buffer;
+  const blob = new Blob([buffer], { type: audioData.mime });
+  const resultAudio = document.getElementById("resultAudio");
+  const prevSrc = resultAudio.src;
+  if (prevSrc?.startsWith("blob:")) URL.revokeObjectURL(prevSrc);
+  const url = URL.createObjectURL(blob);
+  resultAudio.src = url;
+  document.getElementById("convertStatus").classList.remove("d-none");
+}
+async function convert(event) {
+  event.target.disabled = true;
+  const convertText = document.getElementById("convertText");
+  const convertSpinner = document.getElementById("convertSpinner");
+  const convertAlert = document.getElementById("convertAlert");
+  document.getElementById("convertStatus").classList.add("d-none");
+  try {
+    if (midy.instruments.size === 0) {
+      convertAlert.classList.remove("d-none");
+    } else {
+      convertText.classList.add("d-none");
+      convertSpinner.classList.remove("d-none");
+      convertAlert.classList.add("d-none");
+      const paths = getSoundFontPaths();
+      await midy.loadSoundFont(paths);
+      await midy.render();
+      const audioData = await audioBufferToAudio(
+        midy.renderedAudioBuffer,
+        configuration.outputFormat
+      );
+      setAudioTag(audioData);
+    }
+  } finally {
+    convertText.classList.remove("d-none");
+    convertSpinner.classList.add("d-none");
+    event.target.disabled = false;
+  }
+}
+function setDragEvent() {
+  const selectPanel = document.getElementById("selectPanel");
+  let dragCounter = 0;
+  selectPanel.addEventListener("dragenter", (event) => {
+    event.preventDefault();
+    dragCounter++;
+    selectPanel.classList.add("border", "border-secondary");
+  });
+  selectPanel.addEventListener("dragleave", (event) => {
+    event.preventDefault();
+    dragCounter--;
+    if (dragCounter === 0) {
+      selectPanel.classList.remove("border", "border-secondary");
+    }
+  });
+  selectPanel.addEventListener("dragover", (event) => {
+    event.preventDefault();
+  });
+  selectPanel.addEventListener("drop", (event) => {
+    event.preventDefault();
+    selectPanel.classList.remove("border", "border-secondary");
+    const file = event.dataTransfer.files[0];
+    loadFile(file);
+  });
+}
+var htmlLang = document.documentElement.lang;
+var soundFontURL = "https://soundfonts.pages.dev/GeneralUser_GS_v1.471";
+var configuration = {
+  reverbAlgorithm: "Schroeder",
+  reverbType: 4,
+  chorusType: 1,
+  outputFormat: "opus"
+};
+await getSampleMIDIList();
+await getSampleSoundFontList();
+setSampleEvents();
+setConfigurationEvents();
+setDragEvent();
+initEncoders();
+var audioContext = new AudioContext();
+if (audioContext.state === "running") await audioContext.suspend();
+var midy = new Xo(audioContext);
+midy.cacheMode = "audio";
+document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
+document.getElementById("convert").onclick = convert;
+document.getElementById("selectFile").onclick = () => {
+  document.getElementById("inputFile").click();
+};
+document.getElementById("inputFile").addEventListener("change", (event) => {
+  loadFile(event.target.files[0]);
+});
+globalThis.addEventListener("paste", (event) => {
+  const item = event.clipboardData.items[0];
+  const file = item.getAsFile();
+  if (!file) return;
+  loadFile(file);
+});
