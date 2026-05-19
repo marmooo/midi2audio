@@ -1,5 +1,5 @@
 mkdir -p docs
 cp -r src/* docs
 drop-inline-css -r src -o docs
-deno run -A bundle.js
+deno run -RWE --allow-run bundle.js
 minify -r docs -o .
