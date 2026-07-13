@@ -11,10 +11,10 @@ import {
   Output,
   QUALITY_HIGH,
   WavOutputFormat,
-} from "https://cdn.jsdelivr.net/npm/mediabunny@1.45.2/+esm";
-// import { registerMp3Encoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.45.2/+esm";
-// import { registerAacEncoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.45.2/+esm";
-// import { registerFlacEncoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.45.2/+esm";
+} from "https://cdn.jsdelivr.net/npm/mediabunny@1.50.8/+esm";
+// import { registerMp3Encoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.50.8/+esm";
+// import { registerAacEncoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.50.8/+esm";
+// import { registerFlacEncoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.50.8/+esm";
 
 function toggleDarkMode() {
   const html = document.documentElement;
@@ -212,19 +212,19 @@ const FORMAT_MAP = {
 async function initEncoders() {
   if (!(await canEncodeAudio("aac"))) {
     const { registerAacEncoder } = await import(
-      "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.45.2/+esm"
+      "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.50.8/+esm"
     );
     registerAacEncoder();
   }
   if (!(await canEncodeAudio("mp3"))) {
     const { registerMp3Encoder } = await import(
-      "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.45.2/+esm"
+      "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.50.8/+esm"
     );
     registerMp3Encoder();
   }
   if (!(await canEncodeAudio("flac"))) {
     const { registerFlacEncoder } = await import(
-      "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.45.2/+esm"
+      "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.50.8/+esm"
     );
     registerFlacEncoder();
   }
