@@ -6,7 +6,7 @@ const urls = [
   "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.50.8/+esm",
   "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.50.8/+esm",
   "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.50.8/+esm",
-  // "https://cdn.jsdelivr.net/gh/marmooo/midy@0.5.2/dist/midy.min.js",
+  // "https://cdn.jsdelivr.net/gh/marmooo/midy@0.6.2/dist/midy.min.js",
 ];
 const result = await esbuild.build({
   entryPoints: ["src/index.js"],
