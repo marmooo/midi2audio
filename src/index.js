@@ -102,7 +102,7 @@ async function getSampleSoundFontList() {
   let html = "";
   for (let i = 0; i < list.length; i++) {
     const soundFont = list[i];
-    const checked = (soundFont.name === "GeneralUser_GS_v1.471")
+    const checked = (soundFont.name === "GeneralUser_GS_v2.0.3")
       ? "checked"
       : "";
     const license = (soundFont.license.startsWith("http"))
@@ -128,8 +128,7 @@ function getSoundFontPaths() {
     const programNumber = Number(program);
     const index = midy.soundFontTable[programNumber][bankNumber];
     if (index !== undefined) continue;
-    const baseName = bankNumber === 128 ? "128" : program;
-    paths.push(`${soundFontURL}/${baseName}.sf3`);
+    paths.push(`${soundFontURL}/${bank}/${program}.sf3`);
   }
   return paths;
 }
@@ -312,7 +311,7 @@ function setDragEvent() {
 }
 
 const htmlLang = document.documentElement.lang;
-let soundFontURL = "https://soundfonts.pages.dev/GeneralUser_GS_v1.471";
+let soundFontURL = "https://soundfonts.pages.dev/GeneralUser_GS_v2.0.3";
 const configuration = {
   reverbAlgorithm: "Schroeder",
   reverbType: 4,
