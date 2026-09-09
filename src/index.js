@@ -11,10 +11,14 @@ import {
   Output,
   QUALITY_HIGH,
   WavOutputFormat,
-} from "https://cdn.jsdelivr.net/npm/mediabunny@1.50.8/+esm";
-// import { registerMp3Encoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.50.8/+esm";
-// import { registerAacEncoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.50.8/+esm";
-// import { registerFlacEncoder } from "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.50.8/+esm";
+} from "mediabunny";
+
+const MEDIABUNNY_AAC_ENCODER_URL =
+  "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.56.0/dist/bundles/mediabunny-aac-encoder.mjs";
+const MEDIABUNNY_FLAC_ENCODER_URL =
+  "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.56.0/dist/bundles/mediabunny-flac-encoder.mjs";
+const MEDIABUNNY_MP3_ENCODER_URL =
+  "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.56.0/dist/bundles/mediabunny-mp3-encoder.mjs";
 
 function toggleDarkMode() {
   const html = document.documentElement;
@@ -210,21 +214,15 @@ const FORMAT_MAP = {
 
 async function initEncoders() {
   if (!(await canEncodeAudio("aac"))) {
-    const { registerAacEncoder } = await import(
-      "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.50.8/+esm"
-    );
+    const { registerAacEncoder } = await import(MEDIABUNNY_AAC_ENCODER_URL);
     registerAacEncoder();
   }
   if (!(await canEncodeAudio("mp3"))) {
-    const { registerMp3Encoder } = await import(
-      "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.50.8/+esm"
-    );
+    const { registerMp3Encoder } = await import(MEDIABUNNY_MP3_ENCODER_URL);
     registerMp3Encoder();
   }
   if (!(await canEncodeAudio("flac"))) {
-    const { registerFlacEncoder } = await import(
-      "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.50.8/+esm"
-    );
+    const { registerFlacEncoder } = await import(MEDIABUNNY_FLAC_ENCODER_URL);
     registerFlacEncoder();
   }
   document.getElementById("convert").disabled = false;
