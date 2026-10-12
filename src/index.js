@@ -15,6 +15,11 @@ import {
   WavOutputFormat,
 } from "mediabunny";
 
+const MIDI_DB_MODERN = "https://midi-db.pages.dev";
+const MIDI_DB_CLASSICAL = "https://marmooo.github.io/classical-midi-db";
+/** Currently selected MIDI DB base URL (modern or classical). */
+let currentMidiDb = MIDI_DB_MODERN;
+
 const MEDIABUNNY_AAC_ENCODER_URL =
   "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.56.0/dist/bundles/mediabunny-aac-encoder.mjs";
 const MEDIABUNNY_FLAC_ENCODER_URL =
@@ -218,6 +223,7 @@ Modal.getOrCreateInstance(
 );
 
 const midiLibrary = new MidiLibrary({
+  midiDB: currentMidiDb,
   table: "libraryTable",
   pagination: "libraryPagination",
   columns: "libraryColumns",
@@ -225,13 +231,47 @@ const midiLibrary = new MidiLibrary({
   instruments: "libraryInstruments",
   lang: htmlLang,
   onSelect: async (row) => {
-    const response = await fetch(`https://midi-db.pages.dev/${row.file}`);
+    const response = await fetch(`${midiLibrary.midiDB}/${row.file}`);
     const blob = await response.blob();
     await loadMIDI(blob);
     libraryModal.hide();
   },
 });
 midiLibrary.load();
+
+/** Switch MIDI library between modern and classical collections. */
+let switchMidiCategoryBusy = false;
+async function switchMidiCategory(category) {
+  const nextDb = category === "classical" ? MIDI_DB_CLASSICAL : MIDI_DB_MODERN;
+  if (midiLibrary.midiDB === nextDb && midiLibrary.fullData) return;
+  if (switchMidiCategoryBusy) return;
+  switchMidiCategoryBusy = true;
+  try {
+    currentMidiDb = nextDb;
+    midiLibrary.midiDB = nextDb;
+    midiLibrary.collections.clear();
+    midiLibrary.fullData = null;
+    midiLibrary.destroy();
+    await midiLibrary.load();
+  } catch (err) {
+    console.error("Failed to switch MIDI category:", err);
+  } finally {
+    switchMidiCategoryBusy = false;
+  }
+}
+
+function initMidiCategoryRadios() {
+  const radios = document.querySelectorAll('input[name="midiLibraryCategory"]');
+  for (const radio of radios) {
+    radio.addEventListener("change", () => {
+      if (!radio.checked) return;
+      switchMidiCategory(radio.value).catch((err) =>
+        console.error("switchMidiCategory failed:", err)
+      );
+    });
+  }
+}
+initMidiCategoryRadios();
 
 // ---------------------------------------------------------------------------
 // soundfont library
