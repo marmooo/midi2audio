@@ -21,11 +21,11 @@ const MIDI_DB_CLASSICAL = "https://marmooo.github.io/classical-midi-db";
 let currentMidiDb = MIDI_DB_MODERN;
 
 const MEDIABUNNY_AAC_ENCODER_URL =
-  "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.56.0/dist/bundles/mediabunny-aac-encoder.mjs";
+  "https://cdn.jsdelivr.net/npm/@mediabunny/aac-encoder@1.62.0/dist/bundles/mediabunny-aac-encoder.mjs";
 const MEDIABUNNY_FLAC_ENCODER_URL =
-  "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.56.0/dist/bundles/mediabunny-flac-encoder.mjs";
+  "https://cdn.jsdelivr.net/npm/@mediabunny/flac-encoder@1.62.0/dist/bundles/mediabunny-flac-encoder.mjs";
 const MEDIABUNNY_MP3_ENCODER_URL =
-  "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.56.0/dist/bundles/mediabunny-mp3-encoder.mjs";
+  "https://cdn.jsdelivr.net/npm/@mediabunny/mp3-encoder@1.62.0/dist/bundles/mediabunny-mp3-encoder.mjs";
 
 function toggleDarkMode() {
   const html = document.documentElement;
